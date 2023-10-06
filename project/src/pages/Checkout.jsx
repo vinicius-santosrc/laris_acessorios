@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Ring } from "@uiball/loaders";
-
+import Swal from "sweetalert2";
+import * as emailjs from "@emailjs/browser"
 
 export default function Checkout() {
 
@@ -15,7 +16,7 @@ export default function Checkout() {
 
     useEffect(() => {
         document.querySelector("title").innerText = "Finalizar compra"
-        
+
     }, [])
 
 
@@ -39,7 +40,7 @@ export default function Checkout() {
                                 <tr className="product-item" key={index}>
                                     <td className="product-card">
                                         <img src={item.photoURL} alt={item.name} />
-                                        <a href={item.onclick}>{item.name}</a>
+                                        <a href={item.onclick}>{item.name} {item.personalizacao ? <>({item.personalizacao})</> : ""}</a>
                                     </td>
                                     <td>
                                         <p>R$ {item.preco}</p>
@@ -104,7 +105,7 @@ export default function Checkout() {
                             <div class="product-item-info">
                                 <div class="product-item-info-title">
                                     <div>
-                                        <a style={{ color: 'black' }} onclick="window.location.href='${item.onclick}'">{item.name}</a>
+                                        <a style={{ color: 'black' }} onclick="window.location.href='${item.onclick}'">{item.name} {item.personalizacao ? <>({item.personalizacao})</> : ""}</a>
                                         <p style={{ color: 'gray', fontSize: '2.9vw' }}>Produto fornecido e entregue pela LARI'S</p>
                                     </div>
                                     <a class="material-icons" onClick={removeTarefaCart}>
@@ -118,7 +119,13 @@ export default function Checkout() {
                                         </select>
                                     </div>
                                     <div>
-                                        <h2>R$ {item.preco}</h2>
+                                        {item.desconto > 0
+                                            ?
+                                            <h2><s style={{ color: "gray" }}>R$ {item.preco}</s> R$ {item.preco - desconto}</h2>
+                                            :
+                                            <h2>R$ {item.preco}</h2>
+                                        }
+
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +136,7 @@ export default function Checkout() {
         }
     });
 
-    useEffect(() =>{
+    useEffect(() => {
         if (Array.isArray(sacolaAt)) {
             let preco = 0
             let sub = 0
@@ -145,10 +152,147 @@ export default function Checkout() {
         }
     })
 
+    function finalizartudo() {
+
+        let rua = document.getElementById('endereco')
+        let bairro = document.getElementById('bairro')
+        let cidade = document.getElementById('cidade')
+        let estado = document.getElementById('estado')
+        let numero = document.getElementById('numero')
+        let referencia = document.getElementById('referencia')
+
+        let primeironome = document.getElementById('primeironome')
+        let ultimonome = document.getElementById('ultimonome')
+        let cpf = document.getElementById('cpf')
+        let email = document.getElementById('Email')
+        let numercont = document.getElementById('Numerocont')
+
+
+
+        if (primeironome.value == '' || ultimonome.value == '' || cpf.value == '' || rua.value == '' || email.value == '' || numercont.value == '' || bairro.value == '' || cidade.value == '' || estado.value == '' || numero.value == '' || referencia.value == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Preencha todos os dados.',
+
+            })
+        }
+
+        else if (localStorage.sacola == '[]' || localStorage.sacola == undefined || localStorage.sacola == 'undefined' || localStorage == null) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Sua sacola de compras está vazia.',
+
+            })
+        }
+        else {
+            let background = document.querySelector('.background-load')
+            let loader = document.querySelector('.loader')
+
+            loader.style.display = 'block'
+            background.style.display = 'block'
+
+            let rua = document.getElementById('endereco')
+            let bairro = document.getElementById('bairro')
+            let cidade = document.getElementById('cidade')
+            let estado = document.getElementById('estado')
+            let numero = document.getElementById('numero')
+            let referencia = document.getElementById('referencia')
+            let cep = document.getElementById('cep')
+            let methodpay = document.querySelector('.pay-inside select')
+
+            let primeironome = document.getElementById('primeironome')
+            let ultimonome = document.getElementById('ultimonome')
+            let cpf = document.getElementById('cpf')
+            let email = document.getElementById('Email')
+            let numercont = document.getElementById('Numerocont').value
+            const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
+            const pedido = random(0, 999)
+            let data2 = new Date()
+            let ano = data2.getFullYear()
+            let mes = data2.getMonth()
+            let dia = data2.getDate()
+            if (dia > 10) {
+                dia = '0' + dia
+            }
+            else {
+
+            }
+            let outputfinal = ''
+            let produtos2 = JSON.parse(localStorage.getItem('sacola')) || []
+
+            produtos2.forEach((item) => {
+                if (item.personalizacao) {
+                    outputfinal += `
+                  📦
+                      Produto: ${item.name}
+                      Personalização: ${item.personalizacao}
+                      Tamanho: ${item.tamanho}
+                      Quantidade: ${item.qtd}
+                      Desconto: ${item.desconto}
+                      Subtotal: ${item.preco}
+                      Total: ${item.preco - item.desconto}
+                    -------------------------
+                 `
+                }
+                else {
+                    outputfinal += `
+                  📦
+                      Produto: ${item.name}
+                      Tamanho: ${item.tamanho}
+                      Quantidade: ${item.qtd}
+                      Desconto: ${item.desconto}
+                      Subtotal: ${item.preco}
+                      Total: ${item.preco - item.desconto}
+                    -------------------------
+                 `
+                }
+            })
+
+
+            emailjs.send("laris-acessorios", "template_v9pyefq", {
+                from_name: `Nome: ` + primeironome.value + ` ` + ultimonome.value + ` Email: ` + email.value + ` ` + `CPF: ` + cpf.value + ` Telefone: ` + numercont + '',
+                to_name: `CEP: ` + cep.value + ` Cidade: ` + cidade.value + '-' + estado.value + ` Bairro: ` + bairro.value + ` Rua: ` + rua.value + ` Número: ` + numero.value + ` Referência: ` + referencia.value,
+                message: `Pedido N°` + pedido + `: ` + outputfinal,
+                reply_to: '' + methodpay.value,
+            }, "user_LFJAXNJjH0WCy5N2o9gl4").catch(e => {
+                console.log('ERRO: ' + e)
+            })
+                .then(() => {
+                    loader.style.display = 'none'
+                    background.style.display = 'none'
+
+                    window.open("https://api.whatsapp.com/send/?phone=553597394181&text=" + '✨*LARI’S ACEESSORIOS*✨'
+                        + '%0D%0A'
+                        + 'Acessórios que te representam'
+                        + '%0D%0A' + '%0D%0A'
+                        + '================' +
+                        '%0D%0A' + '%0D%0A' +
+                        '📦 Pedido *N' + pedido
+                        + '*' + '%0D%0A'
+                        + '💳 Pagamento via *' + methodpay.value +
+                        '*' + '%0D%0A' +
+                        '🚚 Endereço : *' + cidade.value + ': ' + bairro.value + ', ' + rua.value + ', ' + numero.value +
+                        '*' + '%0D%0A' + '%0D%0A' +
+                        '🔍 Nome: *' + primeironome.value + ' ' + ultimonome.value + '*' +
+                        '%0D%0A' + '%0D%0A'
+                        + '================')
+
+                    localStorage.sacola = '[]'
+                    window.location.href = 'sucesso'
+
+
+                })
+        }
+    };
+
 
     if (localStorage.getItem("sacola") != '[]') {
         return (
             <section className="laris-checkout-page">
+                <span class="loader"><span class="loader-inner"></span></span>
+                <div class='background-load'></div>
                 <Header />
                 <div class='itensresumo'>
 
@@ -262,7 +406,7 @@ export default function Checkout() {
                             <p>Pagamentos via Pix são realizados antes da entrega</p>
                         </div>
                         <div class='botoesseucart'>
-                            <button onclick="finalizartudo()"><i class="fa-solid fa-lock"></i> FINALIZAR COMPRA</button>
+                            <button onClick={finalizartudo}><i class="fa-solid fa-lock"></i> FINALIZAR COMPRA</button>
                         </div>
                     </div>
 

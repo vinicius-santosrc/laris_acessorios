@@ -3583,6 +3583,75 @@ h2.extensorfrase {
     cursor: pointer;
 }
 
+.AdminLoginPage {
+    margin: -10vh 180px;
+}
+
+.AdminLogin-flexbox {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+    width: 100%;
+}
+
+.LogoAdmin {
+    width: 170px;
+    margin: 15px 0px;
+}
+
+.AdminLogin-top {
+    margin: 50px 0px;
+}
+
+.AdminLogin-top h2 {
+    font-size: 2.6rem;
+}
+
+.AdminLogin-top p {
+    font-size: 1.4rem;
+    color: gray;
+}
+
+.AdminLogin-input-box p{
+    color: gray;
+}
+.AdminLogin-left-side {
+    display: block;
+    align-items: center;
+}
+
+.AdminLogin-right-side img{
+    width: 700px;
+    height: 100%;
+    pointer-events: none;
+}
+
+.AdminLogin-input-box input {
+    width: 100%;
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    outline: none;
+    margin: 5px 0px;
+}
+
+.AdminLogin-bottom {
+    text-align: center;
+    justify-content: center;
+}
+
+.AdminLogin-bottom button {
+    background-color: black;
+    width: 90%;
+    border-radius: 10px;
+    margin: 30px auto;
+    color: white;
+    padding: 10px 0px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+}
+
 /* TABLETS */
 @media screen and (max-width: 980px) {
     .menu-pc-top {

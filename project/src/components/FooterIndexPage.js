@@ -33,7 +33,7 @@ export default function FooterIndexPage() {
                     <h1>Receba as novidades da LARIS ACESSÓRIOS</h1>
                     <p>Entre no nosso grupo' e receba novidades e promoções exclusivas.</p>
                     <div className="emailsubscribe">
-                        <button onclick="">Entrar</button>
+                        <button onClick={() => {}}>Entrar</button>
                     </div>
                     <div className="frasesucessoemail"><p>Obrigado!</p></div>
                     <div className="fraseerroemail"><p>EMAIL INVÁLIDO</p></div>

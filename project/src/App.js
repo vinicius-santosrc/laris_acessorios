@@ -21,16 +21,20 @@ import GuiaTornozeleiras from './pages/institucional/guia-de-tamanhos/GuiaTornoz
 import CuidadoJoias from './pages/institucional/CuidadoJoias';
 import FaleConosco from './pages/institucional/FaleConosco';
 import NovidadesPage from './pages/NovidadesPage';
+import SucessoPage from './pages/SucessoPage';
+import AdminLogin from './pages/AdminLogin';
 
 //SCRIPTS
 function App() {
+  const isLoggedIn = localStorage.getItem('accessToken');
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          
+
           <Route path='/' element={<Index />}></Route>
-          
+
           <Route path='/pratas' element={<Pratas />}></Route>
           <Route path='/pratas-colares' element={<Pratas />}></Route>
           <Route path='/pratas-brincos' element={<Pratas />}></Route>
@@ -39,7 +43,7 @@ function App() {
           <Route path='/pratas-braceletes' element={<Pratas />}></Route>
           <Route path='/pratas-tornozeleiras' element={<Pratas />}></Route>
           <Route path='/pratas-piercing' element={<Pratas />}></Route>
-          
+
           <Route path='/cetim' element={<Cetim />}></Route>
           <Route path='/cetim-scrunchie' element={<Cetim />}></Route>
           <Route path='/cetim-toucas' element={<Cetim />}></Route>
@@ -52,25 +56,30 @@ function App() {
           <Route path='/micangas-chaveiros' element={<Micangas />}></Route>
 
           <Route path='/produto/:product' element={<ProductPage />}></Route>
-          <Route path='/admin' element={<AdminPage />}></Route>
-          <Route path='/promocoes' element={<Promocoes />}></Route>
-          <Route path='/checkout' element={<Checkout />}></Route>
-          <Route path='/novidades' element={<NovidadesPage />}></Route>
 
-          <Route path='/institucional/duvidas-frequentes' element={<DuvidasFrequentes />}></Route>
-          <Route path='/pages/privacidade-seguranca' element={<PrivacidadeSeguranca />}></Route>
+          <Route path='/admin' element={
+            <> {isLoggedIn ? <AdminPage /> : <AdminLogin />}</>
+          }>
+          </Route>
+        <Route path='/promocoes' element={<Promocoes />}></Route>
+        <Route path='/checkout' element={<Checkout />}></Route>
+        <Route path='/novidades' element={<NovidadesPage />}></Route>
 
-          <Route path='/institucional/guia-de-tamanhos/aneis' element={<GuiaAneis />}></Route>
-          <Route path='/institucional/guia-de-tamanhos/colares' element={<GuiaColares />}></Route>
-          <Route path='/institucional/guia-de-tamanhos/pulseiras' element={<GuiaPulseiras />}></Route>
-          <Route path='/institucional/guia-de-tamanhos/tornozeleiras' element={<GuiaTornozeleiras />}></Route>
+        <Route path='/institucional/duvidas-frequentes' element={<DuvidasFrequentes />}></Route>
+        <Route path='/pages/privacidade-seguranca' element={<PrivacidadeSeguranca />}></Route>
 
-          <Route path='/institucional/cuidado-joias' element={<CuidadoJoias />}></Route>
-          <Route path='/institucional/fale-conosco' element={<FaleConosco />}></Route>
+        <Route path='/institucional/guia-de-tamanhos/aneis' element={<GuiaAneis />}></Route>
+        <Route path='/institucional/guia-de-tamanhos/colares' element={<GuiaColares />}></Route>
+        <Route path='/institucional/guia-de-tamanhos/pulseiras' element={<GuiaPulseiras />}></Route>
+        <Route path='/institucional/guia-de-tamanhos/tornozeleiras' element={<GuiaTornozeleiras />}></Route>
 
-        </Routes>
-      </BrowserRouter>
-    </div>
+        <Route path='/institucional/cuidado-joias' element={<CuidadoJoias />}></Route>
+        <Route path='/institucional/fale-conosco' element={<FaleConosco />}></Route>
+        <Route path='/sucesso' element={<SucessoPage />}></Route>
+
+      </Routes>
+    </BrowserRouter>
+    </div >
   );
 }
 

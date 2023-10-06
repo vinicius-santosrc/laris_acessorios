@@ -77,7 +77,13 @@ function SacolaDeCompras() {
                                 <option value="${item.qtd}">{item.qtd}</option>
                             </select>
                             <div class="product-list-price">
-                                R$ {item.preco}
+                                {item.desconto > 0
+                                    ?
+                                    <><s style={{color: 'gray'}}>R$ {item.preco}</s> R$ {item.preco - item.desconto}</>
+                                    :
+                                    <>R$ {item.preco}</>
+                            }
+
                             </div>
                         </div>
                     </li>
