@@ -3652,6 +3652,247 @@ h2.extensorfrase {
     font-size: 1.4rem;
 }
 
+.AdminPage-DashBoard nav {
+    padding: 0px;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 1px 1px 7px gray;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    position: fixed;
+    left: 15px;
+    border-radius: 25px;
+    align-items: center;
+    height: 98%;
+    padding: 25px;
+}
+
+.navigation-bar-logo-top {
+    margin: 0 auto ;
+    text-align: center;
+}
+
+.navigation-bar-logo-top img {
+    width: 130px;
+}
+
+.navigation-bar-left-side ul {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    display: block;
+}
+
+.AdminPage-DashBoard li {
+    padding-top: 0px;
+    list-style: none;
+    padding-bottom: 0px;
+    font-size: 1.4rem;
+    color: #EF59A0;
+    border-bottom: none;
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+    padding: 25px 30px;
+    border-radius: 10px;
+    margin: 5px 0px;
+    transition: 500ms;
+}
+
+#selectednavigation {
+    color: #EF59A0;
+}
+
+.AdminPage-DashBoard li:hover {
+    background-color: rgb(204, 204, 204);
+}
+
+.AdminPage-DashBoard li i{
+    padding: 0px;
+
+}
+
+.AdminPage-DashBoard li a {
+    color: black;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.AdminPage-DashBoard header {
+    font-size: 1rem;
+    padding: 10px;
+    margin: auto;
+    justify-content: space-between;
+    position: fixed;
+    display: block;
+    width: 1500px;
+    background-color: #ffff;
+    gap: 5px;
+    box-shadow: 1px 1px 7px gray;
+    border-bottom: none;
+    margin: 10px 0px;
+    border-radius: 10px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+}
+
+.AdminPage-DashBoard header input {
+    width: 500px;
+    padding: 10px 5px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.3rem;
+}
+
+.title-opcoes-pc {
+    margin: 10px 0px;
+    background-color: #EF59A0;
+    border-radius: 10px;
+    padding: 10px 5px;
+    color: white;
+}
+
+.Admin-ContentDashBoard {
+    margin-top: -16vh;
+    
+    margin-left: 340px;
+
+}
+
+.Top-Side-Dashboard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px
+
+}
+
+.Bottom-Side-Dashboard {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.Card-Dashboard-Mid {
+    width: 600px;
+
+    border-radius: 10px;
+    border: 1px solid
+}
+
+.Card-Dashboard-High {
+    width: 100%;
+
+    border-radius: 10px;
+    border: 1px solid
+}
+
+.Card-Dashboard-Low {
+    width: 295px;
+
+    border-radius: 10px;
+    border: 1px solid
+}
+
+.Cards-Dashboards {
+    padding-top: 100px;
+    width: 1500px;
+}
+
+.AdminPage-DashBoard label {
+    background-color: #EF59A0;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    right: -10px;
+    cursor: pointer
+}
+
+.navigation-bar-logo-top {
+    margin: 20px 0px;
+
+}
+
+.title-opcoes-pc {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.loading {
+    position: fixed;
+    background-color: white;
+    margin: auto;
+    z-index: 10;
+    bottom: 0;
+    top: 40%;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.loading img {
+    width: 100px;
+}
+
+.search-products-box {
+    position: absolute;
+    top: 80px;
+    width: 1500px;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-shadow: 1px 1px 7px gray;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+}
+
+
+
+.search-products-box li img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.search-products-box li {
+    gap: 10px;
+    
+    padding-top: 0px;
+    list-style: none;
+    padding-bottom: 0px;
+    font-size: 1.4rem;
+    color: #EF59A0;
+    border-bottom: none;
+    cursor: pointer;
+    margin: auto;
+    text-align: left;
+    padding: 0px;
+    border-radius: 10px;
+    margin: 0px 0px;
+    transition: 500ms;
+    margin: 10px 0px;
+}
+
+.search-products-box li a {
+    font-size: 1rem;
+}
+
+.Admin-ContentDashBoard table img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 /* TABLETS */
 @media screen and (max-width: 980px) {
     .menu-pc-top {

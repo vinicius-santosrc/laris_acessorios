@@ -23,6 +23,8 @@ import FaleConosco from './pages/institucional/FaleConosco';
 import NovidadesPage from './pages/NovidadesPage';
 import SucessoPage from './pages/SucessoPage';
 import AdminLogin from './pages/AdminLogin';
+import AdminProductsAdd from './pages/AdminProductsAdd';
+import AdminProductEditPage from './pages/AdminProductEditPage';
 
 //SCRIPTS
 function App() {
@@ -57,28 +59,29 @@ function App() {
 
           <Route path='/produto/:product' element={<ProductPage />}></Route>
 
-          <Route path='/admin' element={
-            <> {isLoggedIn ? <AdminPage /> : <AdminLogin />}</>
-          }>
-          </Route>
-        <Route path='/promocoes' element={<Promocoes />}></Route>
-        <Route path='/checkout' element={<Checkout />}></Route>
-        <Route path='/novidades' element={<NovidadesPage />}></Route>
+          <Route path='/admin' element={<AdminPage />}></Route>
+          <Route path='/admin/login' exact element={<AdminLogin />}></Route>
+          <Route path='/admin/products/add' element={<AdminProductsAdd />}></Route>
+          <Route path='/admin/products/:product' element={<AdminProductEditPage />}></Route>
 
-        <Route path='/institucional/duvidas-frequentes' element={<DuvidasFrequentes />}></Route>
-        <Route path='/pages/privacidade-seguranca' element={<PrivacidadeSeguranca />}></Route>
+          <Route path='/promocoes' element={<Promocoes />}></Route>
+          <Route path='/checkout' element={<Checkout />}></Route>
+          <Route path='/novidades' element={<NovidadesPage />}></Route>
 
-        <Route path='/institucional/guia-de-tamanhos/aneis' element={<GuiaAneis />}></Route>
-        <Route path='/institucional/guia-de-tamanhos/colares' element={<GuiaColares />}></Route>
-        <Route path='/institucional/guia-de-tamanhos/pulseiras' element={<GuiaPulseiras />}></Route>
-        <Route path='/institucional/guia-de-tamanhos/tornozeleiras' element={<GuiaTornozeleiras />}></Route>
+          <Route path='/institucional/duvidas-frequentes' element={<DuvidasFrequentes />}></Route>
+          <Route path='/pages/privacidade-seguranca' element={<PrivacidadeSeguranca />}></Route>
 
-        <Route path='/institucional/cuidado-joias' element={<CuidadoJoias />}></Route>
-        <Route path='/institucional/fale-conosco' element={<FaleConosco />}></Route>
-        <Route path='/sucesso' element={<SucessoPage />}></Route>
+          <Route path='/institucional/guia-de-tamanhos/aneis' element={<GuiaAneis />}></Route>
+          <Route path='/institucional/guia-de-tamanhos/colares' element={<GuiaColares />}></Route>
+          <Route path='/institucional/guia-de-tamanhos/pulseiras' element={<GuiaPulseiras />}></Route>
+          <Route path='/institucional/guia-de-tamanhos/tornozeleiras' element={<GuiaTornozeleiras />}></Route>
 
-      </Routes>
-    </BrowserRouter>
+          <Route path='/institucional/cuidado-joias' element={<CuidadoJoias />}></Route>
+          <Route path='/institucional/fale-conosco' element={<FaleConosco />}></Route>
+          <Route path='/sucesso' element={<SucessoPage />}></Route>
+
+        </Routes>
+      </BrowserRouter>
     </div >
   );
 }

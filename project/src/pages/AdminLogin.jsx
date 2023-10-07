@@ -1,6 +1,44 @@
+import { useEffect, useState } from "react"
+import { getUserData, login } from "../lib/appwrite";
+import { Models } from "appwrite";
+
 export default function AdminLogin() {
+    const [user, setUser] = useState(null)
+    const [password, setPassword] = useState(null)
+    const [email, setEmail] = useState(null)
+
+    function signIn() {
+        if(!email || !password) {
+            alert("Preencha todos os dados")
+            return;
+        }
+        login(email, password)        
+        .then((res) => {
+            alert('voce entrou com sucesso')
+        })
+        .catch((error) => {
+            alert(error)
+        })
+    }
+
+    useEffect(() => {
+        getUserData()
+        .then((account) => {
+            setUser(account)
+            if(account) {
+                window.location.href = '/admin'
+            }  
+        })
+        .catch((e) => {
+            alert(e)
+        })
+        
+        
+    })
+
+     
     return (
-        <section class="AdminLoginPage">
+        <section className="AdminLoginPage">
             <div className="AdminLogin-flexbox">
                 <div className="AdminLogin-left-side">
                     <img className="LogoAdmin" src={window.location.origin + "/static/media/logolaris.png"} />
@@ -11,15 +49,25 @@ export default function AdminLogin() {
                     <div className="AdminLogin-middle">
                         <div className="AdminLogin-input-box">
                             <p>Email</p>
-                            <input />
+                            <input
+                                onChange={
+                                    (e) => {
+                                        setEmail(e.target.value)
+                                    }
+                                } />
                         </div>
                         <div className="AdminLogin-input-box">
                             <p>Senha</p>
-                            <input />
+                            <input
+                                onChange={
+                                    (e) => {
+                                        setPassword(e.target.value)
+                                    }
+                                } />
                         </div>
                     </div>
                     <div className="AdminLogin-bottom">
-                        <button>Entrar</button>
+                        <button onClick={signIn}>Entrar</button>
                     </div>
                 </div>
                 <div className="AdminLogin-right-side">
