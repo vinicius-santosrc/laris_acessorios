@@ -3,7 +3,19 @@ import { Link } from "react-router-dom";
 
 export default function NavigationLeft() {
 
+    const [MenuMobile, setMenuMobile] = useState(false)
 
+    function changemenumobile() {
+        
+        if(MenuMobile == true) {
+            document.querySelector(".AdminPage-DashBoard nav").style.display = "none";
+            setMenuMobile(false)
+        }
+        else {
+            document.querySelector(".AdminPage-DashBoard nav").style.display = "block";
+            setMenuMobile(true)
+        }
+    }
 
     return (
         <>
@@ -126,14 +138,15 @@ export default function NavigationLeft() {
             </div>
             <header className="navigation-header-cell">
                 <div className="leftside-navigation-bar-cellphone">
-                    <button><i className="fa-solid fa-bars"></i></button>
+                    {MenuMobile == false ? <button onClick={changemenumobile}><i className="fa-solid fa-bars"></i></button> : <button onClick={changemenumobile}><i className="fa-solid fa-xmark"></i></button>}
                     {window.location.pathname == "/admin" ? <h2>Dashboard</h2> : null}
                     {window.location.href.includes("/admin/products") ? <h2>Produtos</h2> : null}
                     {window.location.href.includes("/admin/planilhas") ? <h2>Planilhas</h2> : null}
                     {window.location.href.includes("/admin/pedidos") ? <h2>Pedidos</h2> : null}
+                    {window.location.href.includes("/errors") ? <h2>Docs</h2> : null}
                 </div>
                 <div className="rightside-navigation-bar-cellphone">
-                    <button><i className="fa-solid fa-bars"></i></button>
+                    
                 </div>
             </header>
 

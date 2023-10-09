@@ -3844,7 +3844,7 @@ h2.extensorfrase {
     margin: auto;
 }
 
-.sendPhotosDiv img{
+.sendPhotosDiv img {
     width: 500px;
     pointer-events: none;
     margin: 10px 0px;
@@ -3856,7 +3856,8 @@ h2.extensorfrase {
     justify-content: center;
     margin: auto;
 }
-.preview-images-wrapper img{
+
+.preview-images-wrapper img {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -3940,7 +3941,7 @@ h2.extensorfrase {
     box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.50);
     padding: 20px;
     border-radius: 20px;
-    
+
 }
 
 .Card-Low-Top-Inner a {
@@ -4036,6 +4037,7 @@ h2.extensorfrase {
     cursor: pointer;
     background-color: #D9D9D9;
 }
+
 .Cards-Top .Card-Large-Top {
     width: 100%;
     background: #D9D9D9;
@@ -4069,7 +4071,7 @@ h2.extensorfrase {
     border-radius: 10px;
     color: white;
     font-weight: 600;
-    
+
 }
 
 .title-opcoes-pc {
@@ -9213,41 +9215,41 @@ h2.extensorfrase {
         gap: 0px;
         width: 100%;
     }
-    
+
     .LogoAdmin {
         width: 170px;
         margin: 15px 0px;
     }
-    
+
     .AdminLogin-top {
         margin: 10px 0px;
     }
-    
+
     .AdminLogin-top h2 {
         font-size: 1.9rem;
     }
-    
+
     .AdminLogin-top p {
         font-size: 1.1rem;
         color: gray;
     }
-    
+
     .AdminLogin-input-box p {
         color: gray;
     }
-    
+
     .AdminLogin-left-side {
         display: block;
         align-items: center;
     }
-    
+
     .AdminLogin-right-side img {
         width: 100%;
         height: 100%;
         pointer-events: none;
         display: none;
     }
-    
+
     .AdminLogin-input-box input {
         width: 100%;
         padding: 15px 10px;
@@ -9256,12 +9258,12 @@ h2.extensorfrase {
         outline: none;
         margin: 5px 0px;
     }
-    
+
     .AdminLogin-bottom {
         text-align: center;
         justify-content: center;
     }
-    
+
     .AdminLogin-bottom button {
         background-color: black;
         width: 90%;
@@ -9279,9 +9281,9 @@ h2.extensorfrase {
     }
 
     .AdminPage-DashBoard nav {
-        display:none;
+        display: none;
         position: fixed;
-        
+
     }
 
     .navigation-header-cell {
@@ -9299,9 +9301,9 @@ h2.extensorfrase {
         display: block;
         flex-wrap: nowrap;
         width: 100%;
-    
+
     }
-    
+
     .Cards-Left-Middle {
         display: block;
         justify-content: center;
@@ -9320,7 +9322,7 @@ h2.extensorfrase {
 
         background: #D9D9D9;
         border-radius: 20px;
-        
+
     }
 
     .card_ipt_inner {
@@ -9330,7 +9332,7 @@ h2.extensorfrase {
     .Card-Large-Top {
         width: 100%;
         margin: 30px 0;
-        
+
 
     }
 
@@ -9345,7 +9347,7 @@ h2.extensorfrase {
     .Admin-ContentDashBoard {
         padding: 60px 10px;
     }
-    
+
     .Cards-Top .Card-Middle-Top {
         width: 100%;
         background-color: #FD3A98;
@@ -9355,6 +9357,7 @@ h2.extensorfrase {
         color: white;
         cursor: pointer;
     }
+
     .navigation-header-cell {
         margin: 0px auto !important;
         display: flex !important;
@@ -9376,7 +9379,7 @@ h2.extensorfrase {
         gap: 5px;
     }
 
-    .leftside-navigation-bar-cellphone button{
+    .leftside-navigation-bar-cellphone button {
         background: transparent;
         border: none;
         font-size: 1.2rem;
@@ -9384,5 +9387,162 @@ h2.extensorfrase {
 
     .leftside-navigation-bar-cellphone h2 {
         color: #EF59A0;
+    }
+
+    .products-add-principal {
+        display: block;
+    }
+
+    .content-page-add-products {
+        padding: 10px 0px;
+        width: 100%;
+    }
+
+    .products-add-principal-right {
+        width: 100%;
+    }
+
+    .products-add-principal-left {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 10px;
+    }
+
+    .search-products-box {
+        top: 10px;
+
+        margin: 0 auto !important;
+        width: 95% !important;
+    }
+
+    .nodatabases img {
+        width: 350px;
+    }
+
+    .Admin-ContentDashBoard table td h2 {
+        font-size: 1.1rem;
+    }
+
+    .product-atual {
+        display: block;
+    }
+
+    .product-atual img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .images-product img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .inputbox-editp h3 {
+        text-transform: capitalize;
+        font-size: 1.1rem;
+    }
+
+    .inputbox-editp select {
+        color: black;
+        font-size: 1.1rem
+    }
+
+    .inputbox-editp input {
+        font-size: 1.1rem
+    }
+
+    .sendPhotosDiv img {
+
+        width: 90%;
+    }
+
+    .ipts-wrapper {
+        width: 100%;
+        display: block;
+        justify-content: center;
+        margin-bottom: 10px;
+        margin: 10px 0px;
+    }
+
+    .ipts-wrapper label {
+        background-color: #EF59A0;
+        border-radius: 10px;
+        padding: 10px;
+        color: white;
+        position: relative;
+        right: 0px;
+        cursor: pointer;
+        margin: 10px 0px
+    }
+
+    .navigation-bottom {
+        display: none;
+    }
+
+    .ContentPreviewNewProduct {
+        display: block;
+        align-items: center;
+        margin: auto;
+        gap: 20px;
+    }
+
+    .CreateProduct {
+        margin: auto;
+        width: 95%
+    }
+
+    .leftside-product {
+        width: 100%;
+    }
+
+    .AdminPage-DashBoard nav {
+        padding: 0px;
+        justify-content: center;
+        background-color: white;
+        box-shadow: 1px 1px 17px gray;
+        width: auto;
+        top: 100px;
+        bottom: 0;
+        margin: auto 0;
+        position: fixed;
+        left: 0px;
+        border-radius: 0px;
+        align-items: center;
+        height: 100%;
+        padding: 10px;
+        z-index: 10;
+        width: 350px;
+        animation: openmenumobile 0.4s ease-out;
+    }
+
+    .Cards-Top a h2 {
+        font-size: 1.3rem
+    }
+
+    .Cards-Top a p {
+        font-size: 0.9rem
+    }
+
+    .Card-Low-Top-Inner h2 {
+        font-size: 1.3rem;
+    }
+
+    .Card-Low-Top-Inner p {
+        font-size: 0.9rem;
+    }
+
+    @keyframes openmenumobile {
+        0% {
+            left: -100%;
+        }
+
+        100% {
+            left: 0;
+        }
+    }
+
+    .products-add-btns-top button {
+        color: black;
     }
 }

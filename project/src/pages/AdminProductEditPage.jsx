@@ -327,6 +327,40 @@ export default function AdminProductEditPage() {
                                     </a>
 
                                 </div>
+                                <div className='estoque-prata-index'>
+                                    <a href="#">
+                                        <div class='item-prata' id={ProdutoAtual.$id}>
+                                            <img src={ProdutoAtual != "" && ProdutoAtual.PHOTOURL && ProdutoAtual.PHOTOURL.length > 0 ? ProdutoAtual.PHOTOURL[0] : ""} alt="" />
+                                            <div class="text-prata">
+                                                {ProdutoAtual.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                                    <>
+                                                        {isAvaliable === 'true' ?
+                                                            <p class='novidade-loja'>Disponível</p>
+                                                            :
+                                                            <p class="esgotado-loja">ESGOTADO</p>
+                                                        }
+                                                    </>}
+                                                <h1 class="nome-prata">{nomeProduto}</h1>
+                                                <div class='estrelas'>
+                                                    <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
+                                                </div>
+                                                <div class="promocao">
+                                                    {descontoProduto > 0 ?
+                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduto}</s> R$ {priceProduto - descontoProduto}</p>
+                                                        :
+                                                        <p class="preço-loja">R$ {priceProduto - descontoProduto}</p>
+                                                    }
+                                                    <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                                </div>
+                                                <div class="botaocomprarprata">
+                                                    <span>VER DETALHES</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
                             </div>
                         </div>
 

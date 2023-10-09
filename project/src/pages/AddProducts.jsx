@@ -443,7 +443,6 @@ export default function AddProducts() {
                                             </div>
                                             <div className="iptnewpdt">
                                                 <p>Personalizavel:</p>
-                                                <p>Caso não tenha, mantenha em branco.</p>
                                                 <select
                                                     value={PERSONALIZAVEL}
                                                     onChange={(e) => {
@@ -526,13 +525,50 @@ export default function AddProducts() {
 
                                 </div>
                             </div>
+                            <div className='estoque-prata-index'>
+                                    <a href="#">
+                                        <div class='item-prata'>
+                                            <img src={
+                                                window.location.origin + filepreview != "" && filepreview && filepreview.length > 0 ? filepreview : filepreview
+                                            } alt="" />
+                                            <div class="text-prata">
+                                                {PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                                    <>
+                                                        {avaliable === 'true' ?
+                                                            <p class='novidade-loja'>Disponível</p>
+                                                            :
+                                                            <p class="esgotado-loja">ESGOTADO</p>
+                                                        }
+                                                    </>}
+                                                <h1 class="nome-prata">{nameProduct}</h1>
+                                                <div class='estrelas'>
+                                                    <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
+                                                </div>
+                                                <div class="promocao">
+                                                    {descontoProduct > 0 ?
+                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {priceProduct - descontoProduct}</p>
+                                                        :
+                                                        <p class="preço-loja">R$ {priceProduct - descontoProduct}</p>
+                                                    }
+                                                    <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                                </div>
+                                                <div class="botaocomprarprata">
+                                                    <span>VER DETALHES</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
                             <div className="buttons">
                                 <button onClick={() => setStep((prevState) => prevState - 1)}>Voltar</button>
                                 <button onClick={createNewProduct}>Criar Produto</button>
 
                             </div>
                         </div>
-                    </div>
+                
                     :
                     null}
             </div>
