@@ -4358,7 +4358,7 @@ h2.extensorfrase {
 }
 
 /* TABLETS */
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1200px) {
     .menu-pc-top {
         width: 100%;
         display: flex;
@@ -5632,6 +5632,29 @@ h2.extensorfrase {
         height: 100%;
     }
 
+    .Admin-ContentDashBoard {
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: -16vh;
+        width: 900px;
+
+    }
+
+    .navigation-bottom {
+        display: block;
+        width: 900px;
+        max-width: 900px;
+    }
+
+
+
+    .Cards-Left-Middle {
+        display: block;
+    }
+
+    .AdminPage-DashBoard header {
+        width: 100%;
+    }
 }
 
 /* SMARTPHONES */
