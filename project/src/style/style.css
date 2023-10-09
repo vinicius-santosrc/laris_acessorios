@@ -3612,15 +3612,16 @@ h2.extensorfrase {
     color: gray;
 }
 
-.AdminLogin-input-box p{
+.AdminLogin-input-box p {
     color: gray;
 }
+
 .AdminLogin-left-side {
     display: block;
     align-items: center;
 }
 
-.AdminLogin-right-side img{
+.AdminLogin-right-side img {
     width: 700px;
     height: 100%;
     pointer-events: none;
@@ -3652,6 +3653,14 @@ h2.extensorfrase {
     font-size: 1.4rem;
 }
 
+.AdminPage-DashBoard {
+    position: relative;
+    justify-content: center;
+    margin: 0 auto;
+    display: flex;
+
+}
+
 .AdminPage-DashBoard nav {
     padding: 0px;
     justify-content: center;
@@ -3667,10 +3676,21 @@ h2.extensorfrase {
     align-items: center;
     height: 98%;
     padding: 25px;
+    z-index: 10;
+
+}
+
+.navigation-bottom {
+    width: 300px;
+    height: 100vh;
+    margin-top: -16vh;
+    position: relative;
+    display: block;
+    max-width: 300px;
 }
 
 .navigation-bar-logo-top {
-    margin: 0 auto ;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -3710,7 +3730,7 @@ h2.extensorfrase {
     background-color: rgb(204, 204, 204);
 }
 
-.AdminPage-DashBoard li i{
+.AdminPage-DashBoard li i {
     padding: 0px;
 
 }
@@ -3725,29 +3745,327 @@ h2.extensorfrase {
 .AdminPage-DashBoard header {
     font-size: 1rem;
     padding: 10px;
-    margin: auto;
     justify-content: space-between;
-    position: fixed;
+    position: relative;
+    left: 0;
+    right: 0;
     display: block;
     width: 1500px;
     background-color: #ffff;
     gap: 5px;
     box-shadow: 1px 1px 7px gray;
     border-bottom: none;
-    margin: 10px 0px;
+    margin: 10px auto;
     border-radius: 10px;
-    z-index: 100;
+    z-index: 1;
     display: flex;
     align-items: center;
+
+
+}
+
+.dashboard-cards {
+    padding-top: 20px;
+}
+
+.product-atual {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin: 0px 0px;
+}
+
+.product-atual img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+
+
+.rightside-product-atual {
+    align-items: center;
+    width: 100%;
+}
+
+.rightside-product-atual input {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    width: 100%;
+    outline: none;
+    color: black;
+}
+
+.rightside-product-atual select {
+    background-color: transparent;
+    border: none;
+    font-size: 1.4rem;
+    width: 100%;
+    outline: none;
+}
+
+.optionsedit {
+    margin: 10px;
+}
+
+.images-product {
+    display: flex;
+    width: 500px;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.titleeditproduto {
+    margin: 20px 0px;
+}
+
+.images-product img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.inputbox-editp {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+#imagelogo {
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+}
+
+.sendPhotosDiv {
+    text-align: center;
+    margin: auto;
+}
+
+.sendPhotosDiv img{
+    width: 500px;
+    pointer-events: none;
+    margin: 10px 0px;
+}
+
+.preview-images-wrapper {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: auto;
+}
+.preview-images-wrapper img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.sendPhotosDiv h1 {
+    font-size: 2rem;
+    margin: 10px 0px;
+    cursor: default;
 }
 
 .AdminPage-DashBoard header input {
-    width: 500px;
+    width: 100%;
     padding: 10px 5px;
     background-color: transparent;
     border: none;
     outline: none;
     font-size: 1.3rem;
+    z-index: 1;
+}
+
+.Cards-Top {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    height: 258px;
+    margin: 20px 0px;
+    margin-top: 50px
+}
+
+.Cards-Top .Card-Middle-Top {
+    width: 70%;
+    background-color: #FD3A98;
+    box-shadow: 5px 4px 15px 0px rgba(0, 0, 0, 0.25);
+    padding: 30px;
+    border-radius: 13px;
+    color: white;
+    cursor: pointer;
+}
+
+.Cards-Top a {
+    color: white;
+    text-decoration: noe;
+}
+
+.Cards-Top a h2 {
+    font-size: 2rem;
+}
+
+.Cards-Top a p {
+    font-size: 1.3rem;
+}
+
+.Cards-Left-Middle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.leftside-itens {
+    display: block;
+    flex-wrap: nowrap;
+    width: 885px;
+
+}
+
+.rightside-itens {
+    width: 100%;
+}
+
+.Cards-Low-Top {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+}
+
+.Card-Low-Top-Inner {
+    width: 279px;
+    height: 258px;
+    box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.50);
+    padding: 20px;
+    border-radius: 20px;
+    
+}
+
+.Card-Low-Top-Inner a {
+    color: black;
+}
+
+.Card-Low-Top-Inner i {
+    padding: 10px;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 30px;
+    background-color: #EF59A0;
+}
+
+.Card-Low-Top-Inner h2 {
+    font-size: 2rem;
+}
+
+.Cards-Middle-Top {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 20px 0px;
+    gap: 10px;
+}
+
+.Card-Mid-Top-Inner {
+    width: 421px;
+    height: 258px;
+    border-radius: 13px;
+    background: #D9D9D9;
+    padding: 20px;
+}
+
+.card_ipt_inner {
+    margin: 90px 0px;
+    font-size: 1.4rem;
+
+}
+
+.Card-Large-Hg {
+    width: 100%;
+    height: 536px;
+    border-radius: 13px;
+    background: #D9D9D9;
+    padding: 20px;
+}
+
+.leftside-wrapper-btn {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+}
+
+#titleacessorapido {
+    margin: 10px 0px
+}
+
+.preview-images-bottom {
+    width: 500px;
+}
+
+.leftside-product img {
+    width: 100%;
+}
+
+.ContentPreviewNewProduct {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    gap: 10px;
+}
+
+
+.preview-images-bottom img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover
+}
+
+.leftside-product {
+    width: 400px;
+}
+
+.leftside-wrapper-btn button {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #D9D9D9;
+}
+.Cards-Top .Card-Large-Top {
+    width: 100%;
+    background: #D9D9D9;
+    padding: 30px;
+    box-shadow: 5px 4px 15px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 13px;
+    cursor: pointer;
+}
+
+.btns-bottom-save {
+    display: flex;
+    gap: 10px;
+    justify-content: right;
+}
+
+.btns-bottom-save button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.btns-bottom-save button:nth-child(1) {
+    background: #EF59A0;
+    border-radius: 10px;
+    font-weight: 600;
+    color: white;
+}
+
+.btns-bottom-save button:nth-child(2) {
+    background: red;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    
 }
 
 .title-opcoes-pc {
@@ -3759,10 +4077,10 @@ h2.extensorfrase {
 }
 
 .Admin-ContentDashBoard {
+    justify-content: center;
+    margin: 0 auto;
     margin-top: -16vh;
-    
-    margin-left: 340px;
-
+    width: 1500px;
 }
 
 .Top-Side-Dashboard {
@@ -3770,7 +4088,6 @@ h2.extensorfrase {
     align-items: center;
     gap: 10px;
     margin-bottom: 10px
-
 }
 
 .Bottom-Side-Dashboard {
@@ -3801,8 +4118,11 @@ h2.extensorfrase {
 }
 
 .Cards-Dashboards {
-    padding-top: 100px;
-    width: 1500px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
 .AdminPage-DashBoard label {
@@ -3844,7 +4164,7 @@ h2.extensorfrase {
 
 .search-products-box {
     position: absolute;
-    top: 80px;
+    top: -70px;
     width: 1500px;
     height: 500px;
     overflow-x: hidden;
@@ -3853,6 +4173,7 @@ h2.extensorfrase {
     border-radius: 10px;
     padding: 20px;
     background-color: white;
+    z-index: 1;
 }
 
 
@@ -3865,7 +4186,6 @@ h2.extensorfrase {
 
 .search-products-box li {
     gap: 10px;
-    
     padding-top: 0px;
     list-style: none;
     padding-bottom: 0px;
@@ -3886,11 +4206,103 @@ h2.extensorfrase {
     font-size: 1rem;
 }
 
-.Admin-ContentDashBoard table img{
+.Admin-ContentDashBoard table img {
     width: 50px;
     height: 50px;
     object-fit: cover;
+    border-radius: 5px;
+}
+
+.Admin-ContentDashBoard table td {
+    text-align: center;
+    padding: 10px 5px;
+    cursor: pointer;
+}
+
+.Admin-ContentDashBoard table tr:hover {
+    background-color: rgba(73, 80, 96, .1);
+
+}
+
+.Admin-ContentDashBoard table tr:nth-child(1) {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #EF59A0;
+}
+
+.Admin-ContentDashBoard table {
+    padding: 10px;
     border-radius: 10px;
+    width: 100%;
+}
+
+.Admin-ContentDashBoard table td:nth-child(2) {
+    text-align: left;
+}
+
+.dbs {
+    margin: 20px;
+    padding: 10px;
+    background-color: transparent;
+    color: #EF59A0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.nodatabases {
+    margin: auto;
+    text-align: center;
+}
+
+.nodatabases img {
+    width: 650px;
+    pointer-events: none;
+}
+
+.content-page-add-products {
+    padding: 10px 0px;
+    width: 1500px;
+}
+
+.products-add-principal-left {
+    width: 20%;
+    background-color: transparent;
+    box-shadow: 1px 1px 7px gray;
+    padding: 20px;
+    border-radius: 15px;
+    height: 800px;
+    overflow-y: auto;
+}
+
+.products-add-btns-top {
+    margin: 10px 0px;
+}
+
+.products-add-btns-top button {
+    box-shadow: 1px 1px 7px gray;
+    padding: 10px 15px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+
+.products-add-principal-right {
+    width: 80%;
+    background-color: transparent;
+    box-shadow: 1px 1px 7px gray;
+    padding: 20px;
+    border-radius: 15px;
+    height: 800px;
+    overflow-y: scroll;
+}
+
+.products-add-principal {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
 }
 
 /* TABLETS */
@@ -8586,7 +8998,7 @@ h2.extensorfrase {
         font-size: 3vw;
     }
 
-    .laris-checkout-page .seu-carrinho h1, .laris-checkout-page .seu-endereco h1,  .laris-checkout-page .pay-- h1,.laris-checkout-page .dados-pessoais h1 {
+    .laris-checkout-page .seu-carrinho h1, .laris-checkout-page .seu-endereco h1, .laris-checkout-page .pay-- h1, .laris-checkout-page .dados-pessoais h1 {
         font-size: 6vw !important;
         text-align: left;
         margin-bottom: 0;
@@ -8673,7 +9085,7 @@ h2.extensorfrase {
         justify-content: center;
     }
 
-    .laris-checkout-page .pay-- i,.laris-checkout-page .seu-endereco i,.laris-checkout-page .dados-pessoais i {
+    .laris-checkout-page .pay-- i, .laris-checkout-page .seu-endereco i, .laris-checkout-page .dados-pessoais i {
         background: black;
         color: white;
         padding: 1vw;

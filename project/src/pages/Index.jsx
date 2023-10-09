@@ -30,9 +30,9 @@ export default function Index() {
         )
             .then((response) => {
                 const ProductsArray = response.documents.map((products) => (
-                    <a href={window.location.origin + "/produto/" + products.URL} id={products.$id} key={products.$id}>
+                    <a href={"/produto/" + products.URL} id={products.$id} key={products.$id}>
                         <div class='item-prata' id={products.$id}>
-                            <img src={window.location.origin + products != "" && products.PHOTOURL && products.PHOTOURL.length > 0 ? products.PHOTOURL[0] : ""} alt="" />
+                            <img src={products != "" && products.PHOTOURL && products.PHOTOURL.length > 0 ? products.PHOTOURL[0] : ""} alt="" />
                             <div class="text-prata">
                                 {products.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                     <>

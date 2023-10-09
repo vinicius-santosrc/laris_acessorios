@@ -28,7 +28,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -65,7 +65,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -117,7 +117,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -153,7 +153,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -189,7 +189,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -225,7 +225,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -261,7 +261,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -297,7 +297,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -333,7 +333,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>
@@ -369,7 +369,7 @@ export default function ProductsShow(props) {
                         return (
                             <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
                                 <div class='item-prata' id={produto.$id}>
-                                    <img src={window.location.origin + produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
                                     <div class="text-prata">
                                         {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                             <>

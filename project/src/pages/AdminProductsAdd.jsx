@@ -5,6 +5,7 @@ import { Query } from "appwrite";
 
 export default function AdminProductsAdd() {
 
+    const [DatabaseAt, setDatabaseAtual] = useState(null)
     const [search, setSearch] = useState(null);
     const [ContentSearch, setContentSearch] = useState([])
     const [ProdutosCadastrados, setTodosProdutos] = useState([])
@@ -26,24 +27,25 @@ export default function AdminProductsAdd() {
                 setTodosProdutos(res.documents.map((product) => {
                     return (
                         <tr onClick={() => {
-                            window.location.href= window.location.origin + `/admin/products/${product.$id}`
+                            window.location.href = window.location.origin + `/admin/products/${product.$id}`
                         }}>
                             <td>
-                                <img src={product.PHOTOURL.length > 0 ? window.location.origin + product.PHOTOURL[0] : window.location.origin + product.PHOTOURL} />
+                                <img src={product.PHOTOURL.length > 0 ? product.PHOTOURL[0] : product.PHOTOURL} />
                             </td>
                             <td>
                                 <h2>{product.NAME_PRODUCT}</h2>
+                                <p style={{color: "gray"}}>{product.TYPE}</p>
                             </td>
                             <td>
-                                <p>{product.TYPE}</p>
+                               {product.STYLE} 
                             </td>
                             <td>
-                                <p style={{color: 'gray'}}>R$ {product.DESCONTO}</p>
+                                <p style={{ color: 'gray' }}>R$ {product.DESCONTO}</p>
                             </td>
                             <td>
-                                <p style={{color: 'red'}}>R$ {product.PRICE}</p>
+                                <p style={{ color: 'red' }}>R$ {product.PRICE}</p>
                             </td>
-                            <td>{product.AVALIABLE == true ? <p>Disponível</p> : <p>Sem estoque</p>}</td>
+                            <td>{product.AVALIABLE == true ? <p style={{color: '#EF59A0'}}>Disponível</p> : <p style={{color: 'gray'}}>Sem estoque</p>}</td>
                             <td>{product.QUANT_DISPONIVEL}</td>
                         </tr>
                     )
@@ -67,7 +69,7 @@ export default function AdminProductsAdd() {
                                     <h2>Produtos encontrados: </h2>
                                     <li>
                                         <a href={window.location.origin + "/admin/products/" + r.$id}>
-                                            <img src={r.PHOTOURL.length > 0 ? window.location.origin + r.PHOTOURL[0] : window.location.origin + r.PHOTOURL}></img>
+                                            <img src={r.PHOTOURL.length > 0 ?  r.PHOTOURL[0] :  r.PHOTOURL}></img>
                                             <div className="right-side-busca">
                                                 <p id="type">{r.TYPE}</p>
                                                 <h2>{r.NAME_PRODUCT}</h2>
@@ -86,7 +88,7 @@ export default function AdminProductsAdd() {
                             return (
                                 <li>
                                     <a href={window.location.origin + "/admin/products/" + r.$id}>
-                                        <img src={r.PHOTOURL.length > 0 ? window.location.origin + r.PHOTOURL[0] : window.location.origin + r.PHOTOURL}></img>
+                                        <img src={r.PHOTOURL.length > 0 ?  r.PHOTOURL[0] :  r.PHOTOURL}></img>
                                         <div className="right-side-busca">
                                             <p id="type">{r.TYPE}</p>
                                             <h2>{r.NAME_PRODUCT}</h2>
@@ -110,14 +112,14 @@ export default function AdminProductsAdd() {
             <NavigationLeft />
             <div className="Admin-ContentDashBoard">
                 <header>
-                    <div>
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                        <input placeholder="Buscar" onChange={
-                            (e) => {
-                                setSearch(e.target.value)
-                            }
-                        } />
-                    </div>
+
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                    <input placeholder="Buscar" onChange={
+                        (e) => {
+                            setSearch(e.target.value)
+                        }
+                    } />
+
 
                 </header>
                 {search
@@ -131,43 +133,72 @@ export default function AdminProductsAdd() {
                     <>
                     </>
                 }
+
+                <div className="AdicionarProducts"></div>
                 <div className="content-page-add-products">
-                    <div className="products-add-btns-top">
-                        <button></button>
-                        <button></button>
-                        <button></button>
-                        <button></button>
-                        <button></button>
+                    <div className="Add-Procuts-Laris">
+                        
                     </div>
                     <div className="products-add-principal">
                         <div className="products-add-principal-left">
                             <div className="left-card-principal">
-                                <h2>Bancos de dados</h2>
-                                <a>PRODUTOS</a>
+                                <h2><i className="fa-solid fa-database"></i> Bancos de dados</h2>
+                                <div className="dbs">
+                                    {DatabaseAt == "Products"
+                                        ?
+                                        <a onClick={() => {
+                                            setDatabaseAtual(null)
+                                        }}><i className="fa-regular fa-gem"></i> PRODUTOS <i className="fa-solid fa-chevron-right"></i></a>
+                                        :
+                                        <a style={{ color: "gray" }} onClick={() => {
+                                            setDatabaseAtual('Products')
+                                        }}><i className="fa-regular fa-gem"></i> PRODUTOS <i className="fa-solid fa-chevron-right"></i></a>
+                                    }
+
+                                </div>
                             </div>
                         </div>
                         <div className="products-add-principal-right">
+
                             <div className="right-card-principal">
-                                <p>Id: $id</p>
-                                <h2>Produtos Cadastrados</h2>
-                                <table>
-                                    <tr>
-                                        <td>FOTO</td>
-                                        <td>NOME</td>
-                                        <td>TIPO</td>
-                                        <td>DESCONTO</td>
-                                        <td>PREÇO</td>
-                                        <td>DISPONIBILIDADE</td>
-                                        <td>QUANTIDADE</td>
-                                    </tr>
-                                    {ProdutosCadastrados}
-                                </table>
+                                {DatabaseAt == "Products"
+                                    ?
+                                    <>
+                                        <h2><i className="fa-regular fa-gem"></i> Produtos Cadastrados</h2>
+                                        <div className="products-add-btns-top">
+                                        <button onClick={() => {
+                                            window.location.href = '/admin/products/add'
+                                        }}><i style={{color: 'green'}} className="fa-solid fa-plus"></i> ADICIONAR PRODUTO</button>
+                                        </div>
+     
+
+                                        <table>
+                                            <tr>
+                                                <td>FOTO</td>
+                                                <td>PRODUTO</td>
+                                                <td>TIPO</td>
+                                                <td>DESCONTO</td>
+                                                <td>PREÇO</td>
+                                                <td>DISPONIBILIDADE</td>
+                                                <td>QUANTIDADE</td>
+                                            </tr>
+                                            {ProdutosCadastrados}
+                                        </table>
+                                    </>
+                                    :
+                                    <div className="nodatabases">
+                                        <img src={window.location.origin + "/static/media/admin-images/undraw_folder_files_re_2cbm.svg"} />
+                                        <h2>Nada por aqui..</h2>
+                                        <p>Selecione um banco de dados.</p>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-        </div>
+        </div >
     );
 }

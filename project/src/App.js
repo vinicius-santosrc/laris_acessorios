@@ -25,6 +25,8 @@ import SucessoPage from './pages/SucessoPage';
 import AdminLogin from './pages/AdminLogin';
 import AdminProductsAdd from './pages/AdminProductsAdd';
 import AdminProductEditPage from './pages/AdminProductEditPage';
+import AddProducts from './pages/AddProducts';
+import Errors from './pages/Erros';
 
 //SCRIPTS
 function App() {
@@ -61,12 +63,15 @@ function App() {
 
           <Route path='/admin' element={<AdminPage />}></Route>
           <Route path='/admin/login' exact element={<AdminLogin />}></Route>
-          <Route path='/admin/products/add' element={<AdminProductsAdd />}></Route>
+          <Route path='/admin/products' element={<AdminProductsAdd />}></Route>
+          <Route path='/admin/products/add' element={<AddProducts />}></Route>
           <Route path='/admin/products/:product' element={<AdminProductEditPage />}></Route>
 
           <Route path='/promocoes' element={<Promocoes />}></Route>
           <Route path='/checkout' element={<Checkout />}></Route>
           <Route path='/novidades' element={<NovidadesPage />}></Route>
+
+          <Route path='/errors' element={<Errors />}></Route>
 
           <Route path='/institucional/duvidas-frequentes' element={<DuvidasFrequentes />}></Route>
           <Route path='/pages/privacidade-seguranca' element={<PrivacidadeSeguranca />}></Route>

@@ -84,7 +84,7 @@ export default function ProductPage() {
                     return (
                         <a href={window.location.origin + "/produto/" + products.URL} id={products.$id} key={products.$id}>
                             <div class='item-prata' id={products.$id}>
-                                <img src={window.location.origin + products != "" && products.PHOTOURL && products.PHOTOURL.length > 0 ? products.PHOTOURL[0] : ""} alt="" />
+                                <img src={products != "" && products.PHOTOURL && products.PHOTOURL.length > 0 ? products.PHOTOURL[0] : ""} alt="" />
                                 <div class="text-prata">
                                     {products.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                         <>
@@ -278,7 +278,7 @@ export default function ProductPage() {
 
                                     return (
                                         <div>
-                                            <img onClick={handleClick} id={index} key={index} src={window.location.origin + photo} alt="" />
+                                            <img onClick={handleClick} id={index} key={index} src={ photo} alt="" />
                                         </div>
                                     )
                                 })}
@@ -286,7 +286,7 @@ export default function ProductPage() {
 
                             </div>
                             <div className="imagemprincipal">
-                                <img src={window.location.origin + Product != "" && Product.PHOTOURL && Product.PHOTOURL.length > 0 ? Product.PHOTOURL[PHOTOATUAL] : ""} alt="" />
+                                <img src={Product != "" && Product.PHOTOURL && Product.PHOTOURL.length > 0 ? Product.PHOTOURL[PHOTOATUAL] : ""} alt="" />
                             </div>
                         </div>
                         {Product != '' ?
@@ -310,7 +310,7 @@ export default function ProductPage() {
                                     :
                                     ""}
                                 <h2>Quantidade: <select name="Quantidade" id="quant">
-                                    <option value={Product.QUANT_DISPONIVEL} selected>{Product.QUANT_DISPONIVEL} {Product.QUANT_DISPONIVEL > 1 ? "unidades" : Product.QUANT_DISPONIVEL == 0 ? 'unidades' : 'unidade'}</option>
+                                    <option value={Product.QUANT_DISPONIVEL > 0 ? 1 : 0 } selected>{Product.QUANT_DISPONIVEL} {Product.QUANT_DISPONIVEL > 1 ? "unidades" : Product.QUANT_DISPONIVEL == 0 ? 'unidades' : 'unidade'}</option>
                                 </select></h2>
                                 <div className='tamanhocenterleft'>
                                     <h2 className="tamanhofrase">Selecione Tamanho: <select name="Tamanho" id="tamanho">
