@@ -14,7 +14,8 @@ export default function AdminLogin() {
         }
         login(email, password)        
         .then((res) => {
-            alert('voce entrou com sucesso')
+            alert('Voce entrou com sucesso')
+            window.location.href = window.location.origin + "/admin"
         })
         .catch((error) => {
             alert(error)
@@ -24,17 +25,17 @@ export default function AdminLogin() {
     useEffect(() => {
         getUserData()
         .then((account) => {
-            setUser(account)
             if(account) {
+                setUser(account)
                 window.location.href = '/admin'
             }  
         })
         .catch((e) => {
-            alert(e)
+            console.log(e)
         })
         
         
-    })
+    }, [])
 
      
     return (

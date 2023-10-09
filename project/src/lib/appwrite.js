@@ -21,7 +21,7 @@ export const getUserData = async () => {
         return account.get()
     }
     catch (error) {
-        alert(error)
+        console.log(error)
     }
 }
 
