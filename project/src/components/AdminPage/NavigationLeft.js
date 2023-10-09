@@ -122,8 +122,21 @@ export default function NavigationLeft() {
 
             </nav >
             <div className="navigation-bottom">
-                
+
             </div>
+            <header className="navigation-header-cell">
+                <div className="leftside-navigation-bar-cellphone">
+                    <button><i className="fa-solid fa-bars"></i></button>
+                    {window.location.pathname == "/admin" ? <h2>Dashboard</h2> : null}
+                    {window.location.href.includes("/admin/products") ? <h2>Produtos</h2> : null}
+                    {window.location.href.includes("/admin/planilhas") ? <h2>Planilhas</h2> : null}
+                    {window.location.href.includes("/admin/pedidos") ? <h2>Pedidos</h2> : null}
+                </div>
+                <div className="rightside-navigation-bar-cellphone">
+                    <button><i className="fa-solid fa-bars"></i></button>
+                </div>
+            </header>
+
         </>
     )
 }

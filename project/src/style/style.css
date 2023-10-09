@@ -3929,8 +3929,9 @@ h2.extensorfrase {
 
 .Cards-Low-Top {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 5px;
+    margin: auto;
 }
 
 .Card-Low-Top-Inner {
@@ -4348,6 +4349,10 @@ h2.extensorfrase {
     margin: 10px;
     border: none;
     cursor: pointer;
+}
+
+.navigation-header-cell {
+    display: none !important
 }
 
 /* TABLETS */
@@ -9196,5 +9201,188 @@ h2.extensorfrase {
         color: white;
         border-radius: 10vw;
         padding: 3vw;
+    }
+
+    .AdminLoginPage {
+        margin: -11vh 20px;
+    }
+
+    .AdminLogin-flexbox {
+        display: block;
+        justify-content: space-between;
+        gap: 0px;
+        width: 100%;
+    }
+    
+    .LogoAdmin {
+        width: 170px;
+        margin: 15px 0px;
+    }
+    
+    .AdminLogin-top {
+        margin: 10px 0px;
+    }
+    
+    .AdminLogin-top h2 {
+        font-size: 1.9rem;
+    }
+    
+    .AdminLogin-top p {
+        font-size: 1.1rem;
+        color: gray;
+    }
+    
+    .AdminLogin-input-box p {
+        color: gray;
+    }
+    
+    .AdminLogin-left-side {
+        display: block;
+        align-items: center;
+    }
+    
+    .AdminLogin-right-side img {
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        display: none;
+    }
+    
+    .AdminLogin-input-box input {
+        width: 100%;
+        padding: 15px 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        outline: none;
+        margin: 5px 0px;
+    }
+    
+    .AdminLogin-bottom {
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .AdminLogin-bottom button {
+        background-color: black;
+        width: 90%;
+        border-radius: 10px;
+        margin: 30px auto;
+        color: white;
+        padding: 10px 0px;
+        border: none;
+        cursor: pointer;
+        font-size: 1.4rem;
+    }
+
+    .AdminPage-DashBoard header {
+        width: 100%
+    }
+
+    .AdminPage-DashBoard nav {
+        display:none;
+        position: fixed;
+        
+    }
+
+    .navigation-header-cell {
+        display: block;
+    }
+
+    .Admin-ContentDashBoard {
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: -16vh;
+        width: 100%;
+    }
+
+    .leftside-itens {
+        display: block;
+        flex-wrap: nowrap;
+        width: 100%;
+    
+    }
+    
+    .Cards-Left-Middle {
+        display: block;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .Cards-Top {
+        display: block;
+    }
+
+    .Card-Low-Top-Inner {
+        width: 100%;
+        height: 150px;
+        box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.10);
+        padding: 20px;
+
+        background: #D9D9D9;
+        border-radius: 20px;
+        
+    }
+
+    .card_ipt_inner {
+        margin: auto;
+    }
+
+    .Card-Large-Top {
+        width: 100%;
+        margin: 30px 0;
+        
+
+    }
+
+    .Cards-Dashboards {
+        width: 100%;
+        position: relative;
+        left: 0;
+        right: 0;
+
+    }
+
+    .Admin-ContentDashBoard {
+        padding: 60px 10px;
+    }
+    
+    .Cards-Top .Card-Middle-Top {
+        width: 100%;
+        background-color: #FD3A98;
+        box-shadow: 5px 4px 15px 0px rgba(0, 0, 0, 0.10);
+        padding: 30px;
+        border-radius: 13px;
+        color: white;
+        cursor: pointer;
+    }
+    .navigation-header-cell {
+        margin: 0px auto !important;
+        display: flex !important;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        background: #ffff !important;
+        z-index: 20 !important;
+        width: 100% !important;
+        padding: 10px;
+        border-radius: 0px !important;
+        box-shadow: none !important;
+        backdrop-filter: blur(15px) !important;
+    }
+
+    .leftside-navigation-bar-cellphone {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .leftside-navigation-bar-cellphone button{
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+    }
+
+    .leftside-navigation-bar-cellphone h2 {
+        color: #EF59A0;
     }
 }

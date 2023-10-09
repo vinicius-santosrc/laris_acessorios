@@ -364,6 +364,186 @@ export default function ProductsShow(props) {
                         )
                     }))
                 }
+                else if (window.location.href.includes("-brincos")) {
+                    SETPRODUCTS(res.documents.filter(r => r.STYLE == 'Brincos').map((produto) => {
+                        return (
+                            <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
+                                <div class='item-prata' id={produto.$id}>
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <div class="text-prata">
+                                        {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <>
+                                                {produto.AVALIABLE == true ?
+                                                    <p class='novidade-loja'>Disponível</p>
+                                                    :
+                                                    <p class="esgotado-loja">ESGOTADO</p>}
+                                            </>}
+                                        <h1 class="nome-prata">{produto.NAME_PRODUCT}</h1>
+                                        <div class='estrelas'>
+                                            <img src="./static/media/product-images/Nenhuma estrela.png" alt="" />
+                                        </div>
+                                        <div class="promocao">
+                                            {produto.DESCONTO > 0 ?
+                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                :
+                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                            }
+                                            <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                        </div>
+                                        <div class="botaocomprarprata">
+                                            <label>VER DETALHES</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        )
+                    }))
+                }
+                else if (window.location.href.includes("-aneis")) {
+                    SETPRODUCTS(res.documents.filter(r => r.STYLE == 'Aneis').map((produto) => {
+                        return (
+                            <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
+                                <div class='item-prata' id={produto.$id}>
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <div class="text-prata">
+                                        {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <>
+                                                {produto.AVALIABLE == true ?
+                                                    <p class='novidade-loja'>Disponível</p>
+                                                    :
+                                                    <p class="esgotado-loja">ESGOTADO</p>}
+                                            </>}
+                                        <h1 class="nome-prata">{produto.NAME_PRODUCT}</h1>
+                                        <div class='estrelas'>
+                                            <img src="./static/media/product-images/Nenhuma estrela.png" alt="" />
+                                        </div>
+                                        <div class="promocao">
+                                            {produto.DESCONTO > 0 ?
+                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                :
+                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                            }
+                                            <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                        </div>
+                                        <div class="botaocomprarprata">
+                                            <label>VER DETALHES</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        )
+                    }))
+                }
+                else if (window.location.href.includes("-braceletes")) {
+                    SETPRODUCTS(res.documents.filter(r => r.STYLE == 'Braceletes').map((produto) => {
+                        return (
+                            <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
+                                <div class='item-prata' id={produto.$id}>
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <div class="text-prata">
+                                        {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <>
+                                                {produto.AVALIABLE == true ?
+                                                    <p class='novidade-loja'>Disponível</p>
+                                                    :
+                                                    <p class="esgotado-loja">ESGOTADO</p>}
+                                            </>}
+                                        <h1 class="nome-prata">{produto.NAME_PRODUCT}</h1>
+                                        <div class='estrelas'>
+                                            <img src="./static/media/product-images/Nenhuma estrela.png" alt="" />
+                                        </div>
+                                        <div class="promocao">
+                                            {produto.DESCONTO > 0 ?
+                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                :
+                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                            }
+                                            <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                        </div>
+                                        <div class="botaocomprarprata">
+                                            <label>VER DETALHES</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        )
+                    }))
+                }
+                else if (window.location.href.includes("-tornozeleiras")) {
+                    SETPRODUCTS(res.documents.filter(r => r.STYLE == 'Tornozeleira').map((produto) => {
+                        return (
+                            <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
+                                <div class='item-prata' id={produto.$id}>
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <div class="text-prata">
+                                        {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <>
+                                                {produto.AVALIABLE == true ?
+                                                    <p class='novidade-loja'>Disponível</p>
+                                                    :
+                                                    <p class="esgotado-loja">ESGOTADO</p>}
+                                            </>}
+                                        <h1 class="nome-prata">{produto.NAME_PRODUCT}</h1>
+                                        <div class='estrelas'>
+                                            <img src="./static/media/product-images/Nenhuma estrela.png" alt="" />
+                                        </div>
+                                        <div class="promocao">
+                                            {produto.DESCONTO > 0 ?
+                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                :
+                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                            }
+                                            <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                        </div>
+                                        <div class="botaocomprarprata">
+                                            <label>VER DETALHES</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        )
+                    }))
+                }
+                else if (window.location.href.includes("-piercing")) {
+                    SETPRODUCTS(res.documents.filter(r => r.STYLE == 'Piercing').map((produto) => {
+                        return (
+                            <a href={"produto/" + produto.URL} id={produto.$id} key={produto.$id}>
+                                <div class='item-prata' id={produto.$id}>
+                                    <img src={produto != "" && produto.PHOTOURL && produto.PHOTOURL.length > 0 ? produto.PHOTOURL[0] : ""} alt="" />
+                                    <div class="text-prata">
+                                        {produto.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <>
+                                                {produto.AVALIABLE == true ?
+                                                    <p class='novidade-loja'>Disponível</p>
+                                                    :
+                                                    <p class="esgotado-loja">ESGOTADO</p>}
+                                            </>}
+                                        <h1 class="nome-prata">{produto.NAME_PRODUCT}</h1>
+                                        <div class='estrelas'>
+                                            <img src="./static/media/product-images/Nenhuma estrela.png" alt="" />
+                                        </div>
+                                        <div class="promocao">
+                                            {produto.DESCONTO > 0 ?
+                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                :
+                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                            }
+                                            <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                        </div>
+                                        <div class="botaocomprarprata">
+                                            <label>VER DETALHES</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        )
+                    }))
+                }
                 else {
                     SETPRODUCTS(res.documents.map((produto) => {
                         return (
