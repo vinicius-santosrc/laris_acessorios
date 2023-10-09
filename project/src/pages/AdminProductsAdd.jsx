@@ -13,7 +13,7 @@ export default function AdminProductsAdd() {
 
     const DBUID = '651ca99af19b7afad3f1';
     const PRODUTOSUID = '651ca9adf3de7aad17d9';
-    
+
 
     useEffect(() => {
         getUserData()
@@ -46,10 +46,10 @@ export default function AdminProductsAdd() {
                             </td>
                             <td>
                                 <h2>{product.NAME_PRODUCT}</h2>
-                                <p style={{color: "gray"}}>{product.TYPE}</p>
+                                <p style={{ color: "gray" }}>{product.TYPE}</p>
                             </td>
                             <td>
-                               {product.STYLE} 
+                                {product.STYLE}
                             </td>
                             <td>
                                 <p style={{ color: 'gray' }}>R$ {product.DESCONTO}</p>
@@ -57,7 +57,7 @@ export default function AdminProductsAdd() {
                             <td>
                                 <p style={{ color: 'red' }}>R$ {product.PRICE}</p>
                             </td>
-                            <td>{product.AVALIABLE == true ? <p style={{color: '#EF59A0'}}>Disponível</p> : <p style={{color: 'gray'}}>Sem estoque</p>}</td>
+                            <td>{product.AVALIABLE == true ? <p style={{ color: '#EF59A0' }}>Disponível</p> : <p style={{ color: 'gray' }}>Sem estoque</p>}</td>
                             <td>{product.QUANT_DISPONIVEL}</td>
                         </tr>
                     )
@@ -81,7 +81,7 @@ export default function AdminProductsAdd() {
                                     <h2>Produtos encontrados: </h2>
                                     <li>
                                         <a href={window.location.origin + "/admin/products/" + r.$id}>
-                                            <img src={r.PHOTOURL.length > 0 ?  r.PHOTOURL[0] :  r.PHOTOURL}></img>
+                                            <img src={r.PHOTOURL.length > 0 ? r.PHOTOURL[0] : r.PHOTOURL}></img>
                                             <div className="right-side-busca">
                                                 <p id="type">{r.TYPE}</p>
                                                 <h2>{r.NAME_PRODUCT}</h2>
@@ -100,7 +100,7 @@ export default function AdminProductsAdd() {
                             return (
                                 <li>
                                     <a href={window.location.origin + "/admin/products/" + r.$id}>
-                                        <img src={r.PHOTOURL.length > 0 ?  r.PHOTOURL[0] :  r.PHOTOURL}></img>
+                                        <img src={r.PHOTOURL.length > 0 ? r.PHOTOURL[0] : r.PHOTOURL}></img>
                                         <div className="right-side-busca">
                                             <p id="type">{r.TYPE}</p>
                                             <h2>{r.NAME_PRODUCT}</h2>
@@ -117,11 +117,11 @@ export default function AdminProductsAdd() {
                     }))
                 })
         }
-    });
+    }, []);
 
     if (!user) {
         return <Loading />
-        
+
     }
 
     return (
@@ -154,7 +154,7 @@ export default function AdminProductsAdd() {
                 <div className="AdicionarProducts"></div>
                 <div className="content-page-add-products">
                     <div className="Add-Procuts-Laris">
-                        
+
                     </div>
                     <div className="products-add-principal">
                         <div className="products-add-principal-left">
@@ -183,11 +183,11 @@ export default function AdminProductsAdd() {
                                     <>
                                         <h2><i className="fa-regular fa-gem"></i> Produtos Cadastrados</h2>
                                         <div className="products-add-btns-top">
-                                        <button onClick={() => {
-                                            window.location.href = '/admin/products/add'
-                                        }}><i style={{color: 'green'}} className="fa-solid fa-plus"></i> ADICIONAR PRODUTO</button>
+                                            <button onClick={() => {
+                                                window.location.href = '/admin/products/add'
+                                            }}><i style={{ color: 'green' }} className="fa-solid fa-plus"></i> ADICIONAR PRODUTO</button>
                                         </div>
-     
+
 
                                         <table>
                                             <tr>
