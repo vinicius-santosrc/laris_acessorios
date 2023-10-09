@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
-import db from "../lib/appwrite";
+import db, { getUserData } from "../lib/appwrite";
 import { Query } from "appwrite";
 import { useParams } from "react-router-dom";
 import Loading from "../components/AdminPage/Loading";
@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 export default function AdminProductEditPage() {
     const { product } = useParams();
     const [ProdutoAtual, setProdutoAtual] = useState(null)
-
+    const [user, setUser] = useState(null)
 
     const DBUID = '651ca99af19b7afad3f1';
     const PRODUTOSUID = '651ca9adf3de7aad17d9';
@@ -22,6 +22,16 @@ export default function AdminProductEditPage() {
     const [qtdDisProduto, setQntDisponivelProduto] = useState(null)
     const [URLPRODUTO, setURLProduto] = useState(null)
     
+    useEffect(() => {
+        getUserData()
+            .then((account) => {
+                setUser(account)
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    })
 
     useEffect(() => {
         db.getDocument(DBUID, PRODUTOSUID, product)
@@ -67,6 +77,8 @@ export default function AdminProductEditPage() {
     const handleURLChange = (event) => {
         setURLProduto(event.target.value)
     }
+
+    
 
     const SalvarAlteracoes = async () => {
         Swal.fire({
@@ -138,6 +150,13 @@ export default function AdminProductEditPage() {
     const isAvaliable = avaliableProduto == 'true' ? 'true' : 'false';
     const TypeProduct = typeProduto;
 
+
+    
+
+    if (!user) {
+        return <Loading />
+        
+    }
 
     return (
         <div className="AdminPage-DashBoard">

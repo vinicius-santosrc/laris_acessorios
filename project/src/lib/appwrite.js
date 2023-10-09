@@ -21,7 +21,7 @@ export const getUserData = async () => {
         return account.get()
     }
     catch (error) {
-        console.log(error)
+        setUser(null)
     }
 }
 

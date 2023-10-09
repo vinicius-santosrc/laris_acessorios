@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
-import db from "../lib/appwrite";
+import db, { getUserData } from "../lib/appwrite";
 import { Query } from "appwrite";
+import Loading from "../components/AdminPage/Loading";
 
 export default function AdminProductsAdd() {
-
+    const [user, setUser] = useState(null)
     const [DatabaseAt, setDatabaseAtual] = useState(null)
     const [search, setSearch] = useState(null);
     const [ContentSearch, setContentSearch] = useState([])
@@ -12,7 +13,18 @@ export default function AdminProductsAdd() {
 
     const DBUID = '651ca99af19b7afad3f1';
     const PRODUTOSUID = '651ca9adf3de7aad17d9';
+    
 
+    useEffect(() => {
+        getUserData()
+            .then((account) => {
+                setUser(account)
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    })
 
     useEffect(() => {
         db.listDocuments(
@@ -106,6 +118,11 @@ export default function AdminProductsAdd() {
                 })
         }
     });
+
+    if (!user) {
+        return <Loading />
+        
+    }
 
     return (
         <div className="AdminPage-DashBoard">

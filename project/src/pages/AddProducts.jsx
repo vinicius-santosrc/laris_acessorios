@@ -3,7 +3,8 @@ import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import { ID } from "appwrite";
 import { Client, Storage } from "appwrite";
 import Swal from "sweetalert2";
-import db from "../lib/appwrite";
+import db, { getUserData } from "../lib/appwrite";
+import Loading from "../components/AdminPage/Loading";
 
 const client = new Client();
 const storage = new Storage(client);
@@ -14,6 +15,10 @@ client
 
 
 export default function AddProducts() {
+
+    const [user, setUser] = useState(null)
+
+
 
     //CONST DO PASSO ATUAL (COMEÇA NO 1)
 
@@ -48,6 +53,8 @@ export default function AddProducts() {
     const [filepreview3, setFilePreview3] = useState([])
 
     const [JSONPdtNovo, setJSONProductNovo] = useState([])
+
+
 
     //FAZENDO RECONHECIMENTO DA IMAGEM
 
@@ -123,6 +130,7 @@ export default function AddProducts() {
 
     const uploadImages = async () => {
         return Promise.all(
+
             photoURL.map(async (image) => {
                 try {
                     const response = await storage.createFile(
@@ -139,6 +147,8 @@ export default function AddProducts() {
                     throw error; // Rejeita a promessa se ocorrer um erro
                 }
             })
+
+
         );
     }
 
@@ -147,12 +157,25 @@ export default function AddProducts() {
         setJSONNew()
     })
 
+    //FAZENDO VERIFICACAO DO LOGIN
+
+    useEffect(() => {
+        getUserData()
+            .then((account) => {
+                setUser(account)
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    }, [])
+
     const createNewProduct = () => {
         const DBUID = '651ca99af19b7afad3f1';
         const PRODUTOSUID = '651ca9adf3de7aad17d9';
         Swal.fire({
-            title: `${nameProduct} - ${TYPE}`,
-            text: "Você está prestes a criar esse produto. Deseja continuar?",
+            title: `Deseja continuar?`,
+            text: `Você está prestes a ${nameProduct}.`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -174,7 +197,9 @@ export default function AddProducts() {
                         title: `O produto ${nameProduct} foi criado com sucesso.`,
                         showConfirmButton: false,
                         timer: 2500
-                    });
+                    }).then(() => {
+                        window.location.reload()
+                    })
                 } catch (error) {
                     Swal.fire({
                         icon: 'error',
@@ -190,6 +215,7 @@ export default function AddProducts() {
 
 
 
+
     return (
         <div className="AdminPage-DashBoard">
             <NavigationLeft />
@@ -201,50 +227,44 @@ export default function AddProducts() {
                         <h1>PRIMEIRO, ENVIE AS IMAGENS DO PRODUTO</h1>
                         <p>Envie até 3 imagens, sendo no mínimo uma, do produto.</p>
                         <div className="ipts-wrapper">
-                            <input
-                                type="file"
-                                id="inputfile1"
-                                accept="image/*" // Isso permite apenas que arquivos de imagem sejam selecionados
-                                onChange={handleImagemSelecionada}
-                            />
-                            <input
-                                type="file"
-                                id="inputfile2"
-                                accept="image/*" // Isso permite apenas que arquivos de imagem sejam selecionados
-                                onChange={handleImagemSelecionada2}
-                            />
-                            <input
-                                type="file"
-                                id="inputfile3"
-                                accept="image/*" // Isso permite apenas que arquivos de imagem sejam selecionados
-                                onChange={handleImagemSelecionada3}
-                            />
+                            <div className="inputwrap">
+                                <label for="inputfile1">{file ? <img src={filepreview} /> : <>
+                                    <i className="fa-regular fa-file"></i> Selecionar Imagem 1
+                                </>}</label>
+                                <input
+                                    type="file"
+                                    id="inputfile1"
+                                    accept="image/*" // Isso permite apenas que arquivos de imagem sejam selecionados
+                                    onChange={handleImagemSelecionada}
+                                />
+                            </div>
+                            <div className="inputwrap">
+                                <label for="inputfile2">{file2 ? <img src={filepreview2} /> : <>
+                                    <i className="fa-regular fa-file"></i> Selecionar Imagem 2
+                                </>}</label>
+                                <input
+                                    type="file"
+                                    id="inputfile2"
+                                    accept="image/*" // Isso permite apenas que arquivos de imagem sejam selecionados
+                                    onChange={handleImagemSelecionada2}
+                                />
+                            </div>
+                            <div className="inputwrap">
+                                <label for="inputfile3">{file3 ? <img src={filepreview3} /> : <>
+                                    <i className="fa-regular fa-file"></i> Selecionar Imagem 3
+                                </>}</label>
+                                <input
+                                    type="file"
+                                    id="inputfile3"
+                                    accept="image/*" // Isso permite apenas que arquivos de imagem sejam selecionados
+                                    onChange={handleImagemSelecionada3}
+                                />
+                            </div>
                         </div>
+
                         {
                             file || file2 || file3 ?
-                                <div className="preview-images-wrapper">
-                                    <img
-                                        src={filepreview}
-                                        alt="Produto Imagem"
-
-                                    />
-                                    <img
-                                        src={filepreview2}
-                                        alt="Produto Imagem 2"
-
-                                    />
-                                    <img
-                                        src={filepreview3}
-                                        alt="Produto Imagem 3"
-
-                                    /></div>
-
-                                :
-                                <></>
-                        }
-                        {
-                            file || file2 || file3 ?
-                                <button onClick={() => setStep((prevState) => prevState + 1)}>Continuar</button> : null
+                                <button className="buttonbottomsidecontinue" onClick={() => setStep((prevState) => prevState + 1)}>Continuar</button> : null
                         }
 
                     </section>
@@ -270,16 +290,25 @@ export default function AddProducts() {
                                                 alt="Produto Imagem"
                                             />
                                             <div className="preview-images-bottom">
-                                                <img
-                                                    src={filepreview2}
-                                                    alt="Produto Imagem 2"
+                                                {file2 ?
+                                                    <img
+                                                        src={filepreview2}
+                                                        alt="Produto Imagem 2"
 
-                                                />
-                                                <img
-                                                    src={filepreview3}
-                                                    alt="Produto Imagem 3"
+                                                    />
+                                                    :
+                                                    <>
+                                                    </>
+                                                }
+                                                {file3 ?
+                                                    <img
+                                                        src={filepreview3}
+                                                        alt="Produto Imagem 3"
 
-                                                />
+                                                    />
+                                                    :
+                                                    null
+                                                }
                                             </div>
                                         </div>
                                         <div className="rightside-product">
@@ -344,7 +373,8 @@ export default function AddProducts() {
                                             </div>
                                             <div className="iptnewpdt">
                                                 <p>Nome do produto:</p>
-                                                <input placeholder="Insira aqui"
+                                                <input
+                                                    placeholder=""
                                                     value={nameProduct}
                                                     onChange={(e) => {
                                                         setnameProduct(e.target.value)

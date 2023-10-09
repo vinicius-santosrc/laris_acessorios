@@ -14,7 +14,6 @@ export default function AdminLogin() {
         }
         login(email, password)        
         .then((res) => {
-            alert('Voce entrou com sucesso')
             window.location.href = window.location.origin + "/admin"
         })
         .catch((error) => {
@@ -27,7 +26,6 @@ export default function AdminLogin() {
         .then((account) => {
             if(account) {
                 setUser(account)
-                window.location.href = '/admin'
             }  
         })
         .catch((e) => {
@@ -37,6 +35,9 @@ export default function AdminLogin() {
         
     }, [])
 
+    if(user) {
+        window.location.href = '/admin'
+    }
      
     return (
         <section className="AdminLoginPage">

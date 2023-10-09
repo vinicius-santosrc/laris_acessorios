@@ -3998,7 +3998,10 @@ h2.extensorfrase {
 }
 
 .preview-images-bottom {
-    width: 500px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .leftside-product img {
@@ -4009,13 +4012,13 @@ h2.extensorfrase {
     display: flex;
     align-items: center;
     margin: auto;
-    gap: 10px;
+    gap: 20px;
 }
 
 
 .preview-images-bottom img {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     object-fit: cover
 }
 
@@ -4303,6 +4306,48 @@ h2.extensorfrase {
     display: flex;
     gap: 10px;
     justify-content: space-between;
+}
+
+.ipts-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+
+.ipts-wrapper input[type='file'] {
+    display: none;
+}
+
+.ipts-wrapper label {
+    background-color: #EF59A0;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    position: relative;
+    right: 0px;
+    cursor: pointer;
+    margin: 10px 0px
+}
+
+.ipts-wrapper label img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.inputwrap {
+    margin: 10px 0px
+}
+
+.buttonbottomsidecontinue {
+    background: black;
+    color: white;
+    padding: 10px 80px;
+    border-radius: 10px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
 }
 
 /* TABLETS */
