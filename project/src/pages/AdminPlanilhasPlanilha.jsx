@@ -156,40 +156,82 @@ export default function PlanilhaPage() {
 
                     });
             }
-            else {
-                console.log("salvou planilha outra")
+            else if (planilha == "planilha-despesas") {
+                db
+                    .updateDocument(DBUID, collectionId, itemId, {
+                        descricao: currentItemDESPESAS.descricao,
+                        valor: currentItemDESPESAS.valor,
+                        tipo: currentItemDESPESAS.tipo,
+                    })
+                    .then(() => {
+                        loadItens();
+                        setCurrentItem({
+                            descricao: "",
+                            valor: "",
+                            tipo: "",
+                        })
+                        setItemId(null);
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'O item não pode ser salvo. Contate um desenvolvedor',
+                            footer: '<a href="errors">Por que deste erro?</a>'
+                        })
+
+                    });
             }
         } else {
             // Crie um novo item no Appwrite sem especificar o ID
-            if(planilha == "planilha-itens") {
+            if (planilha == "planilha-itens") {
                 db
-                .createDocument(DBUID, collectionId, ID.unique(), { ...currentItem })
-                .then(() => {
-                    Swal.fire("Item criado com sucesso!");
-                    loadItens();
-                    setCurrentItem({
-                        codigo: "",
-                        nameofitem: "",
-                        detalhe: "",
-                        preco_compra: "",
-                        custos: "",
-                        precorevenda: "",
-                        quantcompra: "",
-                        lucroporitem: "",
-                        // Certifique-se de redefinir o ID
-                    });
-                })
-                .catch(() => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'O item não pôde ser criado. Contate um desenvolvedor.',
-                        footer: '<a href="errors">Por que deste erro?</a>'
+                    .createDocument(DBUID, collectionId, ID.unique(), { ...currentItem })
+                    .then(() => {
+                        Swal.fire("Item criado com sucesso!");
+                        loadItens();
+                        setCurrentItem({
+                            codigo: "",
+                            nameofitem: "",
+                            detalhe: "",
+                            preco_compra: "",
+                            custos: "",
+                            precorevenda: "",
+                            quantcompra: "",
+                            lucroporitem: "",
+                            // Certifique-se de redefinir o ID
+                        });
                     })
-                });
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'O item não pôde ser criado. Contate um desenvolvedor.',
+                            footer: '<a href="errors">Por que deste erro?</a>'
+                        })
+                    });
             }
-            else {
-                console.log("criou planilha tal")
+            else if (planilha == "planilha-despesas"){
+                db
+                    .createDocument(DBUID, collectionId, ID.unique(), { ...currentItemDESPESAS })
+                    .then(() => {
+                        Swal.fire("Item criado com sucesso!");
+                        loadItens();
+                        setCurrentItem({
+                            descricao: "",
+                            valor: "",
+                            tipo: "",
+                            // Certifique-se de redefinir o ID
+                        });
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'O item não pôde ser criado. Contate um desenvolvedor.',
+                            footer: '<a href="errors">Por que deste erro?</a>'
+                        })
+                    });
             }
         }
     };
