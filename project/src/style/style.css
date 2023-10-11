@@ -3750,7 +3750,7 @@ h2.extensorfrase {
     left: 0;
     right: 0;
     display: block;
-    width: 1500px;
+    width: 100%;
     background-color: #ffff;
     gap: 5px;
     box-shadow: 1px 1px 7px gray;
@@ -4086,7 +4086,9 @@ h2.extensorfrase {
     justify-content: center;
     margin: 0 auto;
     margin-top: -16vh;
-    width: 1500px;
+    margin-left: 130px;
+    margin-right: 60px;
+    width: 90%;
 }
 
 .Top-Side-Dashboard {
@@ -4171,7 +4173,7 @@ h2.extensorfrase {
 .search-products-box {
     position: absolute;
     top: -70px;
-    width: 1500px;
+    width: 100%;
     height: 500px;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -4268,7 +4270,7 @@ h2.extensorfrase {
 
 .content-page-add-products {
     padding: 10px 0px;
-    width: 1500px;
+    width: 100%;
 }
 
 .products-add-principal-left {
@@ -4355,6 +4357,154 @@ h2.extensorfrase {
 
 .navigation-header-cell {
     display: none !important
+}
+
+.right-side-flex-box {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin: 50px 0px;
+}
+
+.right-side-flex-box img {
+    width: 493px;
+    height: 367px;
+    object-fit: cover;
+}
+
+.planilhas-exists-flex {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    margin: 10px;
+    flex-wrap: wrap;
+}
+
+.right-side-flex-box h1 {
+    color: #000;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 80px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 2.88px;
+}
+
+.right-side-flex-box h2 {
+    color: #000;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.44px;
+    padding-left: 30px;
+}
+
+.left-side-flex-box {
+    width: 100%;
+}
+
+.left-side-flex-box button {
+    width: 500px;
+    padding: 20px 30px;
+    height: auto;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 21px;
+    background: #EFEFEF;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.Page-Planilhas {
+    margin-top: -16vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.button-create-planilha button {
+    border: 2px dashed #EF59A0;
+    background: transparent;
+    text-align: center;
+    color: #EF59A0;
+}
+
+.newItem {
+    margin: 30px 0px;
+    padding: 3vh;
+    background-color: #EEECEC;
+    border-radius: 1vw;
+}
+
+.newItem h1 {
+    font-size: 1.3rem;
+}
+
+.newItem p {
+    font-size: 0.9rem;
+}
+
+.exboxitem {
+    margin-top: 1.5vh;
+    padding-left: 1.5vw;
+}
+
+.boxitempla {
+    display: block;
+    padding: 0.8vw;
+    margin-bottom: 0.8vh;
+    font-size: 1rem;
+    background-color: #d8d8d8;
+    border-radius: 0.5vw;
+
+}
+
+.newItem input {
+    width: 100%;
+    background: transparent;
+    font-size: 1rem;
+    border: none;
+    padding: 10px;
+    outline: none;
+    color: var(--textcolor);
+    margin-bottom: 10px;
+    border-left: 1px solid #fca5cd;
+}
+
+.headeritem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headeritem button {
+    margin: auto;
+    margin-top: 1vh;
+    padding: 0.5vw 2.5vw 0.5vw 2.5vw;
+    background-color: var(--rosaprimario);
+    color: var(--text-color-in-rosa);
+    border: none;
+    border-radius: 0.5vw;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 0.1vw solid transparent;
+}
+
+.exboxitem button {
+    margin: auto;
+    margin-top: 1vh;
+    padding: 0.5vw 2.5vw 0.5vw 2.5vw;
+    background-color: #EF59A0;
+    color: white;
+    border: none;
+    border-radius: 0.5vw;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 0.1vw solid transparent;
 }
 
 /* TABLETS */
@@ -5636,7 +5786,17 @@ h2.extensorfrase {
         justify-content: center;
         margin: 0 auto;
         margin-top: -16vh;
-        width: 900px;
+
+        margin-left: 50px;
+        margin-right: 40px;
+        width: 65%;
+
+    }
+
+    .leftside-itens {
+        display: block;
+        flex-wrap: nowrap;
+        width: 100%;
 
     }
 
@@ -9567,5 +9727,123 @@ h2.extensorfrase {
 
     .products-add-btns-top button {
         color: black;
+    }
+
+    .newItem {
+        margin: 0 0px;
+        padding: 3vh;
+        background-color: #EEECEC;
+        border-radius: 1vw;
+    }
+    
+    .newItem h1 {
+        font-size: 1.3rem;
+    }
+    
+    .newItem p {
+        font-size: 0.9rem;
+    }
+    
+    .exboxitem {
+        margin-top: 1.5vh;
+        padding-left: 1.5vw;
+    }
+    
+    .boxitempla {
+        display: block;
+        padding: 0.8vw;
+        margin-bottom: 0.8vh;
+        font-size: 1rem;
+        background-color: #d8d8d8;
+        border-radius: 0.5vw;
+    
+    }
+    
+    .newItem input {
+        width: 100%;
+        background: transparent;
+        font-size: 1rem;
+        border: none;
+        padding: 10px;
+        outline: none;
+        color: var(--textcolor);
+        margin-bottom: 10px;
+        border-left: 1px solid #fca5cd;
+    }
+
+    .right-side-flex-box img {
+        width: 100%;
+        height: 367px;
+        object-fit: cover;
+    }
+    
+    .planilhas-exists-flex {
+        display: flex;
+        justify-content: left;
+        gap: 10px;
+        margin: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .right-side-flex-box h1 {
+        color: #000;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 1.3rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 2.88px;
+    }
+    
+    .right-side-flex-box h2 {
+        color: #000;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 0.9rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 1.44px;
+        padding-left: 0px;
+    }
+
+    .left-side-flex-box button {
+        width: 100%;
+        padding: 20px 30px;
+        height: auto;
+        flex-shrink: 0;
+        border: none;
+        border-radius: 21px;
+        background: #EFEFEF;
+        cursor: pointer;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    .AdminPage-DashBoard {
+        position: relative;
+        justify-content: center;
+        margin: 0 auto;
+        display: block;
+    
+    }
+
+    .PlanilhaPage {
+        padding: 0px 10px
+    }
+
+    .AdminPage-DashBoard li {
+        padding-top: 0px;
+        list-style: none;
+        padding-bottom: 0px;
+        font-size: 1.2rem;
+        color: #EF59A0;
+        border-bottom: none;
+        cursor: pointer;
+        margin: auto;
+        text-align: center;
+        padding: 25px 30px;
+        border-radius: 10px;
+        margin: 5px 0px;
+        transition: 500ms;
     }
 }

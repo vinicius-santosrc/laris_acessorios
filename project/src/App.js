@@ -27,6 +27,8 @@ import AdminProductsAdd from './pages/AdminProductsAdd';
 import AdminProductEditPage from './pages/AdminProductEditPage';
 import AddProducts from './pages/AddProducts';
 import Errors from './pages/Erros';
+import AdminPlanilhas from './pages/AdminPlanilhas';
+import AdminPlanilhasPlanilha from './pages/AdminPlanilhasPlanilha';
 
 //SCRIPTS
 function App() {
@@ -64,6 +66,8 @@ function App() {
           <Route path='/admin' element={<AdminPage />}></Route>
           <Route path='/admin/login' exact element={<AdminLogin />}></Route>
           <Route path='/admin/products' element={<AdminProductsAdd />}></Route>
+          <Route path='/admin/planilhas' element={<AdminPlanilhas />}></Route>
+          <Route path='/admin/planilhas/:planilha' element={<AdminPlanilhasPlanilha />}></Route>
           <Route path='/admin/products/add' element={<AddProducts />}></Route>
           <Route path='/admin/products/:product' element={<AdminProductEditPage />}></Route>
 
