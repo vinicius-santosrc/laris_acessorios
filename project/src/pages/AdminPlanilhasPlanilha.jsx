@@ -1,11 +1,37 @@
 import React, { useEffect, useState } from "react";
-import db from "../lib/appwrite";
+import db, { getUserData } from "../lib/appwrite";
 import { useParams } from "react-router-dom";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import Swal from "sweetalert2";
 import { ID } from "appwrite";
 
 export default function PlanilhaPage() {
+    const [user, setUser] = useState(null)
+    const [status, userStatus] = useState(null)
+    const [userDB, setUserDBAccount] = useState([])
+
+    useEffect(() => {
+        getUserData()
+            .then((account) => {
+
+                setUser(account)
+                userStatus(account.status ? 'Online' : 'Offline')
+                db.getDocument(
+                    "651ca99af19b7afad3f1",
+                    "652102213eeea3189590",
+                    account.$id
+                )
+                    .then((r) => {
+                        setUserDBAccount(r)
+                    })
+
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    })
+
     const { planilha } = useParams();
     const DBUID = '651ca99af19b7afad3f1';
     const [AddItemOpen, setAddItemOpen] = useState(false)
@@ -48,10 +74,10 @@ export default function PlanilhaPage() {
                 title: 'Oops...',
                 text: 'O item não possui um ID válido para exclusão! Contate um desenvolvedor.',
                 footer: '<a href="errors">Por que deste erro?</a>'
-              })
+            })
             return;
         }
-        
+
 
         db
             .deleteDocument(DBUID, collectionId, item.$id)
@@ -100,7 +126,7 @@ export default function PlanilhaPage() {
                         title: 'Oops...',
                         text: 'O item não pode ser salvo. Contate um desenvolvedor',
                         footer: '<a href="errors">Por que deste erro?</a>'
-                      })
+                    })
 
                 });
         } else {
