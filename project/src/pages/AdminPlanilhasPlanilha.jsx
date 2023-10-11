@@ -30,7 +30,7 @@ export default function PlanilhaPage() {
                 }
             })
 
-    })
+    }, [])
 
     const { planilha } = useParams();
     const DBUID = '651ca99af19b7afad3f1';
@@ -38,6 +38,7 @@ export default function PlanilhaPage() {
 
     const collectionMap = {
         "planilha-itens": "6524bc3a390afb07a756",
+        "planilha-despesas": "6526ef810e37b1d693c1"
         // Adicione mais mapeamentos conforme necessário
     };
 
@@ -57,12 +58,20 @@ export default function PlanilhaPage() {
         lucroporitem: ""
     });
 
+    const [currentItemDESPESAS, setcurrentItemDESPESAS] = useState({
+        descricao: "",
+        valor: "",
+        tipo: "Receita",
+
+    });
+
     useEffect(() => {
         loadItens();
     }, []);
 
     const handleEdit = (item) => {
         setCurrentItem(item);
+        setcurrentItemDESPESAS(item);
         setItemId(item.$id)
         setAddItemOpen(true)
     };
@@ -84,54 +93,76 @@ export default function PlanilhaPage() {
             .then(() => {
                 loadItens();
             })
-            .catch(console.error);
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'O item não possui um ID válido para exclusão! Contate um desenvolvedor.',
+                    footer: '<a href="errors">Por que deste erro?</a>'
+                })
+            });
     };
 
     const handleSave = () => {
-        if (!currentItem.codigo || !currentItem.nameofitem || !currentItem.detalhe || !currentItem.preco_compra || !currentItem.custos || !currentItem.precorevenda || !currentItem.quantcompra || !currentItem.lucroporitem) {
-            Swal.fire("Preencha todos os campos!");
-            return;
+        if (planilha == "planilha-itens") {
+            if (!currentItem.codigo || !currentItem.nameofitem || !currentItem.detalhe || !currentItem.preco_compra || !currentItem.custos || !currentItem.precorevenda || !currentItem.quantcompra || !currentItem.lucroporitem) {
+                Swal.fire("Preencha todos os campos!");
+                return;
+            }
+        }
+
+        if (planilha == "planilha-despesas") {
+            if (!currentItemDESPESAS.descricao || !currentItemDESPESAS.valor || !currentItemDESPESAS.tipo) {
+                Swal.fire("Preencha todos os campos!");
+                return;
+            }
         }
 
         if (itemId) {
             // Atualize o item no Appwrite
-            db
-                .updateDocument(DBUID, collectionId, itemId, {
-                    codigo: currentItem.codigo,
-                    nameofitem: currentItem.nameofitem,
-                    detalhe: currentItem.detalhe,
-                    preco_compra: currentItem.preco_compra,
-                    custos: currentItem.custos,
-                    precorevenda: currentItem.precorevenda,
-                    quantcompra: currentItem.quantcompra,
-                    lucroporitem: currentItem.lucroporitem,
-                })
-                .then(() => {
-                    loadItens();
-                    setCurrentItem({
-                        codigo: "",
-                        nameofitem: "",
-                        detalhe: "",
-                        preco_compra: "",
-                        custos: "",
-                        precorevenda: "",
-                        quantcompra: "",
-                        lucroporitem: "",
-                    });
-                    setItemId(null);
-                })
-                .catch(() => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'O item não pode ser salvo. Contate um desenvolvedor',
-                        footer: '<a href="errors">Por que deste erro?</a>'
+            if (planilha == "planilha-itens") {
+                db
+                    .updateDocument(DBUID, collectionId, itemId, {
+                        codigo: currentItem.codigo,
+                        nameofitem: currentItem.nameofitem,
+                        detalhe: currentItem.detalhe,
+                        preco_compra: currentItem.preco_compra,
+                        custos: currentItem.custos,
+                        precorevenda: currentItem.precorevenda,
+                        quantcompra: currentItem.quantcompra,
+                        lucroporitem: currentItem.lucroporitem,
                     })
+                    .then(() => {
+                        loadItens();
+                        setCurrentItem({
+                            codigo: "",
+                            nameofitem: "",
+                            detalhe: "",
+                            preco_compra: "",
+                            custos: "",
+                            precorevenda: "",
+                            quantcompra: "",
+                            lucroporitem: "",
+                        });
+                        setItemId(null);
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'O item não pode ser salvo. Contate um desenvolvedor',
+                            footer: '<a href="errors">Por que deste erro?</a>'
+                        })
 
-                });
+                    });
+            }
+            else {
+                console.log("salvou planilha outra")
+            }
         } else {
             // Crie um novo item no Appwrite sem especificar o ID
-            db
+            if(planilha == "planilha-itens") {
+                db
                 .createDocument(DBUID, collectionId, ID.unique(), { ...currentItem })
                 .then(() => {
                     Swal.fire("Item criado com sucesso!");
@@ -148,7 +179,18 @@ export default function PlanilhaPage() {
                         // Certifique-se de redefinir o ID
                     });
                 })
-                .catch(console.error);
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'O item não pôde ser criado. Contate um desenvolvedor.',
+                        footer: '<a href="errors">Por que deste erro?</a>'
+                    })
+                });
+            }
+            else {
+                console.log("criou planilha tal")
+            }
         }
     };
 
@@ -161,6 +203,104 @@ export default function PlanilhaPage() {
             })
             .catch(console.error);
     };
+
+    if (planilha == 'planilha-despesas') {
+        return (
+            <div className="AdminPage-DashBoard">
+                <NavigationLeft />
+                <div className="Admin-ContentDashBoard">
+                    {!collectionId
+                        ?
+                        <div className="Planilha-404-NotFound">
+                            <img src={window.location.origin + "/static/media/admin-images/undraw_void_-3-ggu.svg"} />
+                            <h1>Nenhuma planilha foi encontrada.</h1>
+                            <p>Entre em contato com o desenvolvedor ou tente novamente mais tarde.</p>
+                        </div>
+                        :
+                        <>
+                            <div class="newItem">
+                                <div class="headeritem">
+                                    <div class="side1item">
+                                        <h1>Adicionar um Item</h1>
+                                        <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
+                                    </div>
+                                    <div>
+                                        {AddItemOpen
+                                            ?
+                                            <button onClick={() => {
+                                                setAddItemOpen(false)
+                                            }}><i class="fa-solid fa-minus"></i></button>
+                                            :
+                                            <button onClick={() => {
+                                                setAddItemOpen(true)
+                                            }}><i class="fa-solid fa-plus"></i></button>
+                                        }
+
+
+                                    </div>
+
+                                </div>
+                                {AddItemOpen
+                                    ?
+                                    <div className="exboxitem">
+                                        <p>Descrição:</p>
+                                        <input
+                                            type="text"
+                                            value={currentItemDESPESAS.descricao}
+                                            onChange={(e) => setcurrentItemDESPESAS({ ...currentItemDESPESAS, descricao: e.target.value })}
+                                        />
+                                        <p>Valor:</p>
+                                        <input
+                                            type="text"
+                                            value={currentItemDESPESAS.valor}
+                                            onChange={(e) => setcurrentItemDESPESAS({ ...currentItemDESPESAS, valor: e.target.value })}
+                                        />
+                                        <p>Tipo:</p>
+                                        <select
+                                            value={currentItemDESPESAS.tipo}
+                                            onChange={(e) => setcurrentItemDESPESAS({ ...currentItemDESPESAS, tipo: e.target.value })}
+                                        >
+                                            <option value={'Receita'} selected>Receita</option>
+                                            <option value={'Despesa'}>Despesa</option>
+                                        </select>
+                                        <br />
+                                        <button onClick={handleSave}>Salvar</button>
+                                    </div>
+                                    :
+                                    null}
+
+                            </div>
+
+
+                            <table className="item-table">
+                                <thead className="titlecolumns">
+                                    <tr>
+                                        <th>Descrição</th>
+                                        <th>Valor</th>
+                                        <th>Tipo</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {items.map((item, index) => (
+                                        <tr id={item.$id} key={item.$id}>
+                                            <td id="bggray">{item.descricao}</td>
+                                            <td>{item.valor}</td>
+                                            <td id="bggray">{item.tipo}</td>
+
+                                            <td>
+                                                <button onClick={() => handleEdit(item)}><i className="fa-solid fa-pen-to-square"></i></button>
+                                                <button onClick={() => handleDelete(item)}><i className="fa-solid fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </>}
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="AdminPage-DashBoard">

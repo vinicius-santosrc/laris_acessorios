@@ -29,6 +29,7 @@ import AddProducts from './pages/AddProducts';
 import Errors from './pages/Erros';
 import AdminPlanilhas from './pages/AdminPlanilhas';
 import AdminPlanilhasPlanilha from './pages/AdminPlanilhasPlanilha';
+import AdminPedidos from './pages/AdminPedidos';
 
 //SCRIPTS
 function App() {
@@ -70,6 +71,7 @@ function App() {
           <Route path='/admin/planilhas/:planilha' element={<AdminPlanilhasPlanilha />}></Route>
           <Route path='/admin/products/add' element={<AddProducts />}></Route>
           <Route path='/admin/products/:product' element={<AdminProductEditPage />}></Route>
+          <Route path='/admin/pedidos' element={<AdminPedidos />}></Route>
 
           <Route path='/promocoes' element={<Promocoes />}></Route>
           <Route path='/checkout' element={<Checkout />}></Route>

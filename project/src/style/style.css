@@ -4214,6 +4214,40 @@ h2.extensorfrase {
     font-size: 1rem;
 }
 
+.leftside-header {
+    display: flex;
+    align-items: center;
+}
+
+.right-side-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.right-side-header img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.account-details-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#useronline {
+    font-size: 0.7rem;
+    color: #48c948;
+}
+
+#useroffline {
+    font-size: 0.7rem;
+    color: red;
+}
+
 .Admin-ContentDashBoard table img {
     width: 50px;
     height: 50px;
@@ -4395,7 +4429,7 @@ h2.extensorfrase {
     font-weight: 600;
     line-height: normal;
     letter-spacing: 1.44px;
-    padding-left: 30px;
+    padding-left: 0px;
 }
 
 .left-side-flex-box {

@@ -37,7 +37,7 @@ export default function AdminProductsAdd() {
                 }
             })
 
-    })
+    }, [])
 
     useEffect(() => {
         db.listDocuments(

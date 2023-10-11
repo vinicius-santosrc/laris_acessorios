@@ -34,7 +34,7 @@ export default function AdminPlanilhas() {
                 }
             })
 
-    })
+    }, [])
     return (
         <div className="AdminPage-DashBoard">
             <NavigationLeft />

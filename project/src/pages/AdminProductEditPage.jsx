@@ -45,7 +45,7 @@ export default function AdminProductEditPage() {
                 }
             })
 
-    })
+    }, [])
 
     useEffect(() => {
         db.getDocument(DBUID, PRODUTOSUID, product)

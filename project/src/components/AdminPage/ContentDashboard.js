@@ -1,14 +1,11 @@
 import { useEffect } from "react"
+import HeaderAdminPage from "./HeaderAdminPage"
 
 
 export default function ContentDashboard() {
     return (
         <div className="Admin-ContentDashBoard">
-            <header>
-                <i className="fa-solid fa-magnifying-glass"></i>
-                <input placeholder="Buscar" />
-                <img src="" />
-            </header>
+            <HeaderAdminPage />
 
             <div className="dashboard-cards">
                 <section className="Admin-Btns-Wrapper-Acesso-Rapido">
