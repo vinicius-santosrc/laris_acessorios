@@ -128,124 +128,130 @@ export default function PlanilhaPage() {
         <div className="AdminPage-DashBoard">
             <NavigationLeft />
             <div className="PlanilhaPage">
+                {!collectionId
+                    ?
+                    <div className="Planilha-404-NotFound">
+                        <img src={window.location.origin + "/static/media/admin-images/undraw_void_-3-ggu.svg"} />
+                        <h1>Nenhuma planilha foi encontrada.</h1>
+                        <p>Entre em contato com o desenvolvedor ou tente novamente mais tarde.</p>
+                    </div>
+                    :
+                    <>
+                        <div class="newItem">
+                            <div class="headeritem">
+                                <div class="side1item">
+                                    <h1>Adicionar um Item</h1>
+                                    <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
+                                </div>
+                                <div>
+                                    {AddItemOpen
+                                        ?
+                                        <button onClick={() => {
+                                            setAddItemOpen(false)
+                                        }}><i class="fa-solid fa-minus"></i></button>
+                                        :
+                                        <button onClick={() => {
+                                            setAddItemOpen(true)
+                                        }}><i class="fa-solid fa-plus"></i></button>
+                                    }
 
-                <div class="newItem">
-                    <div class="headeritem">
-                        <div class="side1item">
-                            <h1>Adicionar um Item</h1>
-                            <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
-                        </div>
-                        <div>
+
+                                </div>
+
+                            </div>
                             {AddItemOpen
                                 ?
-                                <button onClick={() => {
-                                    setAddItemOpen(false)
-                                }}><i class="fa-solid fa-minus"></i></button>
+                                <div className="exboxitem">
+                                    <p>Código:</p>
+                                    <input
+                                        type="text"
+                                        value={currentItem.codigo}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, codigo: e.target.value })}
+                                    />
+                                    <p>Nome do Item:</p>
+                                    <input
+                                        type="text"
+                                        value={currentItem.nameofitem}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, nameofitem: e.target.value })}
+                                    />
+                                    <p>Detalhe:</p>
+                                    <input
+                                        type="text"
+                                        value={currentItem.detalhe}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, detalhe: e.target.value })}
+                                    />
+                                    <p>Preço de Compra:</p>
+                                    <input
+                                        type="number"
+                                        value={currentItem.preco_compra}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, preco_compra: e.target.value })}
+                                    />
+                                    <p>Custos:</p>
+                                    <input
+                                        type="number"
+                                        value={currentItem.custos}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, custos: e.target.value })}
+                                    />
+                                    <p>Preço de Revenda:</p>
+                                    <input
+                                        type="number"
+                                        value={currentItem.precorevenda}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, precorevenda: e.target.value })}
+                                    />
+                                    <p>Quantidade de Compra:</p>
+                                    <input
+                                        type="number"
+                                        value={currentItem.quantcompra}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, quantcompra: e.target.value })}
+                                    />
+                                    <p>Lucro por Item:</p>
+                                    <input
+                                        type="number"
+                                        value={currentItem.lucroporitem}
+                                        onChange={(e) => setCurrentItem({ ...currentItem, lucroporitem: e.target.value })}
+                                    />
+                                    <button onClick={handleSave}>Salvar</button>
+                                </div>
                                 :
-                                <button onClick={() => {
-                                    setAddItemOpen(true)
-                                }}><i class="fa-solid fa-plus"></i></button>
-                            }
-
+                                null}
 
                         </div>
 
-                    </div>
-                    {AddItemOpen
-                        ?
-                        <div className="exboxitem">
-                            <p>Código:</p>
-                            <input
-                                type="text"
-                                value={currentItem.codigo}
-                                onChange={(e) => setCurrentItem({ ...currentItem, codigo: e.target.value })}
-                            />
-                            <p>Nome do Item:</p>
-                            <input
-                                type="text"
-                                value={currentItem.nameofitem}
-                                onChange={(e) => setCurrentItem({ ...currentItem, nameofitem: e.target.value })}
-                            />
-                            <p>Detalhe:</p>
-                            <input
-                                type="text"
-                                value={currentItem.detalhe}
-                                onChange={(e) => setCurrentItem({ ...currentItem, detalhe: e.target.value })}
-                            />
-                            <p>Preço de Compra:</p>
-                            <input
-                                type="number"
-                                value={currentItem.preco_compra}
-                                onChange={(e) => setCurrentItem({ ...currentItem, preco_compra: e.target.value })}
-                            />
-                            <p>Custos:</p>
-                            <input
-                                type="number"
-                                value={currentItem.custos}
-                                onChange={(e) => setCurrentItem({ ...currentItem, custos: e.target.value })}
-                            />
-                            <p>Preço de Revenda:</p>
-                            <input
-                                type="number"
-                                value={currentItem.precorevenda}
-                                onChange={(e) => setCurrentItem({ ...currentItem, precorevenda: e.target.value })}
-                            />
-                            <p>Quantidade de Compra:</p>
-                            <input
-                                type="number"
-                                value={currentItem.quantcompra}
-                                onChange={(e) => setCurrentItem({ ...currentItem, quantcompra: e.target.value })}
-                            />
-                            <p>Lucro por Item:</p>
-                            <input
-                                type="number"
-                                value={currentItem.lucroporitem}
-                                onChange={(e) => setCurrentItem({ ...currentItem, lucroporitem: e.target.value })}
-                            />
-                            <button onClick={handleSave}>Salvar</button>
-                        </div>
-                        :
-                        null}
 
-                </div>
-
-                {!collectionId 
-                    ?
-                    <h1>Não há planilha</h1>
-                    :
-                    <table className="item-table">
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Nome do Item</th>
-                                <th>Detalhe</th>
-                                <th>Preço de Compra</th>
-                                <th>Custos</th>
-                                <th>Preço de Revenda</th>
-                                <th>Quantidade de Compra</th>
-                                <th>Lucro por Item</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.map((item, index) => (
-                                <tr id={item.$id} key={item.$id}>
-                                    <td>{item.codigo}</td>
-                                    <td>{item.nameofitem}</td>
-                                    <td>{item.detalhe}</td>
-                                    <td>R$ {item.preco_compra}</td>
-                                    <td>R$ {item.custos}</td>
-                                    <td>R$ {item.precorevenda}</td>
-                                    <td>{item.quantcompra}</td>
-                                    <td>R$ {item.lucroporitem}</td>
-                                    <td>
-                                        <button onClick={() => handleEdit(item)}>Editar</button>
-                                        <button onClick={() => handleDelete(item)}>Excluir</button>
-                                    </td>
+                        <table className="item-table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome do Item</th>
+                                    <th>Detalhe</th>
+                                    <th>Preço de Compra</th>
+                                    <th>Custos</th>
+                                    <th>Preço de Revenda</th>
+                                    <th>Quantidade de Compra</th>
+                                    <th>Lucro por Item</th>
+                                    <th>Ações</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>}
+                            </thead>
+                            <tbody>
+                                {items.map((item, index) => (
+                                    <tr id={item.$id} key={item.$id}>
+                                        <td>{item.codigo}</td>
+                                        <td>{item.nameofitem}</td>
+                                        <td>{item.detalhe}</td>
+                                        <td>R$ {item.preco_compra}</td>
+                                        <td>R$ {item.custos}</td>
+                                        <td>R$ {item.precorevenda}</td>
+                                        <td>{item.quantcompra}</td>
+                                        <td>R$ {item.lucroporitem}</td>
+                                        <td>
+                                            <button onClick={() => handleEdit(item)}>Editar</button>
+                                            <button onClick={() => handleDelete(item)}>Excluir</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </>}
             </div>
         </div>
     );
