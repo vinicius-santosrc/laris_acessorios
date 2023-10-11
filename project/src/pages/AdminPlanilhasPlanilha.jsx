@@ -38,20 +38,25 @@ export default function PlanilhaPage() {
     const handleEdit = (item) => {
         setCurrentItem(item);
         setItemId(item.$id)
-        console.log(itemId)
+        setAddItemOpen(true)
     };
 
     const handleDelete = (item) => {
         if (!item.$id) {
-            Swal.fire("O item não possui um ID válido para exclusão.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'O item não possui um ID válido para exclusão! Contate um desenvolvedor.',
+                footer: '<a href="errors">Por que deste erro?</a>'
+              })
             return;
         }
+        
 
         db
             .deleteDocument(DBUID, collectionId, item.$id)
             .then(() => {
                 loadItens();
-                Swal.fire("Item excluído com sucesso!");
             })
             .catch(console.error);
     };
@@ -76,7 +81,6 @@ export default function PlanilhaPage() {
                     lucroporitem: currentItem.lucroporitem,
                 })
                 .then(() => {
-                    Swal.fire("Item atualizado com sucesso!");
                     loadItens();
                     setCurrentItem({
                         codigo: "",
@@ -90,7 +94,15 @@ export default function PlanilhaPage() {
                     });
                     setItemId(null);
                 })
-                .catch(console.error);
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'O item não pode ser salvo. Contate um desenvolvedor',
+                        footer: '<a href="errors">Por que deste erro?</a>'
+                      })
+
+                });
         } else {
             // Crie um novo item no Appwrite sem especificar o ID
             db
@@ -127,7 +139,7 @@ export default function PlanilhaPage() {
     return (
         <div className="AdminPage-DashBoard">
             <NavigationLeft />
-            <div className="PlanilhaPage">
+            <div className="Admin-ContentDashBoard">
                 {!collectionId
                     ?
                     <div className="Planilha-404-NotFound">
@@ -219,7 +231,7 @@ export default function PlanilhaPage() {
 
 
                         <table className="item-table">
-                            <thead>
+                            <thead className="titlecolumns">
                                 <tr>
                                     <th>Código</th>
                                     <th>Nome do Item</th>
@@ -235,17 +247,17 @@ export default function PlanilhaPage() {
                             <tbody>
                                 {items.map((item, index) => (
                                     <tr id={item.$id} key={item.$id}>
-                                        <td>{item.codigo}</td>
+                                        <td id="bggray">{item.codigo}</td>
                                         <td>{item.nameofitem}</td>
-                                        <td>{item.detalhe}</td>
+                                        <td id="bggray">{item.detalhe}</td>
                                         <td>R$ {item.preco_compra}</td>
-                                        <td>R$ {item.custos}</td>
+                                        <td id="bggray">R$ {item.custos}</td>
                                         <td>R$ {item.precorevenda}</td>
-                                        <td>{item.quantcompra}</td>
-                                        <td>R$ {item.lucroporitem}</td>
+                                        <td id="bggray">{item.quantcompra}</td>
+                                        <td id="lucrolinha">R$ {item.lucroporitem}</td>
                                         <td>
-                                            <button onClick={() => handleEdit(item)}>Editar</button>
-                                            <button onClick={() => handleDelete(item)}>Excluir</button>
+                                            <button onClick={() => handleEdit(item)}><i className="fa-solid fa-pen-to-square"></i></button>
+                                            <button onClick={() => handleDelete(item)}><i className="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 ))}

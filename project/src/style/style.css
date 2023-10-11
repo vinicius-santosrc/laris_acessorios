@@ -4223,7 +4223,7 @@ h2.extensorfrase {
 
 .Admin-ContentDashBoard table td {
     text-align: center;
-    padding: 10px 5px;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
@@ -4232,11 +4232,7 @@ h2.extensorfrase {
 
 }
 
-.Admin-ContentDashBoard table tr:nth-child(1) {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #EF59A0;
-}
+
 
 .Admin-ContentDashBoard table {
     padding: 10px;
@@ -4416,6 +4412,11 @@ h2.extensorfrase {
     cursor: pointer;
     text-align: left;
     margin-bottom: 5px;
+    color: black;
+}
+
+.left-side-flex-box button h2 {
+    color: #EF59A0;
 }
 
 .Page-Planilhas {
@@ -4516,6 +4517,62 @@ h2.extensorfrase {
 .Planilha-404-NotFound img {
     width: 350px
 }
+
+.item-table {
+    margin: 0px;
+    padding: 30px;
+    background-color: #EEECEC;
+    border-radius: 1vw;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.titlecolumns {
+    font-size: 1rem;
+    color: rgb(0, 0, 0);
+    background-color: #ff93c7;
+
+}
+
+.titlecolumns tr th {
+    color: rgb(0, 0, 0);
+}
+
+.titlecolumns tr th {
+    width: auto;
+    padding: 10px 30px;
+}
+
+.item-table .tbody tr td:nth-child(1), .item-table tbody tr td:nth-child(3), .item-table tbody tr td:nth-child(5), .item-table tbody tr td:nth-child(7) {
+    background : transparent;
+    font-weight: 700;
+}
+
+#bggray {
+    background: white;
+}
+
+.item-table button {
+    background: transparent;
+    padding: 3px 10px;
+    border: none;
+    color: #EF59A0;
+    cursor: pointer;
+    transition: 500ms
+}
+
+.item-table button:hover {
+    color: #f782b9;
+}
+
+#lucrolinha {
+    background-color: green;
+    font-weight: 600;
+    border-radius: 1vw;
+    text-align: center;
+    color: white !important;
+}
+
 
 /* TABLETS */
 @media screen and (max-width: 1200px) {
@@ -9576,6 +9633,7 @@ h2.extensorfrase {
         background: transparent;
         border: none;
         font-size: 1.2rem;
+        color: black;
     }
 
     .leftside-navigation-bar-cellphone h2 {
@@ -9855,5 +9913,25 @@ h2.extensorfrase {
         border-radius: 10px;
         margin: 5px 0px;
         transition: 500ms;
+    }
+
+    .item-table {
+        margin: 0px;
+        padding: 0px;
+        background-color: #EEECEC;
+        border-radius: 1vw;
+        overflow-y: auto;
+        overflow-x: scroll;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .titlecolumns tr th {
+        font-size: 0.6rem;
+        padding: 0px;
+    }
+
+    .Admin-ContentDashBoard table td {
+        font-size: 0.6rem;
     }
 }
