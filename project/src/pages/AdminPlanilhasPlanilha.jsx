@@ -9,6 +9,9 @@ export default function PlanilhaPage() {
     const [user, setUser] = useState(null)
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
+    const [saldoWrap, setSaldo] = useState(0)
+    const [entradasWrap, setEntradas] = useState(0)
+    const [saidasWrap, setSaidas] = useState(0)
 
     useEffect(() => {
         getUserData()
@@ -211,7 +214,7 @@ export default function PlanilhaPage() {
                         })
                     });
             }
-            else if (planilha == "planilha-despesas"){
+            else if (planilha == "planilha-despesas") {
                 db
                     .createDocument(DBUID, collectionId, ID.unique(), { ...currentItemDESPESAS })
                     .then(() => {
@@ -236,11 +239,35 @@ export default function PlanilhaPage() {
         }
     };
 
+    useEffect(() => {
+        let entradas = 0; // Inicialize as variáveis aqui
+        let saidas = 0;
+
+        db
+            .listDocuments(DBUID, collectionId)
+            .then((response) => {
+                response.documents.map((r) => {
+                    if (r.tipo === "Receita") {
+                        entradas += Number(r.valor);
+                    } else {
+                        saidas += Number(r.valor);
+                    }
+                });
+                const saldototal = entradas - saidas;
+                setSaldo(saldototal);
+                setEntradas(entradas);
+                setSaidas(saidas);
+            })
+            .catch(console.error);
+    });
+
+
     const loadItens = () => {
         db
             .listDocuments(DBUID, collectionId)
             .then((response) => {
                 setItems(response.documents);
+
 
             })
             .catch(console.error);
@@ -260,6 +287,11 @@ export default function PlanilhaPage() {
                         </div>
                         :
                         <>
+                            <div class="newItem">
+                                <h3>Entradas: R$<span id="entradas">{entradasWrap}</span></h3>
+                                <h3>Saídas: R$<span id="saidas">{saidasWrap}</span></h3>
+                                <h3 id="saldoh3">Saldo: R$<span>{saldoWrap}</span></h3>
+                            </div>
                             <div class="newItem">
                                 <div class="headeritem">
                                     <div class="side1item">
@@ -293,7 +325,7 @@ export default function PlanilhaPage() {
                                         />
                                         <p>Valor:</p>
                                         <input
-                                            type="text"
+                                            type="number"
                                             value={currentItemDESPESAS.valor}
                                             onChange={(e) => setcurrentItemDESPESAS({ ...currentItemDESPESAS, valor: e.target.value })}
                                         />
@@ -314,7 +346,7 @@ export default function PlanilhaPage() {
                             </div>
 
 
-                            <table className="item-table">
+                            <table className="item-table item-table-despesas">
                                 <thead className="titlecolumns">
                                     <tr>
                                         <th>Descrição</th>
@@ -325,10 +357,24 @@ export default function PlanilhaPage() {
                                 </thead>
                                 <tbody>
                                     {items.map((item, index) => (
-                                        <tr id={item.$id} key={item.$id}>
+                                        <tr className={item.tipo == "Receita" ? "color-green-receita" : "red-color-despesa"} id={item.$id} key={item.$id}>
                                             <td id="bggray">{item.descricao}</td>
-                                            <td>{item.valor}</td>
-                                            <td id="bggray">{item.tipo}</td>
+                                            <td>R$ {item.valor}</td>
+                                            <td id="bggray">
+                                                {item.tipo == 'Receita'
+                                                    ?
+                                                    <>
+                                                        <i class="fa-solid fa-circle-chevron-up"></i>
+                                                        <span>Entrada</span>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <i className="fa-solid fa-circle-chevron-down"></i>
+                                                        <span>Saída</span>
+                                                    </>
+                                                }
+                                            </td>
+
 
                                             <td>
                                                 <button onClick={() => handleEdit(item)}><i className="fa-solid fa-pen-to-square"></i></button>

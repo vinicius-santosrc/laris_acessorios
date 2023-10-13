@@ -65,7 +65,8 @@ export default function AddProducts() {
     const [URLPRODUCT, setURL] = useState(null);
     const [FORNECEDOR, setFornecedor] = useState(null);
     const [Style, setStyle] = useState('Colar');
-    const [PERSONALIZAVEL, setPERSONALIZAVEL] = useState(null)
+    const [PERSONALIZAVEL, setPERSONALIZAVEL] = useState(null);
+    const [EXTENSOR, setExtensor] = useState(false)
 
     const [arraysizes, setArraySizes] = useState([]);
 
@@ -145,6 +146,7 @@ export default function AddProducts() {
                 FORNECEDOR: FORNECEDOR,
                 STYLE: Style,
                 PERSONALIZAVEL: PERSONALIZAVEL === 'true' ? true : false,
+                EXTENSOR: EXTENSOR === 'true' ? true : false,
 
             }
         )
@@ -476,6 +478,20 @@ export default function AddProducts() {
                                                     <option value='false' selected>Não</option>
                                                 </select>
                                             </div>
+                                            {TYPE == "PRATA" ?
+                                                <div className="iptnewpdt">
+                                                    <p>Extensor:</p>
+                                                    <select
+                                                        value={EXTENSOR}
+                                                        onChange={(e) => {
+                                                            setExtensor(e.target.value)
+                                                        }}>
+                                                        <option value={true}>Sim</option>
+                                                        <option value={false} selected>Não</option>
+                                                    </select>
+                                                </div>
+                                                :
+                                                null}
                                             <div className="iptnewpdt">
                                                 <p>Disponibilidade:</p>
                                                 <select
@@ -550,49 +566,49 @@ export default function AddProducts() {
                                 </div>
                             </div>
                             <div className='estoque-prata-index'>
-                                    <a href="#">
-                                        <div class='item-prata'>
-                                            <img src={
-                                                window.location.origin + filepreview != "" && filepreview && filepreview.length > 0 ? filepreview : filepreview
-                                            } alt="" />
-                                            <div class="text-prata">
-                                                {PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
-                                                    <>
-                                                        {avaliable === 'true' ?
-                                                            <p class='novidade-loja'>Disponível</p>
-                                                            :
-                                                            <p class="esgotado-loja">ESGOTADO</p>
-                                                        }
-                                                    </>}
-                                                <h1 class="nome-prata">{nameProduct}</h1>
-                                                <div class='estrelas'>
-                                                    <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
-                                                </div>
-                                                <div class="promocao">
-                                                    {descontoProduct > 0 ?
-                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {priceProduct - descontoProduct}</p>
+                                <a href="#">
+                                    <div class='item-prata'>
+                                        <img src={
+                                            window.location.origin + filepreview != "" && filepreview && filepreview.length > 0 ? filepreview : filepreview
+                                        } alt="" />
+                                        <div class="text-prata">
+                                            {PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                                <>
+                                                    {avaliable === 'true' ?
+                                                        <p class='novidade-loja'>Disponível</p>
                                                         :
-                                                        <p class="preço-loja">R$ {priceProduct - descontoProduct}</p>
+                                                        <p class="esgotado-loja">ESGOTADO</p>
                                                     }
-                                                    <p class="opcoesdepaga">Pague à vista ou Pix</p>
-                                                </div>
-                                                <div class="botaocomprarprata">
-                                                    <span>VER DETALHES</span>
-                                                </div>
-
+                                                </>}
+                                            <h1 class="nome-prata">{nameProduct}</h1>
+                                            <div class='estrelas'>
+                                                <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
                                             </div>
-                                        </div>
-                                    </a>
+                                            <div class="promocao">
+                                                {descontoProduct > 0 ?
+                                                    <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {priceProduct - descontoProduct}</p>
+                                                    :
+                                                    <p class="preço-loja">R$ {priceProduct - descontoProduct}</p>
+                                                }
+                                                <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                            </div>
+                                            <div class="botaocomprarprata">
+                                                <span>VER DETALHES</span>
+                                            </div>
 
-                                </div>
-                            </div>
-                            <div className="buttons">
-                                <button onClick={() => setStep((prevState) => prevState - 1)}>Voltar</button>
-                                <button onClick={createNewProduct}>Criar Produto</button>
+                                        </div>
+                                    </div>
+                                </a>
 
                             </div>
                         </div>
-                
+                        <div className="buttons">
+                            <button onClick={() => setStep((prevState) => prevState - 1)}>Voltar</button>
+                            <button onClick={createNewProduct}>Criar Produto</button>
+
+                        </div>
+                    </div>
+
                     :
                     null}
             </div>

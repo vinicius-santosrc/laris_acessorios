@@ -3937,7 +3937,7 @@ h2.extensorfrase {
 
 .Card-Low-Top-Inner {
     width: 279px;
-    height: 258px;
+    height: 188px;
     box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.50);
     padding: 20px;
     border-radius: 20px;
@@ -3976,7 +3976,7 @@ h2.extensorfrase {
 }
 
 .card_ipt_inner {
-    margin: 90px 0px;
+    margin: 0px 0px;
     font-size: 1.4rem;
 
 }
@@ -3987,6 +3987,7 @@ h2.extensorfrase {
     border-radius: 13px;
     background: #D9D9D9;
     padding: 20px;
+    overflow-y: auto;
 }
 
 .leftside-wrapper-btn {
@@ -4579,7 +4580,7 @@ h2.extensorfrase {
 }
 
 .item-table .tbody tr td:nth-child(1), .item-table tbody tr td:nth-child(3), .item-table tbody tr td:nth-child(5), .item-table tbody tr td:nth-child(7) {
-    background : transparent;
+    background: transparent;
     font-weight: 700;
 }
 
@@ -4608,6 +4609,176 @@ h2.extensorfrase {
     color: white !important;
 }
 
+#saldoh3 {
+    color: green;
+}
+
+
+#entradas {
+    color: green;
+}
+
+#saidas {
+    color: red
+}
+
+.color-green-receita {
+    color: green;
+    font-weight: 600
+}
+
+.red-color-despesa {
+    color: red;
+    font-weight: 600
+}
+
+.product-content a{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: black;
+}
+
+.product-content {
+    margin: 5px 0px
+}
+
+.product-content img {
+    width: 100px;
+    height: 100px;
+    border-radius: 3%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 1400px) {
+    .Cards-Left-Middle {
+        display: block;
+
+    }
+
+    .dbs {
+        margin: 20px 0px;
+        font-size: 0.7rem;
+    }
+
+    .right-card-principal {
+        font-size: 0.7rem;
+    }
+
+    .left-card-principal h2 {
+        font-size: 0.9rem;
+    }
+
+    .product-content a{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 0.6rem;
+        color: black;
+    }
+
+    .product-content img {
+        width: 60px;
+        height: 60px;
+        border-radius: 3%;
+        object-fit: cover;
+    }
+
+    .AdminPage-DashBoard header {
+        width: 100%;
+    }
+
+    .Admin-ContentDashBoard {
+        width: 75%;
+    }
+
+    .AdminPage-DashBoard header {
+        font-size: 0.8rem;
+    }
+
+    .AdminPage-DashBoard header input {
+        font-size: 0.8rem;
+    }
+
+    .Cards-Top {
+        height: 200px;
+        width: 100%;
+    }
+
+    .Card-Middle-Top {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        padding: 20px !important;
+        
+    }
+
+    .Card-Middle-Top h2 {
+        font-size: 1.3rem !important;
+    }
+
+    .Card-Middle-Top p {
+        font-size: 1rem !important;
+    }
+
+    .Card-Low-Top-Inner h2 {
+        font-size: 1.3rem !important;
+    }
+
+    .Card-Low-Top-Inner p {
+        font-size: 0.9rem  !important;
+    }
+
+    .Card-Low-Top-Inner {
+        height: auto;
+        width: 32%;
+    }
+    .Cards-Low-Top {
+        width: 100%;
+        display: flex;
+    }
+
+    .Cards-Left-Middle {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .rightside-itens {
+        right: 0;
+        width: auto;
+        margin: auto;
+    }
+
+    .Cards-Middle-Top {
+        width: 100%;
+    }
+
+    .Card-Large-Hg {
+        width: 300px;
+    }
+    
+    .navigation-bar-logo-top img {
+        width: 100px;
+    }
+
+    .AdminPage-DashBoard li a {
+        font-size: 0.8rem;
+        gap: 3px;
+
+    }
+
+    .AdminPage-DashBoard li {
+        padding: 15px 20px;
+    }
+
+    .title-opcoes-pc {
+        font-size: 0.8rem;
+    }
+
+    .Card-Mid-Top-Inner {
+        width: 100%
+    }
+}
 
 /* TABLETS */
 @media screen and (max-width: 1200px) {
@@ -5904,7 +6075,7 @@ h2.extensorfrase {
 
     .navigation-bottom {
         display: block;
-        width: 900px;
+        width: 200px;
         max-width: 900px;
     }
 
@@ -5916,6 +6087,28 @@ h2.extensorfrase {
 
     .AdminPage-DashBoard header {
         width: 100%;
+    }
+
+    .Admin-ContentDashBoard {
+        width: 700px;
+    }
+
+    .navigation-bar-logo-top img {
+        width: 100px;
+    }
+
+    .AdminPage-DashBoard li a {
+        font-size: 0.8rem;
+        gap: 3px;
+
+    }
+
+    .AdminPage-DashBoard li {
+        padding: 15px 20px;
+    }
+
+    .title-opcoes-pc {
+        font-size: 0.8rem;
     }
 }
 
@@ -9874,6 +10067,10 @@ h2.extensorfrase {
         border-left: 1px solid #fca5cd;
     }
 
+    .newItem {
+        margin-bottom: 5px;
+    }
+
     .right-side-flex-box img {
         width: 100%;
         height: 367px;
@@ -9968,5 +10165,19 @@ h2.extensorfrase {
 
     .Admin-ContentDashBoard table td {
         font-size: 0.6rem;
+    }
+
+    .Card-Large-Hg {
+        width: 100%
+    }
+
+    .Card-Large-Top {
+        margin: 0px 0px;
+        width: 100%;
+        display: none
+    }
+
+    .Cards-Top {
+        padding-bottom: 30px
     }
 }

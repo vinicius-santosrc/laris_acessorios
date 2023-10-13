@@ -20,7 +20,8 @@ export default function AdminProductEditPage() {
     const [avaliableProduto, setavaliableProduto] = useState(null)
     const [qtdDisProduto, setQntDisponivelProduto] = useState(null)
     const [URLPRODUTO, setURLProduto] = useState(null)
-    
+    const [EXTENSOR, setExtensor] = useState(null)
+
     const [user, setUser] = useState(null)
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
@@ -58,6 +59,7 @@ export default function AdminProductEditPage() {
                 setavaliableProduto(pdt.AVALIABLE === true ? 'true' : 'false')
                 setQntDisponivelProduto(pdt.QUANT_DISPONIVEL)
                 setURLProduto(pdt.URL)
+                setExtensor(pdt.EXTENSOR === true ? 'true' : 'false')
             });
     }, [product]);
 
@@ -76,6 +78,10 @@ export default function AdminProductEditPage() {
         setavaliableProduto(event.target.value);
     }
 
+    const handleChangeExtensor = (event) => {
+        setExtensor(event.target.value);
+    }
+
     const handlePriceProdutoChange = (event) => {
         setpriceProduto(event.target.value);
     }
@@ -92,7 +98,7 @@ export default function AdminProductEditPage() {
         setURLProduto(event.target.value)
     }
 
-    
+
 
     const SalvarAlteracoes = async () => {
         Swal.fire({
@@ -116,7 +122,8 @@ export default function AdminProductEditPage() {
                         DESCONTO: descontoProduto,
                         AVALIABLE: avaliableProduto == 'true',
                         TYPE: typeProduto,
-                        URL: URLPRODUTO
+                        URL: URLPRODUTO,
+                        EXTENSOR: EXTENSOR == 'true'
                     }
                 )
                     .then((res) => {
@@ -165,11 +172,11 @@ export default function AdminProductEditPage() {
     const TypeProduct = typeProduto;
 
 
-    
+
 
     if (!user) {
         return <Loading />
-        
+
     }
 
     return (
@@ -289,6 +296,18 @@ export default function AdminProductEditPage() {
                                             onChange={handleQuantDisponivelChange}
                                         />
                                     </div>
+                                    {typeProduto == "PRATA" ?
+                                        <div className="inputbox-editp">
+                                            <div><h3>EXTENSOR: </h3></div>
+                                            <span></span>
+                                            <select onChange={handleChangeExtensor} value={EXTENSOR}>
+                                                <option value={true}>Sim</option>
+                                                <option value={false}>Não</option>
+                                            </select>
+                                        </div>
+                                        :
+                                        null
+                                    }
                                     <div className="inputbox-editp">
                                         <div><h3>URL: </h3></div>
                                         <span>/produto/</span>

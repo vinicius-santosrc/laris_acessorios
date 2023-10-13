@@ -196,32 +196,141 @@ export default function ProductPage() {
         let JSON2 = JSON.parse(LOCALST)
 
         let photopdt = Product.PHOTOURL
-        if(Product != "" && Product.PHOTOURL && Product.PHOTOURL.length > 0 ? Product.PHOTOURL[0] : "") {
+        if (Product != "" && Product.PHOTOURL && Product.PHOTOURL.length > 0 ? Product.PHOTOURL[0] : "") {
             photopdt = Product.PHOTOURL[0]
         }
 
-        if (!personalizacao) {
-            JSON2.push({
-                id: Product.$id,
-                name: Product.NAME_PRODUCT,
-                tamanho: tamanho.value,
-                qtd: parseInt(quantidade.value),
-                preco: Product.PRICE,
-                desconto: Product.DESCONTO,
-                photoURL: photopdt
+        if (Product.EXTENSOR == true) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
             })
-            localStorage.setItem('sacola', JSON.stringify(JSON2))
-            window.location.reload()
+
+            Swal.fire({
+                title: 'Você deseja adicionar <b>Extensor (+4cm)</b>',
+                icon: 'info',
+                html:
+                    `
+                    <div class='item-prata'>
+                        <img src="../static/media/product-images/extensor (1).jpeg" alt="">
+                        <div class="text-prata">
+                            <p class='novidade-loja'>Novo</p>
+                            <h1 class="nome-prata">Extensor (+4cm)</h1>
+                            <div class='estrelas'>
+                                <img src="../static/media/product-images/Nenhuma estrela.png" alt="">
+                            </div>
+                            <div class="promocao">
+                                <p class="preço-promo"><s>R$ 13,00</s>
+                                <p class="preço-loja">R$ 8,50</p>
+                                <p class="opcoesdepaga">(comprado junto com produtos)</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+              ` +
+                    '+ R$ 8,50 na soma total',
+                showCancelButton: true,
+                confirmButtonColor: '#EF59A0',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ADICIONAR',
+                cancelButtonText: 'NÃO '
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    JSON2.push({
+                        name: 'Extensor (+4cm)',
+                        tamanho: '4cm',
+                        qtd: 1,
+                        preco: 13,
+                        desconto: 4.5,
+                        photoURL: window.location.origin + '/static/media/product-images/extensor%20(1).jpeg',
+                        onclick: window.location.origin + '/prata/extensor.html'
+                    })
+                    if (!personalizacao) {
+                        JSON2.push({
+                            id: Product.$id,
+                            name: Product.NAME_PRODUCT,
+                            tamanho: tamanho.value,
+                            qtd: parseInt(quantidade.value),
+                            preco: Product.PRICE,
+                            desconto: Product.DESCONTO,
+                            photoURL: photopdt
+                        })
+                        localStorage.setItem('sacola', JSON.stringify(JSON2))
+                        window.location.reload()
+                    }
+                    else {
+                        if (personalizacao.value == "") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Preencha todas informações!',
+                            })
+                        }
+                        else {
+                            JSON2.push({
+                                id: Product.$id,
+                                name: Product.NAME_PRODUCT,
+                                tamanho: tamanho.value,
+                                qtd: parseInt(quantidade.value),
+                                preco: Product.PRICE,
+                                desconto: Product.DESCONTO,
+                                photoURL: photopdt,
+                                personalizacao: personalizacao.value
+                            })
+                            localStorage.setItem('sacola', JSON.stringify(JSON2))
+                            window.location.reload()
+                        }
+
+                    }
+                }
+
+                else if (result.dismiss) {
+                    if (!personalizacao) {
+                        JSON2.push({
+                            id: Product.$id,
+                            name: Product.NAME_PRODUCT,
+                            tamanho: tamanho.value,
+                            qtd: parseInt(quantidade.value),
+                            preco: Product.PRICE,
+                            desconto: Product.DESCONTO,
+                            photoURL: photopdt
+                        })
+                        localStorage.setItem('sacola', JSON.stringify(JSON2))
+                        window.location.reload()
+                    }
+                    else {
+                        if (personalizacao.value == "") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Preencha todas informações!',
+                            })
+                        }
+                        else {
+                            JSON2.push({
+                                id: Product.$id,
+                                name: Product.NAME_PRODUCT,
+                                tamanho: tamanho.value,
+                                qtd: parseInt(quantidade.value),
+                                preco: Product.PRICE,
+                                desconto: Product.DESCONTO,
+                                photoURL: photopdt,
+                                personalizacao: personalizacao.value
+                            })
+                            localStorage.setItem('sacola', JSON.stringify(JSON2))
+                            window.location.reload()
+                        }
+
+                    }
+                }
+
+            });
         }
         else {
-            if (personalizacao.value == "") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Preencha todas informações!',
-                })
-            }
-            else {
+            if (!personalizacao) {
                 JSON2.push({
                     id: Product.$id,
                     name: Product.NAME_PRODUCT,
@@ -229,15 +338,36 @@ export default function ProductPage() {
                     qtd: parseInt(quantidade.value),
                     preco: Product.PRICE,
                     desconto: Product.DESCONTO,
-                    photoURL: photopdt,
-                    personalizacao: personalizacao.value
+                    photoURL: photopdt
                 })
                 localStorage.setItem('sacola', JSON.stringify(JSON2))
                 window.location.reload()
             }
+            else {
+                if (personalizacao.value == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Preencha todas informações!',
+                    })
+                }
+                else {
+                    JSON2.push({
+                        id: Product.$id,
+                        name: Product.NAME_PRODUCT,
+                        tamanho: tamanho.value,
+                        qtd: parseInt(quantidade.value),
+                        preco: Product.PRICE,
+                        desconto: Product.DESCONTO,
+                        photoURL: photopdt,
+                        personalizacao: personalizacao.value
+                    })
+                    localStorage.setItem('sacola', JSON.stringify(JSON2))
+                    window.location.reload()
+                }
 
+            }
         }
-
 
     }
 
@@ -278,7 +408,7 @@ export default function ProductPage() {
 
                                     return (
                                         <div>
-                                            <img onClick={handleClick} id={index} key={index} src={ photo} alt="" />
+                                            <img onClick={handleClick} id={index} key={index} src={photo} alt="" />
                                         </div>
                                     )
                                 })}
@@ -310,7 +440,7 @@ export default function ProductPage() {
                                     :
                                     ""}
                                 <h2>Quantidade: <select name="Quantidade" id="quant">
-                                    <option value={Product.QUANT_DISPONIVEL > 0 ? 1 : 0 } selected>{Product.QUANT_DISPONIVEL} {Product.QUANT_DISPONIVEL > 1 ? "unidades" : Product.QUANT_DISPONIVEL == 0 ? 'unidades' : 'unidade'}</option>
+                                    <option value={Product.QUANT_DISPONIVEL > 0 ? 1 : 0} selected>{Product.QUANT_DISPONIVEL} {Product.QUANT_DISPONIVEL > 1 ? "unidades" : Product.QUANT_DISPONIVEL == 0 ? 'unidades' : 'unidade'}</option>
                                 </select></h2>
                                 <div className='tamanhocenterleft'>
                                     <h2 className="tamanhofrase">Selecione Tamanho: <select name="Tamanho" id="tamanho">

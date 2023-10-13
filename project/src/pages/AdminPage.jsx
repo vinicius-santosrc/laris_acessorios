@@ -8,6 +8,9 @@ export default function AdminPage() {
     const [user, setUser] = useState(null)
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
+    
+
+
 
     useEffect(() => {
         getUserData()
@@ -19,23 +22,25 @@ export default function AdminPage() {
                     "652102213eeea3189590",
                     account.$id
                 )
-                .then((r) => {
-                    setUserDBAccount(r)
-                })
-                
+                    .then((r) => {
+                        setUserDBAccount(r)
+                    })
+
                 if (!account) {
                     window.location.href = window.location.origin + "/admin/login"
                 }
             })
 
-    })
+    }, [])
+
+
 
 
     if (!user) {
         return <Loading />
-        
+
     }
-    
+
 
     return (
         <div className="AdminPage-DashBoard">
