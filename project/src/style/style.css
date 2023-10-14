@@ -4650,6 +4650,169 @@ h2.extensorfrase {
     object-fit: cover;
 }
 
+.bottom-middle-top-card {
+    background: white;
+    padding: 5px;
+    color: black;
+    border-radius: 5px;
+    margin: 10px 0px
+}
+
+.bottom-middle-top-card p {
+    font-size: 1.1rem !important;
+}
+
+#greenbackground-card-middle {
+    background: green
+}
+
+.Content-Page-Metas {
+    margin-top: -14vh;
+    width: 80%
+}
+
+.card-saldo-disponivel {
+    background: #EF59A0;
+    width: 100%;
+    padding: 20px 30px;
+    color: white;
+}
+
+.title-section {
+    margin: 20px 0px;
+}
+
+.meta-card {
+    padding: 20px 30px;
+    background: #D9D9D9;
+    width: 628px;
+    border-radius: 10px;
+    height: 150px
+}
+
+.meta-card a {
+    color: black
+}
+
+.meta-principal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.meta-card-add {
+    background: transparent;
+    border: 2px dashed black;
+    width: 628px;
+    height: 150px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.meta-card-add:hover {
+    color: #EF59A0;
+    border: 2px dashed #EF59A0;
+}
+
+.meta-card-add h2 {
+    align-items: center;
+    justify-content: center;
+    top: 40%;
+    bottom: 0;
+    position: relative;
+    margin: auto;
+    
+}
+
+.metas-secundarias {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-y: auto;
+    flex-wrap: wrap;
+}
+
+.editMeta {
+    width: 80%;
+    background: #d4d4d4;
+    padding: 20px;
+    border-radius: 10px;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.editMeta input{
+    font-size: 1rem;
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 10px;
+    border-left: 2px solid #EF59A0;
+    width: 100%
+}
+
+.editMeta button {
+    padding: 5px 20px;
+    background: white;
+    color: #EF59A0;
+    border-radius: 10px;
+    border: none;
+    margin-top: 1vh;
+    cursor: pointer;
+}
+
+#greenbackground-card-metas {
+    background: green;
+    color: white;
+}
+
+#greenbackground-card-metas a {
+    color: white
+}
+
+.add-meta {
+    background: #d4d4d4;
+    padding: 10px;
+    width: 100%;
+    margin: 20px 0px;
+    border-radius: 20px;
+}
+
+.add-meta input {
+    outline: none;
+    color: black;
+    background: transparent;
+    border: none;
+    border-left: 2px solid #EF59A0;
+    padding: 10px;
+    
+}
+
+.title-create-metas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-meta button {
+    padding: 5px 20px;
+    background: white;
+    color: #EF59A0;
+    border-radius: 10px;
+    border: none;
+    margin-top: 1vh;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 1400px) {
     .Cards-Left-Middle {
         display: block;
@@ -10179,5 +10342,103 @@ h2.extensorfrase {
 
     .Cards-Top {
         padding-bottom: 30px
+    }
+
+    .bottom-middle-top-card {
+        margin: 0px
+    }
+    .editMeta {
+        margin: auto;
+        width: 98%;
+
+        background: #d4d4d4;
+        padding: 20px;
+        border-radius: 10px;
+        height: auto;
+        overflow-y: auto;
+    }
+    
+    .editMeta input{
+        font-size: 1rem;
+        background: none;
+        border: none;
+        outline: none;
+        color: black;
+        padding: 10px;
+        border-left: 2px solid #EF59A0;
+        width: 100%
+    }
+    
+    .editMeta button {
+        padding: 5px 20px;
+        background: white;
+        color: #EF59A0;
+        border-radius: 10px;
+        border: none;
+        margin-top: 1vh;
+        cursor: pointer;
+    }
+
+    .meta-card {
+        padding: 20px 30px;
+        background: #D9D9D9;
+        width: 95%;
+        border-radius: 10px;
+        height: 150px
+    }
+    
+    .meta-card a {
+        color: black
+    }
+    
+    .meta-principal {
+        display: flex;
+    
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        overflow-y: auto;
+    }
+    
+    .meta-card-add {
+        background: transparent;
+        border: 2px dashed black;
+        width: 400px;
+        height: 150px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 500ms;
+    }
+
+    .Content-Page-Metas {
+        width: 100%;
+    }
+
+    .meta-principal {
+        overflow-x: auto;
+        justify-content: center;
+        width: 95%;
+        flex-wrap: wrap;
+        margin: auto;
+    }
+
+    .meta-principal .meta-card  {
+        width: 400px
+    }
+
+    .metas-secundarias {
+        overflow-x: auto;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: auto;
+        justify-content: center;
+
+    }
+
+    .title-section {
+        margin: 30px 10px;
     }
 }

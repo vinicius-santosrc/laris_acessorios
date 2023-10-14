@@ -144,6 +144,7 @@ export default function NavigationLeft() {
                     {window.location.href.includes("/admin/planilhas") ? <h2>Planilhas</h2> : null}
                     {window.location.href.includes("/admin/pedidos") ? <h2>Pedidos</h2> : null}
                     {window.location.href.includes("/errors") ? <h2>Docs</h2> : null}
+                    {window.location.href.includes("/metas") ? <h2>Metas</h2> : null}
                 </div>
                 <div className="rightside-navigation-bar-cellphone">
                     

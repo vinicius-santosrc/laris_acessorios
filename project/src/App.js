@@ -30,6 +30,8 @@ import Errors from './pages/Erros';
 import AdminPlanilhas from './pages/AdminPlanilhas';
 import AdminPlanilhasPlanilha from './pages/AdminPlanilhasPlanilha';
 import AdminPedidos from './pages/AdminPedidos';
+import AdminMetas from './pages/AdminMetas';
+import AdminMetasMeta from './pages/AdminMetasMeta';
 
 //SCRIPTS
 function App() {
@@ -72,7 +74,10 @@ function App() {
           <Route path='/admin/products/add' element={<AddProducts />}></Route>
           <Route path='/admin/products/:product' element={<AdminProductEditPage />}></Route>
           <Route path='/admin/pedidos' element={<AdminPedidos />}></Route>
+          <Route path="/admin/metas" element={<AdminMetas />}></Route>
+          <Route path="/admin/metas/:meta" element={<AdminMetasMeta />}></Route>
 
+ 
           <Route path='/promocoes' element={<Promocoes />}></Route>
           <Route path='/checkout' element={<Checkout />}></Route>
           <Route path='/novidades' element={<NovidadesPage />}></Route>
