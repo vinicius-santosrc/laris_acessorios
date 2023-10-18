@@ -15,7 +15,7 @@ export default function SectionTypeProductsIndex() {
 
             <section>
                 <div className="title-index titulo-produtos-laris">
-                    <h1>CATEGORIAS</h1>
+                    <h1>COMPRE POR CATEGORIAS</h1>
                 </div>
             </section>
             <section className='opções-itens'>

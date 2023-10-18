@@ -43,9 +43,9 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
 
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
@@ -80,10 +80,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -132,10 +133,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -168,10 +170,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -204,10 +207,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -240,10 +244,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -276,10 +281,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -312,10 +318,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -348,10 +355,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -384,10 +392,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -420,10 +429,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -456,10 +466,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -492,10 +503,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -528,10 +540,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">
@@ -564,10 +577,11 @@ export default function ProductsShow(props) {
                                         </div>
                                         <div class="promocao">
                                             {produto.DESCONTO > 0 ?
-                                                <p class="preço-loja"><s style={{color: 'darkgray'}}>R$ {produto.PRICE}</s> R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {(produto.PRICE).toFixed(2)}</s> R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                                 :
-                                                <p class="preço-loja">R$ {produto.PRICE - produto.DESCONTO}</p>
+                                                <p class="preço-loja">R$ {(produto.PRICE - produto.DESCONTO).toFixed(2)}</p>
                                             }
+
                                             <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                         </div>
                                         <div class="botaocomprarprata">

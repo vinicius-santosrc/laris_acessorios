@@ -549,9 +549,9 @@ export default function AddProducts() {
                                                 </div>
                                                 <div class="promocao">
                                                     {descontoProduct > 0 ?
-                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {priceProduct - descontoProduct}</p>
+                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct.toFixed(2)}</s> R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                         :
-                                                        <p class="preço-loja">R$ {priceProduct - descontoProduct}</p>
+                                                        <p class="preço-loja">R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                     }
                                                     <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                                 </div>
@@ -586,9 +586,9 @@ export default function AddProducts() {
                                             </div>
                                             <div class="promocao">
                                                 {descontoProduct > 0 ?
-                                                    <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {priceProduct - descontoProduct}</p>
+                                                    <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct.toFixed(2)}</s> R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                     :
-                                                    <p class="preço-loja">R$ {priceProduct - descontoProduct}</p>
+                                                    <p class="preço-loja">R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                 }
                                                 <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                             </div>

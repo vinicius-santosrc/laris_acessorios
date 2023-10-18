@@ -27,8 +27,8 @@ export default function ContentDashboard() {
         )
             .then((rs) => {
                 console.log(rs.$id)
-                setMetaAnual(rs.anual)
-                setMetaMensal(rs.mensal)
+                setMetaAnual(rs.anual.toFixed(2))
+                setMetaMensal(rs.mensal.toFixed(2))
             })
 
         db
@@ -45,9 +45,9 @@ export default function ContentDashboard() {
                     }
                 });
                 const saldototal = entradas - saidas;
-                setSaldo(saldototal);
-                setEntradas(entradas);
-                setSaidas(saidas);
+                setSaldo(saldototal.toFixed(2));
+                setEntradas(entradas.toFixed(2));
+                setSaidas(saidas.toFixed(2));
             })
             .catch(console.error);
 

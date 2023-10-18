@@ -79,9 +79,9 @@ function SacolaDeCompras() {
                             <div class="product-list-price">
                                 {item.desconto > 0
                                     ?
-                                    <><s style={{color: 'gray'}}>R$ {item.preco}</s> R$ {item.preco - item.desconto}</>
+                                    <><s style={{color: 'gray'}}>R$ {(item.preco).toFixed(2)}</s> R$ {(item.preco - item.desconto).toFixed(2)}</>
                                     :
-                                    <>R$ {item.preco}</>
+                                    <>R$ {(item.preco).toFixed(2)}</>
                             }
 
                             </div>

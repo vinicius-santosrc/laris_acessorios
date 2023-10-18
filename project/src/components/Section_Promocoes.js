@@ -48,9 +48,9 @@ export default function SectionProducts(props) {
                                 </div>
                                 <div class="promocao">
                                     {products.DESCONTO > 0 ?
-                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE}</s> R$ {products.PRICE - products.DESCONTO}</p>
+                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE.toFixed(2)}</s> R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
                                         :
-                                        <p class="preço-loja">R$ {products.PRICE - products.DESCONTO}</p>
+                                        <p class="preço-loja">R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
                                     }
                                     <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                 </div>
@@ -95,9 +95,9 @@ export default function SectionProducts(props) {
                                 </div>
                                 <div class="promocao">
                                     {products.DESCONTO > 0 ?
-                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE}</s> R$ {products.PRICE - products.DESCONTO}</p>
+                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE.toFixed(2)}</s> R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
                                         :
-                                        <p class="preço-loja">R$ {products.PRICE - products.DESCONTO}</p>
+                                        <p class="preço-loja">R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
                                     }
                                     <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                 </div>
@@ -144,9 +144,9 @@ export default function SectionProducts(props) {
                                 </div>
                                 <div class="promocao">
                                     {products.DESCONTO > 0 ?
-                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE}</s> R$ {products.PRICE - products.DESCONTO}</p>
+                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE.toFixed(2)}</s> R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
                                         :
-                                        <p class="preço-loja">R$ {products.PRICE - products.DESCONTO}</p>
+                                        <p class="preço-loja">R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
                                     }
                                     <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                 </div>

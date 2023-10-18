@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Notification_Top from "./Notification_Top";
 import Swal from 'sweetalert2'
 
@@ -10,18 +10,42 @@ export default function Header() {
     let data = new Date;
     let ano = data.getFullYear()
     let footer = document.querySelector('p#ano')
+    const [numberbagitems, setnumberbagitems] = useState(null)
+
+    let [precototal, setprecototal] = useState(null)
+    let [subtotal, setsubtotal] = useState(null)
+    let [desconto, setdescontos] = useState(null)
+    const [sacolaAt, setSacolaAtual] = useState([]);
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
 
+    useEffect(() => {
+        setSacolaAtual(JSON.parse(localStorage.getItem("sacola")));
+
+        if (Array.isArray(sacolaAt)) {
+            let preco = 0
+            let sub = 0
+            let desc = 0
+            sacolaAt.map((item, index) => {
+                preco += item.preco - item.desconto
+                sub += item.preco
+                desc += item.desconto
+            })
+            setprecototal(preco)
+            setsubtotal(sub)
+            setdescontos(desc)
+        }
+    })
+
     function GoToCheckOut() {
-        if(localStorage.getItem("sacola") == '[]') {
+        if (localStorage.getItem("sacola") == '[]') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Sua sacola está vazia.',
-              })
+            })
         }
         else {
             window.location.href = window.location.origin + '/checkout#cart=' + getRandomInt(1502) + '?'
@@ -67,14 +91,20 @@ export default function Header() {
         })
     }
 
+
+    useEffect(() => {
+        setnumberbagitems(JSON.parse(localStorage.getItem("sacola")).length)
+    })
+
     if (localStorage.sacola == '[]' || localStorage.sacola == undefined || localStorage.sacola == 'undefined' || localStorage == null) {
 
     }
+
     else {
 
         if (document.querySelector('.cart')) {
             let cart3 = document.querySelector('.cart')
-            cart3.style.color = '#EF59A0'
+
             let cartmobile = document.querySelector('.headercell a.cart')
             cartmobile.style.color = '#EF59A0'
         }
@@ -188,6 +218,8 @@ export default function Header() {
         )
     }
 
+
+
     return (
         <>
 
@@ -201,9 +233,31 @@ export default function Header() {
                         </div>
                         <div className='icons'>
                             <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
+                            <span className="number-bag-items">{numberbagitems}</span>
                             <a onClick={openmenu} className='menu' title="Acesso rápido"><i className="fas fa-bars"></i></a>
                         </div>
                     </div>
+                    {/** // 
+                     
+                     * NAVEGAÇÃO HEADER BOTTOM
+                     
+                     <div className="menu-pc-bottom">
+                        <div className="item-bottom-header">
+                            <a href={window.location.origin + "/novidades"}>LANÇAMENTOS <i className="fa-solid fa-sort-down"></i></a>
+                        </div>
+                        <div className="item-bottom-header">
+                            <a href={window.location.origin + "/pratas"}>PRATAS <i className="fa-solid fa-sort-down"></i></a>
+                        </div>
+                        <div className="item-bottom-header">
+                            <a href={window.location.origin + "/micangas"}>MIÇANGAS <i className="fa-solid fa-sort-down"></i></a>
+                        </div>
+                        <div className="item-bottom-header">
+                            <a href={window.location.origin + "/cetim"}>CETIM <i className="fa-solid fa-sort-down"></i></a>
+                        </div>
+                    </div>
+
+                    
+                     */}
                 </div>
             </header>
             <header className='headercell'>
@@ -216,6 +270,7 @@ export default function Header() {
                         </a>
                     </div>
                     <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
+
                 </div>
             </header>
 
@@ -255,19 +310,35 @@ export default function Header() {
                             </div>
                         </div>
                     </div>
+                    {precototal && precototal > 0 ?
                     <div class='botoesfinais'>
+                        
+                            <div className="precosfinais">
+                                <div className="showitemprice">
+                                    <h5>Subtotal</h5>
+                                    <span>R$ {subtotal.toFixed(2)}</span>
+                                </div>
+                                <div className="showitemprice">
+                                    <h5>Descontos</h5>
+                                    <span>R$ {desconto.toFixed(2)}</span>
+                                </div>
+                                <div className="showitemprice">
+                                    <h4>Total</h4>
+                                    <span><b>R$ {precototal.toFixed(2)}</b></span>
+                                </div>
+                            </div>
+                    
+                        
                         <div class='obsfinal'>
                             <label>Pague com o Pix ou à vista</label>
                         </div>
                         <div class='botaofinal'>
-                            <button onClick={GoToCheckOut}>FINALIZAR COMPRA</button>
+                            <button onClick={GoToCheckOut}>IR PARA O CHECKOUT</button>
                         </div>
                     </div>
-                    <nav>
-                        <ul>
-                            <li><a onClick={limpar}><i className="fas fa-trash-alt"></i> Limpar carrinho</a></li>
-                        </ul>
-                    </nav>
+                    :
+                    null
+                    }
                 </div>
             </div>
         </>

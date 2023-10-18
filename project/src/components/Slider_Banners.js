@@ -7,7 +7,7 @@ export default function Slider_Banners() {
                     <ul>
                         <li>
                             <a href>
-                                <img onclick="window.open('novidades')" src={window.location.origin + "/static/media/product-images/banner-noviades.png"} />
+                                <img onclick="window.open('novidades')" src={window.location.origin + "/static/media/product-images/banner-primeiro-pedido.png"} />
                             </a>
                         </li>
                         
@@ -19,7 +19,7 @@ export default function Slider_Banners() {
             <section className='container'>
                 <div className="cell-slider">
                     <a href="novidades">
-                        <img src="/static/media/product-images/banner-noviades-1.png" />
+                        <img src="/static/media/product-images/banner-primeiro-pedido-cell.png" />
                     </a>
                     
                 </div>

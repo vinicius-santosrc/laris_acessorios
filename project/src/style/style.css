@@ -34,7 +34,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    border-bottom: 0.2vw solid #EF59A0;
+    border-bottom: 0.2vw solid transparent;
 }
 
 .menu-pc-flex {
@@ -655,17 +655,24 @@ p.new {
     justify-content: center;
     top: 0;
     bottom: 0;
-    left: 0;
     right: 0;
     margin-left: 83%;
     margin-top: 00vh;
-    width: 17vw;
+    width: 380px;
     height: 100vh;
     background: #ffff;
     z-index: 550;
     border-radius: 0vw;
     animation: carrinhopc 1s fowards;
     -webkit-animation: carrinhopc 1s forwards;
+}
+
+.showitemprice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    border-bottom: 1px solid rgb(199, 199, 199);
 }
 
 .sacola-top {
@@ -775,27 +782,40 @@ li.mdl-list__item a {
     justify-content: center;
     text-align: center;
     margin-top: 1vh;
-    border-top: 0.1vw solid rgb(224, 224, 224);
-    padding-top: 2vh;
+    box-shadow: 1px -1px 5px #919191;
+    position: absolute;
+    width: 100%;
+    padding: 20px;
 }
 
 .botoesfinais button {
-    width: 90%;
+    width: 100%;
     border: none;
-    padding: 0.3vw;
+    padding: 8px;
     background-color: #eb879d;
     color: rgb(255, 255, 255);
     border-radius: 0.1vw;
     cursor: pointer;
-    font-size: 1vw;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
 }
 
 .obsfinal {
     margin: auto;
-    margin-bottom: 2vh;
+    margin: 10px 0px;
+    padding: 5px;
     background-color: rgb(236, 234, 234);
-    width: 90%;
-    font-size: 0.7vw;
+    width: 100%;
+    font-size: 0.9rem;
+}
+.showitemprice h5 {
+    font-weight: 400
+}
+
+.showitemprice h4 {
+    font-weight: 500;
+    font-size: 1.3rem;
 }
 
 nav {
@@ -2025,6 +2045,7 @@ label#cart {
 .pc-slider img {
     width: 100%;
 
+
 }
 
 
@@ -2189,12 +2210,25 @@ label#cart {
     border-bottom: 0.1vw solid #EF59A0;
     cursor: pointer;
     font-size: 0.8vw;
+    color: black
 }
 
 .novidade-inicio label:hover {
     color: #EF59A0;
     border-bottom: 0.1vw solid #EF59A0;
     cursor: pointer;
+}
+
+.product-list-price {
+    font-weight: 500;
+    color: rgb(191, 0, 0)
+}
+
+.number-bag-items {
+    position: absolute;
+    color: red;
+    border-radius: 100%;
+    font-size: 15px;
 }
 
 .info-inicioside1 {
@@ -2762,19 +2796,17 @@ img#colar-- {
 }
 
 .index-select-type img {
-    width: 9vw;
+    width: 160px;
+    height: 210px;
+    object-fit: cover;
     margin-left: 0.7vw;
     margin-right: 0.7vw;
-    border: 0.2vw solid transparent;
+    border: 1px solid lightgray;
     cursor: pointer;
 }
 
 .titulo-produtos-laris {
     display: none;
-}
-
-.index-select-type img:hover {
-    border: 0.2vw solid black;
 }
 
 .obs-coments-sem a {
@@ -4878,6 +4910,32 @@ h2.extensorfrase {
     color: black;
 }
 
+.menu-pc-bottom {
+    display: flex;
+    gap: 30px;
+}
+
+.item-bottom-header {
+    padding: 10px 0px;
+    border-bottom: 2px solid transparent;
+    display: flex;
+    align-items: center;
+}
+
+.item-bottom-header a {
+    display: flex;
+    align-items: center;
+    gap: 5px
+}
+
+.item-bottom-header a i {
+    color: gray
+}
+
+.item-bottom-header:hover {
+    border-bottom: 2px solid #EF59A0;
+}
+
 @media screen and (max-width: 1400px) {
     .Cards-Left-Middle {
         display: block;
@@ -5014,7 +5072,7 @@ h2.extensorfrase {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        border-bottom: 0.2vw solid #EF59A0;
+        border-bottom: 0.2vw solid transparent;
     }
 
     .rightsidecart p {
@@ -5270,6 +5328,7 @@ h2.extensorfrase {
         border-bottom: 0.1vw solid #EF59A0;
         cursor: pointer;
         font-size: 1.5vw;
+        color: black
     }
 
     .novidade-inicio label:hover {
@@ -5464,7 +5523,7 @@ h2.extensorfrase {
         justify-content: center;
         top: 0;
         bottom: 0;
-        left: 0;
+
         right: 0;
         margin-left: 62%;
         margin-top: 00vh;
@@ -8494,9 +8553,11 @@ h2.extensorfrase {
         display: none;
         position: fixed;
         justify-content: center;
-        margin-left: 9.5vh;
+        margin-left: 0px;
         top: 0;
-        width: 82.8vw;
+
+        right: 0 !important;
+        width: 325px;
         height: 100vh;
         background: rgb(255, 255, 255);
         z-index: 550;
@@ -8644,10 +8705,11 @@ h2.extensorfrase {
 
     .obsfinal {
         margin: auto;
-        margin-bottom: 2vh;
         background-color: rgb(236, 234, 234);
-        width: 85%;
-        font-size: 3vw;
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 3px;
+        margin: 10px 0px;
     }
 
 
@@ -8700,14 +8762,15 @@ h2.extensorfrase {
     }
 
     .botoesfinais button {
-        width: 87%;
+        width: 100%;
         border: none;
         padding: 1vw;
         background-color: #e485b1;
         color: rgb(255, 250, 250);
         border-radius: 0.5vw;
         cursor: pointer;
-        font-size: 4vw;
+        font-size: 1.1rem;
+        border-radius: 10px;
     }
 
 
@@ -10412,7 +10475,7 @@ h2.extensorfrase {
     }
 
     .Cards-Top {
-        padding-bottom: 30px
+        padding-bottom: 0px
     }
 
     .bottom-middle-top-card {
