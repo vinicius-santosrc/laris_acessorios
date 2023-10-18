@@ -5281,8 +5281,8 @@ h2.extensorfrase {
     .opções-itens {
         display: block;
         justify-content: center;
-        padding-left: 19vw;
-        padding-right: 19vw;
+        padding-left: 25px;
+        padding-right: 25px;
         margin: auto;
     }
 
@@ -6429,8 +6429,8 @@ h2.extensorfrase {
 
     .pc-slider img, .cell-slider a img {
         height: 11vh;
-        padding-left: 1vw;
-        padding-right: 1vw;
+        padding-left: 25px;
+        padding-right: 25px;
     }
 
     img.slick-slide {
@@ -9124,7 +9124,7 @@ h2.extensorfrase {
     }
 
     .novidade-inicio-cell img {
-        width: 160px;
+        width: 140px;
         height: 200px;
         object-fit: cover;
         border: 1px solid lightgray;
