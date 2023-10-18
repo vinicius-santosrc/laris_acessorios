@@ -83,12 +83,7 @@ export default function Index() {
                 />
             }
 
-            <SectionProducts
-                name="BEST SELLERS"
-                hide_bottom={true}
-                link="bestsellers"
-                type="bestsellers"
-            />
+            
             <SectionTypeProductsIndex />
             <SectionProducts
                 name="RECOMENDADOS PARA VOCÊ"

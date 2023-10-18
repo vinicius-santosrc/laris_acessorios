@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { Ring } from "@uiball/loaders";
 import Swal from "sweetalert2";
 import * as emailjs from "@emailjs/browser"
+import db from "../lib/appwrite";
+import { ID } from "appwrite";
 
 export default function Checkout() {
 
@@ -250,40 +252,69 @@ export default function Checkout() {
                 }
             })
 
+            db.createDocument(
+                '651ca99af19b7afad3f1',
+                '652a0331c1f7f4d327ff',
+                ID.unique(),
+                {
+                    order_name: primeironome.value + " " + ultimonome.value,
+                    order_email: email.value,
+                    order_cpf: cpf.value,
+                    order_tel: numercont,
+                    order_end: `CEP: ` + cep.value + ` Cidade: ` + cidade.value + '-' + estado.value + ` Bairro: ` + bairro.value + ` Rua: ` + rua.value + ` Número: ` + numero.value + ` Referência: ` + referencia.value,
+                    order_number: pedido,
+                    order_pedido: outputfinal,
+                    order_payment: methodpay.value
+                }
+            )
+                .then((r) => {
+                    emailjs.send("laris-acessorios", "template_v9pyefq", {
+                        from_name: `Nome: ` + primeironome.value + ` ` + ultimonome.value + ` Email: ` + email.value + ` ` + `CPF: ` + cpf.value + ` Telefone: ` + numercont + '',
+                        to_name: `CEP: ` + cep.value + ` Cidade: ` + cidade.value + '-' + estado.value + ` Bairro: ` + bairro.value + ` Rua: ` + rua.value + ` Número: ` + numero.value + ` Referência: ` + referencia.value,
+                        message: `Pedido N°` + pedido + `: ` + outputfinal,
+                        reply_to: '' + methodpay.value,
+                    }, "user_LFJAXNJjH0WCy5N2o9gl4").catch(e => {
+                        console.log('ERRO: ' + e)
+                    })
+                        .then(() => {
+                            loader.style.display = 'none'
+                            background.style.display = 'none'
 
-            emailjs.send("laris-acessorios", "template_v9pyefq", {
-                from_name: `Nome: ` + primeironome.value + ` ` + ultimonome.value + ` Email: ` + email.value + ` ` + `CPF: ` + cpf.value + ` Telefone: ` + numercont + '',
-                to_name: `CEP: ` + cep.value + ` Cidade: ` + cidade.value + '-' + estado.value + ` Bairro: ` + bairro.value + ` Rua: ` + rua.value + ` Número: ` + numero.value + ` Referência: ` + referencia.value,
-                message: `Pedido N°` + pedido + `: ` + outputfinal,
-                reply_to: '' + methodpay.value,
-            }, "user_LFJAXNJjH0WCy5N2o9gl4").catch(e => {
-                console.log('ERRO: ' + e)
-            })
-                .then(() => {
+                            window.open("https://api.whatsapp.com/send/?phone=553597394181&text=" + '✨*LARI’S ACEESSORIOS*✨'
+                                + '%0D%0A'
+                                + 'Acessórios que te representam'
+                                + '%0D%0A' + '%0D%0A'
+                                + '================' +
+                                '%0D%0A' + '%0D%0A' +
+                                '📦 Pedido *N' + pedido
+                                + '*' + '%0D%0A'
+                                + '💳 Pagamento via *' + methodpay.value +
+                                '*' + '%0D%0A' +
+                                '🚚 Endereço : *' + cidade.value + ': ' + bairro.value + ', ' + rua.value + ', ' + numero.value +
+                                '*' + '%0D%0A' + '%0D%0A' +
+                                '🔍 Nome: *' + primeironome.value + ' ' + ultimonome.value + '*' +
+                                '%0D%0A' + '%0D%0A'
+                                + '================')
+
+                            localStorage.sacola = '[]'
+                            window.location.href = 'sucesso'
+
+
+                        })
+                })
+                .catch((e) => {
                     loader.style.display = 'none'
                     background.style.display = 'none'
-
-                    window.open("https://api.whatsapp.com/send/?phone=553597394181&text=" + '✨*LARI’S ACEESSORIOS*✨'
-                        + '%0D%0A'
-                        + 'Acessórios que te representam'
-                        + '%0D%0A' + '%0D%0A'
-                        + '================' +
-                        '%0D%0A' + '%0D%0A' +
-                        '📦 Pedido *N' + pedido
-                        + '*' + '%0D%0A'
-                        + '💳 Pagamento via *' + methodpay.value +
-                        '*' + '%0D%0A' +
-                        '🚚 Endereço : *' + cidade.value + ': ' + bairro.value + ', ' + rua.value + ', ' + numero.value +
-                        '*' + '%0D%0A' + '%0D%0A' +
-                        '🔍 Nome: *' + primeironome.value + ' ' + ultimonome.value + '*' +
-                        '%0D%0A' + '%0D%0A'
-                        + '================')
-
-                    localStorage.sacola = '[]'
-                    window.location.href = 'sucesso'
-
-
+                    console.log(e)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo deu errado. Tente novamente mais tarde',
+                      })
                 })
+
+
+
         }
     };
 

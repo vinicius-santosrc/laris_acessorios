@@ -190,7 +190,7 @@ export default function Header() {
 
     return (
         <>
-            <Notification_Top />
+
             <header className='menu-pc'>
                 <div className='menu-pc-flex'>
                     <div className="menu-pc-top">
@@ -207,7 +207,7 @@ export default function Header() {
                 </div>
             </header>
             <header className='headercell'>
-                <div className="top"><p>CONFIRA NOSSA NOVA NOVIDADE: PRATAS 925</p></div>
+
                 <div className="menu-cell">
                     <a onClick={openmenu} className='menu' title="Acesso rápido"><i className="fas fa-bars"></i></a>
                     <div className='logo'>

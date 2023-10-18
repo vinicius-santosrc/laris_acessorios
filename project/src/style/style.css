@@ -10,8 +10,8 @@
 header {
     font-size: 0.8vw;
     padding: 1vw;
-    padding-right: 19vw;
-    padding-left: 19vw;
+    padding-right: 200px;
+    padding-left: 200px;
     margin: auto;
     justify-content: space-between;
     position: fixed;
@@ -19,9 +19,11 @@ header {
     width: 100%;
     background-color: rgb(255, 255, 255);
     border-bottom: none;
-    margin-top: -13vh;
+    margin-top: 0px;
     z-index: 100;
     display: flex;
+    top: 0;
+    border-bottom: 1px solid rgb(180, 180, 180);
 }
 
 .sectiondown {
@@ -38,6 +40,7 @@ header {
 .menu-pc-flex {
     width: 100%;
     display: block;
+    
 }
 
 
@@ -65,7 +68,7 @@ header {
 
 body {
     background: #ffffff;
-    margin-top: 16vh;
+    padding: 90px 0px;
 }
 
 .menu-mobile {
@@ -1045,6 +1048,7 @@ label#cart {
     margin: 10px 0px;
     border-bottom: 1px solid #eb879d;
     padding: 3px 0px;
+    color: black
 }
 
 .line {
@@ -1997,18 +2001,33 @@ label#cart {
 }
 
 .pc-slider {
-    margin: 0 auto;
-    display: flex;
-    cursor: pointer;
-    width: 100%;
-    overflow-x: auto;
-    animation: 1s scroll infinite;
+    overflow: hidden;
+    margin: 10px 200px;
+
 }
+
+.pc-slider ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+}
+
+.pc-slider li {
+    list-style: none;
+    position: relative;
+    animation: slide 7s infinite ease-out;
+    width: 100%;
+}
+
+
 
 .pc-slider img {
     width: 100%;
-    height: 700px;
+
 }
+
+
 
 .compartilhar {
     margin-top: 2vh;
@@ -2255,8 +2274,8 @@ img#colar-- {
 .opções-itens {
     display: block;
     justify-content: center;
-    padding-left: 19vw;
-    padding-right: 19vw;
+    padding-left: 270px;
+    padding-right: 270px;
     margin: auto;
 }
 
@@ -2724,8 +2743,8 @@ img#colar-- {
 
 .index-select-type {
     display: flex;
-    padding-left: 19vw;
-    padding-right: 19vw;
+    padding-left: 270px;
+    padding-right: 270px;
     justify-content: center;
     margin-top: 5vh;
     margin-bottom: 5vh;
@@ -3301,16 +3320,17 @@ h2.extensorfrase {
 .laris-checkout-page header {
     font-size: 0.8vw;
     padding: 1vw;
-    padding-right: 17vw;
-    padding-left: 17vw;
+    padding-right: 200px;
+    padding-left: 200px;
     margin: auto;
     margin-top: 0px;
     justify-content: space-between;
-    position: relative;
+
     display: flex;
     width: 100%;
     background-color: #ffff;
     border-bottom: 0.1vw solid #e2e2e2;
+    top: 0
 }
 
 .laris-checkout-page .itensresumo {
@@ -3319,7 +3339,7 @@ h2.extensorfrase {
     flex-wrap: wrap;
     margin-left: 17vw;
     margin-right: 17vw;
-    margin-top: 3vh;
+    margin-top: 17vh;
 }
 
 .laris-checkout-page .seu-carrinho h1,
@@ -4811,6 +4831,51 @@ h2.extensorfrase {
     border: none;
     margin-top: 1vh;
     cursor: pointer;
+}
+
+.order_card {
+    background: #d4d4d4;
+    padding: 10px;
+    border-radius: 10px;
+    width: 550px;
+    cursor: pointer;
+}
+
+#pendente-id {
+    background-color: orange;
+    color: white;
+    padding: 5px 10px;
+    margin: -0px -10px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#finalizado-id {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    margin: -0px -10px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.Content-Orders-Page {
+    width: 80%;
+    
+    
+}
+
+.list-pedidos {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.order_card a {
+    color: black;
 }
 
 @media screen and (max-width: 1400px) {
@@ -6377,16 +6442,16 @@ h2.extensorfrase {
     }
 
     .cell-slider a {
-        width: 80vw !important;
+        width: 100% !important;
         justify-content: center !important;
         margin: auto !important;
-        margin-left: 10vw !important;
-        margin-right: 10vw !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
 
     }
 
     .cell-slider a img {
-        width: 80vw !important;
+        width: 100% !important;
         height: 100% !important;
     }
 
@@ -6435,7 +6500,7 @@ h2.extensorfrase {
     }
 
     body {
-        margin-top: 20vh;
+        padding: 50px 0px;
     }
 
     header {
@@ -6455,7 +6520,7 @@ h2.extensorfrase {
     .headercell {
 
         font-size: 6vw;
-        padding: 8vw;
+        padding: 0px;
         padding-right: 0vw;
         padding-left: 0vw;
         margin: auto;
@@ -6475,9 +6540,7 @@ h2.extensorfrase {
     .menu-cell {
         display: block;
         font-size: 6vw;
-        padding: 8vw;
-        padding-right: 0vw;
-        padding-left: 0vw;
+        padding: 10px;
         padding-bottom: 1vh;
         margin: auto;
         justify-content: space-between;
@@ -6485,9 +6548,9 @@ h2.extensorfrase {
         width: auto;
         z-index: 199;
         top: 0;
-        margin-right: 5vw;
-        margin-left: 5vw;
-        border-bottom: 1vw solid #f78abd;
+        margin-right: 4vw;
+        margin-left: 4vw;
+
     }
 
     .background-cart {
@@ -6507,7 +6570,7 @@ h2.extensorfrase {
         position: fixed;
         justify-content: center;
         margin-left: 0vh;
-        margin-top: 15vh;
+        margin-top: 10px;
         top: 0;
         width: 82.8vw;
         height: 100vh;
@@ -6524,9 +6587,10 @@ h2.extensorfrase {
         margin-top: 0vh;
         margin-left: 1vh;
         font-size: 5.5vw;
-        font-weight: 500;
+        font-weight: 400;
         text-align: left;
         text-transform: uppercase;
+        color: red;
     }
 
     .options .botaofecharsacola {
@@ -6612,7 +6676,7 @@ h2.extensorfrase {
         margin: auto;
         width: 90%;
         text-align: center;
-        font-size: 5vw;
+        font-size: none;
         margin-top: 5vh;
         margin-bottom: 3vh;
 
@@ -6621,6 +6685,7 @@ h2.extensorfrase {
     .title-index h1 {
         font-weight: 650;
         color: #222222;
+        font-size: 22px
     }
 
     header a {
@@ -8100,7 +8165,7 @@ h2.extensorfrase {
         padding-bottom: 15vh;
         display: flex;
         justify-content: space-between;
-        margin-top: 14vh;
+
     }
 
     .direct {
@@ -9049,23 +9114,29 @@ h2.extensorfrase {
 
     .novidade-inicio-cell {
         display: block;
-        width: 45%;
-        padding-top: 3vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        padding-top: 10px;
+        
 
     }
 
     .novidade-inicio-cell img {
-        width: 90%;
-        height: 100%;
+        width: 160px;
+        height: 200px;
+        object-fit: cover;
+        border: 1px solid lightgray;
     }
 
     .opções-itens {
         display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
+        justify-content: left;
+        flex-wrap: nowrap;
         margin: auto;
-        padding-left: 5vw;
-        padding-right: 5vw;
+        gap: 10px;
+        overflow-x: scroll;
 
     }
 
@@ -9133,7 +9204,7 @@ h2.extensorfrase {
         color: white;
         font-size: 4vw;
         font-weight: 600;
-        margin-top: 14vh;
+
     }
 
     .notification-topcell label {
@@ -9805,7 +9876,7 @@ h2.extensorfrase {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
-        margin-top: 1vh;
+        margin-top: 14vh;
         margin-right: 0;
         margin-left: 0;
     }
