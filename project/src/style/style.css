@@ -5190,6 +5190,7 @@ h2.extensorfrase {
     border-radius: 10px;
     font-size: 0.9rem;
     transition: 300ms;
+    color: black
 }
 
 .Card-CreateNewStart button:hover {
