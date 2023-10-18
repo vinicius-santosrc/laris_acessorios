@@ -95,19 +95,19 @@ export default function NavigationLeft() {
                         </li>
                     }
 
-                    {window.location.href.includes('admin/plano-semanal')
+                    {window.location.href.includes('admin/planejamentos')
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin/plano-semanal'}>
+                            <a id="selectednavigation" href={window.location.origin + '/admin/planejamentos'}>
                                 <i className="fa-regular fa-calendar-check"></i>
-                                <span>Plano Semanal</span>
+                                <span>Planejamentos</span>
                             </a>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/plano-semanal'}>
+                            <a href={window.location.origin + '/admin/planejamentos'}>
                                 <i className="fa-regular fa-calendar-check"></i>
-                                <span>Plano Semanal</span>
+                                <span>Planejamentos</span>
                             </a>
                         </li>
                     }
@@ -129,6 +129,8 @@ export default function NavigationLeft() {
                         </li>
                     }
 
+                   
+
 
                 </ul>
 
@@ -145,6 +147,7 @@ export default function NavigationLeft() {
                     {window.location.href.includes("/admin/pedidos") ? <h2>Pedidos</h2> : null}
                     {window.location.href.includes("/errors") ? <h2>Docs</h2> : null}
                     {window.location.href.includes("/metas") ? <h2>Metas</h2> : null}
+                    {window.location.href.includes("/planejamentos") ? <h2>Planejamentos</h2> : null}
                 </div>
                 <div className="rightside-navigation-bar-cellphone">
                     

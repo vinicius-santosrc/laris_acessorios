@@ -3735,7 +3735,7 @@ h2.extensorfrase {
 .navigation-bottom {
     width: 300px;
     height: 100vh;
-    margin-top: -16vh;
+
     position: relative;
     display: block;
     max-width: 300px;
@@ -4138,7 +4138,7 @@ h2.extensorfrase {
 .Admin-ContentDashBoard {
     justify-content: center;
     margin: 0 auto;
-    margin-top: -16vh;
+
     margin-left: 130px;
     margin-right: 60px;
     width: 90%;
@@ -4508,7 +4508,7 @@ h2.extensorfrase {
 }
 
 .Page-Planilhas {
-    margin-top: -16vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -5066,6 +5066,223 @@ h2.extensorfrase {
     }
 }
 
+.header-planejamentos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+.Planejamentos-Page {
+    width: 80%;
+    margin-top: -80px;
+}
+
+.left-side-header-planejemanetos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.right-side-header-show-options {
+    display: flex;
+    align-items: center;
+}
+
+.LogoPlanejamentos {
+    display: flex;
+    align-items: center;
+}
+
+.LogoPlanejamentos img {
+    width: 400px;
+    pointer-events: none;
+}
+
+.right-side-header-show-options img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.header-bottom {
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-bottom img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.flex-box-wrapper-createnew {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Card-CreateNew {
+    padding: 10px;
+    background: #F1F2F4;
+    border-radius: 10px;
+    width: 270px;
+    height: 100px;
+    
+}
+
+.Card-CreateNew input {
+    border: 1px solid #EF59A0;
+    color: black;
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.createshowcreate input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid rgb(188, 188, 188);
+}
+
+.createshowcreate .contentcreatebutton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+}
+
+.createshowcreate .contentcreatebutton button{
+    background: #EF59A0;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+}
+
+#closecreatecardbtn {
+    background: transparent;
+    color: black
+}
+
+.Card-CreateNewStart {
+    width: 270px;
+}
+
+.Card-CreateNewStart button {
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    background: #bababa8f;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: 300ms;
+}
+
+.Card-CreateNewStart button:hover {
+    background: #a8a8a88f;
+}
+
+.Card-CreateNew button {
+    color: white;
+    background: #EF59A0;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.Content-Planejamentos-Card-Wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: top;
+    padding: 20px
+}
+
+.Planejamentos-Card-Wrapper {
+    background: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1152/d505af68c3a2b58f02ffeae1a23cf200/photo-1696643830146-44a8755f1905.jpg");
+    height: 85vh;
+    overflow-x: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#closelist {
+    background: transparent;
+    color: black;
+}
+
+.Card-Wrapper {
+    padding: 10px;
+    background: #F1F2F4;
+    border-radius: 10px;
+    width: 270px;
+    height: auto;
+}
+
+.contents-card {
+    background: white;
+    padding:5px;
+    color: black;
+    margin: 5px 0px;
+    border-radius: 3px;
+    width: 100%
+}
+
+.Card-Wrapper-Top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Card-Wrapper-Top h3{
+    font-size: 1rem;
+}
+
+.flexbox-content {
+    display: flex;
+    
+}
+
+.flexbox-content button{
+    border: none;
+    background: none;
+    padding: 0px 5px;
+    color: red;
+    cursor: pointer;
+}
+
+.Card-Wrapper-Top button {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    
+}
+
+.createCard {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 10px 0px;
+    
+}
+
 /* TABLETS */
 @media screen and (max-width: 1200px) {
     .menu-pc-top {
@@ -5098,7 +5315,7 @@ h2.extensorfrase {
         font-size: 2vw;
         font-weight: 600;
         z-index: 100;
-        margin-top: -16vh;
+    
     }
 
     header {
@@ -6345,7 +6562,7 @@ h2.extensorfrase {
     .Admin-ContentDashBoard {
         justify-content: center;
         margin: 0 auto;
-        margin-top: -16vh;
+   
 
         margin-left: 50px;
         margin-right: 40px;
@@ -10574,5 +10791,225 @@ h2.extensorfrase {
 
     .title-section {
         margin: 30px 10px;
+    }
+
+    .header-planejamentos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        border-bottom: 1px solid lightgray;
+        display: none;
+    }
+    
+    .Planejamentos-Page {
+        width: 100%;
+        margin: auto;
+    }
+    
+    .left-side-header-planejemanetos {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .right-side-header-show-options {
+        display: flex;
+        align-items: center;
+    }
+    
+    .LogoPlanejamentos {
+        display: flex;
+        align-items: center;
+    }
+    
+    .LogoPlanejamentos img {
+        width: 400px;
+        pointer-events: none;
+    }
+    
+    .right-side-header-show-options img{
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+    
+    .header-bottom {
+        padding: 10px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .header-bottom img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        object-fit: cover;
+    }
+    
+    .flex-box-wrapper-createnew {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .Card-CreateNew {
+        padding: 10px;
+        background: #F1F2F4;
+        border-radius: 10px;
+        width: 270px;
+        height: 100px;
+        
+    }
+    
+    .Card-CreateNew input {
+        border: 1px solid #EF59A0;
+        color: black;
+        width: 100%;
+        padding: 5px;
+        margin: 5px 0px;
+        outline: none;
+        border-radius: 5px;
+    }
+    
+    .createshowcreate input {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid rgb(188, 188, 188);
+    }
+    
+    .createshowcreate .contentcreatebutton {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0px;
+    }
+    
+    .createshowcreate .contentcreatebutton button{
+        background: #EF59A0;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 0.9rem;
+        cursor: pointer;
+    
+    }
+    
+    #closecreatecardbtn {
+        background: transparent;
+        color: black
+    }
+    
+    .Card-CreateNewStart {
+        width: 270px;
+    }
+    
+    .Card-CreateNewStart button {
+        width: 100%;
+        cursor: pointer;
+        padding: 10px;
+        background: #bababa8f;
+        border: none;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        transition: 300ms;
+    }
+    
+    .Card-CreateNewStart button:hover {
+        background: #a8a8a88f;
+    }
+    
+    .Card-CreateNew button {
+        color: white;
+        background: #EF59A0;
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .Content-Planejamentos-Card-Wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: top;
+        padding: 20px;
+        width: 200%;
+
+    }
+    
+    .Planejamentos-Card-Wrapper {
+        background: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1152/d505af68c3a2b58f02ffeae1a23cf200/photo-1696643830146-44a8755f1905.jpg");
+        height: 115vh;
+        overflow-x: auto;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    #closelist {
+        background: transparent;
+        color: black;
+    }
+    
+    .Card-Wrapper {
+        padding: 10px;
+        background: #F1F2F4;
+        border-radius: 10px;
+        width: 270px;
+        height: auto;
+    }
+    
+    .contents-card {
+        background: white;
+        padding:5px;
+        color: black;
+        margin: 5px 0px;
+        border-radius: 3px;
+        width: 100%
+    }
+    
+    .Card-Wrapper-Top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .Card-Wrapper-Top h3{
+        font-size: 1rem;
+    }
+    
+    .flexbox-content {
+        display: flex;
+        
+    }
+    
+    .flexbox-content button{
+        border: none;
+        background: none;
+        padding: 0px 5px;
+        color: red;
+        cursor: pointer;
+    }
+    
+    .Card-Wrapper-Top button {
+        border: none;
+        background: transparent;
+        font-size: 1rem;
+        cursor: pointer;
+        
+    }
+    
+    .createCard {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 10px 0px;
+        
     }
 }

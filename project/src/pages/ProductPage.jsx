@@ -484,7 +484,7 @@ export default function ProductPage() {
                                 </div>
                                 {Product.DESCONTO > 0 ?
                                     <h2>Valor: <s style={{ color: 'darkgray' }}>R${Product.PRICE.toFixed(2)}</s> R${(Product.PRICE - Product.DESCONTO).toFixed(2)}</h2> :
-                                    <h2>Valor: R${Product.PRICE.toFixed(2)}</h2>
+                                    <h2>Valor: <b>R$ {Product.PRICE.toFixed(2)}</b></h2>
                                 }
                                 {Product.PERSONALIZAVEL == true ?
                                     <div class="personalizado-card">
@@ -514,7 +514,6 @@ export default function ProductPage() {
                                 }
 
                                 <p id='entregue'>Este produto é vendido e entregue pela <a href=''>LARI'S</a>.</p>
-
                                 <p className="compartilhar">Compartilhe: <a href={'https://api.whatsapp.com/send/?text=' + window.location.href} target="_blank"><i className="fa-brands fa-square-whatsapp"></i></a></p>
                             </div>
                             :

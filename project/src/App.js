@@ -33,6 +33,7 @@ import AdminPedidos from './pages/AdminPedidos';
 import AdminMetas from './pages/AdminMetas';
 import AdminMetasMeta from './pages/AdminMetasMeta';
 import AdminPedidosPedido from './pages/AdminPedidosPedido';
+import AdminPlanejamentos from './pages/AdminPlanejamentos';
 
 //SCRIPTS
 function App() {
@@ -78,6 +79,7 @@ function App() {
           <Route path='/admin/pedidos/:pedido' element={<AdminPedidosPedido />}></Route>
           <Route path="/admin/metas" element={<AdminMetas />}></Route>
           <Route path="/admin/metas/:meta" element={<AdminMetasMeta />}></Route>
+          <Route path="/admin/planejamentos" element={<AdminPlanejamentos />}></Route>
 
  
           <Route path='/promocoes' element={<Promocoes />}></Route>

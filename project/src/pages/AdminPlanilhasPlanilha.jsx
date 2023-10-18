@@ -288,9 +288,9 @@ export default function PlanilhaPage() {
                         :
                         <>
                             <div class="newItem">
-                                <h3>Entradas: R$<span id="entradas">{entradasWrap}</span></h3>
-                                <h3>Saídas: R$<span id="saidas">{saidasWrap}</span></h3>
-                                <h3 id="saldoh3">Saldo: R$<span>{saldoWrap}</span></h3>
+                                <h3>Entradas: R$<span id="entradas">{entradasWrap.toFixed(2)}</span></h3>
+                                <h3>Saídas: R$<span id="saidas">{saidasWrap.toFixed(2)}</span></h3>
+                                <h3 id="saldoh3">Saldo: R$<span>{saldoWrap.toFixed(2)}</span></h3>
                             </div>
                             <div class="newItem">
                                 <div class="headeritem">
