@@ -4226,7 +4226,7 @@ h2.extensorfrase {
 
 .search-products-box {
     position: absolute;
-    top: -70px;
+    top: 90px;
     width: 100%;
     height: 500px;
     overflow-x: hidden;
@@ -4720,7 +4720,7 @@ h2.extensorfrase {
 }
 
 .Content-Page-Metas {
-    margin-top: -14vh;
+    margin-top: 0vh;
     width: 80%
 }
 
@@ -10288,7 +10288,7 @@ h2.extensorfrase {
     .Admin-ContentDashBoard {
         justify-content: center;
         margin: 0 auto;
-        margin-top: -16vh;
+        margin-top: -4vh;
         width: 100%;
     }
 
@@ -11017,6 +11017,6 @@ h2.extensorfrase {
     }
 
     .dashboard-cards {
-        padding-top: 70px;
+        padding-top: 0px;
     }
 }

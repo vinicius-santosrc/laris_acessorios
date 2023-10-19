@@ -194,7 +194,7 @@ export default function AdminMetas() {
                     window.location.href = window.location.origin + "/admin/planilhas/planilha-despesas"
                 }}>
                     <h2>Saldo disponível</h2>
-                    <p>R$<span>{SaldoTotal}</span></p>
+                    <p>R$<span>{SaldoTotal.toFixed(2)}</span></p>
                 </section>
                 {addMeta ?
                     <div className="add-meta">
