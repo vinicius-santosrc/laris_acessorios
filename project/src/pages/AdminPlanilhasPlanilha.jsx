@@ -3,7 +3,7 @@ import db, { getUserData } from "../lib/appwrite";
 import { useParams } from "react-router-dom";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import Swal from "sweetalert2";
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 
 export default function PlanilhaPage() {
     const [user, setUser] = useState(null)
@@ -264,7 +264,13 @@ export default function PlanilhaPage() {
 
     const loadItens = () => {
         db
-            .listDocuments(DBUID, collectionId)
+            .listDocuments(DBUID,
+                collectionId,
+                [
+                    Query.limit(500),
+                    Query.orderDesc('$createdAt')
+                ]
+            )
             .then((response) => {
                 setItems(response.documents);
 
