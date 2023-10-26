@@ -108,7 +108,9 @@ export default function ProductsShow(props) {
             [
                 Query.limit(200),
                 Query.equal("TYPE", props.type),
+                Query.orderDesc("AVALIABLE"), // Ordena por AVALIABLE em ordem decrescente (false primeiro)
                 Query.orderDesc("$createdAt"),
+                
 
             ]
         )
