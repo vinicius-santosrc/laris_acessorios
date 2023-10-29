@@ -8,7 +8,7 @@ export default function ContentDashboard() {
     const [saldoWrap, setSaldo] = useState(0)
     const [entradasWrap, setEntradas] = useState(0)
     const [saidasWrap, setSaidas] = useState(0)
-    const [Produtos, setProdutos] = useState(0)
+    const [Produtos, setProdutos] = useState([])
     const DBUID = '651ca99af19b7afad3f1';
 
     const [metaMensal, setMetaMensal] = useState(0)
@@ -50,7 +50,10 @@ export default function ContentDashboard() {
             })
             .catch(console.error);
 
+       
     }, []);
+
+
 
     db.listDocuments(
         DBUID,
@@ -65,11 +68,20 @@ export default function ContentDashboard() {
                 return (
                     <div className="product-content">
                         <a target="_blank" href={"admin/products/" + response.$id}>
-                            <img src={(response.PHOTOURL).length > 0 ? response.PHOTOURL[0] : response.PHOTOURL} />
-                            <div>
-                                <h2>{response.NAME_PRODUCT}</h2>
-                                <p>{response.TYPE}</p>
 
+                            <div className="product-content-show-rightside">
+                                <div className="product-content-show-rightside-l">
+                                    <img src={(response.PHOTOURL).length > 0 ? response.PHOTOURL[0] : response.PHOTOURL} />
+                                    <div>
+                                        <h2>{response.NAME_PRODUCT}</h2>
+                                        <p>{response.TYPE}</p>
+                                    </div>
+
+                                </div>
+
+                                <div className="product-content-show-rightside-r">
+                                    <button>VISUALIZAR</button>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -92,8 +104,11 @@ export default function ContentDashboard() {
                             window.location.href = "/admin/pedidos";
                         }}>Pedidos realizados</button>
                         <button onClick={() => {
-                            window.location.href = "/admin/planilhas";
-                        }}>Planilhas</button>
+                            window.location.href = "/admin/planilhas/planilha-despesas";
+                        }}>Planilha de Despesas</button>
+                        <button onClick={() => {
+                            window.location.href = "/admin/planilhas/planilha-itens";
+                        }}>Planilha de Itens</button>
                     </div>
                     <div className="rightsideside-wrapper-btn">
 
@@ -102,59 +117,58 @@ export default function ContentDashboard() {
 
                 <section className="Cards-Dashboards">
                     <div className="Cards-Top">
+                        {metaAnual - saldoWrap <= 0 && metaMensal - saldoWrap <= 0
+                            ?
+                            <div className="Card-Middle-Top" id="greenbackground-card-middle" >
+                                <a href="admin/metas">
+                                    <h2><i className="fa-solid fa-bullseye"></i> Suas Metas:</h2>
+                                    <p>Anual: R$<span>{metaAnual}</span></p>
+                                    <p>Mensal: R$<span>{metaMensal}</span></p>
+                                    <div className="bottom-middle-top-card">
+                                        {metaAnual - saldoWrap <= 0
+                                            ?
+                                            <p>Conseguimos! Batemos a meta anual e estamos com <span id="greenlight">R${saldoWrap - metaAnual}</span> acima da meta.</p>
+                                            :
+                                            <p>Faltam: R${metaAnual - saldoWrap} para alcançar sua meta anual.</p>
+                                        }
+                                        {metaMensal - saldoWrap <= 0
+                                            ?
+                                            <p>Conseguimos! Batemos a meta mensal e estamos com <span id="greenlight">R${saldoWrap - metaMensal}</span> acima da meta.</p>
+                                            :
+                                            <p>Faltam: R${metaMensal - saldoWrap} para alcançar sua meta mensal.</p>
+                                        }
 
-                    {metaAnual - saldoWrap <= 0 && metaMensal - saldoWrap <= 0 
-                    ?
-                    <div className="Card-Middle-Top" id="greenbackground-card-middle" >
-                            <a href="admin/metas">
-                                <h2><i className="fa-solid fa-bullseye"></i> Suas Metas:</h2>
-                                <p>Anual: R$<span>{metaAnual}</span></p>
-                                <p>Mensal: R$<span>{metaMensal}</span></p>
-                                <div className="bottom-middle-top-card">
-                                    {metaAnual - saldoWrap <= 0
-                                        ?
-                                        <p>Conseguimos! Batemos a meta anual e estamos com <span id="greenlight">R${saldoWrap - metaAnual}</span> acima da meta.</p>
-                                        :
-                                        <p>Faltam: R${metaAnual - saldoWrap} para alcançar sua meta anual.</p>
-                                    }
-                                    {metaMensal - saldoWrap <= 0
-                                        ?
-                                        <p>Conseguimos! Batemos a meta mensal e estamos com <span id="greenlight">R${saldoWrap - metaMensal}</span> acima da meta.</p>
-                                        :
-                                        <p>Faltam: R${metaMensal - saldoWrap} para alcançar sua meta mensal.</p>
-                                    }
+                                    </div>
+                                </a>
+                            </div>
+                            :
+                            <div className="Card-Middle-Top" >
+                                <a href="admin/metas">
+                                    <h2><i className="fa-solid fa-bullseye"></i> Suas Metas:</h2>
+                                    <p>Anual: R$<span>{metaAnual}</span></p>
+                                    <p>Mensal: R$<span>{metaMensal}</span></p>
+                                    <div className="bottom-middle-top-card">
+                                        {metaAnual - saldoWrap <= 0
+                                            ?
+                                            <p>Conseguimos! Batemos a meta anual e estamos com <span id="greenlight">R${saldoWrap - metaAnual}</span> acima da meta.</p>
+                                            :
+                                            <p>Faltam: R${(metaAnual - saldoWrap).toFixed(2)} para alcançar sua meta anual.</p>
+                                        }
+                                        {metaMensal - saldoWrap <= 0
+                                            ?
+                                            <p>Conseguimos! Batemos a meta mensal e estamos com <span id="greenlight">R${saldoWrap - metaMensal}</span> acima da meta.</p>
+                                            :
+                                            <p>Faltam: R${(metaMensal - saldoWrap).toFixed(2)} para alcançar sua meta mensal.</p>
+                                        }
 
-                                </div>
-                            </a>
-                        </div> 
-                    : 
-                    <div className="Card-Middle-Top" >
-                    <a href="admin/metas">
-                        <h2><i className="fa-solid fa-bullseye"></i> Suas Metas:</h2>
-                        <p>Anual: R$<span>{metaAnual}</span></p>
-                        <p>Mensal: R$<span>{metaMensal}</span></p>
-                        <div className="bottom-middle-top-card">
-                            {metaAnual - saldoWrap <= 0
-                                ?
-                                <p>Conseguimos! Batemos a meta anual e estamos com <span id="greenlight">R${saldoWrap - metaAnual}</span> acima da meta.</p>
-                                :
-                                <p>Faltam: R${(metaAnual - saldoWrap).toFixed(2)} para alcançar sua meta anual.</p>
-                            }
-                            {metaMensal - saldoWrap <= 0
-                                ?
-                                <p>Conseguimos! Batemos a meta mensal e estamos com <span id="greenlight">R${saldoWrap - metaMensal}</span> acima da meta.</p>
-                                :
-                                <p>Faltam: R${(metaMensal - saldoWrap).toFixed(2)} para alcançar sua meta mensal.</p>
-                            }
+                                    </div>
+                                </a>
+                            </div>}
 
-                        </div>
-                    </a>
-                </div>} 
-                        
 
-                        <div className="Card-Large-Top">
+                        <div className="Card-Large-Top Card-Middle-Top-Right">
                             <a href="#">
-                                <h2></h2>
+                                <h2><i className="fa-solid fa-calendar"></i> Planejamento de hoje</h2>
                             </a>
                         </div>
 
@@ -209,7 +223,12 @@ export default function ContentDashboard() {
                             <h2 id="titleacessorapido">Produtos</h2>
                             <div className="Card-Large-Hg">
                                 <div className="products-content-wrap">
-                                    {Produtos}
+                                    {Produtos != '' ?
+                                        <>{Produtos}</>
+                                        :
+                                        <>LOADING</>
+                                    }
+
 
                                 </div>
                             </div>

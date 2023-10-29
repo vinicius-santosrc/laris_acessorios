@@ -4303,16 +4303,22 @@ h2.extensorfrase {
 }
 
 .Admin-ContentDashBoard table img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 1px;
+    border: 1px solid lightgray
 }
 
 .Admin-ContentDashBoard table td {
-    text-align: center;
-    padding: 5px 10px;
+    text-align: left;
+    padding: 0 5px;
     cursor: pointer;
+    border-bottom: 1px solid lightgray
+}
+
+.Admin-ContentDashBoard table tr {
+    border: 1px solid lightgray
 }
 
 .Admin-ContentDashBoard table tr:hover {
@@ -4323,13 +4329,58 @@ h2.extensorfrase {
 
 
 .Admin-ContentDashBoard table {
-    padding: 10px;
-    border-radius: 10px;
+    padding: 10px 0px;
     width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    
+}
+
+.toppage-products {
+    margin: 20px 0px;
+    border-bottom: 1px solid lightgray;
+    padding: 10px 0px;
+    align-items: center;
+}
+
+.search-box-table {
+    margin: 10px 0px;
+}
+
+.top-top-product-header button {
+    padding: 10px;
+    color: white;
+    background: #EF59A0;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    
+}
+
+.top-top-product-header p {
+    font-weight: 500;
+    color: rgb(150, 150, 150);
+}
+
+.search-box-table input {
+    padding: 4px 20px;
+    padding-right: 60px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    outline: none;
+    font-weight: 500;
+    color: gray;
 }
 
 .Admin-ContentDashBoard table td:nth-child(2) {
     text-align: left;
+}
+
+.Admin-ContentDashBoard table {
+    height: 400px !important;
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .dbs {
@@ -4353,7 +4404,7 @@ h2.extensorfrase {
 }
 
 .content-page-add-products {
-    padding: 10px 0px;
+    padding: 00px 0px;
     width: 100%;
 }
 
@@ -4383,7 +4434,7 @@ h2.extensorfrase {
 
 
 .products-add-principal-right {
-    width: 80%;
+    width: 100%;
     background-color: transparent;
     box-shadow: 1px 1px 7px gray;
     padding: 20px;
@@ -4393,9 +4444,7 @@ h2.extensorfrase {
 }
 
 .products-add-principal {
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
+
 }
 
 .ipts-wrapper {
@@ -4690,17 +4739,32 @@ h2.extensorfrase {
     gap: 10px;
     align-items: center;
     color: black;
+    display: flex;
+    justify-content: space-between;
 }
 
 .product-content {
-    margin: 5px 0px
+    margin: 5px 0px;
+    
+}
+
+.product-content-show-rightside-l {
+    display: flex;
+    align-items: center;
+    gap: 10px
 }
 
 .product-content img {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 3%;
     object-fit: cover;
+}
+
+.top-top-product-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .bottom-middle-top-card {
@@ -4935,6 +4999,32 @@ h2.extensorfrase {
 
 .item-bottom-header:hover {
     border-bottom: 2px solid #EF59A0;
+}
+
+.Card-Middle-Top-Right {
+    background: white !important;
+}
+
+.Card-Middle-Top-Right h2{
+    color: black;
+}
+
+.product-content-show-rightside {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+.product-content-show-rightside button{
+    background: #EF59A0;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1400px) {
