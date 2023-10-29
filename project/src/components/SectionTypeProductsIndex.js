@@ -7,9 +7,24 @@ export default function SectionTypeProductsIndex() {
                         <h1>Acessórios que te representam</h1>
                         <h1>Loja virtual</h1>
                     </div>
-                    <a href={window.location.origin + '/pratas'}><img src="/static/media/product-images/PRATAS 925-cell.png" alt="" /></a>
-                    <a href={window.location.origin + '/micangas'}><img src="/static/media/product-images/MICANGAS-cell.png" alt="" /></a>
-                    <a href={window.location.origin + '/cetim'}><img src="/static/media/product-images/CETIM-cell.png" alt="" /></a>
+                    <a href={window.location.origin + '/pratas'}>
+                        <div className="card-categorias">
+                            <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/PRATAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
+                            <h2>PRATAS 925</h2>
+                        </div>
+                    </a>
+                    <a href={window.location.origin + '/micangas'}>
+                        <div className="card-categorias">
+                            <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/MICANGAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
+                            <h2>MIÇANGAS</h2>
+                        </div>
+                    </a>
+                    <a href={window.location.origin + '/cetim'}>
+                        <div className="card-categorias">
+                            <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/CETIM-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
+                            <h2>CETIM</h2>
+                        </div>
+                    </a>
                 </div>
             </section>
 
@@ -67,17 +82,20 @@ export default function SectionTypeProductsIndex() {
             <section className='opções-itens'>
                 <div className='novidade-inicio-cell'>
                     <a href={window.location.origin + '/pratas'}>
-                        <img src="/static/media/product-images/PRATAS 925-cell.png" alt="" />
+                        <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/PRATAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
+                        <h2>PRATAS 925</h2>
                     </a>
                 </div>
                 <div className='novidade-inicio-cell'>
                     <a href={window.location.origin + '/micangas'}>
-                        <img src="/static/media/product-images/MICANGAS-cell.png" alt="" />
+                        <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/MICANGAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
+                        <h2>MIÇANGAS</h2>
                     </a>
                 </div>
                 <div className='novidade-inicio-cell'>
                     <a href={window.location.origin + '/cetim'}>
-                        <img src="/static/media/product-images/CETIM-cell.png" alt="" />
+                        <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/CETIM-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
+                        <h2>CETIM</h2>
                     </a>
                 </div>
             </section>

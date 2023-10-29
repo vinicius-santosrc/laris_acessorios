@@ -2489,6 +2489,51 @@ img#colar-- {
     font-size: 0.7vw;
 }
 
+.SectionImageHeader {
+    padding: 20px 0px;
+    border-bottom: 1px solid lightgray;
+}
+
+.AdminImagensPage {
+    width: 80%;
+}
+
+.contentSectionImage {
+    margin: 0px 20px;
+}
+
+.index-select-type-admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.index-select-type-admin button {
+    background: black;
+    color: white;
+    padding: 5px 35px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0px;
+}
+
+.index-select-type-admin input {
+    display: none;
+}
+
+.index-select-type-admin label {
+    background-color: transparent !important;
+    border-radius: 10px;
+    padding: 0px !important;
+    position: relative !important;
+    right: 0px !important;
+    cursor: pointer;
+    color: #EF59A0;
+}
+
+
 .quadros-inicio-product {
     width: 100%;
     display: flex;
@@ -2782,6 +2827,7 @@ img#colar-- {
     justify-content: center;
     margin-top: 5vh;
     margin-bottom: 5vh;
+    
 }
 
 .index-select-type .title-index-type {
@@ -2796,13 +2842,39 @@ img#colar-- {
 }
 
 .index-select-type img {
-    width: 160px;
-    height: 210px;
+    width: 100%;
+    height: 140px;
+    margin-bottom: 15px;
     object-fit: cover;
-    margin-left: 0.7vw;
-    margin-right: 0.7vw;
-    border: 1px solid lightgray;
     cursor: pointer;
+}
+
+.card-categorias {
+    color: black;
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: 300;
+    background: #F6F6F6;
+    width: 170px;
+}
+
+.card-categorias img {
+    width: 100%
+}
+
+.card-categorias h2 {
+    margin: auto;
+    border-bottom: 1.5px solid #EF59A0;
+    width: 80%;
+    
+}
+
+.index-select-type a {
+    width: 170px;
+    height: 210px;
+    border: 1px solid lightgray;
+    background: #F6F6F6;
+    
 }
 
 .titulo-produtos-laris {
@@ -5614,7 +5686,7 @@ h2.extensorfrase {
         display: none;
     }
 
-    .index-select-type img:hover {
+    .index-select-type a:hover {
         border: 0.2vw solid black;
     }
 
@@ -9486,20 +9558,32 @@ h2.extensorfrase {
 
     .novidade-inicio-cell {
         display: block;
-        width: 100%;
+        width: 140px;
+        height: 200px;
         display: flex;
         align-items: center;
-
-        padding-top: 10px;
+        border: 1px solid lightgray;
+        padding-top: 0px;
+        background: #F6F6F6
         
 
     }
 
     .novidade-inicio-cell img {
-        width: 140px;
-        height: 200px;
+        width: 139px;
+        height: 140px;
         object-fit: cover;
-        border: 1px solid lightgray;
+        
+    }
+
+    .novidade-inicio-cell h2 {
+        margin: auto;
+        border-bottom: 1.5px solid #EF59A0;
+        width: 80%;
+        font-size: 0.8rem;
+        color: black;
+        text-align: center;
+
     }
 
     .opções-itens {
@@ -11108,5 +11192,20 @@ h2.extensorfrase {
 
     .dashboard-cards {
         padding-top: 0px;
+    }
+
+    .index-select-type-admin {
+        overflow-x: scroll;
+        width: 360px;
+
+    }
+
+    .leftside-wrapper-btn {
+        width: 100%;
+        overflow-x: auto
+    }
+
+    .leftside-wrapper-btn button {
+        padding: 5px 35px
     }
 }

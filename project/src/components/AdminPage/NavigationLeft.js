@@ -6,8 +6,8 @@ export default function NavigationLeft() {
     const [MenuMobile, setMenuMobile] = useState(false)
 
     function changemenumobile() {
-        
-        if(MenuMobile == true) {
+
+        if (MenuMobile == true) {
             document.querySelector(".AdminPage-DashBoard nav").style.display = "none";
             setMenuMobile(false)
         }
@@ -112,6 +112,23 @@ export default function NavigationLeft() {
                         </li>
                     }
 
+                    {window.location.href.includes('admin/imagens-pagina')
+                        ?
+                        <li>
+                            <a  id="selectednavigation" href={window.location.origin + '/admin/imagens-pagina'}>
+                            <i className="fa-regular fa-image"></i>
+                                <span>Imagens</span>
+                            </a>
+                        </li>
+                        :
+                        <li>
+                            <a href={window.location.origin + '/admin/imagens-pagina'}>
+                            <i className="fa-regular fa-image"></i>
+                                <span>Imagens</span>
+                            </a>
+                        </li>
+                    }
+
                     {window.location.href.includes('admin/settings')
                         ?
                         <li>
@@ -129,7 +146,7 @@ export default function NavigationLeft() {
                         </li>
                     }
 
-                   
+
 
 
                 </ul>
@@ -148,9 +165,10 @@ export default function NavigationLeft() {
                     {window.location.href.includes("/errors") ? <h2>Docs</h2> : null}
                     {window.location.href.includes("/metas") ? <h2>Metas</h2> : null}
                     {window.location.href.includes("/planejamentos") ? <h2>Planejamentos</h2> : null}
+                    {window.location.href.includes("/imagens-pagina") ? <h2>Imagens</h2> : null}
                 </div>
                 <div className="rightside-navigation-bar-cellphone">
-                    
+
                 </div>
             </header>
 
