@@ -396,6 +396,23 @@ export default function PlanilhaPage() {
         )
     }
 
+    function handleDeleteItem(item) {
+        Swal.fire({
+            title: "Você deseja remover esse item?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Remover",
+            denyButtonText: `Cancelar`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                handleDelete(item)
+            } else if (result.isDenied) {
+                return
+            }
+        });
+    }
+
     return (
         <div className="AdminPage-DashBoard">
             <NavigationLeft />
@@ -517,7 +534,7 @@ export default function PlanilhaPage() {
                                         <td id="lucrolinha">R$ {item.lucroporitem}</td>
                                         <td>
                                             <button onClick={() => handleEdit(item)}><i className="fa-solid fa-pen-to-square"></i></button>
-                                            <button onClick={() => handleDelete(item)}><i className="fa-solid fa-trash"></i></button>
+                                            <button onClick={() => handleDeleteItem(item)}><i className="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 ))}
