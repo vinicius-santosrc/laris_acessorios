@@ -5219,8 +5219,8 @@ h2.extensorfrase {
 
     .Card-Mid-Top-Inner {
         font-size: 14px;
-        background: #d4d4d4;
-        box-shadow: none;
+        background: white;
+        box-shadow: 1px 1px 10px gray;
     }
 
     .Card-Large-Hg {
@@ -5476,6 +5476,8 @@ h2.extensorfrase {
         justify-content: space-between;
         border-bottom: 0.2vw solid transparent;
     }
+
+    
 
     .rightsidecart p {
         font-size: 2vw;
