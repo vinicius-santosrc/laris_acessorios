@@ -5477,6 +5477,12 @@ h2.extensorfrase {
         border-bottom: 0.2vw solid transparent;
     }
 
+    .Card-Mid-Top-Inner {
+        font-size: 14px;
+        background: #d4d4d4;
+        box-shadow: none;
+    }
+
     
 
     .rightsidecart p {
