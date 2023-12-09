@@ -2466,10 +2466,10 @@ img#colar-- {
 }
 
 .estoque-prata-index-pc {
-    width: 80%;
+    width: 100%;
     margin: auto;
-    padding-left: 7vw;
-    padding-right: 7vw;
+    padding-left: 200px;
+    padding-right: 200px;
     margin-top: 1vh;
     margin-bottom: 1vh;
     display: flex;
@@ -6869,6 +6869,11 @@ h2.extensorfrase {
         display: block;
         margin-top: 0vh;
         width: 100%;
+    }
+
+    .cell-slider img {
+        width: 100vw;
+        height: 100%;
     }
 
     .avaliacoes img {
