@@ -13,8 +13,8 @@ import 'swiper/css/scrollbar';
 const items_slider = [
     {
         id: '1',
-        image: '/static/media/banner-natal.svg',
-        imagemobile: '/static/media/banner-natal-cell.svg'
+        image: '/static/media/banner-natal.webp',
+        imagemobile: '/static/media/banner-natal-cell.webp'
     },
     {
         id: '2',

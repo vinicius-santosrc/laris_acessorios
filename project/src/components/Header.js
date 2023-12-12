@@ -152,16 +152,18 @@ export default function Header() {
     if (window.location.href.includes('checkout')) {
         return (
             <>
-                <header class='menu-pc'>
-                    <div class='logo'>
-                        <a href={window.location.origin}>
-                            <img src={window.location.origin + '/static/media/Logo.webp'} alt="" />
-                        </a>
-                    </div>
-                    <div class='icons'>
+                <div className="HeaderContent-LARIS">
+                    <header class='menu-pc'>
+                        <div class='logo'>
+                            <a href={window.location.origin}>
+                                <img src={window.location.origin + '/static/media/Logo.webp'} alt="" />
+                            </a>
+                        </div>
+                        <div class='icons'>
 
-                    </div>
-                </header>
+                        </div>
+                    </header>
+                </div>
 
                 <div className='background-cart' onClick={fecharcart}></div>
                 <div className='background-option' onClick={fecharmenu}></div>
@@ -222,22 +224,22 @@ export default function Header() {
 
     return (
         <>
-
-            <header className='menu-pc'>
-                <div className='menu-pc-flex'>
-                    <div className="menu-pc-top">
-                        <div className='logo'>
-                            <a href={window.location.origin}>
-                                <img src={window.location.origin + '/static/media/Logo.webp'} alt="" />
-                            </a>
+            <div className="HeaderContent-LARIS">
+                <header className='menu-pc'>
+                    <div className='menu-pc-flex'>
+                        <div className="menu-pc-top">
+                            <div className='logo'>
+                                <a href={window.location.origin}>
+                                    <img src={window.location.origin + '/static/media/Logo.webp'} alt="" />
+                                </a>
+                            </div>
+                            <div className='icons'>
+                                <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
+                                <span className="number-bag-items">{numberbagitems}</span>
+                                <a onClick={openmenu} className='menu' title="Acesso rápido"><i className="fas fa-bars"></i></a>
+                            </div>
                         </div>
-                        <div className='icons'>
-                            <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
-                            <span className="number-bag-items">{numberbagitems}</span>
-                            <a onClick={openmenu} className='menu' title="Acesso rápido"><i className="fas fa-bars"></i></a>
-                        </div>
-                    </div>
-                    {/** // 
+                        {/** // 
                      
                      * NAVEGAÇÃO HEADER BOTTOM
                      
@@ -258,8 +260,9 @@ export default function Header() {
 
                     
                      */}
-                </div>
-            </header>
+                    </div>
+                </header>
+            </div>
             <header className='headercell'>
 
                 <div className="menu-cell">
@@ -311,8 +314,8 @@ export default function Header() {
                         </div>
                     </div>
                     {precototal && precototal > 0 ?
-                    <div class='botoesfinais'>
-                        
+                        <div class='botoesfinais'>
+
                             <div className="precosfinais">
                                 <div className="showitemprice">
                                     <h5>Subtotal</h5>
@@ -327,17 +330,17 @@ export default function Header() {
                                     <span><b>R$ {precototal.toFixed(2)}</b></span>
                                 </div>
                             </div>
-                    
-                        
-                        <div class='obsfinal'>
-                            <label>Pague com o Pix ou à vista</label>
+
+
+                            <div class='obsfinal'>
+                                <label>Pague com o Pix ou à vista</label>
+                            </div>
+                            <div class='botaofinal'>
+                                <button onClick={GoToCheckOut}>IR PARA O CHECKOUT</button>
+                            </div>
                         </div>
-                        <div class='botaofinal'>
-                            <button onClick={GoToCheckOut}>IR PARA O CHECKOUT</button>
-                        </div>
-                    </div>
-                    :
-                    null
+                        :
+                        null
                     }
                 </div>
             </div>

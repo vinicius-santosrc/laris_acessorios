@@ -8,22 +8,31 @@
 /** MENUS **/
 
 header {
-    font-size: 0.8vw;
-    padding: 1vw;
-    padding-right: 200px;
-    padding-left: 200px;
-    margin: auto;
+    font-size: 15px;
     justify-content: space-between;
-    position: fixed;
+
     display: block;
-    width: 100%;
+    top: 0;
+    max-width: 1500px;
     background-color: rgb(255, 255, 255);
-    border-bottom: none;
-    margin-top: 0px;
+
     z-index: 100;
     display: flex;
+    
+    margin: 0 auto;
+}
+
+.HeaderContent-LARIS {
+    width: 100%;
     top: 0;
-    border-bottom: 1px solid rgb(180, 180, 180);
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 0px;
+    border-bottom: 1px solid lightgray;
+    position: fixed;
+    z-index: 100;
+    background-color: rgb(255, 255, 255);
 }
 
 .sectiondown {
@@ -76,14 +85,18 @@ body {
 }
 
 header .icons {
-    font-size: 1.8vw;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px
+    
 }
 
 .title-index {
     margin: auto;
     width: 60%;
     text-align: center;
-    font-size: 1vw;
+    font-size: 19px;
     margin-top: 5vh;
     margin-bottom: 3vh;
 
@@ -92,6 +105,7 @@ header .icons {
 .title-index h1 {
     font-weight: 600;
     color: #222222;
+    
 }
 
 .bottom-code {
@@ -99,9 +113,7 @@ header .icons {
     text-align: center;
 }
 
-.icons a {
-    margin-left: 1vw;
-}
+
 
 header a {
     color: rgb(0, 0, 0);
@@ -135,7 +147,7 @@ header .logo {
 }
 
 .logo img {
-    width: 17vw;
+    width: 350px;
 }
 
 /** BODY **/
@@ -679,7 +691,7 @@ p.new {
 .sacola-top {
     margin-top: 1vh;
     margin-left: 2vh;
-    font-size: 0.6vw;
+    font-size: 15px;
 }
 
 .sacola-top h1 {
@@ -1019,13 +1031,12 @@ label#cart {
 
 .title-index a {
     color: #EF59A0;
-    font-size: 1vw;
+    font-size: 15px;
     border-bottom: 0.1vw solid transparent;
 }
 
 .title-index a:hover {
     color: #EF59A0;
-    font-size: 1vw;
     border-bottom: 0.1vw solid #EF59A0;
 }
 
@@ -2024,7 +2035,9 @@ label#cart {
 
 .pc-slider {
     overflow: hidden;
-    margin: 10px 200px;
+    margin: 10px auto;
+    padding: 0px 20px;
+    max-width: 1500px;
 
 }
 
@@ -2228,6 +2241,8 @@ label#cart {
 
 .number-bag-items {
     position: absolute;
+    right: 55px;
+    top: 20px;
     color: red;
     border-radius: 100%;
     font-size: 15px;
@@ -2310,8 +2325,8 @@ img#colar-- {
 .opções-itens {
     display: block;
     justify-content: center;
-    padding-left: 270px;
-    padding-right: 270px;
+    padding: 50px 20px;
+    max-width: 1500px;
     margin: auto;
 }
 
@@ -2321,7 +2336,9 @@ img#colar-- {
 }
 
 .info-inicio2 img {
-    width: 35vw;
+    width: 30rem;
+    height: 450px;
+    object-fit: cover;
 }
 
 #novo-inicio {
@@ -2422,11 +2439,10 @@ img#colar-- {
 }
 
 .banner-footer-pc {
-    padding-right: 19vw;
-    padding-left: 19vw;
+    margin: auto;
+    padding: 50px 20px;
+    max-width: 1500px;
     justify-content: center;
-    margin-bottom: 7vh;
-    margin-top: 7vh;
 }
 
 .banner-footer-pc img {
@@ -2440,10 +2456,9 @@ img#colar-- {
 .estoque-prata {
     width: 100%;
     margin: auto;
-    padding-left: 200px;
-    padding-right: 200px;
-    margin-top: 1vh;
-    margin-bottom: 200px;
+    max-width: 1500px;
+    margin: auto;
+    padding: 10px 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -2451,12 +2466,11 @@ img#colar-- {
 }
 
 .estoque-prata-index {
-    width: 100%;
+    max-width: 1500px;
     margin: auto;
-    padding-left: 200px;
-    padding-right: 200px;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+    padding: 10px 20px;
+
+    margin: auto;
     gap: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -2469,16 +2483,13 @@ img#colar-- {
 }
 
 .estoque-prata-index-pc {
-    width: 100%;
+    max-width: 1500px;
     margin: auto;
-    padding-left: 200px;
-    padding-right: 200px;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    padding: 10px 20px
 }
 
 .quadros-inicio {
@@ -2587,7 +2598,7 @@ img#colar-- {
 }
 
 .Product-Card-Wrapper {
-    width: 400px;
+    width: 350px;
 }
 
 .Product-Card-Wrapper a {
@@ -2597,18 +2608,13 @@ img#colar-- {
 
 .Product-Jewel-Image-Content img {
     width: 100%;
-    height: 400px;
+    height: 350px;
     object-fit: cover;
     background: #d4d4d4;
     transition: 300ms;
     transform: scale(0.99);
     
 }
-
-.Product-Jewel-Image-Content img:hover {
-    transform: scale(1)
-}
-
 .Product-Jewel-Title {
     padding: 1px 0px
 }
@@ -2669,7 +2675,7 @@ img#colar-- {
 
 .novidade-loja {
     color: #EF59A0;
-    font-size: 0.78vw;
+    font-size: 14px;
 }
 
 .novidade-loja-kit {
@@ -2718,7 +2724,9 @@ img#colar-- {
 
 .card {
     background-color: transparent;
-    padding: 20px 200px;
+    padding: 20px 20px;
+    max-width: 1500px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
 }
@@ -2867,11 +2875,10 @@ img#colar-- {
 
 .index-select-type {
     display: flex;
-    padding-left: 270px;
-    padding-right: 270px;
     justify-content: center;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin: auto;
+    padding: 50px 20px;
+    max-width: 1500px;
     
 }
 
@@ -2883,7 +2890,7 @@ img#colar-- {
 }
 
 .index-select-type h1 {
-    font-size: 1.2vw;
+    font-size: 19px;
 }
 
 .index-select-type img {
@@ -2979,14 +2986,22 @@ img#colar-- {
 .infoindex {
     background-color: #27251F;
     width: 100%;
-    padding-top: 6vh;
-    padding-bottom: 6vh;
+    padding: 60px 0px;
     display: flex;
     justify-content: center;
 }
 
+.infoindex-inside {
+    display: flex;
+    max-width: 1500px;
+    gap: 10px;
+    margin: auto
+}
+
 .infoindex img {
-    width: 4vw;
+    width: 70px;
+    height: 50px;
+
     padding-right: 1vw;
 }
 
@@ -3009,10 +3024,8 @@ img#colar-- {
 .infoindex1 {
     color: white;
     display: flex;
-    font-size: 0.65vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    width: 20vw;
+    font-size: 13px;
+    width: 100%;
 }
 
 .botaocomprarprata label {
@@ -3027,7 +3040,8 @@ img#colar-- {
 .filtros-op {
     display: flex;
     width: 100%;
-    padding: 10px 200px;
+    padding: 20px 20px;
+    max-width: 1500px;
     margin: auto;
     justify-content: left;
     font-size: 0.9vw;
@@ -3036,7 +3050,10 @@ img#colar-- {
 }
 
 .ordenar {
-    margin: 20px 200px
+    margin: auto;
+    padding: 10px 20px;
+    max-width: 1500px;
+    
 }
 
 .ordenar label {
@@ -3102,8 +3119,8 @@ img#colar-- {
     background-color: #F0F0F0;
     padding-top: 5vh;
     padding-bottom: 10vh;
-    padding-left: 19vw;
-    padding-right: 19vw;
+    padding-left: 15vw;
+    padding-right: 15vw;
     display: flex;
 }
 
@@ -7637,9 +7654,9 @@ h2.extensorfrase {
 
     .banner-footer-cell {
         display: block;
-        padding-right: 5vw;
-        padding-left: 5vw;
-        margin-bottom: 4vh;
+        padding-right: 4vw;
+        padding-left: 4vw;
+        margin: 20px 0px
     }
 
     .banner-footer-cell img {
@@ -8934,10 +8951,15 @@ h2.extensorfrase {
     .infoindex {
         background-color: #27251F;
         width: 100%;
-        padding-top: 3vh;
-        padding-bottom: 3vh;
+
         display: block;
         justify-content: center;
+    }
+
+    .infoindex-inside {
+        display: block;
+        max-width: 100%;
+        width: 100%;
     }
 
     .infoindex img {
@@ -8948,9 +8970,8 @@ h2.extensorfrase {
     .infoindex1 {
         color: white;
         display: flex;
-        font-size: 3vw;
-        padding-left: 3vw;
-        padding-right: 3vw;
+        align-items: center;
+        font-size: 13px;
         padding-top: 2vh;
         padding-bottom: 2vh;
         width: 100%;
@@ -9705,15 +9726,16 @@ h2.extensorfrase {
 
     .novidade-inicio-cell {
         display: block;
-        width: 140px;
-        height: 200px;
+        width: 170px;
+        height: auto;
         display: flex;
         align-items: center;
-        border: 1px solid lightgray;
+        padding: 0px 0px;
         padding-top: 0px;
-        background: #F6F6F6
-        
-
+        padding-bottom: 15px;
+        background: #e9e9e9;
+        border: 1px solid #e1e1e1
+    
     }
 
     .novidade-inicio-cell img {

@@ -35,7 +35,7 @@ function CardItems(products) {
                                 }</span></h4>
                             </div>
                             <div className="Product-Bottom-Info">
-                                <p><span>Page em até 10x de R$ {((products.data.PRICE - products.data.DESCONTO) / 10).toFixed(2)} sem juros.</span></p>
+                                <p><span>Page em até 10x de R$ {((products.data.PRICE - products.data.DESCONTO) / 10 * 1.07).toFixed(2)} com 7% juros.</span></p>
                             </div>
                         </div>
                     </article>

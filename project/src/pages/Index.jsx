@@ -45,6 +45,7 @@ export default function Index() {
         <>
             <Header />
             <Slider_Banners />
+            <SectionTypeProductsIndex />
             {promoItems == "" ?
                 <></>
                 :
@@ -55,9 +56,9 @@ export default function Index() {
                     type="promocoes"
                 />
             }
+            
 
-
-            <SectionTypeProductsIndex />
+            
             <SectionProducts
                 name="RECOMENDADOS PARA VOCÊ"
                 hide_bottom={true}

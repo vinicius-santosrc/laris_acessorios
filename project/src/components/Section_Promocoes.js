@@ -181,7 +181,7 @@ export default function SectionProducts(props) {
                     <>
                         <Swiper
                             modules={[Navigation, Scrollbar, A11y]}
-                            slidesPerView={3}
+                            slidesPerView={4}
                             pagination={{ clickable: true }}
 
                         >
@@ -196,7 +196,7 @@ export default function SectionProducts(props) {
                     <>
                         <Swiper
                             modules={[Navigation, Scrollbar, A11y]}
-                            slidesPerView={3}
+                            slidesPerView={4}
                             pagination={{ clickable: true }}
 
                         >
