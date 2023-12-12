@@ -4437,6 +4437,28 @@ h2.extensorfrase {
     border: 1px solid lightgray
 }
 
+.PlanejamentoDateTitle {
+    color: black;
+}
+
+.listContentDt {
+    color: black;
+    padding: 10px;
+    border: 1px solid #EF59A0;
+    margin: 5px 0px;
+    border-radius: 10px;
+    
+}
+
+.content-card-day {
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.noPlanToday {
+    color: red;
+}
+
 .Admin-ContentDashBoard table td {
     text-align: left;
     padding: 0 5px;
@@ -8462,6 +8484,8 @@ h2.extensorfrase {
         padding-bottom: 3vh;
     }
 
+
+
     .comment-avaliation img {
         width: 25vw;
     }
@@ -10623,8 +10647,8 @@ h2.extensorfrase {
 
     .Card-Large-Top {
         width: 100%;
-        margin: 30px 0;
-
+        margin: 250px 0;
+        display: none;
 
     }
 
@@ -10988,7 +11012,7 @@ h2.extensorfrase {
     .Card-Large-Top {
         margin: 0px 0px;
         width: 100%;
-        display: none
+        
     }
 
     .Cards-Top {

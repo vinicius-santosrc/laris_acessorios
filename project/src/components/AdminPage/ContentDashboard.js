@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import HeaderAdminPage from "./HeaderAdminPage"
 import db from "../../lib/appwrite"
-import { Query } from "appwrite"
+import { Databases, Query } from "appwrite"
 import { Link } from "react-router-dom"
 
 
@@ -15,10 +15,14 @@ export default function ContentDashboard() {
     const [metaMensal, setMetaMensal] = useState(0)
     const [metaAnual, setMetaAnual] = useState(0)
 
+    const [PlanejamentoDiario, setPlanejamentoDiario] = useState([])
+
     useEffect(() => {
         let entradas = 0; // Inicialize as variáveis aqui
         let saidas = 0;
-        const collectionId = "6526ef810e37b1d693c1"
+        const collectionId = "6526ef810e37b1d693c1";
+
+        getPlanejamentoDiario()
 
         db.getDocument(
             '651ca99af19b7afad3f1',
@@ -89,6 +93,58 @@ export default function ContentDashboard() {
                 )
             }))
         })
+
+    function getPlanejamentoDiario() {
+
+        const dates = [
+            "DOMINGO",
+            "SEGUNDA",
+            "TERCA",
+            "QUARTA",
+            "QUINTA",
+            "SEXTA",
+            "SÁBADO",
+
+        ]
+
+        const date = new Date()
+        const day = date.getDay()
+
+        try {
+            db.listDocuments(
+                "651ca99af19b7afad3f1",
+                "653007052c16f10101f5",
+                [
+                    Query.equal("name_card", dates[day])
+                ]
+            )
+                .then((date) => {
+
+                    setPlanejamentoDiario(date.documents.map((dt) => {
+                        return (
+                            <div className="BoxPlanningDay">
+                                
+                                {dt.content_card != "" ?
+                                 <div className="content-card-day">{dt.content_card.map((r) => {
+                                    return (
+                                        <div className="listContentDt"><h4><span>{r}</span></h4></div>
+                                    )
+                                })}
+                                </div>
+                                :
+                                <h3 className="noPlanToday">Nenhum planejamento definido para hoje.</h3>}
+                               
+                            </div>
+                        )
+                    }))
+                    
+                })
+
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <div className="Admin-ContentDashBoard">
@@ -168,8 +224,11 @@ export default function ContentDashboard() {
 
 
                         <div className="Card-Large-Top Card-Middle-Top-Right">
-                            <a href="#">
+                            <a href={window.location.origin + '/admin/planejamentos'}>
                                 <h2><i className="fa-solid fa-calendar"></i> Planejamento de hoje</h2>
+                                <div className="Planning-Today">
+                                    {PlanejamentoDiario == '' ? "null" : <>{PlanejamentoDiario}</>}
+                                </div>
                             </a>
                         </div>
 
@@ -210,7 +269,7 @@ export default function ContentDashboard() {
                             <div className="Cards-Middle-Top">
                                 <div className="Card-Mid-Top-Inner">
                                     <Link to={'https://app.conectavenda.com.br/91fd8209815b8f86427520a32c28a053'} target="_blank">
-                                        <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/002/289/530/themes/common/logo-1300451119-1658325553-8236ebeadb95411f6d5a1629dcd5e0701658325554.jpg?0"/>
+                                        <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/002/289/530/themes/common/logo-1300451119-1658325553-8236ebeadb95411f6d5a1629dcd5e0701658325554.jpg?0" />
                                         <div>
                                             <h2>Cy Semijóias</h2>
                                             <p>(55) 11 99710-7008</p>
@@ -235,7 +294,7 @@ export default function ContentDashboard() {
                                     {Produtos != '' ?
                                         <>{Produtos}</>
                                         :
-                                        <>LOADING</>
+                                        <></>
                                     }
 
 
