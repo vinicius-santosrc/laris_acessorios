@@ -35,6 +35,7 @@ import AdminMetasMeta from './pages/AdminMetasMeta';
 import AdminPedidosPedido from './pages/AdminPedidosPedido';
 import AdminPlanejamentos from './pages/AdminPlanejamentos';
 import AdminImages from './pages/AdminImages';
+import LinksPage from './pages/LinksPage';
 
 //SCRIPTS
 function App() {
@@ -101,6 +102,8 @@ function App() {
           <Route path='/institucional/cuidado-joias' element={<CuidadoJoias />}></Route>
           <Route path='/institucional/fale-conosco' element={<FaleConosco />}></Route>
           <Route path='/sucesso' element={<SucessoPage />}></Route>
+
+          <Route path="/links" element={<LinksPage />} />
 
         </Routes>
       </BrowserRouter>
