@@ -36,6 +36,11 @@ export default function BannerTopPage(props) {
                                 <div className='direct'>
                                     <label><a href={window.location.origin}>Página Inicial</a><a href="">{props.name}</a></label>
                                 </div>
+                                <div className="ImageContentPage">
+                                    {window.location.pathname.includes("/pratas") ? <img src={"https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/PRATAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin"} /> : null}
+                                    {window.location.pathname.includes("/micangas") ? <img src={"https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/MICANGAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin"} /> : null}
+                                    {window.location.pathname.includes("/cetim") ? <img src={"https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/CETIM-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin"} /> : null}
+                                </div>
                                 <div className="topcard">
                                     <h1>{props.name}</h1>
                                     <p>{props.QTD_PRODT} Produtos</p>
@@ -46,21 +51,13 @@ export default function BannerTopPage(props) {
                                     </p>
                                 </div>
                             </div>
-                            <div className="imgside">
-                                <img src="imgs/pratas925.png" alt="" />
-                            </div>
+
                         </div>
                     }
 
                 </>
             }
 
-
-
-
-            <section className="quadros-inicio">
-                <label>Agradecemos por escolher seu produto da loja LARI'S Acessórios</label>
-            </section>
 
             {window.location.href.includes("/novidades") || window.location.href.includes("promocoes")
                 ?

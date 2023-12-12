@@ -10,6 +10,7 @@ import SectionProducts from "../components/Section_Promocoes";
 import Slider_Banners from "../components/Slider_Banners";
 import db from "../lib/appwrite";
 import { Query } from "appwrite";
+import CardItems from "../components/ItemCard";
 
 export default function Index() {
     const [promoItems, setPromocoes] = useState([])
@@ -30,37 +31,9 @@ export default function Index() {
         )
             .then((response) => {
                 const ProductsArray = response.documents.map((products) => (
-                    <a href={"/produto/" + products.URL} id={products.$id} key={products.$id}>
-                        <div class='item-prata' id={products.$id}>
-                            <img src={products != "" && products.PHOTOURL && products.PHOTOURL.length > 0 ? products.PHOTOURL[0] : ""} alt="" />
-                            <div class="text-prata">
-                                {products.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
-                                    <>
-                                        {products.AVALIABLE == true ?
-                                            <p class='novidade-loja'>Disponível</p>
-                                            :
-                                            <p class="esgotado-loja">ESGOTADO</p>
-                                        }
-                                    </>}
-                                <h1 class="nome-prata">{products.NAME_PRODUCT}</h1>
-                                <div class='estrelas'>
-                                    <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
-                                </div>
-                                <div class="promocao">
-                                    {products.DESCONTO > 0 ?
-                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE}</s> R$ {products.PRICE - products.DESCONTO}</p>
-                                        :
-                                        <p class="preço-loja">R$ {products.PRICE - products.DESCONTO}</p>
-                                    }
-                                    <p class="opcoesdepaga">Pague à vista ou Pix</p>
-                                </div>
-                                <div class="botaocomprarprata">
-                                    <label>VER DETALHES</label>
-                                </div>
-
-                            </div>
-                        </div>
-                    </a>
+                    <CardItems
+                        data={products}
+                    />
                 ));
                 setPromocoes(ProductsArray)
             })
@@ -83,7 +56,7 @@ export default function Index() {
                 />
             }
 
-            
+
             <SectionTypeProductsIndex />
             <SectionProducts
                 name="RECOMENDADOS PARA VOCÊ"

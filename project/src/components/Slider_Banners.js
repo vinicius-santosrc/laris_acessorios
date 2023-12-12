@@ -61,7 +61,7 @@ export default function Slider_Banners() {
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
                         slidesPerView={1}
                         pagination={{ clickable: true }}
-                        navigation
+                        
                     >
                         {items_slider.map((item) => (
                             <SwiperSlide key={item.id}>

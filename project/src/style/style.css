@@ -497,6 +497,7 @@ p.new {
     width: 30vw;
     height: 60vh;
     object-fit: cover;
+    background: #d4d4d4;
 }
 
 .imgitem {
@@ -1057,6 +1058,7 @@ label#cart {
 
 .empty-sacola p {
     font-size: 0.9rem;
+    text-align: center !important;
 }
 
 .empty-sacola button {
@@ -2337,7 +2339,6 @@ img#colar-- {
 .promocao {
     display: block;
     margin: auto;
-    text-align: center;
     justify-content: center;
 }
 
@@ -2437,24 +2438,26 @@ img#colar-- {
 }
 
 .estoque-prata {
-    width: 80%;
+    width: 100%;
     margin: auto;
-    padding-left: 7vw;
-    padding-right: 7vw;
+    padding-left: 200px;
+    padding-right: 200px;
     margin-top: 1vh;
-    margin-bottom: 15vh;
+    margin-bottom: 200px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
 }
 
 .estoque-prata-index {
-    width: 80%;
+    width: 100%;
     margin: auto;
-    padding-left: 7vw;
-    padding-right: 7vw;
+    padding-left: 200px;
+    padding-right: 200px;
     margin-top: 1vh;
     margin-bottom: 1vh;
+    gap: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -2475,6 +2478,7 @@ img#colar-- {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
 }
 
 .quadros-inicio {
@@ -2574,19 +2578,64 @@ img#colar-- {
 }
 
 .esgotado-loja {
+    font-size: 15px;
     background-color: black;
     color: white;
-    width: 60%;
-    margin: auto;
-    border-radius: 10vw;
+    width: 100%;
+    padding: 0px 5px;
+    border-radius: 0px;
+}
+
+.Product-Card-Wrapper {
+    width: 400px;
+}
+
+.Product-Card-Wrapper a {
+    text-decoration: none;
+    color: black;
+}
+
+.Product-Jewel-Image-Content img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    background: #d4d4d4;
+    transition: 300ms;
+    transform: scale(0.99);
+    
+}
+
+.Product-Jewel-Image-Content img:hover {
+    transform: scale(1)
+}
+
+.Product-Jewel-Title {
+    padding: 1px 0px
+}
+
+.Product-Jewel-Title-Content  span {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.Product-Jewel-Title-Content {
+    height: 35px
+}
+
+.Product-Bottom-Info span {
+    font-size: 14px;
+}
+
+.Product-Price-Show span {
+    font-weight: 500;
 }
 
 .personalizado-loja {
-    background-color: #EF59A0;
+    background-color: rgb(161, 108, 247);
     color: white;
-    width: 60%;
-    margin: auto;
-    border-radius: 10vw;
+    width: 100%;
+
+
 }
 
 .opcoes {
@@ -2596,31 +2645,26 @@ img#colar-- {
 }
 
 .item-prata {
-    width: 15vw;
-    text-align: center;
-    font-size: 0.9vw;
-    background-color: #f6f6f6;
-    margin-bottom: 1vh;
-    margin-right: 0.4vw;
-    border: 0.1vw solid rgb(245, 245, 245);
+    width: 16vw;
+    text-align: left;
+    font-size: 16px;
+    background-color: transparent;
+    margin-bottom: 20px;
     color: black;
 }
 
-.item-prata:hover {
-    text-align: center;
-    background-color: #ffffff;
-    margin-bottom: 1vh;
-    margin-right: 0.4vw;
-    border: 0.1vw solid #EF59A0;
-    box-shadow: 0.005vw 0.005vw 0.1vw;
+.item-prata img:hover {
+    transform: scale(1.02)
+    
 }
 
 .item-prata img {
-    width: 95%;
+    width: 100%;
     border-radius: 0vw;
     height: 33vh;
     object-fit: cover;
     margin-bottom: 1vh;
+    transition: 300ms;
 }
 
 .novidade-loja {
@@ -2637,18 +2681,21 @@ img#colar-- {
     font-size: 0.8vw;
     margin-bottom: 0vh;
     font-weight: 400;
-    height: 5vh;
+    height: auto;
 }
 
 .estrelas img {
-    width: 7vw;
-    height: 1vw;
+    width: 120px;
+    margin: 0;
+    
+    object-fit: cover;
+    height: 30px;
 }
 
 .estrelas {
     display: flex;
-    justify-content: center;
-    margin-bottom: 1.5vw;
+    justify-content: left;
+    margin-bottom: 0;
 }
 
 .estrelas label {
@@ -2670,10 +2717,8 @@ img#colar-- {
 }
 
 .card {
-    background-color: #E3E3E3;
-    padding-left: 19vw;
-    padding-top: 2vh;
-    padding-bottom: 7vh;
+    background-color: transparent;
+    padding: 20px 200px;
     display: flex;
     justify-content: space-between;
 }
@@ -2734,7 +2779,7 @@ img#colar-- {
 
 .desccard {
     font-size: 0.7vw;
-    width: 90%;
+    width: 100%;
 }
 
 .comentarios {
@@ -2919,17 +2964,16 @@ img#colar-- {
 
 .botaocomprarprata {
     background-color: #fdfcfd;
-    font-size: 0.7vw;
+    font-size: 15px;
     margin: auto;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    width: 95%;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
     border-radius: 0vw;
     color: #000000;
     border: 0.1vw solid #EF59A0;
     cursor: pointer;
-    padding-top: 0.9vh;
-    padding-bottom: 0.9vh;
+    padding: 5px;
 }
 
 .infoindex {
@@ -2982,20 +3026,17 @@ img#colar-- {
 
 .filtros-op {
     display: flex;
-    width: 62%;
+    width: 100%;
+    padding: 10px 200px;
     margin: auto;
     justify-content: left;
     font-size: 0.9vw;
-    border-bottom: 0.1vw solid rgb(224, 224, 224);
-    padding-bottom: 1.5vh;
-    padding-top: 1.5vh;
+
     margin-bottom: 2vh;
 }
 
 .ordenar {
-    margin-left: 21vw;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
+    margin: 20px 200px
 }
 
 .ordenar label {
@@ -5034,6 +5075,24 @@ h2.extensorfrase {
     border-radius: 10px 10px 0px 0px;
 }
 
+.ImageContentPage{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px
+}
+
+
+.ImageContentPage img {
+    width: 100%;
+    margin: auto;
+    height: 500px;
+    object-position: 00px 60%;
+    object-fit: cover;
+    border-radius: 3px;
+    background: #d4d4d4;
+    
+}
+
 #finalizado-id {
     background-color: green;
     color: white;
@@ -5523,7 +5582,7 @@ h2.extensorfrase {
         width: 100%;
         background: white;
         border-bottom: none;
-        margin-top: -13.5vh;
+
         z-index: 100;
         display: flex;
     }
@@ -5561,8 +5620,8 @@ h2.extensorfrase {
     .estoque-prata-index-pc {
         width: 100%;
         margin: auto;
-        padding-left: 4vw;
-        padding-right: 4vw;
+        padding-left: 10px ;
+        padding-right: 10px;
         margin-top: 1vh;
         margin-bottom: 1vh;
         display: flex;
@@ -5668,9 +5727,9 @@ h2.extensorfrase {
         color: white;
         width: 100%;
         margin: auto;
-        border-radius: 10vw;
+       
         margin-top: 1.5vh;
-        font-size: 1.5vw;
+        font-size: 15px;
     }
 
     .personalizado-loja {
@@ -5678,7 +5737,7 @@ h2.extensorfrase {
         color: white;
         width: 100%;
         margin: auto;
-        border-radius: 10vw;
+
         margin-top: 1.5vh;
         font-size: 1.5vw;
     }
@@ -6114,6 +6173,7 @@ h2.extensorfrase {
     .imgitem img {
         width: 45vw;
         height: 45vh;
+        background: #d4d4d4;
         object-fit: cover;
     }
 
@@ -6342,6 +6402,7 @@ h2.extensorfrase {
     .desccard {
         font-size: 1.6vw;
         width: auto;
+
     }
 
     .card {
@@ -6869,11 +6930,16 @@ h2.extensorfrase {
         display: block;
         margin-top: 0vh;
         width: 100%;
+        margin: auto;
+        text-align: center;
+        justify-content: center;
     }
 
     .cell-slider img {
-        width: 100vw;
+       
+        width: 90%;
         height: 100%;
+        text-align: center;
     }
 
     .avaliacoes img {
@@ -7957,6 +8023,8 @@ h2.extensorfrase {
         border-radius: 100%;
     }
 
+    
+
     .imagecard {
         text-align: center;
         margin: auto;
@@ -8633,11 +8701,14 @@ h2.extensorfrase {
     }
 
     .card {
-        background-color: #E3E3E3;
-        padding-left: 3vw;
-        padding-top: 2vh;
-        padding-bottom: 15vh;
+        
+        background-color: transparent;
+        padding: 20px 5px;
+        border-radius: 10px;
+        width: 95%;
+        margin: auto;
         display: flex;
+        margin-top: 10px;
         justify-content: space-between;
 
     }
@@ -8667,6 +8738,15 @@ h2.extensorfrase {
         color: black !important;
     }
 
+    .Product-Card-Wrapper {
+        width: 190px;
+    }
+
+    .Product-Jewel-Image-Content img{
+        height: 190px;
+    }
+    
+
     .topcard {
         display: flex;
     }
@@ -8680,7 +8760,7 @@ h2.extensorfrase {
     }
 
     .card a {
-        color: white;
+        color: gray;
     }
 
     .card a:nth-last-child(2) {
@@ -8689,6 +8769,7 @@ h2.extensorfrase {
 
     .card a:nth-last-child(1) {
         margin-left: 0.5vw;
+
     }
 
     .card a:hover {
@@ -9150,6 +9231,14 @@ h2.extensorfrase {
         margin-top: 2vh;
         height: 25vh;
         background: #fafafa;
+    }
+
+    .ImageContentPage img {
+        width: 100%;
+        margin: auto;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 0px 0px;
     }
 
     li.mdl-list__item a {
@@ -9740,8 +9829,8 @@ h2.extensorfrase {
     .estoque-prata-index {
         width: 100%;
         margin: auto;
-        padding-left: 0vw;
-        padding-right: 0vw;
+        padding-left: 15px;
+        padding-right: 15px;
         margin-top: 1vh;
         margin-bottom: 1vh;
         display: flex;
@@ -9758,7 +9847,7 @@ h2.extensorfrase {
         color: white;
         width: 100%;
         margin: auto;
-        border-radius: 10vw;
+
         margin-top: 1.5vh;
         font-size: 3.5vw;
     }
@@ -9768,7 +9857,7 @@ h2.extensorfrase {
         color: white;
         width: 100%;
         margin: auto;
-        border-radius: 10vw;
+ 
         margin-top: 1.5vh;
         font-size: 3.5vw;
     }

@@ -70,8 +70,7 @@ export default function Pratas() {
                 <BannerTopPage
                     name={NAMEWINDOW}
                     description="
-                    A Prata de Lei também é conhecida pelos brasileiros como Prata 925. Ambas são ideais para a fabricação de joias e têm grau de pureza de 92,5%, respectivamente, o que garante a qualidade, o brilho e a durabilidade de uma joia em prata. 
-                    Fonte: pratafina.com.br
+                    As pratas 925 referem-se a objetos de prata que possuem uma composição de 92,5% de prata pura e 7,5% de outros metais, geralmente cobre. Essa liga é conhecida como prata esterlina e é amplamente utilizada na fabricação de joias e objetos de decoração. A beleza das pratas 925 reside na sua brilhante aparência, durabilidade e resistência à corrosão. Essas peças apresentam um charme atemporal, destacando-se por seu lustro e elegância, sendo uma escolha popular para quem busca acessórios sofisticados e duradouros.
                 "
                     QTD_PRODT={QTD_PRODUCT}
                 />

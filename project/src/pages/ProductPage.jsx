@@ -5,6 +5,17 @@ import { useEffect, useState } from "react"
 
 import * as emailjs from "@emailjs/browser"
 
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 //DATABASE
 
 import db from "../lib/appwrite"
@@ -21,6 +32,7 @@ import Swal from "sweetalert2"
 
 import { SacolaDeCompras, carregarSacolaDoLocalStorage } from "../components/ProductsPage/sacola"
 import FooterIndexPage from "../components/FooterIndexPage"
+import CardItems from "../components/ItemCard"
 
 
 const produtos = JSON.parse(localStorage.getItem('produtos')) || []
@@ -75,45 +87,16 @@ export default function ProductPage() {
                 Query.orderDesc("$createdAt"),
                 Query.equal("STYLE", pd.STYLE), //Buscar o produto no Banco de Dados Appwrite que tem TYPE E STYLE igual ao Atual
                 Query.equal("AVALIABLE", true),
-                Query.limit(8)
+                Query.limit(17)
 
             ]
         )
             .then((response) => {
                 setProductRelacionados(response.documents.map((products) => {
                     return (
-                        <a href={window.location.origin + "/produto/" + products.URL} id={products.$id} key={products.$id}>
-                            <div class='item-prata' id={products.$id}>
-                                <img src={products != "" && products.PHOTOURL && products.PHOTOURL.length > 0 ? products.PHOTOURL[0] : ""} alt="" />
-                                <div class="text-prata">
-                                    {products.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
-                                        <>
-                                            {products.AVALIABLE == true ?
-                                                <p class='novidade-loja'>Disponível</p>
-                                                :
-                                                <p class="esgotado-loja">ESGOTADO</p>
-                                            }
-                                        </>}
-                                    <h1 class="nome-prata">{products.NAME_PRODUCT}</h1>
-                                    <div class='estrelas'>
-                                        <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
-                                    </div>
-                                    <div class="promocao">
-
-                                        {products.DESCONTO > 0 ?
-                                            <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.PRICE.toFixed(2)}</s> R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
-                                            :
-                                            <p class="preço-loja">R$ {(products.PRICE - products.DESCONTO).toFixed(2)}</p>
-                                        }
-                                        <p class="opcoesdepaga">Pague à vista ou Pix</p>
-                                    </div>
-                                    <div class="botaocomprarprata">
-                                        <label>VER DETALHES</label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </a>
+                        <SwiperSlide>
+                            <CardItems data={products} />
+                        </SwiperSlide>
                     ) //Definindo Produtos Relacionados
 
                 }))
@@ -532,7 +515,14 @@ export default function ProductPage() {
                     <h1>Mais Produtos</h1>
 
                     <div className='produtoslista'>
-                        {ProdutosRelacionados}
+                        <Swiper
+                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                            slidesPerView={2}
+                            pagination={{ clickable: true }}
+                            
+                        >
+                            {ProdutosRelacionados}
+                        </Swiper>
                     </div>
                 </div>
 
