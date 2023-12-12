@@ -6,7 +6,7 @@
     
 }
 
-.background {
+.Links-Page .background {
     background-size: cover;
     background-repeat: no-repeat;
     width: 100vw;
@@ -17,37 +17,37 @@
     z-index: -5;
 }
 
-.LinkHref {
+.Links-Page .LinkHref {
     margin: 0px 0px !important;
 }
 
-.words-back {
+.Links-Page .words-back {
     background-color: rgb(27, 27, 27);
     color: white;
     padding: 1vw;
 }
 
-.title-cards {
+.Links-Page .title-cards {
     margin: auto;
     width: 17vw;
     text-align: center;
 }
 
-.title-cards img {
+.Links-Page .title-cards img {
     width: 17vw;
     height: 30vh;
     object-fit: cover;
 }
 
-.title-cards h1 {
+.Links-Page .title-cards h1 {
     font-size: 0.9vw;
 }
 
-.title-cards p {
+.Links-Page .title-cards p {
     font-size: 0.7vw;
 }
 
-.container {
+.Links-Page .container {
     margin: auto;
     margin-top: 0vh;
     margin-bottom: 0vh;
@@ -55,7 +55,7 @@
     width: 100%
 }
 
-.card {
+.Links-Page .card {
     margin: auto;
     width: 100%;
     display: flex;
@@ -67,43 +67,43 @@
     transition: 500ms;
 }
 
-.card-links {
+.Links-Page .card-links {
     width: 17vw;
     margin: auto;
     background-color: white;
 }
 
-.card img {
+.Links-Page .card img {
     width: 100%;
 }
 
-.card-imagem {
+.Links-Page .card-imagem {
     margin-top: 0vw;
     margin-bottom: 0vw;    
 }
 
-.informacoes-card- {
+.Links-Page .informacoes-card- {
     margin-left: 0vw;
     margin-top: 0vw;
     margin-bottom: 0vw;
 }
 
-.card h1{
+.Links-Page .card h1{
     font-size: 1vw;
 }
 
-.card p {
+.Links-Page .card p {
     font-size: 0.4vw;
 }
 
 @media screen and (max-width: 800px) {
-    .card-links {
+    .Links-Page .card-links {
         width: 80vw;
         margin: auto;
         background-color: white;
     }
 
-    body {
+    .Links-Page {
         background: #f4f4f4;
         background-size: cover;
         background-repeat: no-repeat;
@@ -111,43 +111,43 @@
         height: 100vh;
     }
 
-    .imgsback {
+    .Links-Page .imgsback {
         padding-top: 0vh;
         padding-bottom: 0vh;
         background: white;
     }
     
-    .title-cards {
+    .Links-Page .title-cards {
         margin: auto;
         width: 100%;
         height: 100%;
         text-align: center;
     }
     
-    .title-cards img {
+    .Links-Page .title-cards img {
         width: 100%;
         height: 40vh;
         border-radius: 0%;
         margin-top: 0vh;
     }
     
-    .title-cards h1 {
+    .Links-Page .title-cards h1 {
         margin-top: 2vh;
         font-size: 5vw;
     }
     
-    .title-cards p {
+    .Links-Page .title-cards p {
         font-size: 4vw;
         margin-bottom: 2vh;
     }
     
-    .container {
+    .Links-Page .container {
         margin: auto;
         margin-top: 0vh;
         width: 99%;
     }
     
-    .card {
+    .Links-Page .card {
         margin: auto;
         width: 100%;
         display: flex;
@@ -158,26 +158,26 @@
         padding: 0vw;
     }
     
-    .card img {
+    .Links-Page .card img {
         width: 100%;
     }
     
-    .card-imagem {
+    .Links-Page .card-imagem {
         margin-top: 0vw;
         margin-bottom: 0vw;
     }
     
-    .informacoes-card- {
+    .Links-Page .informacoes-card- {
         margin-left: 2vw;
         margin-top: auto;
         margin-bottom: auto;
     }
     
-    .card h1{
+    .Links-Page .card h1{
         font-size: 4vw;
     }
     
-    .card p {
+    .Links-Page .card p {
         font-size: 3vw;
     }
 }
