@@ -16,13 +16,14 @@ import 'swiper/css/scrollbar';
 
 
 export default function SectionProducts(props) {
-    const DATABASE_UID = '651ca99af19b7afad3f1'
-    const PRODUTOS_UID = '651ca9adf3de7aad17d9'
+    const DATABASE_UID = '651ca99af19b7afad3f1';
+    const PRODUTOS_UID = '651ca9adf3de7aad17d9';
 
-    const [ProductsNovidades, setProductsNovidades] = useState([])
-    const [ProductForYouItems, setProductForYouItems] = useState([])
-    const [ProductsPromocoes, setProductsPromocoes] = useState([])
-    const PREFERENCE = localStorage.getItem("PREFERENCE")
+    const [ProductsNovidades, setProductsNovidades] = useState([]);
+    const [ProductForYouItems, setProductForYouItems] = useState([]);
+    const [ProductsPromocoes, setProductsPromocoes] = useState([]);
+
+    const PREFERENCE = localStorage.getItem("PREFERENCE");
     if (PREFERENCE) {
 
     }
@@ -30,23 +31,41 @@ export default function SectionProducts(props) {
         localStorage.setItem("PREFERENCE", 'MICANGAS')
     }
 
-    function setProductFOrYou() {
-        db.listDocuments(
+    function randomNumberForYou() {
+        const randomNum = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+        
+        return randomNum;
+    }
+
+    async function setProductFOrYou() {
+
+        await db.listDocuments(
             DATABASE_UID,
             PRODUTOS_UID,
             [
                 Query.orderDesc("$createdAt"),
-                Query.limit(16),
+                Query.limit(30),
+                Query.offset(randomNumberForYou()),
                 Query.equal('TYPE', PREFERENCE)
             ]
         )
             .then((response) => {
                 const ProductsArray = response.documents.map((products) => (
-                    <SwiperSlide>
-                        <CardItems
-                            data={products}
-                        />
-                    </SwiperSlide>
+
+
+                    products.AVALIABLE ?
+                        <SwiperSlide>
+
+                            <CardItems
+                                data={products}
+                            />
+                            false
+
+
+                        </SwiperSlide>
+                        :
+                        null
+
                 ));
                 setProductForYouItems(ProductsArray)
             })
@@ -96,10 +115,13 @@ export default function SectionProducts(props) {
             })
     }
 
+
     useEffect(() => {
+        
         setProductNovidades()
         setProductFOrYou()
         setShowProductPromocoes()
+        
     }, [])
     return (
         <>
