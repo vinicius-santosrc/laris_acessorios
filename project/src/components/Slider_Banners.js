@@ -12,20 +12,16 @@ import 'swiper/css/scrollbar';
 
 const items_slider = [
     {
-        id: '1',
-        image: '/static/media/banner-natal.webp',
-        imagemobile: '/static/media/banner-natal-cell.webp'
-    },
-    {
         id: '2',
-        image: '/static/media/banner-laris-brilhe.svg',
-        imagemobile: '/static/media/banner-laris-brilhe-cell.svg'
-    },
-    {
-        id: '3',
         image: '/static/media/product-images/banner-primeiro-pedido.png',
         imagemobile: '/static/media/product-images/banner-primeiro-pedido-cell.png'
     },
+    {
+        id: '3',
+        image: '/static/media/banner-laris-brilhe.svg',
+        imagemobile: '/static/media/banner-laris-brilhe-cell.svg'
+    },
+    
     
     
 ]
