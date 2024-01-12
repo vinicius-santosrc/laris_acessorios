@@ -13,18 +13,7 @@ export default function SectionTypeProductsIndex() {
                             <h2>PRATAS 925</h2>
                         </div>
                     </a>
-                    <a href={window.location.origin + '/micangas'}>
-                        <div className="card-categorias">
-                            <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/MICANGAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
-                            <h2>MIÇANGAS</h2>
-                        </div>
-                    </a>
-                    <a href={window.location.origin + '/cetim'}>
-                        <div className="card-categorias">
-                            <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/CETIM-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
-                            <h2>CETIM</h2>
-                        </div>
-                    </a>
+                   
                 </div>
             </section>
 
@@ -42,18 +31,7 @@ export default function SectionTypeProductsIndex() {
                         <h2>PRATAS 925</h2>
                     </a>
                 </div>
-                <div className='novidade-inicio-cell'>
-                    <a href={window.location.origin + '/micangas'}>
-                        <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/MICANGAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
-                        <h2>MIÇANGAS</h2>
-                    </a>
-                </div>
-                <div className='novidade-inicio-cell'>
-                    <a href={window.location.origin + '/cetim'}>
-                        <img src="https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/CETIM-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin" alt="" />
-                        <h2>CETIM</h2>
-                    </a>
-                </div>
+                
             </section>
             
          

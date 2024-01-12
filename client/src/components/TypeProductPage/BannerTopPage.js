@@ -38,8 +38,6 @@ export default function BannerTopPage(props) {
                                 </div>
                                 <div className="ImageContentPage">
                                     {window.location.pathname.includes("/pratas") ? <img src={"https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/PRATAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin"} /> : null}
-                                    {window.location.pathname.includes("/micangas") ? <img src={"https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/MICANGAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin"} /> : null}
-                                    {window.location.pathname.includes("/cetim") ? <img src={"https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/CETIM-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin"} /> : null}
                                 </div>
                                 <div className="topcard">
                                     <h1>{props.name}</h1>
@@ -69,16 +67,7 @@ export default function BannerTopPage(props) {
                                     <label>PRATAS 925 <i class="fa-sharp fa-solid fa-caret-down"></i></label>
                                 </div>
                             </a>
-                            <a href="micangas">
-                                <div>
-                                    <label>MIÇANGAS <i class="fa-sharp fa-solid fa-caret-down"></i></label>
-                                </div>
-                            </a>
-                            <a href="cetim">
-                                <div>
-                                    <label>CETIM <i class="fa-sharp fa-solid fa-caret-down"></i></label>
-                                </div>
-                            </a>
+                            
                         </div>
                     </div>
 
@@ -90,16 +79,7 @@ export default function BannerTopPage(props) {
                                     <label>PRATAS 925 <i class="fa-sharp fa-solid fa-caret-down"></i></label>
                                 </div>
                             </a>
-                            <a href="micangas">
-                                <div>
-                                    <label>MIÇANGAS <i class="fa-sharp fa-solid fa-caret-down"></i></label>
-                                </div>
-                            </a>
-                            <a href="cetim">
-                                <div>
-                                    <label>CETIM <i class="fa-sharp fa-solid fa-caret-down"></i></label>
-                                </div>
-                            </a>
+                            
                         </div>
                     </section>
 

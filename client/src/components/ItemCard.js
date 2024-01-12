@@ -1,6 +1,5 @@
 function CardItems(products) {
     const photos = JSON.parse(products.data.photoURL)
-    console.log(photos)
     
     return (
         <div className="Product-Card-Wrapper" key={products.data.id} id={products.data.id}>

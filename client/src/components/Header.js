@@ -174,11 +174,7 @@ export default function Header() {
                     <p class="titlemenu">Acesso Rápido</p>
                     <div class='linesacola'></div>
                     <div class='opcoes'>
-                        <a href={window.location.origin + "/micangas"}><p>Miçangas</p></a>
                         <a href={window.location.origin + "/pratas"}><p>Pratas 925</p></a>
-                        <a href={window.location.origin + "/cetim"}><p>Cetim</p></a>
-
-
                     </div>
                 </div>
 
@@ -286,11 +282,7 @@ export default function Header() {
                 <p class="titlemenu">Acesso Rápido</p>
                 <div class='linesacola'></div>
                 <div class='opcoes'>
-                    <a href={window.location.origin + "/micangas"}><p>Miçangas</p></a>
                     <a href={window.location.origin + "/pratas"}><p>Pratas 925</p></a>
-                    <a href={window.location.origin + "/cetim"}><p>Cetim</p></a>
-
-
                 </div>
             </div>
 
