@@ -13,12 +13,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { getAllProducts } from "../lib/database";
 
 
 export default function SectionProducts(props) {
-    const DATABASE_UID = '651ca99af19b7afad3f1';
-    const PRODUTOS_UID = '651ca9adf3de7aad17d9';
-
     const [ProductsNovidades, setProductsNovidades] = useState([]);
     const [ProductForYouItems, setProductForYouItems] = useState([]);
     const [ProductsPromocoes, setProductsPromocoes] = useState([]);
@@ -28,100 +26,68 @@ export default function SectionProducts(props) {
 
     }
     else {
-        localStorage.setItem("PREFERENCE", 'MICANGAS')
+        localStorage.setItem("PREFERENCE", 'PRATAS')
     }
 
     function randomNumberForYou() {
         const randomNum = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
-        
+
         return randomNum;
     }
 
     async function setProductFOrYou() {
-
-        await db.listDocuments(
-            DATABASE_UID,
-            PRODUTOS_UID,
-            [
-                Query.orderDesc("$createdAt"),
-                Query.limit(30),
-                Query.offset(randomNumberForYou()),
-                Query.equal('TYPE', PREFERENCE)
-            ]
-        )
-            .then((response) => {
-                const ProductsArray = response.documents.map((products) => (
+        const products = await getAllProducts();
 
 
-                    products.AVALIABLE ?
-                        <SwiperSlide>
+        const ProductsArray = products.filter((a) => (a.disponibilidade == true)).slice(randomNumberForYou(), 30).map((products) => (
+            products.disponibilidade ?
+                <SwiperSlide>
+                    <CardItems
+                        data={products}
+                    />
+                </SwiperSlide>
+                :
+                null
 
-                            <CardItems
-                                data={products}
-                            />
-                            false
+        ));
+        setProductForYouItems(ProductsArray)
 
-
-                        </SwiperSlide>
-                        :
-                        null
-
-                ));
-                setProductForYouItems(ProductsArray)
-            })
     }
 
-    function setProductNovidades() {
-        db.listDocuments(
-            DATABASE_UID,
-            PRODUTOS_UID,
-            [
-                Query.orderDesc("$createdAt"),
-                Query.limit(16)
-            ]
-        )
-            .then((response) => {
-                const ProductsArray = response.documents.map((products) => (
-                    <SwiperSlide>
-                        <CardItems
-                            data={products}
-                        />
-                    </SwiperSlide>
-                ));
-                setProductsNovidades(ProductsArray)
-            })
+    async function setProductNovidades() {
+        const products = await getAllProducts();
+
+        const ProductsArray = products.map((products) => (
+            <SwiperSlide>
+                <CardItems
+                    data={products}
+                />
+            </SwiperSlide>
+        ));
+        setProductsNovidades(ProductsArray)
+
     }
 
-    function setShowProductPromocoes() {
-        db.listDocuments(
-            DATABASE_UID,
-            PRODUTOS_UID,
-            [
-                Query.greaterThan("DESCONTO", 0),
-                Query.orderDesc("$createdAt"),
-                Query.limit(16),
+    async function setShowProductPromocoes() {
+        const products = await getAllProducts();
+        const ProductsArray = products.filter(pdt => pdt.desconto > 0).map((produto) => (
+            <SwiperSlide>
+                <CardItems
+                    data={produto}
+                />
+            </SwiperSlide>
+        ));
+        setProductsPromocoes(ProductsArray)
 
-            ]
-        )
-            .then((response) => {
-                const ProductsArray = response.documents.map((products) => (
-                    <SwiperSlide>
-                        <CardItems
-                            data={products}
-                        />
-                    </SwiperSlide>
-                ));
-                setProductsPromocoes(ProductsArray)
-            })
     }
 
 
     useEffect(() => {
-        
+
         setProductNovidades()
         setProductFOrYou()
         setShowProductPromocoes()
-        
+
     }, [])
     return (
         <>

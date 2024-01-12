@@ -18,26 +18,22 @@ export default function Index() {
     const DATABASE_UID = '651ca99af19b7afad3f1'
     const PRODUTOS_UID = '651ca9adf3de7aad17d9'
 
-    function setShowProductPromocoes() {
-        db.listDocuments(
-            DATABASE_UID,
-            PRODUTOS_UID,
-            [
-                Query.greaterThan("DESCONTO", 0),
-                Query.orderDesc("$createdAt"),
-                Query.limit(4),
-
-            ]
-        )
-            .then((response) => {
-                const ProductsArray = response.documents.map((products) => (
-                    <CardItems
-                        data={products}
-                    />
-                ));
-                setPromocoes(ProductsArray)
-            })
+    const setShowProductPromocoes = async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/api/products`)
+            const data = await response.json()
+            const ProductsArray = data.reverse().sort((a, b) => (b.disponibilidade - a.disponibilidade)).filter((product) => product.desconto > 0).map((pdt) => {
+                <CardItems
+                    data={pdt}
+                />
+            });
+            setPromocoes(ProductsArray)
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
+
     useEffect(() => {
         setShowProductPromocoes()
     }, [promoItems])

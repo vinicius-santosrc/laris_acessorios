@@ -1,18 +1,20 @@
 function CardItems(products) {
-
+    const photos = JSON.parse(products.data.photoURL)
+    console.log(photos)
+    
     return (
-        <div className="Product-Card-Wrapper" key={products.data.$id} id={products.data.$id}>
+        <div className="Product-Card-Wrapper" key={products.data.id} id={products.data.id}>
             <section className="Section-Product-Card-Wrapper">
-                <a href={window.location.origin + "/produto/" + products.data.URL} className="Product-Card-Link-Content">
+                <a href={window.location.origin + "/produto/" + products.data.url} className="Product-Card-Link-Content">
                     <article className="Product-Card-Inside-Content">
                         <div className="Product-Jewel-Image-Content Laris-Image-Jewel">
-                            <img className="Product-Jewel-Image-Wrapper" src={window.location.origin + products != "" && products.data.PHOTOURL && products.data.PHOTOURL.length > 0 ? products.data.PHOTOURL[0] : ''} loading="auto" alt={products.data.NAME_PRODUCT} />
+                            <img className="Product-Jewel-Image-Wrapper" src={window.location.origin + products != "" && photos && photos.length > 0 ? photos[0] : ''} loading="auto" alt={products.data.name_product} />
                         </div>
                         <div className="Product-Jewel-Content-Data">
                             <div className="Product-Availabilities">
-                                {products.data.PERSONALIZAVEL == true ? <p class="personalizado-loja">Personalizado</p> :
+                                {products.data.personalizavel == true ? <p class="personalizado-loja">Personalizado</p> :
                                     <>
-                                        {products.data.AVALIABLE == true ?
+                                        {products.data.disponibilidade == true ?
                                             <p class='novidade-loja'>Disponível</p>
                                             :
                                             <p class="esgotado-loja">Esgotado</p>
@@ -21,21 +23,18 @@ function CardItems(products) {
                             </div>
                             <div className="Product-Jewel-Title">
                                 <h3 className="Product-Jewel-Title-Content">
-                                    <span>{products.data.NAME_PRODUCT}</span>
+                                    <span>{products.data.name_product}</span>
                                 </h3>
                             </div>
                             <div className="Product-Rating">
                                 <img src={null} />
                             </div>
                             <div className="Product-Price-Show">
-                                <h4><span>R$ {products.data.DESCONTO > 0 ?
-                                    <span><s>{products.data.PRICE.toFixed(2)}</s> R$ {(products.data.PRICE - products.data.DESCONTO).toFixed(2)}</span>
+                                <h4><span>R$ {products.data.desconto > 0 ?
+                                    <span><s>{products.data.price.toFixed(2)}</s> R$ {(products.data.price - products.data.desconto).toFixed(2)}</span>
                                     :
-                                    <span>{(products.data.PRICE - products.data.DESCONTO).toFixed(2)}</span>
+                                    <span>{(Number(products.data.price) - Number(products.data.desconto)).toFixed(2)}</span>
                                 }</span></h4>
-                            </div>
-                            <div className="Product-Bottom-Info">
-                                <p><span>Page em até 10x de R$ {((products.data.PRICE - products.data.DESCONTO) / 10 * 1.07).toFixed(2)} com 7% juros.</span></p>
                             </div>
                         </div>
                     </article>

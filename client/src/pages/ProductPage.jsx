@@ -33,6 +33,7 @@ import Swal from "sweetalert2"
 import { SacolaDeCompras, carregarSacolaDoLocalStorage } from "../components/ProductsPage/sacola"
 import FooterIndexPage from "../components/FooterIndexPage"
 import CardItems from "../components/ItemCard"
+import { GetProduct } from "../lib/database";
 
 
 const produtos = JSON.parse(localStorage.getItem('produtos')) || []
@@ -48,73 +49,35 @@ export default function ProductPage() {
     const [SIZES, SETSIZES] = useState([]) //PEGAR TODOS OS SIZES DA PUBLICACAO
     const [PHOTOATUAL, SETPHOTOATUAL] = useState(0) //PARA MUDAR A FOTO PRINCIPAL
 
-    const DATABASE_UID = '651ca99af19b7afad3f1'
-    const PRODUTOS_UID = '651ca9adf3de7aad17d9'
-
-
-    async function GetProduct() {
-        await db.listDocuments(
-            DATABASE_UID,
-            PRODUTOS_UID,
-            [
-                Query.limit(200),
-                Query.equal("URL", PRODUTO_NAME.product) //Buscar o produto no Banco de Dados Appwrite que tem URL igual ao Atual
-            ]
-        )
-            .then((response) => {
-                response.documents.map((product) => {
-                    setProduct(product) //Definindo Produto
-                    ChangePageTitle(product) //Mudando Title Página
-                    setPHOTOURL(product.PHOTOURL)
-                    if (PHOTOURL && PHOTOURL.PHOTOURL) {
-                        setPhotosOfPublic(PHOTOURL.PHOTOURL.map((r) => {
-                            return (
-                                <img src={r} alt="" key={r} />
-                            )
-                        }))
-                    }
-                    GetRelated(product)
-                    localStorage.setItem('PREFERENCE', product.TYPE)
-                })
-            })
-    }
-
-    async function GetRelated(pd) {
-        await db.listDocuments(
-            DATABASE_UID,
-            PRODUTOS_UID,
-            [
-                Query.orderDesc("$createdAt"),
-                Query.equal("STYLE", pd.STYLE), //Buscar o produto no Banco de Dados Appwrite que tem TYPE E STYLE igual ao Atual
-                Query.equal("AVALIABLE", true),
-                Query.limit(17)
-
-            ]
-        )
-            .then((response) => {
-                setProductRelacionados(response.documents.map((products) => {
-                    return (
-                        <SwiperSlide>
-                            <CardItems data={products} />
-                        </SwiperSlide>
-                    ) //Definindo Produtos Relacionados
-
-                }))
-            })
-    }
-
-
-
-    async function ChangePageTitle(t) {
-        document.querySelector("title").innerText = t.NAME_PRODUCT + " | LARI'S ACESSÓRIOS"
-    }
-
-
-
     useEffect(() => {
-        GetProduct()
+        
+        async function request_Product() {
+            try {
+                const pdtRequest = await GetProduct(PRODUTO_NAME.product);
+                setProduct(pdtRequest);
+                SETSIZES(JSON.parse(pdtRequest.tamanhos))
+                ChangePageTitle(pdtRequest.name_product); // Mudando Title Página
+                setPHOTOURL(JSON.parse(pdtRequest.photoURL));
 
-    }, [])
+                console.log(pdtRequest.photoURL)
+                if (pdtRequest.photoURL && pdtRequest.photoURL.length > 0) {
+                    setPhotosOfPublic(pdtRequest.photoURL.map((r) => (
+                        <img src={r} alt="" key={r} />
+                    )));
+                }
+
+                localStorage.setItem('PREFERENCE', Product.categoria);
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+            }
+        }
+
+        request_Product();
+    }, [PRODUTO_NAME]); // Adicione PRODUTO_NAME como dependência para reexecutar o efeito quando ele mudar
+
+    async function ChangePageTitle(name) {
+        document.querySelector("title").innerText = name + " | LARI'S ACESSÓRIOS"
+    }
 
     function product_indisponivel() {
         (async () => {
@@ -152,7 +115,7 @@ export default function ProductPage() {
             else {
                 emailjs.send("laris-acessorios", "template_ei7wc9p", {
                     nome: nomeaviso,
-                    produto: Product.NAME_PRODUCT + ' / ' + Product.FORNECEDOR,
+                    produto: Product.name_product + ' / ' + Product.fornecedor,
                     email: emailaviso,
                     telefone: numberaviso,
                 }, 'user_LFJAXNJjH0WCy5N2o9gl4');
@@ -166,10 +129,6 @@ export default function ProductPage() {
         })()
     }
 
-
-    const produto = 'Nome do Produto'; // Substitua pelo nome do produto que deseja adicionar
-    const preco = 10.99; // Substitua pelo preço do produto
-
     function HandleClickAdd() {
         let LOCALST = localStorage.getItem("sacola")
         let quantidade = document.querySelector('select#quant')
@@ -178,12 +137,12 @@ export default function ProductPage() {
 
         let JSON2 = JSON.parse(LOCALST)
 
-        let photopdt = Product.PHOTOURL
-        if (Product != "" && Product.PHOTOURL && Product.PHOTOURL.length > 0 ? Product.PHOTOURL[0] : "") {
-            photopdt = Product.PHOTOURL[0]
+        let photopdt = PHOTOURL
+        if (Product != "" && PHOTOURL && PHOTOURL.length > 0 ? PHOTOURL[0] : "") {
+            photopdt = PHOTOURL[0]
         }
 
-        if (Product.EXTENSOR == true) {
+        if (Product.extensor == true) {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success',
@@ -235,18 +194,18 @@ export default function ProductPage() {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: `Você adicionou ${Product.NAME_PRODUCT} a sacola.`,
+                            title: `Você adicionou ${Product.name_product} a sacola.`,
                             showConfirmButton: false,
                             timer: 1500
                         })
                             .then((r) => {
                                 JSON2.push({
-                                    id: Product.$id,
-                                    name: Product.NAME_PRODUCT,
+                                    id: Product.id,
+                                    name: Product.name_product,
                                     tamanho: tamanho.value,
                                     qtd: parseInt(quantidade.value),
-                                    preco: Product.PRICE,
-                                    desconto: Product.DESCONTO,
+                                    preco: Product.price,
+                                    desconto: Product.desconto,
                                     photoURL: photopdt
                                 })
                                 localStorage.setItem('sacola', JSON.stringify(JSON2))
@@ -265,18 +224,18 @@ export default function ProductPage() {
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'success',
-                                title: `Você adicionou ${Product.NAME_PRODUCT} a sacola.`,
+                                title: `Você adicionou ${Product.name_product} a sacola.`,
                                 showConfirmButton: false,
                                 timer: 1500
                             })
                                 .then((r) => {
                                     JSON2.push({
-                                        id: Product.$id,
-                                        name: Product.NAME_PRODUCT,
+                                        id: Product.id,
+                                        name: Product.name_product,
                                         tamanho: tamanho.value,
                                         qtd: parseInt(quantidade.value),
-                                        preco: Product.PRICE,
-                                        desconto: Product.DESCONTO,
+                                        preco: Product.price,
+                                        desconto: Product.desconto,
                                         photoURL: photopdt,
                                         personalizacao: personalizacao.value
                                     })
@@ -293,18 +252,18 @@ export default function ProductPage() {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: `Você adicionou ${Product.NAME_PRODUCT} a sacola.`,
+                            title: `Você adicionou ${Product.name_product} a sacola.`,
                             showConfirmButton: false,
                             timer: 1500
                         })
                             .then((r) => {
                                 JSON2.push({
                                     id: Product.$id,
-                                    name: Product.NAME_PRODUCT,
+                                    name: Product.name_product,
                                     tamanho: tamanho.value,
                                     qtd: parseInt(quantidade.value),
-                                    preco: Product.PRICE,
-                                    desconto: Product.DESCONTO,
+                                    preco: Product.price,
+                                    desconto: Product.desconto,
                                     photoURL: photopdt
                                 })
                                 localStorage.setItem('sacola', JSON.stringify(JSON2))
@@ -323,18 +282,18 @@ export default function ProductPage() {
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'success',
-                                title: `Você adicionou ${Product.NAME_PRODUCT} a sacola.`,
+                                title: `Você adicionou ${Product.name_product} a sacola.`,
                                 showConfirmButton: false,
                                 timer: 1500
                             })
                                 .then((r) => {
                                     JSON2.push({
                                         id: Product.$id,
-                                        name: Product.NAME_PRODUCT,
+                                        name: Product.name_product,
                                         tamanho: tamanho.value,
                                         qtd: parseInt(quantidade.value),
-                                        preco: Product.PRICE,
-                                        desconto: Product.DESCONTO,
+                                        preco: Product.price,
+                                        desconto: Product.desconto,
                                         photoURL: photopdt,
                                         personalizacao: personalizacao.value
                                     })
@@ -353,18 +312,18 @@ export default function ProductPage() {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: `Você adicionou ${Product.NAME_PRODUCT} a sacola.`,
+                    title: `Você adicionou ${Product.name_product} a sacola.`,
                     showConfirmButton: false,
                     timer: 1500
                 })
                     .then((r) => {
                         JSON2.push({
-                            id: Product.$id,
-                            name: Product.NAME_PRODUCT,
+                            id: Product.id,
+                            name: Product.name_product,
                             tamanho: tamanho.value,
                             qtd: parseInt(quantidade.value),
-                            preco: Product.PRICE,
-                            desconto: Product.DESCONTO,
+                            preco: Product.price,
+                            desconto: Product.desconto,
                             photoURL: photopdt
                         })
                         localStorage.setItem('sacola', JSON.stringify(JSON2))
@@ -383,18 +342,18 @@ export default function ProductPage() {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: `Você adicionou ${Product.NAME_PRODUCT} a sacola.`,
+                        title: `Você adicionou ${Product.name_product} a sacola.`,
                         showConfirmButton: false,
                         timer: 1500
                     })
                         .then((r) => {
                             JSON2.push({
                                 id: Product.$id,
-                                name: Product.NAME_PRODUCT,
+                                name: Product.name_product,
                                 tamanho: tamanho.value,
                                 qtd: parseInt(quantidade.value),
-                                preco: Product.PRICE,
-                                desconto: Product.DESCONTO,
+                                preco: Product.price,
+                                desconto: Product.desconto,
                                 photoURL: photopdt,
                                 personalizacao: personalizacao.value
                             })
@@ -438,7 +397,7 @@ export default function ProductPage() {
                         <div className='imgitem'>
                             <div className='opcoesdeimagem'>
 
-                                {Product.PHOTOURL && Product.PHOTOURL.map((photo, index) => {
+                                {PHOTOURL.length && PHOTOURL.map((photo, index) => {
                                     const handleClick = () => {
                                         SETPHOTOATUAL(index);
                                     };
@@ -453,23 +412,23 @@ export default function ProductPage() {
 
                             </div>
                             <div className="imagemprincipal">
-                                <img src={Product != "" && Product.PHOTOURL && Product.PHOTOURL.length > 0 ? Product.PHOTOURL[PHOTOATUAL] : ""} alt="" />
+                                <img src={Product != "" && PHOTOURL && PHOTOURL.length > 0 ? PHOTOURL[PHOTOATUAL] : ""} alt="" />
                             </div>
                         </div>
                         {Product != '' ?
                             <div className='itensdesc'>
-                                <p id='caminho'><a href={window.location.origin}> LARI'S</a> / <a href={window.location.origin + "/" + (Product.TYPE).toLowerCase()}>{Product.TYPE}</a> / <a href="">{Product.NAME_PRODUCT ? (Product.NAME_PRODUCT).toUpperCase() : ''}</a></p>
-                                <h1>{Product.NAME_PRODUCT}</h1>
-                                <p className="bottom-code">Código: {Product.$id}</p>
+                                <p id='caminho'><a href={window.location.origin}> LARI'S</a> / <a href={window.location.origin + "/" + (Product.categoria).toLowerCase()}>{Product.categoria}</a> / <a href="">{Product.name_product ? (Product.name_product).toUpperCase() : ''}</a></p>
+                                <h1>{Product.name_product}</h1>
+                                <p className="bottom-code">Código: {Product.id}</p>
                                 <div className="avaliacoes">
                                     <img src="../static/media/product-images/Nenhuma estrela.png" alt="" />
                                     <p>Nenhum vendido</p>
                                 </div>
-                                {Product.DESCONTO > 0 ?
-                                    <h2>Valor: <s style={{ color: 'darkgray' }}>R${Product.PRICE.toFixed(2)}</s> R${(Product.PRICE - Product.DESCONTO).toFixed(2)}</h2> :
-                                    <h2>Valor: <b>R$ {Product.PRICE.toFixed(2)}</b></h2>
+                                {Product.desconto > 0 ?
+                                    <h2>Valor: <s style={{ color: 'darkgray' }}>R${Product.price.toFixed(2)}</s> R${(Product.price - Product.desconto).toFixed(2)}</h2> :
+                                    <h2>Valor: <b>R$ {Product.price.toFixed(2)}</b></h2>
                                 }
-                                {Product.PERSONALIZAVEL == true ?
+                                {Product.personalizavel == true ?
                                     <div class="personalizado-card">
 
                                         <h2>Personalização: <input minlength="1" maxlength="7" name="personalizacao" id="personalizacao" /></h2>
@@ -477,11 +436,11 @@ export default function ProductPage() {
                                     :
                                     ""}
                                 <h2>Quantidade: <select name="Quantidade" id="quant">
-                                    <option value={Product.QUANT_DISPONIVEL > 0 ? 1 : 0} selected>{Product.QUANT_DISPONIVEL} {Product.QUANT_DISPONIVEL > 1 ? "unidades" : Product.QUANT_DISPONIVEL == 0 ? 'unidades' : 'unidade'}</option>
+                                    <option value={Product.quantidade_disponivel > 0 ? 1 : 0} selected>{Product.quantidade_disponivel} {Product.quantidade_disponivel > 1 ? "unidades" : Product.quantidade_disponivel == 0 ? 'unidades' : 'unidade'}</option>
                                 </select></h2>
                                 <div className='tamanhocenterleft'>
                                     <h2 className="tamanhofrase">Selecione Tamanho: <select name="Tamanho" id="tamanho">
-                                        {Product.SIZES.map((s) => {
+                                        {SIZES.map((s) => {
                                             return (
                                                 <option value={s}>{s}</option>
                                             )
@@ -490,7 +449,7 @@ export default function ProductPage() {
                                     </h2>
                                     <a href={window.location.origin + "/institucional/guia-de-tamanhos/colares"} target="_blank"><u>Guia de Tamanhos</u></a>
                                 </div>
-                                {Product.AVALIABLE == true ?
+                                {Product.disponibilidade == true ?
                                     <label id='cart' onClick={HandleClickAdd}><i className="fas fa-cart-plus"></i> ADICIONAR A SACOLA</label>
                                     :
                                     <label className="indisponivel" onClick={product_indisponivel}><i className="fas fa-shopping-bag"></i> AVISE-ME QUANDO CHEGAR</label>
@@ -519,7 +478,7 @@ export default function ProductPage() {
                             modules={[Navigation, Pagination, Scrollbar, A11y]}
                             slidesPerView={2}
                             pagination={{ clickable: true }}
-                            
+
                         >
                             {ProdutosRelacionados}
                         </Swiper>
@@ -533,10 +492,10 @@ export default function ProductPage() {
                         <div>
                             <ul>
                                 <div className='linetype'>
-                                    <li id='first'>Tipo:</li><li id='second'>{Product.TYPE}</li>
+                                    <li id='first'>Tipo:</li><li id='second'>{Product.categoria}</li>
                                 </div>
                                 <div className='linetype'>
-                                    <li id='first'>Modelo:</li><li id='second'>{Product.NAME_PRODUCT}</li>
+                                    <li id='first'>Modelo:</li><li id='second'>{Product.name_product}</li>
                                 </div>
 
                                 <div className='linetype'>
@@ -546,7 +505,7 @@ export default function ProductPage() {
                                     <li id='first'>Sac:</li><li id='second'>(35) 9739-4181</li>
                                 </div>
                                 <div className='linetype'>
-                                    <li id='first'>Tamanho:</li><li id='second'>{Product.SIZES}</li>
+                                    <li id='first'>Tamanho:</li><li id='second'>{SIZES}</li>
                                 </div>
                             </ul>
                         </div>

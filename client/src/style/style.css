@@ -5211,6 +5211,87 @@ h2.extensorfrase {
     cursor: pointer;
 }
 
+.ManutencaoPage-Section {
+    background: white;
+    margin: auto;
+    margin-top: 50px;
+
+}
+
+.flexBox-Manutencao {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: auto;
+    width: 1200px;
+    padding: 20px 0px;
+    position: relative;
+}
+
+.ContentManutencaoImages {
+    width: 100%;
+}
+
+.ContentManutencaoText {
+    font-size: 25px;
+    position: relative;
+    width: 100%;
+}
+
+.ContentManutencaoText button {
+    background: #EF59A0;
+    color: white;
+    border: none;
+    box-shadow: 5px 5px 1px black;
+    cursor: pointer;
+    padding: 10px 50px;
+    transition: 500ms;
+}
+
+.logolaris {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
+
+.logolaris img {
+    width: 200px
+}
+
+.ContentManutencaoText button:hover {
+    box-shadow: none;
+}
+
+#boldtext {
+    font-weight: 700;
+    font-size: 45px
+}
+
+.ManutencaoPage {
+    width: 100vw;
+    text-align: center;
+    margin: auto;
+    position: relative;
+}
+
+.ManutencaoContent {
+    text-align: center;
+    margin: auto;
+    position: relative;
+}
+
+#cellphone {
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    pointer-events: none;
+}
+
+#monitor {
+    width: 100%;
+    pointer-events: none;
+}
+
 @media screen and (max-width: 1400px) {
     .Cards-Left-Middle {
         display: block;
@@ -5276,6 +5357,57 @@ h2.extensorfrase {
 
     .Card-Middle-Top h2 {
         font-size: 1.3rem !important;
+    }
+
+    .ManutencaoPage-Section {
+        background: white;
+        margin: auto;
+        margin-top: 50px;
+    
+    }
+    
+    .flexBox-Manutencao {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: auto;
+        width: 1000px;
+    }
+    
+    .ContentManutencaoText {
+        font-size: 25px;
+    }
+    
+    .ContentManutencaoText button {
+        background: #EF59A0;
+        color: white;
+        border: none;
+        box-shadow: 5px 5px 1px black;
+        cursor: pointer;
+        padding: 10px 50px;
+        transition: 500ms;
+    }
+
+
+    
+    .ContentManutencaoText button:hover {
+        box-shadow: none;
+    }
+    
+    #boldtext {
+        font-weight: 700;
+        font-size: 35px
+    }
+    
+    .ManutencaoPage {
+        width: 100vw;
+        text-align: center;
+        margin: auto;
+    }
+    
+    .ManutencaoContent {
+        text-align: center;
+        margin: auto;
     }
 
     .Card-Middle-Top p {
@@ -11376,5 +11508,92 @@ h2.extensorfrase {
 
     .leftside-wrapper-btn button {
         padding: 5px 35px
+    }
+
+    .ManutencaoPage-Section {
+        background: white;
+        margin: auto;
+        margin-top: 50px;
+    
+    }
+    
+    .flexBox-Manutencao {
+        display: block;
+        align-items: center;
+        gap: 20px;
+        margin: auto;
+        width: 100%;
+        padding: 20px 0px;
+        position: relative;
+    }
+    
+    .ContentManutencaoImages {
+        width: 100%;
+        text-align: center;
+        margin: auto;
+    }
+    
+    .ContentManutencaoText {
+        font-size: 25px;
+        position: relative;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .ContentManutencaoText button {
+        background: #EF59A0;
+        color: white;
+        border: none;
+        box-shadow: 5px 5px 1px black;
+        cursor: pointer;
+        padding: 10px 50px;
+        transition: 500ms;
+    }
+    
+    .logolaris {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .logolaris img {
+        width: 100px
+    }
+    
+    .ContentManutencaoText button:hover {
+        box-shadow: none;
+    }
+    
+    #boldtext {
+        font-weight: 700;
+        font-size: 45px
+    }
+    
+    .ManutencaoPage {
+        width: 100vw;
+        text-align: center;
+        margin: auto;
+        position: relative;
+    }
+    
+    .ManutencaoContent {
+        text-align: center;
+        margin: auto;
+        position: relative;
+    }
+    
+    #cellphone {
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        pointer-events: none;
+        display: none
+    }
+    
+    #monitor {
+        width: 90%;
+        margin: auto;
+        pointer-events: none;
     }
 }
