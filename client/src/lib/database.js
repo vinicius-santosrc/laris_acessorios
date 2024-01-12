@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const url = "http://localhost:3001";
+const url = "https://api-laris-acessorios.vercel.app";
 
 const GetProduct = async (URL) => {
 

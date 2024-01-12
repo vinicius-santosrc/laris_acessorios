@@ -14,7 +14,7 @@ export default function ProductsShow(props) {
 
     const getProducts = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/api/products`)
+            const response = await fetch(`https://api-laris-acessorios.vercel.app/api/products`)
             const data = await response.json()
             SETPRODUCTS(data.reverse().sort((a, b) => (b.disponibilidade - a.disponibilidade)).filter((product) => product.categoria == 'PRATA').map((pdt) => {
                 return (

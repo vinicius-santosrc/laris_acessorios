@@ -13,7 +13,7 @@ export default function Pratas() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/products');
+                const response = await fetch('https://api-laris-acessorios.vercel.app/api/products');
                 const data = await response.json();
                 //SETANDO DADOS
                 setProdutos(data);
