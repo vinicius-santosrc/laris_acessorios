@@ -148,7 +148,7 @@ export default function PlanilhaPage() {
             }
         }
 
-        if (planilha == "planilha-despesas") {
+        else if (planilha == "planilha-despesas") {
             if (!currentItemDESPESAS.descricao || !currentItemDESPESAS.valor || !currentItemDESPESAS.tipo) {
                 Swal.fire("Preencha todos os campos!");
                 return;

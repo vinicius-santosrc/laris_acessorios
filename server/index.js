@@ -163,6 +163,18 @@ app.get(`/api/metas`, (req, res) => {
     })
 });
 
+//REQUISIÇÃO DE PLANEJAMENTOS
+
+app.get(`/api/planejamentos`, (req, res) => {
+    connection.query('SELECT * FROM `planejamentos`', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
 //REQUISIÇÃO DE PRODUTOS
 
 app.get(`/api/products`, (req, res) => {
@@ -179,12 +191,36 @@ app.get(`/api/products`, (req, res) => {
 
 app.post(`/api/products/add`, (req, res) => {
     const item = req.body
-    connection.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [], (err, result) => {
+    connection.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [item.name_product, item.price, item.desconto, item.disponibilidade, item.tamanhos, item.quantidade_disponivel, item.categoria, item.url, item.fornecedor, item.tipo, item.personalizavel, item.photoURL, item.extensor], (err, result) => {
         if (err) {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
             res.status(200).json({ message: 'Produto cadastrado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/products/edit`, (req, res) => {
+    const item = req.body
+    connection.query('update `products` set name_product = ?, price = ?, desconto = ?, disponibilidade = ?, quantidade_disponivel = ?, categoria = ?, url = ?, fornecedor = ?, tipo = ?, personalizavel = ?, extensor = ? where id = ?', [item.name_product, item.price, item.desconto, item.disponibilidade, item.quantidade_disponivel, item.categoria, item.url, item.fornecedor, item.tipo, item.personalizavel, item.extensor], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Item editado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/products/delete`, (req, res) => {
+    const item = req.body
+    connection.query('delete from `products` where id = ?', [item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Item deletado com sucesso' });
         }
     });
 });

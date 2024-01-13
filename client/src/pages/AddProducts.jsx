@@ -134,19 +134,19 @@ export default function AddProducts() {
     function setJSONNew() {
         setJSONProductNovo(
             {
-                NAME_PRODUCT: nameProduct,
-                PRICE: priceProduct,
-                PHOTOURL: imageUrls,
-                DESCONTO: descontoProduct,
-                AVALIABLE: avaliable === 'true' ? true : false,
-                SIZES: arraysizes,
-                QUANT_DISPONIVEL: QTDDISP,
-                TYPE: TYPE,
-                URL: URLPRODUCT,
-                FORNECEDOR: FORNECEDOR,
-                STYLE: Style,
-                PERSONALIZAVEL: PERSONALIZAVEL === 'true' ? true : false,
-                EXTENSOR: EXTENSOR === 'true' ? true : false,
+                name_product: nameProduct,
+                price: priceProduct,
+                photoURL: JSON.stringify(imageUrls),
+                desconto: descontoProduct,
+                disponibilidade: avaliable === 'true' ? true : false,
+                tamanhos: JSON.stringify(arraysizes),
+                quantidade_disponivel: QTDDISP,
+                categoria: TYPE,
+                url: URLPRODUCT,
+                fornecedor: FORNECEDOR,
+                tipo: Style,
+                personalizavel: PERSONALIZAVEL === 'true' ? true : false,
+                extensor: EXTENSOR === 'true' ? true : false,
 
             }
         )
@@ -197,8 +197,6 @@ export default function AddProducts() {
     }, [])
 
     const createNewProduct = () => {
-        const DBUID = '651ca99af19b7afad3f1';
-        const PRODUTOSUID = '651ca9adf3de7aad17d9';
         Swal.fire({
             title: `Deseja continuar?`,
             text: `Você está prestes a ${nameProduct}.`,
@@ -213,9 +211,13 @@ export default function AddProducts() {
                 await uploadImages();
                 try {
                     // Faça algo com imageUrls, se necessário
-                    await db.createDocument(DBUID, PRODUTOSUID, ID.unique(), JSONPdtNovo
-                    )
-
+                    fetch('http://localhost:3001/api/products/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(JSONPdtNovo),
+                    })
 
                     Swal.fire({
                         position: 'top-end',
@@ -343,41 +345,10 @@ export default function AddProducts() {
                                                 <select value={TYPE} onChange={(e) => {
                                                     setTYPE(e.target.value)
                                                 }}>
-                                                    <option value={'PRATA'} >PRATA</option>
-                                                    <option value={'MICANGAS'}>MIÇANGAS</option>
-                                                    <option value={'CETIM'}>CETIM</option>
+                                                    <option value={'PRATA'} selected >PRATA</option>
                                                 </select>
                                             </div>
                                             <div className="iptnewpdt">
-                                                {TYPE == "CETIM"
-                                                    ?
-                                                    <select value={Style} onChange={(e) => {
-                                                        setStyle(e.target.value)
-                                                    }}>
-
-                                                        <option value={'Scrunchie'}>Scrunchie</option>
-                                                        <option value={'Touca'}>Touca</option>
-
-                                                    </select>
-                                                    :
-                                                    ""
-                                                }
-
-                                                {TYPE == "MICANGAS"
-                                                    ?
-                                                    <select value={Style} onChange={(e) => {
-                                                        setStyle(e.target.value)
-                                                    }}>
-                                                        <option value={'Colar'}>Colar</option>
-                                                        <option value={'Chocker'} >Chocker</option>
-                                                        <option value={'Pulseiras'}>Pulseira</option>
-                                                        <option value={'Phone-Strap'}>Phone-Strap</option>
-                                                        <option value={'Chaveiros'}>Chaveiros</option>
-                                                    </select>
-                                                    :
-                                                    ""
-                                                }
-
                                                 {TYPE == "PRATA"
                                                     ?
                                                     <select value={Style} onChange={(e) => {
@@ -549,7 +520,7 @@ export default function AddProducts() {
                                                 </div>
                                                 <div class="promocao">
                                                     {descontoProduct > 0 ?
-                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct.toFixed(2)}</s> R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
+                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                         :
                                                         <p class="preço-loja">R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                     }
@@ -586,9 +557,9 @@ export default function AddProducts() {
                                             </div>
                                             <div class="promocao">
                                                 {descontoProduct > 0 ?
-                                                    <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct.toFixed(2)}</s> R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
+                                                    <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {(priceProduct - descontoProduct)}</p>
                                                     :
-                                                    <p class="preço-loja">R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
+                                                    <p class="preço-loja">R$ {(priceProduct - descontoProduct)}</p>
                                                 }
                                                 <p class="opcoesdepaga">Pague à vista ou Pix</p>
                                             </div>

@@ -4,29 +4,20 @@ import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import HeaderTop from "../components/AdminPage/PlanejamentosComponents/HeaderTop";
 import ContentPlanejamentos from "../components/AdminPage/PlanejamentosComponents/ContentPlanejamentos";
+import { getUser } from "../lib/database";
 
 export default function AdminPlanejamentos() {
     const [user, setUser] = useState(null)
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
 
-
-
-
     useEffect(() => {
         getUserData()
-            .then((account) => {
+            .then(async (account) => {
                 setUser(account)
                 userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
+                const user = await getUser(account.email)
+                setUserDBAccount(user)
                 if (!account) {
                     window.location.href = window.location.origin + "/admin/login"
                 }

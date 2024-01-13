@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import db from "../../../lib/appwrite";
 import Swal from "sweetalert2";
 import { ID } from "appwrite";
+import { getPlanejamentos } from "../../../lib/database";
 
 export default function ContentPlanejamentos() {
 
@@ -68,7 +69,7 @@ export default function ContentPlanejamentos() {
                 .then((r) => {
                     getCards();
                     setNameOfNewList(null);
-                    
+
 
 
                 })
@@ -111,7 +112,7 @@ export default function ContentPlanejamentos() {
         console.log(list, newItems)
 
         if (!newItems) {
-            return 
+            return
         }
 
         if (document.content_card != []) {
@@ -194,16 +195,13 @@ export default function ContentPlanejamentos() {
     }
 
     async function getCards() {
-        await db.listDocuments(
-            LARISDB,
-            PLANEJAMENTOS_LIST
-        )
-            .then((res) => {
-                setContentCards(res.documents)
-            })
-
-
-
+        try{
+            const response = await getPlanejamentos()
+            setContentCards(response)
+        }
+        catch(error) {
+            console.log(error)
+        }
     }
 
 

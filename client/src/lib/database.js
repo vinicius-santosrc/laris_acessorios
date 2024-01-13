@@ -102,4 +102,15 @@ const getPlanilhaItens = async () => {
     }
 }
 
-export { GetProduct, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens};
+const getPlanejamentos = async () => {
+    try {
+        const response = await fetch(`${url}/api/planejamentos`);
+        const data = await response.json();
+
+        return data;
+    } catch(err) {
+        throw err;
+    }
+}
+
+export { GetProduct, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos};
