@@ -50,6 +50,27 @@ app.get(`/api/admins`, (req, res) => {
     })
 });
 
+
+app.get(`/api/planilha-despesas`, (req, res) => {
+    connection.query('SELECT * FROM `planilha-despesas`', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
+app.get(`/api/metas`, (req, res) => {
+    connection.query('SELECT * FROM `metas`', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
 app.get(`/api/products`, (req, res) => {
     connection.query('SELECT * FROM produtos', (err, result) => {
         if (err) {
