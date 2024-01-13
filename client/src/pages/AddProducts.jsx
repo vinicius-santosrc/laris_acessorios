@@ -211,7 +211,7 @@ export default function AddProducts() {
                 await uploadImages();
                 try {
                     // Faça algo com imageUrls, se necessário
-                    fetch('http://localhost:3001/api/products/add', {
+                    fetch('https://api-laris-acessorios.vercel.app/api/products/add', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

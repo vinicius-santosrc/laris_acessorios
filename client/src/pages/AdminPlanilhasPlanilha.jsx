@@ -98,7 +98,7 @@ export default function PlanilhaPage() {
         }
 
         if (planilha == 'planilha-despesas') {
-            fetch('http://localhost:3001/api/planilha-despesas/delete', {
+            fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas/delete', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export default function PlanilhaPage() {
                 });
         }
         else if (planilha == 'planilha-itens') {
-            fetch('http://localhost:3001/api/planilha-itens/delete', {
+            fetch('https://api-laris-acessorios.vercel.app/api/planilha-itens/delete', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ export default function PlanilhaPage() {
         if (itemId) {
             // Atualize o item no Appwrite
             if (planilha == "planilha-itens") {
-                fetch('http://localhost:3001/api/planilha-itens/edit', {
+                fetch('https://api-laris-acessorios.vercel.app/api/planilha-itens/edit', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -191,7 +191,7 @@ export default function PlanilhaPage() {
             }
             else if (planilha == "planilha-despesas") {
                 //EDITAR LINHA
-                fetch('http://localhost:3001/api/planilha-despesas/edit', {
+                fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas/edit', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ export default function PlanilhaPage() {
         } else {
             // Crie um novo item no Appwrite sem especificar o ID
             if (planilha == "planilha-itens") {
-                fetch('http://localhost:3001/api/planilha-itens/add', {
+                fetch('https://api-laris-acessorios.vercel.app/api/planilha-itens/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -254,7 +254,7 @@ export default function PlanilhaPage() {
             }
             else if (planilha == "planilha-despesas") {
                 //ADICIONAR LINHA
-                fetch('http://localhost:3001/api/planilha-despesas/add', {
+                fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

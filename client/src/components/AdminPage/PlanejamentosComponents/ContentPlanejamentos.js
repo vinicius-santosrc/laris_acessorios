@@ -215,18 +215,18 @@ export default function ContentPlanejamentos() {
                         <div className="Card-Wrapper-Top">
                             <h3>{cards.name_card}</h3>
                             <button onClick={() => {
-                                deleteThatCard(cards.$id)
+                                deleteThatCard(cards.id)
                             }}><i className="fa-solid fa-trash-can"></i></button>
                         </div>
                         <div className="Content-Card">
-                            {(cards.content_card).map((r, i) => {
+                            {JSON.parse(cards.content_card).map((r, i) => {
                                 return (
                                     <div className="flexbox-content">
                                         <div className="contents-card">
                                             {r}
                                         </div>
                                         <button onClick={() => {
-                                            removeAtt(i, cards.$id)
+                                            removeAtt(i, cards.id)
                                         }} id={i} key={i}><i className="fa-solid fa-minus"></i></button>
                                     </div>
                                 )
