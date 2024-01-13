@@ -66,6 +66,7 @@ app.post(`/api/add/planilha-despesas`, (req, res) => {
     const item = req.body;
     connection.query('INSERT INTO `planilha-despesas` (descricao, valor, tipo) VALUES (?, ?, ?)', [item.descricao, item.valor, item.tipo], (err, result) => {
         if (err) {
+            console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
             console.log("SUCESSO");
