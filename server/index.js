@@ -64,6 +64,8 @@ app.get(`/api/planilha-despesas`, (req, res) => {
 
 app.post(`/api/planilha-despesas`, (req, res) => {
     const item = req.body;
+    console.log("Received request with item:", item);
+
     connection.query('INSERT INTO `planilha-despesas` (descricao, valor, tipo) VALUES (?, ?, ?)', [item.descricao, item.valor, item.tipo], (err, result) => {
         if (err) {
             console.error(err);  // Log the error for debugging

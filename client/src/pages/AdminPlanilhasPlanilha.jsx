@@ -202,7 +202,7 @@ export default function PlanilhaPage() {
                     });
             }
             else if (planilha == "planilha-despesas") {
-                fetch('https://api-laris-acessorios.vercel.app/api/add/planilha-despesas', {
+                fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
