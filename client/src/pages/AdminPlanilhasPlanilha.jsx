@@ -28,6 +28,30 @@ export default function PlanilhaPage() {
 
     }, [])
 
+    let entradas = 0; // Inicialize as variáveis aqui
+    let saidas = 0;
+
+    useEffect(() => {
+        async function getTotal() {
+            const PlanilhaDespesa = await getPlanilhaDespesas();
+
+            //SETAR PLANILHAS ENTRADAS E SAIDAS
+            PlanilhaDespesa.map((r) => {
+                if (r.tipo === "Receita") {
+                    entradas += Number(r.valor);
+                } else {
+                    saidas += Number(r.valor);
+                }
+            });
+
+            setEntradas(entradas)
+            setSaidas(saidas)
+            setSaldo(entradas - saidas)
+
+        }
+        getTotal()
+    }, []);
+
     const collectionId = ''
 
     const { planilha } = useParams();
@@ -51,8 +75,7 @@ export default function PlanilhaPage() {
     const [currentItemDESPESAS, setcurrentItemDESPESAS] = useState({
         descricao: "",
         valor: "",
-        tipo: "Receita",
-
+        tipo: "Receita"
     });
 
     useEffect(() => {
@@ -62,12 +85,12 @@ export default function PlanilhaPage() {
     const handleEdit = (item) => {
         setCurrentItem(item);
         setcurrentItemDESPESAS(item);
-        setItemId(item.$id)
+        setItemId(item.id)
         setAddItemOpen(true)
     };
 
     const handleDelete = (item) => {
-        if (!item.$id) {
+        if (!item.id) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -78,8 +101,13 @@ export default function PlanilhaPage() {
         }
 
 
-        db
-            .deleteDocument(DBUID, collectionId, item.$id)
+        fetch('http://localhost:3001/api/planilha-despesas/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(item),
+        })
             .then(() => {
                 loadItens();
             })
@@ -147,12 +175,14 @@ export default function PlanilhaPage() {
                     });
             }
             else if (planilha == "planilha-despesas") {
-                db
-                    .updateDocument(DBUID, collectionId, itemId, {
-                        descricao: currentItemDESPESAS.descricao,
-                        valor: currentItemDESPESAS.valor,
-                        tipo: currentItemDESPESAS.tipo,
-                    })
+                //EDITAR LINHA
+                fetch('http://localhost:3001/api/planilha-despesas/edit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(currentItemDESPESAS),
+                })
                     .then(() => {
                         loadItens();
                         setCurrentItem({
@@ -161,6 +191,7 @@ export default function PlanilhaPage() {
                             tipo: "",
                         })
                         setItemId(null);
+
                     })
                     .catch(() => {
                         Swal.fire({
@@ -202,12 +233,13 @@ export default function PlanilhaPage() {
                     });
             }
             else if (planilha == "planilha-despesas") {
-                fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas', {
+                //ADICIONAR LINHA
+                fetch('http://localhost:3001/api/planilha-despesas/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ currentItemDESPESAS }),
+                    body: JSON.stringify(currentItemDESPESAS),
                 })
                     .then(() => {
                         Swal.fire("Item criado com sucesso!");
@@ -230,27 +262,6 @@ export default function PlanilhaPage() {
             }
         }
     };
-
-    let entradas = 0; // Inicialize as variáveis aqui
-    let saidas = 0;
-    let saldototal = entradas - saidas;
-
-    useEffect(() => {
-        async function getTotal() {
-            const PlanilhaDespesa = await getPlanilhaDespesas();
-
-            //SETAR PLANILHAS ENTRADAS E SAIDAS
-            PlanilhaDespesa.map((r) => {
-                if (r.tipo === "Receita") {
-                    entradas += Number(r.valor);
-                } else {
-                    saidas += Number(r.valor);
-                }
-            });
-
-        }
-        getTotal()
-    }, []);
 
     const loadItens = async () => {
         if (planilha == 'planilha-despesas') {
@@ -281,7 +292,7 @@ export default function PlanilhaPage() {
                             <div class="newItem">
                                 <div class="headeritem">
                                     <div class="side1item">
-                                        <h1>Adicionar um Item</h1>
+                                    <h1>{itemId ? 'Editando' : 'Adicionar'} um Item</h1>
                                         <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
                                     </div>
                                     <div>
@@ -324,7 +335,7 @@ export default function PlanilhaPage() {
                                             <option value={'Despesa'}>Despesa</option>
                                         </select>
                                         <br />
-                                        <button onClick={handleSave}>Salvar</button>
+                                        <button onClick={handleSave}>{itemId ? 'Salvar' : 'Adicionar item na tabela'}</button>
                                     </div>
                                     :
                                     null}
@@ -343,7 +354,7 @@ export default function PlanilhaPage() {
                                 </thead>
                                 <tbody>
                                     {items.map((item, index) => (
-                                        <tr className={item.tipo == "Receita" ? "color-green-receita" : "red-color-despesa"} id={item.$id} key={item.$id}>
+                                        <tr className={item.tipo == "Receita" ? "color-green-receita" : "red-color-despesa"} id={item.id} key={item.id}>
                                             <td id="bggray">{item.descricao}</td>
                                             <td>R$ {item.valor}</td>
                                             <td id="bggray">
@@ -409,7 +420,7 @@ export default function PlanilhaPage() {
                         <div class="newItem">
                             <div class="headeritem">
                                 <div class="side1item">
-                                    <h1>Adicionar um Item</h1>
+                                    <h1>{itemId ? 'Editando' : 'Adicionar'} um Item</h1>
                                     <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
                                 </div>
                                 <div>
@@ -503,7 +514,7 @@ export default function PlanilhaPage() {
                             </thead>
                             <tbody>
                                 {items.map((item, index) => (
-                                    <tr id={item.$id} key={item.$id}>
+                                    <tr id={item.id} key={item.id}>
                                         <td id="bggray">{item.codigo}</td>
                                         <td>{item.nameofitem}</td>
                                         <td id="bggray">{item.detalhe}</td>

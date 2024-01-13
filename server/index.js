@@ -51,8 +51,10 @@ app.get(`/api/admins`, (req, res) => {
     })
 });
 
+//REQUISIÇÃO PLANILHA DESPESA
 
 app.get(`/api/planilha-despesas`, (req, res) => {
+    console.log(req)
     connection.query('SELECT * FROM `planilha-despesas`', (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
@@ -62,20 +64,45 @@ app.get(`/api/planilha-despesas`, (req, res) => {
     })
 });
 
-app.post(`/api/planilha-despesas`, (req, res) => {
-    const item = req.body;
-    console.log("Received request with item:", item);
+//POSTS NA PLANILHA DESPESA
 
+app.post(`/api/planilha-despesas/add`, (req, res) => {
+    const item = req.body
     connection.query('INSERT INTO `planilha-despesas` (descricao, valor, tipo) VALUES (?, ?, ?)', [item.descricao, item.valor, item.tipo], (err, result) => {
         if (err) {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
-            console.log("SUCESSO");
             res.status(200).json({ message: 'Item adicionado com sucesso' });
         }
     });
 });
+
+app.post(`/api/planilha-despesas/edit`, (req, res) => {
+    const item = req.body
+    connection.query('update `planilha-despesas` set descricao = ?, valor = ?, tipo = ? where id = ?', [item.descricao, item.valor, item.tipo, item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Item editado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/planilha-despesas/delete`, (req, res) => {
+    const item = req.body
+    connection.query('delete from `planilha-despesas` where id = ?', [item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Item deletado com sucesso' });
+        }
+    });
+});
+
+//SERVIDOR METAS
 
 app.get(`/api/metas`, (req, res) => {
     connection.query('SELECT * FROM `metas`', (err, result) => {
@@ -86,6 +113,8 @@ app.get(`/api/metas`, (req, res) => {
         }
     })
 });
+
+//REQUISIÇÃO DE PRODUTOS
 
 app.get(`/api/products`, (req, res) => {
     connection.query('SELECT * FROM produtos', (err, result) => {
