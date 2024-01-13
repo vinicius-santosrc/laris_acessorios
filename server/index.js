@@ -22,6 +22,7 @@ const connection = mysql.createConnection({
     },
 })
 
+app.use(express.json()); // Add this line for JSON body parsing
 app.use(cors());
 
 /*
@@ -61,15 +62,16 @@ app.get(`/api/planilha-despesas`, (req, res) => {
     })
 });
 
-app.get(`/api/add/planilha-despesas`, (req, res) => {
-    const item = JSON.parse(req.body)
-    connection.query('insert into `planilha-despesas` ' + `values (default, ${item.descricao}, ${item.valor}, ${item.tipo})`, (err, result) => {
+app.post(`/api/add/planilha-despesas`, (req, res) => {
+    const item = req.body;
+    connection.query('INSERT INTO `planilha-despesas` (descricao, valor, tipo) VALUES (?, ?, ?)', [item.descricao, item.valor, item.tipo], (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
-            console.log("SUCESSO")
+            console.log("SUCESSO");
+            res.status(200).json({ message: 'Item adicionado com sucesso' });
         }
-    })
+    });
 });
 
 app.get(`/api/metas`, (req, res) => {
