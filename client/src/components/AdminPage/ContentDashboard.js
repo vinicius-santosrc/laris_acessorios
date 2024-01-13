@@ -3,7 +3,7 @@ import HeaderAdminPage from "./HeaderAdminPage"
 import db from "../../lib/appwrite"
 import { Databases, Query } from "appwrite"
 import { Link } from "react-router-dom"
-import { getAllProducts } from "../../lib/database"
+import { getAllProducts, getMetas, getPlanilhaDespesas } from "../../lib/database"
 
 
 export default function ContentDashboard() {
@@ -18,54 +18,45 @@ export default function ContentDashboard() {
 
     const [PlanejamentoDiario, setPlanejamentoDiario] = useState([])
     useEffect(() => {
+        //getPlanejamentoDiario()
+        getInfoData()
+    }, []);
+
+    async function getInfoData() {
+        const AllProducts = await getAllProducts();
+        const Metas = await getMetas();
+        const PlanilhaDespesa = await getPlanilhaDespesas();
+
+        //VARIAVEIS
 
         let entradas = 0; // Inicialize as variáveis aqui
         let saidas = 0;
-        const collectionId = "6526ef810e37b1d693c1";
 
-        //getPlanejamentoDiario()
+        //SETAR METAS PEGANDO DO DATABASE
+        Metas.filter((meta) => meta.id === 1).map((res) => {
+            setMetaAnual(res.anual.toFixed(2))
+            setMetaMensal(res.mensal.toFixed(2))
+        })
 
-        db.getDocument(
-            '651ca99af19b7afad3f1',
-            "6526fb79b32651e0087a",
-            "6529bb6b64c8490376bd"
+        //SETAR PLANILHAS ENTRADAS E SAIDAS
+        PlanilhaDespesa.map((r) => {
+            if (r.tipo === "Receita") {
+                entradas += Number(r.valor);
+            } else {
+                saidas += Number(r.valor);
+            }
+        });
 
-        )
-            .then((rs) => {
-                setMetaAnual(rs.anual.toFixed(2))
-                setMetaMensal(rs.mensal.toFixed(2))
-            })
+        
+        const saldototal = entradas - saidas;
 
-        db
-            .listDocuments(
-                DBUID,
-                collectionId
-            )
-            .then((response) => {
-                response.documents.map((r) => {
-                    if (r.tipo === "Receita") {
-                        entradas += Number(r.valor);
-                    } else {
-                        saidas += Number(r.valor);
-                    }
-                });
-                const saldototal = entradas - saidas;
-                setSaldo(saldototal.toFixed(2));
-                setEntradas(entradas.toFixed(2));
-                setSaidas(saidas.toFixed(2));
-            })
-            .catch(console.error);
+        setSaldo(saldototal.toFixed(2));
+        setEntradas(entradas.toFixed(2));
+        setSaidas(saidas.toFixed(2));
 
-
-    }, []);
-
-    async function setProducts() {
-        const AllProducts = await getAllProducts();
-
+        //SETAR PRODUTOS ATUAIS
         setProdutos(AllProducts.map((response) => {
-
             const PHOTOURL = JSON.parse(response.photoURL)
-
             return (
                 <div className="product-content">
                     <a target="_blank" href={"admin/products/" + response.id}>
@@ -89,8 +80,6 @@ export default function ContentDashboard() {
             )
         }))
     }
-
-    setProducts()
 
 
     function getPlanejamentoDiario() {

@@ -61,6 +61,16 @@ app.get(`/api/planilha-despesas`, (req, res) => {
     })
 });
 
+app.get(`/api/add/planilha-despesas`, (req, res) => {
+    connection.query('insert into `planilha-despesas` ' + `values (default, ${req.body.descricao}, ${req.body.valor}, ${req.body.tipo})`, (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            console.log("SUCESSO")
+        }
+    })
+});
+
 app.get(`/api/metas`, (req, res) => {
     connection.query('SELECT * FROM `metas`', (err, result) => {
         if (err) {

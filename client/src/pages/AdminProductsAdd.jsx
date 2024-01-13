@@ -3,6 +3,7 @@ import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import { Query } from "appwrite";
 import Loading from "../components/AdminPage/Loading";
+import { getAllProducts, getUser } from "../lib/database";
 
 export default function AdminProductsAdd() {
     const [user, setUser] = useState(null);
@@ -10,81 +11,66 @@ export default function AdminProductsAdd() {
     const [search, setSearch] = useState(null);
     const [ContentSearch, setContentSearch] = useState([]);
     const [ProdutosCadastrados, setTodosProdutos] = useState([]);
+    const [ProdutosLength, setProdutosLength] = useState(null);
     const [status, userStatus] = useState(null);
     const [userDB, setUserDBAccount] = useState([]);
-    const [ProdutosLength, setProdutosLength] = useState(null)
-
-    const DBUID = '651ca99af19b7afad3f1';
-    const PRODUTOSUID = '651ca9adf3de7aad17d9';
-
 
     useEffect(() => {
-        getUserData()
-            .then((account) => {
 
+
+        getUserData()
+            .then(async (account) => {
                 setUser(account)
                 userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
+                const user = await getUser(account.email)
+                setUserDBAccount(user)
                 if (!account) {
                     window.location.href = window.location.origin + "/admin/login"
                 }
-            })
 
-    }, [])
 
-    useEffect(() => {
-        db.listDocuments(
-            DBUID,
-            PRODUTOSUID,
-            [
-                Query.limit(250),
-                Query.orderDesc("$createdAt")
-            ]
-        )
-            .then(res => {
-                setProdutosLength(res.documents.length)
-                setTodosProdutos(res.documents.map((product) => {
-                    return (
-                        <tr onClick={() => {
-                            window.location.href = window.location.origin + `/admin/products/${product.$id}`
-                        }}>
-                            <td>
-                                <img src={product.PHOTOURL.length > 0 ? product.PHOTOURL[0] : product.PHOTOURL} />
-                            </td>
-                            <td>
-                                <p>{product.NAME_PRODUCT}</p>
-         
-                            </td>
-                            <td>
-                                {product.STYLE}
-                            </td>
-                            <td>
-                                <p>R$ {product.DESCONTO.toFixed(2)}</p>
-                            </td>
-                            <td>
-                                <p>R$ {product.PRICE.toFixed(2)}</p>
-                            </td>
-                            <td>{product.AVALIABLE == true ? <p >Disponível</p> : <p style={{ color: 'red' }}>Sem estoque</p>}</td>
-                            <td>{product.QUANT_DISPONIVEL}</td>
-                            <td><i className="fa-solid fa-ellipsis"></i></td>
-                        </tr>
-                    )
-                }))
-            })
+            }, [])
 
+        async function setProducts() {
+            const AllPdt = await getAllProducts();
+
+            setProdutosLength(AllPdt.length)
+            setTodosProdutos(AllPdt.map((product) => {
+
+                const PHOTOURL = JSON.parse(product.photoURL)
+
+                return (
+                    <tr onClick={() => {
+                        window.location.href = window.location.origin + `/admin/products/${product.id}`
+                    }}>
+                        <td>
+                            <img src={PHOTOURL.length > 0 ? PHOTOURL[0] : PHOTOURL} />
+                        </td>
+                        <td>
+                            <p>{product.name_product}</p>
+
+                        </td>
+                        <td>
+                            {product.tipo}
+                        </td>
+                        <td>
+                            <p>R$ {product.desconto.toFixed(2)}</p>
+                        </td>
+                        <td>
+                            <p>R$ {product.price.toFixed(2)}</p>
+                        </td>
+                        <td>{product.disponibilidade == true ? <p >Disponível</p> : <p style={{ color: 'red' }}>Sem estoque</p>}</td>
+                        <td>{product.quantidade_disponivel}</td>
+                        <td><i className="fa-solid fa-ellipsis"></i></td>
+                    </tr>
+                )
+            }))
+        }
+        setProducts()
     }, []);
 
     if (!user) {
         return <Loading />
-
     }
 
     return (

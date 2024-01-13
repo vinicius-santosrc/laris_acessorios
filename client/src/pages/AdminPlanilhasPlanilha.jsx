@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import Swal from "sweetalert2";
 import { ID, Query } from "appwrite";
+import { getPlanilhaDespesas, getUser } from "../lib/database";
 
 export default function PlanilhaPage() {
     const [user, setUser] = useState(null)
@@ -15,19 +16,11 @@ export default function PlanilhaPage() {
 
     useEffect(() => {
         getUserData()
-            .then((account) => {
-
+            .then(async (account) => {
                 setUser(account)
                 userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
+                const user = await getUser(account.email)
+                setUserDBAccount(user)
                 if (!account) {
                     window.location.href = window.location.origin + "/admin/login"
                 }
@@ -35,18 +28,12 @@ export default function PlanilhaPage() {
 
     }, [])
 
+    const collectionId = ''
+
     const { planilha } = useParams();
     const DBUID = '651ca99af19b7afad3f1';
+
     const [AddItemOpen, setAddItemOpen] = useState(false)
-
-    const collectionMap = {
-        "planilha-itens": "6524bc3a390afb07a756",
-        "planilha-despesas": "6526ef810e37b1d693c1"
-        // Adicione mais mapeamentos conforme necessário
-    };
-
-    const collectionId = collectionMap[planilha.toLowerCase()]; // planilha é o nome da coleção
-
 
     const [items, setItems] = useState([]);
     const [itemId, setItemId] = useState(null)
@@ -215,8 +202,13 @@ export default function PlanilhaPage() {
                     });
             }
             else if (planilha == "planilha-despesas") {
-                db
-                    .createDocument(DBUID, collectionId, ID.unique(), { ...currentItemDESPESAS })
+                fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ currentItemDESPESAS }),
+                })
                     .then(() => {
                         Swal.fire("Item criado com sucesso!");
                         loadItens();
@@ -239,44 +231,32 @@ export default function PlanilhaPage() {
         }
     };
 
+    let entradas = 0; // Inicialize as variáveis aqui
+    let saidas = 0;
+    let saldototal = entradas - saidas;
+
     useEffect(() => {
-        let entradas = 0; // Inicialize as variáveis aqui
-        let saidas = 0;
+        async function getTotal() {
+            const PlanilhaDespesa = await getPlanilhaDespesas();
 
-        db
-            .listDocuments(DBUID, collectionId)
-            .then((response) => {
-                response.documents.map((r) => {
-                    if (r.tipo === "Receita") {
-                        entradas += Number(r.valor);
-                    } else {
-                        saidas += Number(r.valor);
-                    }
-                });
-                const saldototal = entradas - saidas;
-                setSaldo(saldototal);
-                setEntradas(entradas);
-                setSaidas(saidas);
-            })
-            .catch(console.error);
-    });
+            //SETAR PLANILHAS ENTRADAS E SAIDAS
+            PlanilhaDespesa.map((r) => {
+                if (r.tipo === "Receita") {
+                    entradas += Number(r.valor);
+                } else {
+                    saidas += Number(r.valor);
+                }
+            });
 
+        }
+        getTotal()
+    }, []);
 
-    const loadItens = () => {
-        db
-            .listDocuments(DBUID,
-                collectionId,
-                [
-                    Query.limit(500),
-                    Query.orderDesc('$createdAt')
-                ]
-            )
-            .then((response) => {
-                setItems(response.documents);
-
-
-            })
-            .catch(console.error);
+    const loadItens = async () => {
+        if (planilha == 'planilha-despesas') {
+            const Items = await getPlanilhaDespesas();
+            setItems(Items)
+        }
     };
 
     if (planilha == 'planilha-despesas') {
@@ -284,7 +264,7 @@ export default function PlanilhaPage() {
             <div className="AdminPage-DashBoard">
                 <NavigationLeft />
                 <div className="Admin-ContentDashBoard">
-                    {!collectionId
+                    {planilha != "planilha-despesas"
                         ?
                         <div className="Planilha-404-NotFound">
                             <img src={window.location.origin + "/static/media/admin-images/undraw_void_-3-ggu.svg"} />
@@ -417,7 +397,7 @@ export default function PlanilhaPage() {
         <div className="AdminPage-DashBoard">
             <NavigationLeft />
             <div className="Admin-ContentDashBoard">
-                {!collectionId
+                {planilha == "planilha-despesas"
                     ?
                     <div className="Planilha-404-NotFound">
                         <img src={window.location.origin + "/static/media/admin-images/undraw_void_-3-ggu.svg"} />
