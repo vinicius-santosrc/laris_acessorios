@@ -5,13 +5,11 @@ import { Query } from "appwrite";
 import { useParams } from "react-router-dom";
 import Loading from "../components/AdminPage/Loading";
 import Swal from "sweetalert2";
+import { GetProductById, getUser } from "../lib/database";
 
 export default function AdminProductEditPage() {
     const { product } = useParams();
     const [ProdutoAtual, setProdutoAtual] = useState(null)
-
-    const DBUID = '651ca99af19b7afad3f1';
-    const PRODUTOSUID = '651ca9adf3de7aad17d9';
 
     const [nomeProduto, setNomeProduto] = useState('');
     const [typeProduto, setTypeProduto] = useState(null)
@@ -28,40 +26,38 @@ export default function AdminProductEditPage() {
 
     useEffect(() => {
         getUserData()
-            .then((account) => {
-
+            .then(async (account) => {
                 setUser(account)
                 userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
+                const user = await getUser(account.email)
+                setUserDBAccount(user)
                 if (!account) {
                     window.location.href = window.location.origin + "/admin/login"
                 }
-            })
+
+
+            }, [])
 
     }, [])
 
     useEffect(() => {
-        db.getDocument(DBUID, PRODUTOSUID, product)
-            .then((pdt) => {
-                setProdutoAtual(pdt);
-                setNomeProduto(pdt.NAME_PRODUCT);
-                setTypeProduto(pdt.TYPE)
-                setpriceProduto(pdt.PRICE)
-                setdescontoProduto(pdt.DESCONTO)
-                setavaliableProduto(pdt.AVALIABLE === true ? 'true' : 'false')
-                setQntDisponivelProduto(pdt.QUANT_DISPONIVEL)
-                setURLProduto(pdt.URL)
-                setExtensor(pdt.EXTENSOR === true ? 'true' : 'false')
-            });
+        getProdutoAtual()
     }, [product]);
+
+    async function getProdutoAtual() {
+        const response = await GetProductById(product)
+        const pdt = response
+
+        setProdutoAtual(pdt);
+        setNomeProduto(pdt.name_product);
+        setTypeProduto(pdt.categoria)
+        setpriceProduto(pdt.price)
+        setdescontoProduto(pdt.desconto)
+        setavaliableProduto(pdt.disponibilidade == true ? 'true' : 'false')
+        setQntDisponivelProduto(pdt.quantidade_disponivel)
+        setURLProduto(pdt.url)
+        setExtensor(pdt.extensor === true ? 'true' : 'false')
+    }
 
     const handleNomeProdutoChange = (event) => {
         // Atualize o estado local com o novo valor do input
@@ -112,26 +108,31 @@ export default function AdminProductEditPage() {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                db.updateDocument(
-                    DBUID,
-                    PRODUTOSUID,
-                    ProdutoAtual.$id,
-                    {
-                        NAME_PRODUCT: nomeProduto,
-                        PRICE: priceProduto,
-                        DESCONTO: descontoProduto,
-                        AVALIABLE: avaliableProduto == 'true',
-                        TYPE: typeProduto,
-                        URL: URLPRODUTO,
-                        EXTENSOR: EXTENSOR == 'true'
-                    }
-                )
-                    .then((res) => {
-                        Swal.fire(ProdutoAtual.NAME_PRODUCT + " foi salvo com sucesso.", '', 'success')
-                    })
-                    .catch((error) => {
-                        Swal.fire('Error ao salvar: ' + error, '', 'info')
-                    })
+
+                fetch("https://api-laris-acessorios.vercel.app/api/products/edit", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: ProdutoAtual.id,
+                        name_product: nomeProduto,
+                        price: priceProduto,
+                        desconto: descontoProduto,
+                        disponibilidade: avaliableProduto == 'true',
+                        quantidade_disponivel: qtdDisProduto,
+                        categoria: typeProduto,
+                        url: URLPRODUTO,
+                        extensor: EXTENSOR == true
+                    }),
+                })
+                .then((res) => {
+                    Swal.fire(ProdutoAtual.name_product + " foi salvo com sucesso.", '', 'success')
+                    getProdutoAtual()
+                })
+                .catch((error) => {
+                    Swal.fire('Error ao salvar: ' + error, '', 'info')
+                })                    
             } else if (result.isDenied) {
 
             }
@@ -151,17 +152,18 @@ export default function AdminProductEditPage() {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                db.deleteDocument(
-                    DBUID,
-                    PRODUTOSUID,
-                    ProdutoAtual.$id,
-                )
-                    .then((res) => {
-                        Swal.fire(ProdutoAtual.NAME_PRODUCT + " foi excluido do banco de dados.", '', 'success')
-                    })
-                    .catch((error) => {
-                        Swal.fire('Error ao salvar: ' + error, '', 'info')
-                    })
+                fetch("https://api-laris-acessorios.vercel.app/api/products/delete", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: ProdutoAtual.id,
+                    }),
+                })
+                .then((res) => {
+                    window.location.href = window.location.origin + "/admin/products"
+                })
             } else if (result.isDenied) {
 
             }
@@ -170,9 +172,6 @@ export default function AdminProductEditPage() {
 
     const isAvaliable = avaliableProduto == 'true' ? 'true' : 'false';
     const TypeProduct = typeProduto;
-
-
-
 
     if (!user) {
         return <Loading />
@@ -188,24 +187,24 @@ export default function AdminProductEditPage() {
                         <div className="titleeditproduto"><h1>Editar Produto</h1></div>
                         <div className="product-atual">
 
-                            {ProdutoAtual.PHOTOURL ?
+                            {ProdutoAtual.photoURL ?
                                 <div className="leftside-product-atual">
-                                    {ProdutoAtual.PHOTOURL.length > 0 ?
-                                        <img src={ProdutoAtual.PHOTOURL.includes("/static/media") ? window.location.origin + ProdutoAtual.PHOTOURL[0] : ProdutoAtual.PHOTOURL[0]} />
+                                    {JSON.parse(ProdutoAtual.photoURL).length > 0 ?
+                                        <img src={JSON.parse(ProdutoAtual.photoURL).includes("/static/media") ? window.location.origin + JSON.parse(ProdutoAtual.photoURL)[0] : JSON.parse(ProdutoAtual.photoURL)[0]} />
                                         :
-                                        <img src={ProdutoAtual.PHOTOURL.includes("/static/media") ? window.location.origin + ProdutoAtual.PHOTOURL : ProdutoAtual.PHOTOURL} />
+                                        <img src={JSON.parse(ProdutoAtual.photoURL).includes("/static/media") ? window.location.origin + JSON.parse(ProdutoAtual.photoURL) : JSON.parse(ProdutoAtual.photoURL)} />
                                     }
                                     <div className="images-product">
-                                        {ProdutoAtual.PHOTOURL.length > 0 ?
+                                        {JSON.parse(ProdutoAtual.photoURL).length > 0 ?
                                             <>
-                                                {ProdutoAtual.PHOTOURL.map((res) => {
+                                                {JSON.parse(ProdutoAtual.photoURL).map((res) => {
                                                     return (
                                                         <img src={res.includes("/static/media") ? window.location.origin + res : res} />
                                                     )
                                                 })}
                                             </>
                                             :
-                                            <img src={ProdutoAtual.PHOTOURL.includes("/static/media") ? window.location.origin + ProdutoAtual.PHOTOURL : ProdutoAtual.PHOTOURL} />
+                                            <img src={JSON.parse(ProdutoAtual.photoURL).includes("/static/media") ? window.location.origin + JSON.parse(ProdutoAtual.photoURL) : JSON.parse(ProdutoAtual.photoURL)} />
                                         }
                                     </div>
                                 </div>
@@ -236,8 +235,6 @@ export default function AdminProductEditPage() {
                                                             onChange={handleChangeType}
                                                         >
                                                             <option value={typeProduto} selected>{typeProduto}</option>
-                                                            <option value='CETIM'>CETIM</option>
-                                                            <option value='PRATA'>PRATA</option>
                                                         </select>
                                                         :
                                                         <>
@@ -247,8 +244,6 @@ export default function AdminProductEditPage() {
                                                                     onChange={handleChangeType}
                                                                 >
                                                                     <option value={typeProduto} selected>{typeProduto}</option>
-                                                                    <option value='CETIM'>CETIM</option>
-                                                                    <option value='MICANGAS'>MIÇANGAS</option>
                                                                 </select>
                                                                 :
                                                                 <></>
@@ -329,7 +324,7 @@ export default function AdminProductEditPage() {
                                 <div className='estoque-prata-index-pc'>
                                     <a href="#">
                                         <div class='item-prata' id={ProdutoAtual.$id}>
-                                            <img src={ProdutoAtual != "" && ProdutoAtual.PHOTOURL && ProdutoAtual.PHOTOURL.length > 0 ? ProdutoAtual.PHOTOURL[0] : ""} alt="" />
+                                            <img src={ProdutoAtual != "" && JSON.parse(ProdutoAtual.photoURL) && JSON.parse(ProdutoAtual.photoURL).length > 0 ? JSON.parse(ProdutoAtual.photoURL)[0] : ""} alt="" />
                                             <div class="text-prata">
                                                 {ProdutoAtual.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                                     <>
@@ -363,7 +358,7 @@ export default function AdminProductEditPage() {
                                 <div className='estoque-prata-index'>
                                     <a href="#">
                                         <div class='item-prata' id={ProdutoAtual.$id}>
-                                            <img src={ProdutoAtual != "" && ProdutoAtual.PHOTOURL && ProdutoAtual.PHOTOURL.length > 0 ? ProdutoAtual.PHOTOURL[0] : ""} alt="" />
+                                            <img src={ProdutoAtual != "" && JSON.parse(ProdutoAtual.photoURL) && JSON.parse(ProdutoAtual.photoURL).length > 0 ? JSON.parse(ProdutoAtual.photoURL)[0] : ""} alt="" />
                                             <div class="text-prata">
                                                 {ProdutoAtual.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
                                                     <>

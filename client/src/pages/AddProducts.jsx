@@ -73,6 +73,7 @@ export default function AddProducts() {
     const [photoURL, setPHOTOURL] = useState([])
     const [imageUrls, setImageUrls] = useState([]);
 
+    const [JSONPHOTOS, setJSONPHOTOS] = useState([])
     const [filepreview, setFilePreview] = useState([])
     const [filepreview2, setFilePreview2] = useState([])
     const [filepreview3, setFilePreview3] = useState([])
@@ -118,17 +119,30 @@ export default function AddProducts() {
         if (Sizes.trim() !== "") {
             setArraySizes([...arraysizes, Sizes])
             setSizes("");
-
         }
     }
 
 
     useEffect(() => {
-        setPHOTOURL([
-            file,
-            file2,
-            file3
-        ])
+        if (file && file2 && file3) {
+            setPHOTOURL([
+                file,
+                file2,
+                file3
+            ])
+        }
+        else if (file && file2 && !file3) {
+            setPHOTOURL([
+                file,
+                file2,
+            ])
+        }
+
+        else if (file && !file2 && !file3) {
+            setPHOTOURL([
+                file,
+            ])
+        }
     })
 
     function setJSONNew() {
@@ -136,7 +150,7 @@ export default function AddProducts() {
             {
                 name_product: nameProduct,
                 price: priceProduct,
-                photoURL: JSON.stringify(imageUrls),
+                photoURL: JSON.stringify(JSONPHOTOS),
                 desconto: descontoProduct,
                 disponibilidade: avaliable === 'true' ? true : false,
                 tamanhos: JSON.stringify(arraysizes),
@@ -152,31 +166,27 @@ export default function AddProducts() {
         )
     }
 
-
-
     const uploadImages = async () => {
-        return Promise.all(
-
-            photoURL.map(async (image) => {
-                try {
-                    const response = await storage.createFile(
-                        '651df9c4741bb296da03',
-                        ID.unique(),
-                        image
-                    );
-                    const imageURL = response.$id;
-                    setImageUrls(
-                        imageUrls.push(`https://cloud.appwrite.io/v1/storage/buckets/651df9c4741bb296da03/files/${response.$id}/view?project=651c17501139519bc5a2`)
-                    );
-                    setJSONNew()
-                } catch (error) {
-                    throw error; // Rejeita a promessa se ocorrer um erro
-                }
-            })
-
-
-        );
-    }
+        let jsonPHOTOS = [];
+        try {
+            for (const image of photoURL) {
+                const response = await storage.createFile(
+                    '651df9c4741bb296da03',
+                    ID.unique(),
+                    image
+                );
+                const imageURL = `https://cloud.appwrite.io/v1/storage/buckets/651df9c4741bb296da03/files/${response.$id}/view?project=651c17501139519bc5a2`;
+                jsonPHOTOS.push(imageURL);
+                
+            }
+            criarProduto(jsonPHOTOS);
+            setJSONNew();
+        } catch (error) {
+            // Handle error appropriately
+            console.error(error);
+        }
+    };
+    
 
     useEffect(() => {
 
@@ -209,7 +219,7 @@ export default function AddProducts() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await uploadImages();
-                try {
+                /*try {
                     // Faça algo com imageUrls, se necessário
                     fetch('https://api-laris-acessorios.vercel.app/api/products/add', {
                         method: 'POST',
@@ -235,10 +245,54 @@ export default function AddProducts() {
                         text: `Erro ao criar o produto: ${error}`,
                         footer: '<a href="errors">Por que deste erro?</a>'
                     });
-                }
+                }*/
             }
         })
 
+    }
+    async function criarProduto(IMAGES) {
+        try {
+            // Faça algo com imageUrls, se necessário
+            fetch('https://api-laris-acessorios.vercel.app/api/products/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name_product: nameProduct,
+                    price: priceProduct,
+                    photoURL: JSON.stringify(IMAGES),
+                    desconto: descontoProduct,
+                    disponibilidade: avaliable === 'true' ? true : false,
+                    tamanhos: JSON.stringify(arraysizes),
+                    quantidade_disponivel: QTDDISP,
+                    categoria: TYPE,
+                    url: URLPRODUCT,
+                    fornecedor: FORNECEDOR,
+                    tipo: Style,
+                    personalizavel: PERSONALIZAVEL === 'true' ? true : false,
+                    extensor: EXTENSOR === 'true' ? true : false,
+    
+                }),
+            })
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `O produto ${nameProduct} foi criado com sucesso.`,
+                showConfirmButton: false,
+                timer: 2500
+            }).then(() => {
+                window.location.reload()
+            })
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Erro ao criar o produto: ${error}`,
+                footer: '<a href="errors">Por que deste erro?</a>'
+            });
+        }
     }
 
 

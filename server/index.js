@@ -22,24 +22,8 @@ const connection = mysql.createConnection({
     },
 })
 
-app.use(express.json()); // Add this line for JSON body parsing
+app.use(express.json());
 app.use(cors());
-
-/*
-app.get('/api/createproduto', (req, res) => {
-    connection.query(`
-        insert into produtos values
-        (default, 'Anel Trançado', '35', '0', False, '["15"]', '0', 'PRATA', 'anel-trançado', 'Cypratas', 'Aneis', False, '["https://cloud.appwrite.io/v1/storage/buckets/651df9c4741bb296da03/files/652413808ffa3f53b313/view?project=651c17501139519bc5a2", "https://cloud.appwrite.io/v1/storage/buckets/651df9c4741bb296da03/files/65241380ce935cbec1e9/view?project=651c17501139519bc5a2", "https://cloud.appwrite.io/v1/storage/buckets/651df9c4741bb296da03/files/65241382209bedcb8b10/view?project=651c17501139519bc5a2"]', False)
-    `, (err, res) => {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            console.log("SUCESSO")
-        }
-    })
-})
-*/
 
 app.get(`/api/admins`, (req, res) => {
     connection.query('SELECT * FROM administradores', (err, result) => {
@@ -203,7 +187,7 @@ app.post(`/api/products/add`, (req, res) => {
 
 app.post(`/api/products/edit`, (req, res) => {
     const item = req.body
-    connection.query('update `products` set name_product = ?, price = ?, desconto = ?, disponibilidade = ?, quantidade_disponivel = ?, categoria = ?, url = ?, fornecedor = ?, tipo = ?, personalizavel = ?, extensor = ? where id = ?', [item.name_product, item.price, item.desconto, item.disponibilidade, item.quantidade_disponivel, item.categoria, item.url, item.fornecedor, item.tipo, item.personalizavel, item.extensor], (err, result) => {
+    connection.query('update `produtos` set name_product = ?, price = ?, desconto = ?, disponibilidade = ?, categoria = ?, url = ?, quantidade_disponivel = ?, extensor = ? where id = ?', [item.name_product, item.price, item.desconto, item.disponibilidade, item.categoria, item.url, item.quantidade_disponivel, item.extensor, item.id], (err, result) => {
         if (err) {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
@@ -215,7 +199,7 @@ app.post(`/api/products/edit`, (req, res) => {
 
 app.post(`/api/products/delete`, (req, res) => {
     const item = req.body
-    connection.query('delete from `products` where id = ?', [item.id], (err, result) => {
+    connection.query('delete from `produtos` where id = ?', [item.id], (err, result) => {
         if (err) {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
