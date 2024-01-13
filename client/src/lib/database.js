@@ -86,4 +86,20 @@ const getPlanilhaDespesas = async () => {
     }
 }
 
-export { GetProduct, getUser, getAllProducts, getMetas, getPlanilhaDespesas};
+const getPlanilhaItens = async () => {
+    try {
+        const response = await fetch(`${url}/api/planilha-itens`);
+        const data = await response.json();
+        // Encontrando o produto pelo URL usando find
+
+        // Verificando se o produto foi encontrado antes de atualizar o estado
+        return data.reverse();
+
+    } catch (err) {
+        console.error(err);
+        // Lançar o erro novamente para que o chamador possa lidar com ele, se necessário
+        throw err;
+    }
+}
+
+export { GetProduct, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens};

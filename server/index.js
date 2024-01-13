@@ -51,10 +51,9 @@ app.get(`/api/admins`, (req, res) => {
     })
 });
 
-//REQUISIÇÃO PLANILHA DESPESA
+//REQUISIÇÃO PLANILHAS
 
 app.get(`/api/planilha-despesas`, (req, res) => {
-    console.log(req)
     connection.query('SELECT * FROM `planilha-despesas`', (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
@@ -63,6 +62,17 @@ app.get(`/api/planilha-despesas`, (req, res) => {
         }
     })
 });
+
+app.get(`/api/planilha-itens`, (req, res) => {
+    connection.query('SELECT * FROM `planilha-itens`', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
 
 //POSTS NA PLANILHA DESPESA
 
@@ -102,6 +112,45 @@ app.post(`/api/planilha-despesas/delete`, (req, res) => {
     });
 });
 
+//POSTS NA PLANILHA ITEMS
+
+app.post(`/api/planilha-itens/add`, (req, res) => {
+    const item = req.body
+    connection.query('INSERT INTO `planilha-itens` (id, custos, detalhe, codigo, nameofitem, preco_compra, precorevenda, quantcompra, lucroporitem) VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?)', [item.custos, item.detalhe, item.codigo, item.nameofitem, item.preco_compra, item.precorevenda, item.quantcompra, item.lucroporitem], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Item adicionado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/planilha-itens/edit`, (req, res) => {
+    const item = req.body
+    connection.query('update `planilha-itens` set custos = ?, detalhe = ?, codigo = ?, nameofitem = ?, preco_compra = ?, precorevenda = ?, quantcompra = ?, lucroporitem = ? where id = ?', [item.custos, item.detalhe, item.codigo, item.nameofitem, item.preco_compra, item.precorevenda, item.quantcompra, item.lucroporitem, item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Item editado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/planilha-itens/delete`, (req, res) => {
+    const item = req.body
+    connection.query('delete from `planilha-itens` where id = ?', [item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Item deletado com sucesso' });
+        }
+    });
+});
+
+
 //SERVIDOR METAS
 
 app.get(`/api/metas`, (req, res) => {
@@ -125,6 +174,21 @@ app.get(`/api/products`, (req, res) => {
         }
     })
 });
+
+//POSTS DE PRODUTOS
+
+app.post(`/api/products/add`, (req, res) => {
+    const item = req.body
+    connection.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Produto cadastrado com sucesso' });
+        }
+    });
+});
+
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);

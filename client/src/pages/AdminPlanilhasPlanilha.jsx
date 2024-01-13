@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import Swal from "sweetalert2";
 import { ID, Query } from "appwrite";
-import { getPlanilhaDespesas, getUser } from "../lib/database";
+import { getPlanilhaDespesas, getPlanilhaItens, getUser } from "../lib/database";
 
 export default function PlanilhaPage() {
     const [user, setUser] = useState(null)
@@ -52,10 +52,7 @@ export default function PlanilhaPage() {
         getTotal()
     }, []);
 
-    const collectionId = ''
-
     const { planilha } = useParams();
-    const DBUID = '651ca99af19b7afad3f1';
 
     const [AddItemOpen, setAddItemOpen] = useState(false)
 
@@ -100,25 +97,47 @@ export default function PlanilhaPage() {
             return;
         }
 
-
-        fetch('http://localhost:3001/api/planilha-despesas/delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(item),
-        })
-            .then(() => {
-                loadItens();
+        if (planilha == 'planilha-despesas') {
+            fetch('http://localhost:3001/api/planilha-despesas/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(item),
             })
-            .catch(() => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'O item não possui um ID válido para exclusão! Contate um desenvolvedor.',
-                    footer: '<a href="errors">Por que deste erro?</a>'
+                .then(() => {
+                    loadItens();
                 })
-            });
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'O item não possui um ID válido para exclusão! Contate um desenvolvedor.',
+                        footer: '<a href="errors">Por que deste erro?</a>'
+                    })
+                });
+        }
+        else if (planilha == 'planilha-itens') {
+            fetch('http://localhost:3001/api/planilha-itens/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(item),
+            })
+                .then(() => {
+                    loadItens();
+                })
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'O item não possui um ID válido para exclusão! Contate um desenvolvedor.',
+                        footer: '<a href="errors">Por que deste erro?</a>'
+                    })
+                });
+        }
+
     };
 
     const handleSave = () => {
@@ -139,17 +158,13 @@ export default function PlanilhaPage() {
         if (itemId) {
             // Atualize o item no Appwrite
             if (planilha == "planilha-itens") {
-                db
-                    .updateDocument(DBUID, collectionId, itemId, {
-                        codigo: currentItem.codigo,
-                        nameofitem: currentItem.nameofitem,
-                        detalhe: currentItem.detalhe,
-                        preco_compra: currentItem.preco_compra,
-                        custos: currentItem.custos,
-                        precorevenda: currentItem.precorevenda,
-                        quantcompra: currentItem.quantcompra,
-                        lucroporitem: currentItem.lucroporitem,
-                    })
+                fetch('http://localhost:3001/api/planilha-itens/edit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(currentItem),
+                })
                     .then(() => {
                         loadItens();
                         setCurrentItem({
@@ -206,8 +221,13 @@ export default function PlanilhaPage() {
         } else {
             // Crie um novo item no Appwrite sem especificar o ID
             if (planilha == "planilha-itens") {
-                db
-                    .createDocument(DBUID, collectionId, ID.unique(), { ...currentItem })
+                fetch('http://localhost:3001/api/planilha-itens/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(currentItem),
+                })
                     .then(() => {
                         Swal.fire("Item criado com sucesso!");
                         loadItens();
@@ -268,6 +288,10 @@ export default function PlanilhaPage() {
             const Items = await getPlanilhaDespesas();
             setItems(Items)
         }
+        else if (planilha == 'planilha-itens') {
+            const Items = await getPlanilhaItens();
+            setItems(Items)
+        }
     };
 
     if (planilha == 'planilha-despesas') {
@@ -292,7 +316,7 @@ export default function PlanilhaPage() {
                             <div class="newItem">
                                 <div class="headeritem">
                                     <div class="side1item">
-                                    <h1>{itemId ? 'Editando' : 'Adicionar'} um Item</h1>
+                                        <h1>{itemId ? 'Editando' : 'Adicionar'} um Item</h1>
                                         <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
                                     </div>
                                     <div>
