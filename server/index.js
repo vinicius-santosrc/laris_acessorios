@@ -62,7 +62,7 @@ app.get(`/api/planilha-despesas`, (req, res) => {
     })
 });
 
-app.post(`/api/add/planilha-despesas`, (req, res) => {
+app.post(`/api/planilha-despesas`, (req, res) => {
     const item = req.body;
     connection.query('INSERT INTO `planilha-despesas` (descricao, valor, tipo) VALUES (?, ?, ?)', [item.descricao, item.valor, item.tipo], (err, result) => {
         if (err) {
