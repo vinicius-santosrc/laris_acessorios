@@ -3,6 +3,7 @@ import HeaderAdminPage from "./HeaderAdminPage"
 import db from "../../lib/appwrite"
 import { Databases, Query } from "appwrite"
 import { Link } from "react-router-dom"
+import { getAllProducts } from "../../lib/database"
 
 
 export default function ContentDashboard() {
@@ -16,13 +17,13 @@ export default function ContentDashboard() {
     const [metaAnual, setMetaAnual] = useState(0)
 
     const [PlanejamentoDiario, setPlanejamentoDiario] = useState([])
-
     useEffect(() => {
+
         let entradas = 0; // Inicialize as variáveis aqui
         let saidas = 0;
         const collectionId = "6526ef810e37b1d693c1";
 
-        getPlanejamentoDiario()
+        //getPlanejamentoDiario()
 
         db.getDocument(
             '651ca99af19b7afad3f1',
@@ -58,41 +59,39 @@ export default function ContentDashboard() {
 
     }, []);
 
+    async function setProducts() {
+        const AllProducts = await getAllProducts();
 
+        setProdutos(AllProducts.map((response) => {
 
-    db.listDocuments(
-        DBUID,
-        "651ca9adf3de7aad17d9",
-        [
-            Query.limit(7),
-            Query.orderDesc("$createdAt")
-        ]
-    )
-        .then((r) => {
-            setProdutos(r.documents.map((response) => {
-                return (
-                    <div className="product-content">
-                        <a target="_blank" href={"admin/products/" + response.$id}>
+            const PHOTOURL = JSON.parse(response.photoURL)
 
-                            <div className="product-content-show-rightside">
-                                <div className="product-content-show-rightside-l">
-                                    <img src={(response.PHOTOURL).length > 0 ? response.PHOTOURL[0] : response.PHOTOURL} />
-                                    <div>
-                                        <h2>{response.NAME_PRODUCT}</h2>
-                                        <p>{response.TYPE}</p>
-                                    </div>
+            return (
+                <div className="product-content">
+                    <a target="_blank" href={"admin/products/" + response.id}>
 
+                        <div className="product-content-show-rightside">
+                            <div className="product-content-show-rightside-l">
+                                <img src={(PHOTOURL).length > 0 ? PHOTOURL[0] : PHOTOURL} />
+                                <div>
+                                    <h2>{response.name_product}</h2>
+                                    <p>{response.tipo}</p>
                                 </div>
 
-                                <div className="product-content-show-rightside-r">
-                                    <button>VISUALIZAR</button>
-                                </div>
                             </div>
-                        </a>
-                    </div>
-                )
-            }))
-        })
+
+                            <div className="product-content-show-rightside-r">
+                                <button>VISUALIZAR</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            )
+        }))
+    }
+
+    setProducts()
+
 
     function getPlanejamentoDiario() {
 
@@ -123,21 +122,21 @@ export default function ContentDashboard() {
                     setPlanejamentoDiario(date.documents.map((dt) => {
                         return (
                             <div className="BoxPlanningDay">
-                                
+
                                 {dt.content_card != "" ?
-                                 <div className="content-card-day">{dt.content_card.map((r) => {
-                                    return (
-                                        <div className="listContentDt"><h4><span>{r}</span></h4></div>
-                                    )
-                                })}
-                                </div>
-                                :
-                                <h3 className="noPlanToday">Nenhum planejamento definido para hoje.</h3>}
-                               
+                                    <div className="content-card-day">{dt.content_card.map((r) => {
+                                        return (
+                                            <div className="listContentDt"><h4><span>{r}</span></h4></div>
+                                        )
+                                    })}
+                                    </div>
+                                    :
+                                    <h3 className="noPlanToday">Nenhum planejamento definido para hoje.</h3>}
+
                             </div>
                         )
                     }))
-                    
+
                 })
 
         }

@@ -3,6 +3,7 @@ import ContentDashboard from "../components/AdminPage/ContentDashboard";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import Loading from "../components/AdminPage/Loading";
+import { getUser } from "../lib/database";
 
 export default function AdminPage() {
     const [user, setUser] = useState(null)
@@ -10,22 +11,15 @@ export default function AdminPage() {
     const [userDB, setUserDBAccount] = useState([])
 
 
-    const [pageClosed, setPageClosed] = useState(true)
+    const [pageClosed, setPageClosed] = useState(false)
 
     useEffect(() => {
         getUserData()
-            .then((account) => {
+            .then(async (account) => {
                 setUser(account)
                 userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
+                const user = await getUser(account.email)
+                setUserDBAccount(user)
                 if (!account) {
                     window.location.href = window.location.origin + "/admin/login"
                 }
