@@ -159,6 +159,48 @@ app.get(`/api/planejamentos`, (req, res) => {
     })
 });
 
+//POSTS PLANEJAMENTOS
+
+app.post(`/api/planejamentos/add`, (req, res) => {
+    const item = req.body
+    connection.query('insert into planejamentos values (default, "[]", ?)', [item.name_card], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Produto cadastrado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/planejamentos/update`, (req, res) => {
+    const item = req.body;
+    const contentCardValue = JSON.stringify(item.list);  // Convert array to JSON string
+
+    connection.query("UPDATE planejamentos SET content_card = ? WHERE id = ?", [contentCardValue, item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Update no Planejamento' });
+        }
+    });
+});
+
+
+app.post(`/api/planejamentos/delete`, (req, res) => {
+    const item = req.body
+    connection.query('delete from planejamentos where id = ?', [item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Produto cadastrado com sucesso' });
+        }
+    });
+});
+
+
 //REQUISIÇÃO DE PRODUTOS
 
 app.get(`/api/products`, (req, res) => {

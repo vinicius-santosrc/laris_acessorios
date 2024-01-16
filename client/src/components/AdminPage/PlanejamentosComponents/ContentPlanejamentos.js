@@ -13,10 +13,6 @@ export default function ContentPlanejamentos() {
     const [newItems, setNewItems] = useState(null); // Novo estado para os itens a lista
     const [localNewItems, setLocalNewItems] = useState('');
 
-
-    const LARISDB = "651ca99af19b7afad3f1";
-    const PLANEJAMENTOS_LIST = '653007052c16f10101f5'
-
     useEffect(() => {
         getCards()
     }, [])
@@ -31,24 +27,30 @@ export default function ContentPlanejamentos() {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                db.deleteDocument(
-                    LARISDB,
-                    PLANEJAMENTOS_LIST,
-                    id
-                )
-                    .then((r) => {
-                        getCards()
-                    })
-                    .catch((error) => {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Algo deu errado. Contate um desenvolvedor.',
-
+                try {
+                    fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/delete", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            id: id,
                         })
-                        getCards()
                     })
+                        .then((r) => {
+                            getCards()
+                        })
 
+                }
+                catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo deu errado. Contate um desenvolvedor.',
+
+                    })
+                    getCards()
+                }
             } else if (result.isDenied) {
 
             }
@@ -58,30 +60,30 @@ export default function ContentPlanejamentos() {
 
     function createNewList() {
         if (NameOfNewList) {
-            db.createDocument(
-                LARISDB,
-                PLANEJAMENTOS_LIST,
-                ID.unique(),
-                {
-                    name_card: NameOfNewList
-                }
-            )
-                .then((r) => {
-                    getCards();
-                    setNameOfNewList(null);
-
-
-
+            try {
+                // Faça algo com imageUrls, se necessário
+                fetch('https://api-laris-acessorios.vercel.app/api/planejamentos/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name_card: NameOfNewList
+                    }),
                 })
-                .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo deu errado. Contate um desenvolvedor.',
 
+                    .then(() => {
+                        getCards();
+                        setNameOfNewList(null);
                     })
-                })
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo deu errado. Contate um desenvolvedor.',
 
+                })
+            }
         }
         else (
             Swal.fire({
@@ -104,88 +106,100 @@ export default function ContentPlanejamentos() {
 
 
 
-    async function addListDB(id) {
-        const document = await db.getDocument(LARISDB, PLANEJAMENTOS_LIST, id);
+    async function addListDB(id, content_card) {
 
-        const list = [...document.content_card, newItems]
-
-        console.log(list, newItems)
+        const itensantigos = JSON.parse(content_card)
 
         if (!newItems) {
             return
         }
 
-        if (document.content_card != []) {
-            db.updateDocument(
-                LARISDB,
-                PLANEJAMENTOS_LIST,
-                id,
-                {
-                    content_card: list
-                }
-            )
-                .then((r) => {
-                    getCards()
+        if (content_card != []) {
+            try {
+                const list = [...itensantigos]
+                list.push(newItems)
+                fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/update", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        list: list
+                    }),
 
                 })
-                .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo deu errado. Contate um desenvolvedor.',
-                        footer: `<a href="">ERRO: ${error}</a>`
+                    .then((r) => {
+                        getCards()
                     })
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo deu errado. Contate um desenvolvedor.',
+                    footer: `<a href="">ERRO: ${error}</a>`
                 })
+            }
         }
         else {
-            db.updateDocument(
-                LARISDB,
-                PLANEJAMENTOS_LIST,
-                id,
-                {
-                    content_card: list
-                }
-            )
-                .then((r) => {
-                    getCards()
-
+            try {
+                const list = []
+                list.push(newItems.toString())
+                fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/update", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        list: list
+                    }),
                 })
-                .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo deu errado. Contate um desenvolvedor.',
-                        footer: `<a href="">ERRO: ${error}</a>`
+                    .then((r) => {
+                        getCards()
                     })
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo deu errado. Contate um desenvolvedor.',
+                    footer: `<a href="">ERRO: ${error}</a>`
                 })
-
+            }
         }
-
-
     }
 
-    async function removeAtt(a, b) {
-        const document = await db.getDocument(LARISDB, PLANEJAMENTOS_LIST, b);
+    async function removeAtt(a, id, content_card) {
 
-        const contentCardArray = document.content_card;
+        const contentCardArray = JSON.parse(content_card);
 
         if (a >= 0 && a < contentCardArray.length) {
             // Remova o item da matriz
             contentCardArray.splice(a, 1);
 
             // Atualize o documento no banco de dados com a nova matriz 'content_card'
-            await db.updateDocument(LARISDB, PLANEJAMENTOS_LIST, b, {
-                content_card: contentCardArray
-            })
-                .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo deu errado. Contate um desenvolvedor.',
-                        footer: `<a href="">ERRO: ${error}</a>`
-                    })
+            try {
+                fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/update", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        list: contentCardArray
+                    }),
                 })
-
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo deu errado. Contate um desenvolvedor.',
+                    footer: `<a href="">ERRO: ${error}</a>`
+                })
+            }
             // Atualize o estado ContentCards (se necessário)
             getCards();
         }
@@ -195,11 +209,11 @@ export default function ContentPlanejamentos() {
     }
 
     async function getCards() {
-        try{
+        try {
             const response = await getPlanejamentos()
             setContentCards(response)
         }
-        catch(error) {
+        catch (error) {
             console.log(error)
         }
     }
@@ -226,14 +240,13 @@ export default function ContentPlanejamentos() {
                                             {r}
                                         </div>
                                         <button onClick={() => {
-                                            removeAtt(i, cards.id)
+                                            removeAtt(i, cards.id, cards.content_card)
                                         }} id={i} key={i}><i className="fa-solid fa-minus"></i></button>
                                     </div>
                                 )
                             })}
                         </div>
                         <div className="bottom_create">
-
                             <div className="createshowcreate">
                                 <input
                                     type="text"
@@ -242,12 +255,10 @@ export default function ContentPlanejamentos() {
                                     onChange={(e) =>
                                         setNewItems(e.target.value)
                                     } // Atualize o estado conforme o usuário digita
-
-
                                 />
                                 <div className="contentcreatebutton">
                                     <button onClick={() => {
-                                        addListDB(cards.$id)
+                                        addListDB(cards.id, cards.content_card)
                                     }}>Adicionar cartão</button>
                                     <button id="closecreatecardbtn"><i className="fa-solid fa-xmark"></i></button>
                                 </div>
