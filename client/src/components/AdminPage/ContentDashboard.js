@@ -11,7 +11,6 @@ export default function ContentDashboard() {
     const [entradasWrap, setEntradas] = useState(0)
     const [saidasWrap, setSaidas] = useState(0)
     const [Produtos, setProdutos] = useState([])
-    const DBUID = '651ca99af19b7afad3f1';
 
     const [metaMensal, setMetaMensal] = useState(0)
     const [metaAnual, setMetaAnual] = useState(0)
@@ -92,7 +91,6 @@ export default function ContentDashboard() {
             "QUINTA",
             "SEXTA",
             "SÁBADO",
-
         ]
 
         const date = new Date()
