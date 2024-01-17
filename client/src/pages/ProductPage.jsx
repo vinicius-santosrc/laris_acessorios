@@ -33,7 +33,7 @@ import Swal from "sweetalert2"
 import { SacolaDeCompras, carregarSacolaDoLocalStorage } from "../components/ProductsPage/sacola"
 import FooterIndexPage from "../components/FooterIndexPage"
 import CardItems from "../components/ItemCard"
-import { GetProduct } from "../lib/database";
+import { GetProduct, getAllProducts } from "../lib/database";
 
 
 const produtos = JSON.parse(localStorage.getItem('produtos')) || []
@@ -50,7 +50,7 @@ export default function ProductPage() {
     const [PHOTOATUAL, SETPHOTOATUAL] = useState(0) //PARA MUDAR A FOTO PRINCIPAL
 
     useEffect(() => {
-        
+
         async function request_Product() {
             try {
                 const pdtRequest = await GetProduct(PRODUTO_NAME.product);
@@ -59,7 +59,6 @@ export default function ProductPage() {
                 ChangePageTitle(pdtRequest.name_product); // Mudando Title Página
                 setPHOTOURL(JSON.parse(pdtRequest.photoURL));
 
-                console.log(pdtRequest.photoURL)
                 if (pdtRequest.photoURL && pdtRequest.photoURL.length > 0) {
                     setPhotosOfPublic(pdtRequest.photoURL.map((r) => (
                         <img src={r} alt="" key={r} />
@@ -72,7 +71,25 @@ export default function ProductPage() {
             }
         }
 
+        async function getRelatedProducts() {
+            try {
+                const allProducts = await getAllProducts();
+                setProductRelacionados(allProducts.splice(0, 20).map((products) => {
+
+                    return (
+                        <CardItems
+                            data={products}
+                        />
+                    )
+                }))
+            }
+            catch (error) {
+                console.log('Erro ao pegar produtos relacionados: ', error)
+            }
+        }
+
         request_Product();
+        getRelatedProducts();
     }, [PRODUTO_NAME]); // Adicione PRODUTO_NAME como dependência para reexecutar o efeito quando ele mudar
 
     async function ChangePageTitle(name) {
@@ -417,12 +434,11 @@ export default function ProductPage() {
                         </div>
                         {Product != '' ?
                             <div className='itensdesc'>
-                                <p id='caminho'><a href={window.location.origin}> LARI'S</a> / <a href={window.location.origin + "/" + (Product.categoria).toLowerCase()}>{Product.categoria}</a> / <a href="">{Product.name_product ? (Product.name_product).toUpperCase() : ''}</a></p>
+                                <p id='caminho'>LARI'S ACESSÓRIOS</p>
                                 <h1>{Product.name_product}</h1>
                                 <p className="bottom-code">Código: {Product.id}</p>
                                 <div className="avaliacoes">
                                     <img src="../static/media/product-images/Nenhuma estrela.png" alt="" />
-                                    <p>Nenhum vendido</p>
                                 </div>
                                 {Product.desconto > 0 ?
                                     <h2>Valor: <s style={{ color: 'darkgray' }}>R${Product.price.toFixed(2)}</s> R${(Product.price - Product.desconto).toFixed(2)}</h2> :
@@ -468,20 +484,6 @@ export default function ProductPage() {
                         }
                         <div>
                         </div>
-                    </div>
-                </div>
-                <div className='maisprodutos'>
-                    <h1>Mais Produtos</h1>
-
-                    <div className='produtoslista'>
-                        <Swiper
-                            modules={[Navigation, Pagination, Scrollbar, A11y]}
-                            slidesPerView={2}
-                            pagination={{ clickable: true }}
-
-                        >
-                            {ProdutosRelacionados}
-                        </Swiper>
                     </div>
                 </div>
 

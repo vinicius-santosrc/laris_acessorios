@@ -18,7 +18,7 @@ header {
 
     z-index: 100;
     display: flex;
-    
+
     margin: 0 auto;
 }
 
@@ -49,7 +49,7 @@ header {
 .menu-pc-flex {
     width: 100%;
     display: block;
-    
+
 }
 
 
@@ -89,7 +89,6 @@ header .icons {
     display: flex;
     align-items: center;
     gap: 10px
-    
 }
 
 .title-index {
@@ -105,7 +104,7 @@ header .icons {
 .title-index h1 {
     font-weight: 600;
     color: #222222;
-    
+
 }
 
 .bottom-code {
@@ -361,11 +360,11 @@ a {
 }
 
 .item {
-    width: 65vw;
+    width: 1500px;
     background: rgb(255, 255, 255);
     box-shadow: 0vw 0vw 0.2vw #ef599f00;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 10px;
     justify-content: space-between;
 }
 
@@ -417,26 +416,27 @@ a {
 }
 
 .maisprodutos {
-    width: 65vw;
+    width: 1500px;
     background: transparent;
     margin: auto;
     margin-top: 3vh;
     margin-bottom: 3vh;
-    padding: 2vw;
+    padding: 0px;
     border-radius: 1vw;
 }
 
 .produtoslista {
     display: flex;
-    padding-top: 1vw;
-    padding-bottom: 1vw;
-    overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow-x: scroll;
 }
 
 .informaçõesproduto {
     margin: auto;
-    padding-left: 19vw;
-    padding-right: 19vw;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 1500px;
     text-align: center;
     background: transparent;
     margin-bottom: 5vh;
@@ -464,7 +464,7 @@ p.new {
 }
 
 .linetype li {
-    font-size: 1vw;
+    font-size: 17px;
 }
 
 .linetype #first {
@@ -480,7 +480,7 @@ p.new {
 }
 
 .infoprod h2 {
-    font-size: 1.7vw;
+    font-size: 28px;
     padding: 0vh;
     margin-bottom: 1vh;
     text-align: left;
@@ -488,7 +488,7 @@ p.new {
 }
 
 .maisprodutos h1:nth-child(1) {
-    font-size: 1.5vw;
+    font-size: 28px;
     padding-top: 0vh;
     margin-bottom: 0vh;
     width: 100%;
@@ -506,8 +506,8 @@ p.new {
 
 
 .imgitem img {
-    width: 30vw;
-    height: 60vh;
+    width: 750px;
+    height: 600px;
     object-fit: cover;
     background: #d4d4d4;
 }
@@ -527,8 +527,8 @@ p.new {
 
 
 .imgitem .opcoesdeimagem img {
-    width: 4vw;
-    height: 4vw;
+    width: 80px;
+    height: 80px;
     object-fit: center;
     height: auto;
     margin-right: 1vw;
@@ -545,13 +545,14 @@ p.new {
 
 .backitem {
     display: flex;
+    gap: 5px;
     margin: auto;
     justify-content: space-between;
 }
 
 .sessoes-top {
     margin: auto;
-    width: 70%;
+    width: 1550px;
     justify-content: space-between;
     margin-top: 2vh;
     padding-top: 0.5vw;
@@ -564,8 +565,8 @@ p.new {
     margin-top: 1vh;
     padding-top: 2vh;
     border-top: 0.1vw solid rgb(231, 231, 231);
-    width: 65%;
-    margin-left: 17.5vw;
+    width: 1500px;
+    margin: auto;
 }
 
 .infocompra img {
@@ -578,7 +579,7 @@ p.new {
     display: flex;
     justify-content: center;
     margin: auto;
-    width: 20vw;
+    width: 100%;
     align-items: center;
 }
 
@@ -588,12 +589,12 @@ p.new {
 }
 
 .etapa p {
-    font-size: 1vw;
+    font-size: 17px;
     text-transform: uppercase;
 }
 
 .itensdesc h1 {
-    font-size: 1.5vw;
+    font-size: 32px;
     color: rgb(0, 0, 0);
 }
 
@@ -609,14 +610,14 @@ p.new {
 }
 
 #caminho {
-    font-size: 0.8vw;
+    font-size: 13px;
 }
 
 #entregue {
     margin: auto;
     margin-top: 2vh;
-    width: 20vw;
-    font-size: 0.9vw;
+    width: 100%;
+    font-size: 17px;
     color: rgb(70, 70, 70);
     text-align: center;
 }
@@ -636,15 +637,16 @@ p.new {
     margin-top: 0vh;
     margin-bottom: auto;
     text-align: center;
+    width: 35%;
 
 }
 
 .itensdesc h2 {
-    font-size: 1vw;
+    font-size: 20px;
     color: rgb(0, 0, 0);
     border-left: 0.2vw solid #ef599f00;
     padding-left: 0.5vw;
-    margin-bottom: 2vh;
+    margin-bottom: 10px;
     font-weight: 400;
     text-align: center;
 }
@@ -822,6 +824,7 @@ li.mdl-list__item a {
     width: 100%;
     font-size: 0.9rem;
 }
+
 .showitemprice h5 {
     font-weight: 400
 }
@@ -858,7 +861,7 @@ nav li i {
 }
 
 select#quant {
-    font-size: 0.8vw;
+    font-size: 14px;
     outline: none;
 }
 
@@ -867,7 +870,7 @@ select#quant {
     color: rgb(0, 0, 0);
     border-left: 0.2vw solid #ef599f00;
     padding-left: 0.5vw;
-    margin-bottom: 2vh;
+    margin-bottom: 10px;
 }
 
 .personalizado-card {
@@ -878,7 +881,7 @@ select#tamanho, select#extensor {
     margin-bottom: 2vh;
     color: black;
     outline: none;
-    font-size: 0.7vw;
+    font-size: 14px;
     border: 0.1vw solid black;
 
 }
@@ -905,12 +908,12 @@ select#cor {
     border-radius: 0vw;
     color: white;
     cursor: pointer;
-    font-size: 0.9vw;
+    font-size: 17px;
     display: none;
 }
 
 label#cart {
-    padding: 0.6vw;
+    padding: 15px 0px;
     height: auto;
     background: #EF59A0;
     border: 0.1vw solid #EF59A0;
@@ -918,18 +921,18 @@ label#cart {
     color: white;
     display: block;
     cursor: pointer;
-    font-size: 0.9vw;
-    width: 20vw;
+    font-size: 17px;
+    width: 100%;
     margin: auto;
 }
 
 .itensdesc label.indisponivel {
-    padding: 0.6vw;
+    padding: 10px 0px;
     height: auto;
     border-radius: 0.2vw;
     color: white;
     cursor: pointer;
-    font-size: 0.9vw;
+    font-size: 17px;
     background: black;
     display: block;
 
@@ -2045,7 +2048,7 @@ label#cart {
     width: 100%;
     height: 100%;
     display: flex;
-    
+
 }
 
 .pc-slider li {
@@ -2067,7 +2070,7 @@ label#cart {
 
 .compartilhar {
     margin-top: 2vh;
-    font-size: 0.9vw;
+    font-size: 17px;
     text-align: center;
 }
 
@@ -2521,7 +2524,7 @@ img#colar-- {
     display: flex;
     align-items: center;
     gap: 10px;
-    
+
 }
 
 .index-select-type-admin button {
@@ -2613,13 +2616,14 @@ img#colar-- {
     background: #d4d4d4;
     transition: 300ms;
     transform: scale(0.99);
-    
+
 }
+
 .Product-Jewel-Title {
     padding: 1px 0px
 }
 
-.Product-Jewel-Title-Content  span {
+.Product-Jewel-Title-Content span {
     font-weight: 400;
     font-size: 15px;
 }
@@ -2661,7 +2665,6 @@ img#colar-- {
 
 .item-prata img:hover {
     transform: scale(1.02)
-    
 }
 
 .item-prata img {
@@ -2693,7 +2696,7 @@ img#colar-- {
 .estrelas img {
     width: 120px;
     margin: 0;
-    
+
     object-fit: cover;
     height: 30px;
 }
@@ -2792,19 +2795,21 @@ img#colar-- {
 
 .comentarios {
     display: block;
-    padding-left: 29vw;
-    padding-right: 29vw;
+    padding-left: 0px;
+    width: 1500px;
+    padding-right: 0px;
+    margin: auto
 }
 
 .comentarios h1 {
-    font-size: 2vw;
+    font-size: 28px;
     font-weight: 400;
 }
 
 .comentarios-sides {
     display: flex;
-    padding-left: 5vw;
-    padding-right: 5vw;
+    padding-left: 200px;
+    padding-right: 200px;
     justify-content: space-between;
     padding-top: 4vh;
     padding-bottom: 2vh;
@@ -2812,7 +2817,7 @@ img#colar-- {
 }
 
 .comentarios1 p {
-    font-size: 0.8vw;
+    font-size: 17px;
 }
 
 .comentarios2 h2 {
@@ -2879,7 +2884,7 @@ img#colar-- {
     margin: auto;
     padding: 30px 20px;
     max-width: 1500px;
-    
+
 }
 
 .right-side-categorias-show {
@@ -2927,7 +2932,7 @@ img#colar-- {
     margin: auto;
     border-bottom: 1.5px solid #EF59A0;
     width: 80%;
-    
+
 }
 
 .index-select-type a {
@@ -2935,7 +2940,7 @@ img#colar-- {
     height: 210px;
     border: 1px solid lightgray;
     background: #F6F6F6;
-    
+
 }
 
 .titulo-produtos-laris {
@@ -2943,10 +2948,10 @@ img#colar-- {
 }
 
 .obs-coments-sem a {
-    font-size: 0.8vw;
-    margin-bottom: 5vh;
+    font-size: 17px;
+    margin: 20px auto;
     background-color: #EF59A0;
-    padding: 0.5vw 1vw 0.5vw 1vw;
+    padding: 10px 15px;
     color: white;
 
 }
@@ -3062,7 +3067,7 @@ img#colar-- {
     margin: auto;
     padding: 10px 20px;
     max-width: 1500px;
-    
+
 }
 
 .ordenar label {
@@ -3106,7 +3111,7 @@ img#colar-- {
 }
 
 .avaliacoes img {
-    width: 7vw;
+    width: 100px;
 }
 
 .avaliacoes {
@@ -3114,11 +3119,13 @@ img#colar-- {
     justify-content: center;
     text-align: center;
     font-size: 0.6vw;
+    padding: 10px 0px;
     margin: auto;
 }
 
 .avaliacoes p {
     margin: auto;
+    font-size: 13px;
     margin-left: 0;
     margin-right: 0;
 }
@@ -3427,9 +3434,8 @@ img#colar-- {
 
 h2.tamanhofrase {
     border-top: 0.1vw solid;
-    padding-top: 1vh;
+    padding: 10px 0px;
     text-align: left;
-    margin-bottom: 1vh;
     padding-left: 0;
 }
 
@@ -3441,30 +3447,29 @@ h2.extensorfrase {
 }
 
 .tamanhocenterleft {
-    width: 20vw;
+    width: 100%;
     margin: auto;
 }
 
 .envio {
-    width: 20vw;
+    width: 100%;
     margin: auto;
     text-align: left;
 }
 
 .tamanhocenterleft a {
     text-align: left;
-    margin-bottom: 3vh;
     display: block;
     text-align: left;
-    font-size: 0.8vw;
+    font-size: 17px;
     background-color: rgb(51, 51, 51);
     text-align: center;
-    padding-top: 1.5vh;
-    padding-bottom: 1.5vh;
+    padding: 15px 0px;
     color: rgb(49, 49, 49);
     color: white;
     text-transform: uppercase;
     text-decoration: none;
+    margin-bottom: 10px;
 }
 
 .flagpromo {
@@ -4473,7 +4478,7 @@ h2.extensorfrase {
     border: 1px solid #EF59A0;
     margin: 5px 0px;
     border-radius: 10px;
-    
+
 }
 
 .content-card-day {
@@ -4508,7 +4513,7 @@ h2.extensorfrase {
     width: 100%;
     border: 1px solid lightgray;
     border-radius: 4px;
-    
+
 }
 
 .toppage-products {
@@ -4530,7 +4535,7 @@ h2.extensorfrase {
     border: none;
     cursor: pointer;
     outline: none;
-    
+
 }
 
 .top-top-product-header p {
@@ -4618,9 +4623,7 @@ h2.extensorfrase {
     overflow-y: scroll;
 }
 
-.products-add-principal {
-
-}
+.products-add-principal {}
 
 .ipts-wrapper {
     width: 100%;
@@ -4909,7 +4912,7 @@ h2.extensorfrase {
     font-weight: 600
 }
 
-.product-content a{
+.product-content a {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -4920,7 +4923,7 @@ h2.extensorfrase {
 
 .product-content {
     margin: 5px 0px;
-    
+
 }
 
 .product-content-show-rightside-l {
@@ -5020,7 +5023,7 @@ h2.extensorfrase {
     bottom: 0;
     position: relative;
     margin: auto;
-    
+
 }
 
 .metas-secundarias {
@@ -5041,7 +5044,7 @@ h2.extensorfrase {
     overflow-y: auto;
 }
 
-.editMeta input{
+.editMeta input {
     font-size: 1rem;
     background: none;
     border: none;
@@ -5086,7 +5089,7 @@ h2.extensorfrase {
     border: none;
     border-left: 2px solid #EF59A0;
     padding: 10px;
-    
+
 }
 
 .title-create-metas {
@@ -5123,7 +5126,7 @@ h2.extensorfrase {
     border-radius: 10px 10px 0px 0px;
 }
 
-.ImageContentPage{
+.ImageContentPage {
     width: 100%;
     text-align: center;
     padding: 10px 0px
@@ -5138,7 +5141,7 @@ h2.extensorfrase {
     object-fit: cover;
     border-radius: 3px;
     background: #d4d4d4;
-    
+
 }
 
 #finalizado-id {
@@ -5153,8 +5156,8 @@ h2.extensorfrase {
 
 .Content-Orders-Page {
     width: 80%;
-    
-    
+
+
 }
 
 .opções-itens {
@@ -5202,7 +5205,7 @@ h2.extensorfrase {
     background: white !important;
 }
 
-.Card-Middle-Top-Right h2{
+.Card-Middle-Top-Right h2 {
     color: black;
 }
 
@@ -5215,7 +5218,7 @@ h2.extensorfrase {
 
 
 
-.product-content-show-rightside button{
+.product-content-show-rightside button {
     background: #EF59A0;
     color: white;
     border-radius: 10px;
@@ -5324,7 +5327,7 @@ h2.extensorfrase {
         font-size: 0.9rem;
     }
 
-    .product-content a{
+    .product-content a {
         display: flex;
         gap: 10px;
         align-items: center;
@@ -5365,7 +5368,7 @@ h2.extensorfrase {
         height: 100%;
         overflow-y: auto;
         padding: 20px !important;
-        
+
     }
 
     .Card-Middle-Top h2 {
@@ -5376,9 +5379,9 @@ h2.extensorfrase {
         background: white;
         margin: auto;
         margin-top: 50px;
-    
+
     }
-    
+
     .flexBox-Manutencao {
         display: flex;
         align-items: center;
@@ -5386,11 +5389,11 @@ h2.extensorfrase {
         margin: auto;
         width: 1000px;
     }
-    
+
     .ContentManutencaoText {
         font-size: 25px;
     }
-    
+
     .ContentManutencaoText button {
         background: #EF59A0;
         color: white;
@@ -5402,22 +5405,22 @@ h2.extensorfrase {
     }
 
 
-    
+
     .ContentManutencaoText button:hover {
         box-shadow: none;
     }
-    
+
     #boldtext {
         font-weight: 700;
         font-size: 35px
     }
-    
+
     .ManutencaoPage {
         width: 100vw;
         text-align: center;
         margin: auto;
     }
-    
+
     .ManutencaoContent {
         text-align: center;
         margin: auto;
@@ -5432,13 +5435,14 @@ h2.extensorfrase {
     }
 
     .Card-Low-Top-Inner p {
-        font-size: 0.9rem  !important;
+        font-size: 0.9rem !important;
     }
 
     .Card-Low-Top-Inner {
         height: auto;
         width: 32%;
     }
+
     .Cards-Low-Top {
         width: 100%;
         display: flex;
@@ -5457,7 +5461,7 @@ h2.extensorfrase {
 
     .Cards-Middle-Top {
         width: 100%;
-        
+
     }
 
     .Card-Mid-Top-Inner {
@@ -5469,7 +5473,7 @@ h2.extensorfrase {
     .Card-Large-Hg {
         width: 300px;
     }
-    
+
     .navigation-bar-logo-top img {
         width: 100px;
     }
@@ -5527,7 +5531,7 @@ h2.extensorfrase {
     pointer-events: none;
 }
 
-.right-side-header-show-options img{
+.right-side-header-show-options img {
     width: 50px;
     height: 50px;
     object-fit: cover;
@@ -5560,7 +5564,7 @@ h2.extensorfrase {
     border-radius: 10px;
     width: 270px;
     height: 100px;
-    
+
 }
 
 .Card-CreateNew input {
@@ -5588,7 +5592,7 @@ h2.extensorfrase {
     padding: 5px 0px;
 }
 
-.createshowcreate .contentcreatebutton button{
+.createshowcreate .contentcreatebutton button {
     background: #EF59A0;
     padding: 5px 10px;
     border: none;
@@ -5664,7 +5668,7 @@ h2.extensorfrase {
 
 .contents-card {
     background: white;
-    padding:5px;
+    padding: 5px;
     color: black;
     margin: 5px 0px;
     border-radius: 3px;
@@ -5677,16 +5681,16 @@ h2.extensorfrase {
     align-items: center;
 }
 
-.Card-Wrapper-Top h3{
+.Card-Wrapper-Top h3 {
     font-size: 1rem;
 }
 
 .flexbox-content {
     display: flex;
-    
+
 }
 
-.flexbox-content button{
+.flexbox-content button {
     border: none;
     background: none;
     padding: 0px 5px;
@@ -5699,7 +5703,7 @@ h2.extensorfrase {
     background: transparent;
     font-size: 1rem;
     cursor: pointer;
-    
+
 }
 
 .createCard {
@@ -5708,7 +5712,7 @@ h2.extensorfrase {
     cursor: pointer;
     font-size: 0.9rem;
     padding: 10px 0px;
-    
+
 }
 
 /* TABLETS */
@@ -5720,13 +5724,14 @@ h2.extensorfrase {
         border-bottom: 0.2vw solid transparent;
     }
 
+
     .Card-Mid-Top-Inner {
         font-size: 14px;
         background: #d4d4d4;
         box-shadow: none;
     }
 
-    
+
 
     .rightsidecart p {
         font-size: 2vw;
@@ -5751,24 +5756,22 @@ h2.extensorfrase {
         font-size: 2vw;
         font-weight: 600;
         z-index: 100;
-    
+
     }
 
     header {
-        font-size: 0.8vw;
-        padding: 2vw;
-        padding-right: 5vw;
-        padding-left: 5vw;
-        margin: auto;
+        font-size: 15px;
         justify-content: space-between;
-        position: fixed;
+
         display: block;
-        width: 100%;
-        background: white;
-        border-bottom: none;
+        top: 0;
+        max-width: 1300px;
+        background-color: rgb(255, 255, 255);
 
         z-index: 100;
         display: flex;
+
+        margin: 0 auto;
     }
 
     .logo img {
@@ -5804,7 +5807,7 @@ h2.extensorfrase {
     .estoque-prata-index-pc {
         width: 100%;
         margin: auto;
-        padding-left: 10px ;
+        padding-left: 10px;
         padding-right: 10px;
         margin-top: 1vh;
         margin-bottom: 1vh;
@@ -5915,7 +5918,7 @@ h2.extensorfrase {
         color: white;
         width: 100%;
         margin: auto;
-       
+
         margin-top: 1.5vh;
         font-size: 15px;
     }
@@ -6366,11 +6369,11 @@ h2.extensorfrase {
     }
 
     .item {
-        width: 85vw;
+        width: 1100px;
         background: rgb(255, 255, 255);
         box-shadow: 0vw 0vw 0.2vw #ef599f00;
         margin: auto;
-        margin-top: 5vh;
+        margin-top: 10px;
         justify-content: space-between;
     }
 
@@ -7004,7 +7007,7 @@ h2.extensorfrase {
     .Admin-ContentDashBoard {
         justify-content: center;
         margin: 0 auto;
-   
+
 
         margin-left: 50px;
         margin-right: 40px;
@@ -7124,7 +7127,7 @@ h2.extensorfrase {
     }
 
     .cell-slider img {
-       
+
         width: 90%;
         height: 100%;
         text-align: center;
@@ -7820,6 +7823,7 @@ h2.extensorfrase {
     .itensdesc {
         margin-top: auto;
         margin-bottom: auto;
+        width: 100%;
     }
 
     .swal2-html-container {
@@ -8211,7 +8215,7 @@ h2.extensorfrase {
         border-radius: 100%;
     }
 
-    
+
 
     .imagecard {
         text-align: center;
@@ -8591,6 +8595,8 @@ h2.extensorfrase {
         display: block;
         padding-left: 5vw;
         padding-right: 5vw;
+        width: 100%;
+
     }
 
     .comentarios h1 {
@@ -8891,7 +8897,7 @@ h2.extensorfrase {
     }
 
     .card {
-        
+
         background-color: transparent;
         padding: 20px 5px;
         border-radius: 10px;
@@ -8932,10 +8938,10 @@ h2.extensorfrase {
         width: 170px;
     }
 
-    .Product-Jewel-Image-Content img{
+    .Product-Jewel-Image-Content img {
         height: 170px;
     }
-    
+
 
     .topcard {
         display: flex;
@@ -9885,7 +9891,7 @@ h2.extensorfrase {
         background: #e9e9e9;
         border: 1px solid #e1e1e1;
         text-align: center;
-    
+
     }
 
     .novidade-inicio-cell a {
@@ -9896,7 +9902,7 @@ h2.extensorfrase {
         width: 95%;
         height: 170px;
         object-fit: cover;
-        
+
     }
 
     .novidade-inicio-cell h2 {
@@ -9916,7 +9922,7 @@ h2.extensorfrase {
         margin: auto;
         gap: 10px;
         overflow-x: scroll;
-        padding: 10px 20px; 
+        padding: 10px 20px;
     }
 
     .index-select-type {
@@ -10057,7 +10063,7 @@ h2.extensorfrase {
         color: white;
         width: 100%;
         margin: auto;
- 
+
         margin-top: 1.5vh;
         font-size: 3.5vw;
     }
@@ -11188,7 +11194,7 @@ h2.extensorfrase {
     .Card-Large-Top {
         margin: 0px 0px;
         width: 100%;
-        
+
     }
 
     .Cards-Top {
@@ -11198,6 +11204,7 @@ h2.extensorfrase {
     .bottom-middle-top-card {
         margin: 0px
     }
+
     .editMeta {
         margin: auto;
         width: 98%;
@@ -11208,8 +11215,8 @@ h2.extensorfrase {
         height: auto;
         overflow-y: auto;
     }
-    
-    .editMeta input{
+
+    .editMeta input {
         font-size: 1rem;
         background: none;
         border: none;
@@ -11219,7 +11226,7 @@ h2.extensorfrase {
         border-left: 2px solid #EF59A0;
         width: 100%
     }
-    
+
     .editMeta button {
         padding: 5px 20px;
         background: white;
@@ -11237,20 +11244,20 @@ h2.extensorfrase {
         border-radius: 10px;
         height: 150px
     }
-    
+
     .meta-card a {
         color: black
     }
-    
+
     .meta-principal {
         display: flex;
-    
+
         align-items: center;
         gap: 10px;
         width: 100%;
         overflow-y: auto;
     }
-    
+
     .meta-card-add {
         background: transparent;
         border: 2px dashed black;
@@ -11276,7 +11283,7 @@ h2.extensorfrase {
         margin: auto;
     }
 
-    .meta-principal .meta-card  {
+    .meta-principal .meta-card {
         width: 400px
     }
 
@@ -11301,69 +11308,69 @@ h2.extensorfrase {
         border-bottom: 1px solid lightgray;
         display: none;
     }
-    
+
     .Planejamentos-Page {
         width: 100%;
         margin: auto;
     }
-    
+
     .left-side-header-planejemanetos {
         display: flex;
         align-items: center;
         gap: 10px;
     }
-    
+
     .right-side-header-show-options {
         display: flex;
         align-items: center;
     }
-    
+
     .LogoPlanejamentos {
         display: flex;
         align-items: center;
     }
-    
+
     .LogoPlanejamentos img {
         width: 400px;
         pointer-events: none;
     }
-    
-    .right-side-header-show-options img{
+
+    .right-side-header-show-options img {
         width: 50px;
         height: 50px;
         object-fit: cover;
         border-radius: 100%;
     }
-    
+
     .header-bottom {
         padding: 10px 0px;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    
+
     .header-bottom img {
         width: 50px;
         height: 50px;
         border-radius: 100%;
         object-fit: cover;
     }
-    
+
     .flex-box-wrapper-createnew {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    
+
     .Card-CreateNew {
         padding: 10px;
         background: #F1F2F4;
         border-radius: 10px;
         width: 270px;
         height: 100px;
-        
+
     }
-    
+
     .Card-CreateNew input {
         border: 1px solid #EF59A0;
         color: black;
@@ -11373,7 +11380,7 @@ h2.extensorfrase {
         outline: none;
         border-radius: 5px;
     }
-    
+
     .createshowcreate input {
         width: 100%;
         padding: 5px;
@@ -11381,15 +11388,15 @@ h2.extensorfrase {
         outline: none;
         border: 1px solid rgb(188, 188, 188);
     }
-    
+
     .createshowcreate .contentcreatebutton {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 5px 0px;
     }
-    
-    .createshowcreate .contentcreatebutton button{
+
+    .createshowcreate .contentcreatebutton button {
         background: #EF59A0;
         padding: 5px 10px;
         border: none;
@@ -11397,18 +11404,18 @@ h2.extensorfrase {
         color: white;
         font-size: 0.9rem;
         cursor: pointer;
-    
+
     }
-    
+
     #closecreatecardbtn {
         background: transparent;
         color: black
     }
-    
+
     .Card-CreateNewStart {
         width: 270px;
     }
-    
+
     .Card-CreateNewStart button {
         width: 100%;
         cursor: pointer;
@@ -11419,11 +11426,11 @@ h2.extensorfrase {
         font-size: 0.9rem;
         transition: 300ms;
     }
-    
+
     .Card-CreateNewStart button:hover {
         background: #a8a8a88f;
     }
-    
+
     .Card-CreateNew button {
         color: white;
         background: #EF59A0;
@@ -11432,7 +11439,7 @@ h2.extensorfrase {
         border: none;
         border-radius: 5px;
     }
-    
+
     .Content-Planejamentos-Card-Wrapper {
         display: flex;
         flex-wrap: wrap;
@@ -11442,7 +11449,7 @@ h2.extensorfrase {
         width: 500%;
 
     }
-    
+
     .Planejamentos-Card-Wrapper {
         background: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1152/d505af68c3a2b58f02ffeae1a23cf200/photo-1696643830146-44a8755f1905.jpg");
         height: 115vh;
@@ -11450,12 +11457,12 @@ h2.extensorfrase {
         background-repeat: no-repeat;
         background-size: cover;
     }
-    
+
     #closelist {
         background: transparent;
         color: black;
     }
-    
+
     .Card-Wrapper {
         padding: 10px;
         background: #F1F2F4;
@@ -11463,54 +11470,54 @@ h2.extensorfrase {
         width: 270px;
         height: auto;
     }
-    
+
     .contents-card {
         background: white;
-        padding:5px;
+        padding: 5px;
         color: black;
         margin: 5px 0px;
         border-radius: 3px;
         width: 100%
     }
-    
+
     .Card-Wrapper-Top {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    
-    .Card-Wrapper-Top h3{
+
+    .Card-Wrapper-Top h3 {
         font-size: 1rem;
     }
-    
+
     .flexbox-content {
         display: flex;
-        
+
     }
-    
-    .flexbox-content button{
+
+    .flexbox-content button {
         border: none;
         background: none;
         padding: 0px 5px;
         color: red;
         cursor: pointer;
     }
-    
+
     .Card-Wrapper-Top button {
         border: none;
         background: transparent;
         font-size: 1rem;
         cursor: pointer;
-        
+
     }
-    
+
     .createCard {
         background: transparent;
         border: none;
         cursor: pointer;
         font-size: 0.9rem;
         padding: 10px 0px;
-        
+
     }
 
     .dashboard-cards {
@@ -11536,9 +11543,9 @@ h2.extensorfrase {
         background: white;
         margin: auto;
         margin-top: 50px;
-    
+
     }
-    
+
     .flexBox-Manutencao {
         display: block;
         align-items: center;
@@ -11548,13 +11555,13 @@ h2.extensorfrase {
         padding: 20px 0px;
         position: relative;
     }
-    
+
     .ContentManutencaoImages {
         width: 100%;
         text-align: center;
         margin: auto;
     }
-    
+
     .ContentManutencaoText {
         font-size: 25px;
         position: relative;
@@ -11562,7 +11569,7 @@ h2.extensorfrase {
         text-align: center;
         padding: 10px;
     }
-    
+
     .ContentManutencaoText button {
         background: #EF59A0;
         color: white;
@@ -11572,39 +11579,39 @@ h2.extensorfrase {
         padding: 10px 50px;
         transition: 500ms;
     }
-    
+
     .logolaris {
         position: absolute;
         bottom: 10px;
         right: 10px;
     }
-    
+
     .logolaris img {
         width: 100px
     }
-    
+
     .ContentManutencaoText button:hover {
         box-shadow: none;
     }
-    
+
     #boldtext {
         font-weight: 700;
         font-size: 45px
     }
-    
+
     .ManutencaoPage {
         width: 100vw;
         text-align: center;
         margin: auto;
         position: relative;
     }
-    
+
     .ManutencaoContent {
         text-align: center;
         margin: auto;
         position: relative;
     }
-    
+
     #cellphone {
         position: absolute;
         bottom: -100px;
@@ -11612,7 +11619,7 @@ h2.extensorfrase {
         pointer-events: none;
         display: none
     }
-    
+
     #monitor {
         width: 90%;
         margin: auto;

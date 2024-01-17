@@ -195,7 +195,7 @@ app.post(`/api/planejamentos/delete`, (req, res) => {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
-            res.status(200).json({ message: 'Produto cadastrado com sucesso' });
+            res.status(200).json({ message: 'Item planejamentos deletado com sucesso' });
         }
     });
 });
@@ -234,7 +234,7 @@ app.post(`/api/products/edit`, (req, res) => {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
-            res.status(200).json({ message: 'Item editado com sucesso' });
+            res.status(200).json({ message: 'Produto editado com sucesso' });
         }
     });
 });
@@ -246,7 +246,7 @@ app.post(`/api/products/delete`, (req, res) => {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
-            res.status(200).json({ message: 'Item deletado com sucesso' });
+            res.status(200).json({ message: 'Produto deletado com sucesso' });
         }
     });
 });

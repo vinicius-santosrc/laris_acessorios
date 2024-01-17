@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const url = "https://api-laris-acessorios.vercel.app";
-//const url = "https://api-laris-acessorios.vercel.app"
+//const url = "http://localhost:3001"
 
 const GetProduct = async (URL) => {
 
