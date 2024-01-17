@@ -2877,9 +2877,18 @@ img#colar-- {
     display: flex;
     justify-content: center;
     margin: auto;
-    padding: 50px 20px;
+    padding: 30px 20px;
     max-width: 1500px;
     
+}
+
+.right-side-categorias-show {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: left;
+    overflow-x: scroll;
+    width: 60%
 }
 
 .index-select-type .title-index-type {
@@ -5148,6 +5157,10 @@ h2.extensorfrase {
     
 }
 
+.opções-itens {
+    display: none;
+}
+
 .list-pedidos {
     display: flex;
     flex-wrap: wrap;
@@ -5857,6 +5870,10 @@ h2.extensorfrase {
         color: #EF59A0;
         font-size: 1.5vw;
         margin-top: 1.5vh;
+    }
+
+    .opções-itens {
+        display: block
     }
 
     .novidade-loja-kit {
@@ -9858,7 +9875,7 @@ h2.extensorfrase {
 
     .novidade-inicio-cell {
         display: block;
-        width: 170px;
+        width: 200px;
         height: auto;
         display: flex;
         align-items: center;
@@ -9866,13 +9883,18 @@ h2.extensorfrase {
         padding-top: 0px;
         padding-bottom: 15px;
         background: #e9e9e9;
-        border: 1px solid #e1e1e1
+        border: 1px solid #e1e1e1;
+        text-align: center;
     
     }
 
+    .novidade-inicio-cell a {
+        width: 200px;
+    }
+
     .novidade-inicio-cell img {
-        width: 139px;
-        height: 140px;
+        width: 95%;
+        height: 170px;
         object-fit: cover;
         
     }
@@ -9880,7 +9902,7 @@ h2.extensorfrase {
     .novidade-inicio-cell h2 {
         margin: auto;
         border-bottom: 1.5px solid #EF59A0;
-        width: 80%;
+        width: 100%;
         font-size: 0.8rem;
         color: black;
         text-align: center;
@@ -9894,7 +9916,7 @@ h2.extensorfrase {
         margin: auto;
         gap: 10px;
         overflow-x: scroll;
-
+        padding: 10px 20px; 
     }
 
     .index-select-type {

@@ -51,10 +51,7 @@ export default function Index() {
                     link="promocoes"
                     type="promocoes"
                 />
-            }
-            
-
-            
+            }            
             <SectionProducts
                 name="RECOMENDADOS PARA VOCÊ"
                 hide_bottom={true}

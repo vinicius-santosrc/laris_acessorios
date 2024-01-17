@@ -57,17 +57,6 @@ function App() {
           <Route path='/pratas-tornozeleiras' element={<Pratas />}></Route>
           <Route path='/pratas-piercing' element={<Pratas />}></Route>
 
-          <Route path='/cetim' element={<Cetim />}></Route>
-          <Route path='/cetim-scrunchie' element={<Cetim />}></Route>
-          <Route path='/cetim-toucas' element={<Cetim />}></Route>
-
-          <Route path='/micangas' element={<Micangas />}></Route>
-          <Route path='/micangas-colares' element={<Micangas />}></Route>
-          <Route path='/micangas-chockers' element={<Micangas />}></Route>
-          <Route path='/micangas-pulseiras' element={<Micangas />}></Route>
-          <Route path='/micangas-phone-strap' element={<Micangas />}></Route>
-          <Route path='/micangas-chaveiros' element={<Micangas />}></Route>
-
           <Route path='/produto/:product' element={<ProductPage />}></Route>
 
           <Route path='/admin' element={<AdminPage />}></Route>
