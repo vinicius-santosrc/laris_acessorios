@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
+const secretKey = process.env.REACT_APP_API_SECRET_KEY;
 //const url = process.env.REACT_APP_API_ENDPOINT_TEST
 
 const GetProduct = async (URL) => {
 
     try {
-        const response = await fetch(`${url}/api/v1/gH9LARISp2X3qR7bY8/products`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/products`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
         const foundProduct = data.find((produto) => produto.url == URL);
@@ -24,7 +25,7 @@ const GetProduct = async (URL) => {
 const GetProductById = async (id) => {
 
     try {
-        const response = await fetch(`${url}/api/products`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/products`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
         const foundProduct = data.find((PRODUCT) => PRODUCT.id == id);
@@ -43,7 +44,7 @@ const GetProductById = async (id) => {
 const getUser = async (email) => {
 
     try {
-        const response = await fetch(`${url}/api/admins`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/admins`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
         const foundProduct = data.find((user) => user.email == email);
@@ -60,7 +61,7 @@ const getUser = async (email) => {
 
 const getAllProducts = async () => {
     try {
-        const response = await fetch(`${url}/api/products`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/products`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
 
@@ -76,7 +77,7 @@ const getAllProducts = async () => {
 
 const getMetas = async () => {
     try {
-        const response = await fetch(`${url}/api/metas`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/metas`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
 
@@ -92,7 +93,7 @@ const getMetas = async () => {
 
 const getPlanilhaDespesas = async () => {
     try {
-        const response = await fetch(`${url}/api/planilha-despesas`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/planilha-despesas`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
 
@@ -108,7 +109,7 @@ const getPlanilhaDespesas = async () => {
 
 const getPlanilhaItens = async () => {
     try {
-        const response = await fetch(`${url}/api/planilha-itens`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/planilha-itens`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
 
@@ -124,7 +125,7 @@ const getPlanilhaItens = async () => {
 
 const getPlanejamentos = async () => {
     try {
-        const response = await fetch(`${url}/api/planejamentos`);
+        const response = await fetch(`${url}/api/v1/${secretKey}/planejamentos`);
         const data = await response.json();
 
         return data;
