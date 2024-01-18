@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContentDashboard from "../components/AdminPage/ContentDashboard";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import Loading from "../components/AdminPage/Loading";
 import { getUser } from "../lib/database";
+
+// Rest of your code goes here
 
 export default function AdminPage() {
     const [user, setUser] = useState(null)

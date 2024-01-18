@@ -9,6 +9,9 @@ export default function ProductsShow(props) {
     const [PRODUCTS, SETPRODUCTS] = useState([])
     const [productsObject, setProductsObject] = useState([])
 
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+
     useEffect(() => {
         async function getPdt() {
             await getProducts()
@@ -18,7 +21,7 @@ export default function ProductsShow(props) {
 
     const getProducts = async () => {
         try {
-            const response = await fetch(`https://api-laris-acessorios.vercel.app/api/products`)
+            const response = await fetch(`${endpoint}/api/v1/${secretKey}/products`)
             const data = await response.json()
             SETPRODUCTS(data);
 

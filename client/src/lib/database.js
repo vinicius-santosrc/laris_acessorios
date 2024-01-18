@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-const url = "https://api-laris-acessorios.vercel.app";
-//const url = "http://localhost:3001"
+const url = process.env.REACT_APP_API_ENDPOINT;
+//const url = process.env.REACT_APP_API_ENDPOINT_TEST
 
 const GetProduct = async (URL) => {
 
     try {
-        const response = await fetch(`${url}/api/products`);
+        const response = await fetch(`${url}/api/v1/gH9LARISp2X3qR7bY8/products`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
         const foundProduct = data.find((produto) => produto.url == URL);

@@ -12,6 +12,9 @@ export default function ContentPlanejamentos() {
     const [createCardOpen, setCreateCardOpen] = useState(false); // Novo estado
     const [newItems, setNewItems] = useState(null); // Novo estado para os itens a lista
     const [localNewItems, setLocalNewItems] = useState('');
+    
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
 
     useEffect(() => {
         getCards()
@@ -28,7 +31,7 @@ export default function ContentPlanejamentos() {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 try {
-                    fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/delete", {
+                    fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/delete`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -62,7 +65,7 @@ export default function ContentPlanejamentos() {
         if (NameOfNewList) {
             try {
                 // Faça algo com imageUrls, se necessário
-                fetch('https://api-laris-acessorios.vercel.app/api/planejamentos/add', {
+                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -118,7 +121,7 @@ export default function ContentPlanejamentos() {
             try {
                 const list = [...itensantigos]
                 list.push(newItems)
-                fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/update", {
+                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/update`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -146,7 +149,7 @@ export default function ContentPlanejamentos() {
             try {
                 const list = []
                 list.push(newItems.toString())
-                fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/update", {
+                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/update`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -181,7 +184,7 @@ export default function ContentPlanejamentos() {
 
             // Atualize o documento no banco de dados com a nova matriz 'content_card'
             try {
-                fetch("https://api-laris-acessorios.vercel.app/api/planejamentos/update", {
+                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/update`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

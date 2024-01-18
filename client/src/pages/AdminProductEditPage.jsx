@@ -24,6 +24,9 @@ export default function AdminProductEditPage() {
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
 
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    
     useEffect(() => {
         getUserData()
             .then(async (account) => {
@@ -109,7 +112,7 @@ export default function AdminProductEditPage() {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
 
-                fetch("https://api-laris-acessorios.vercel.app/api/products/edit", {
+                fetch(`${endpoint}/api/v1/${secretKey}/products/edit`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -152,7 +155,7 @@ export default function AdminProductEditPage() {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                fetch("https://api-laris-acessorios.vercel.app/api/products/delete", {
+                fetch(`${endpoint}/api/v1/${secretKey}/products/delete`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -14,6 +14,9 @@ export default function PlanilhaPage() {
     const [entradasWrap, setEntradas] = useState(0)
     const [saidasWrap, setSaidas] = useState(0)
 
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+
     useEffect(() => {
         getUserData()
             .then(async (account) => {
@@ -98,7 +101,7 @@ export default function PlanilhaPage() {
         }
 
         if (planilha == 'planilha-despesas') {
-            fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas/delete', {
+            fetch(`${endpoint}/api/v1/${secretKey}/planilha-despesas/delete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,7 +121,7 @@ export default function PlanilhaPage() {
                 });
         }
         else if (planilha == 'planilha-itens') {
-            fetch('https://api-laris-acessorios.vercel.app/api/planilha-itens/delete', {
+            fetch(`${endpoint}/api/v1/${secretKey}/planilha-itens/delete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -158,7 +161,7 @@ export default function PlanilhaPage() {
         if (itemId) {
             // Atualize o item no Appwrite
             if (planilha == "planilha-itens") {
-                fetch('https://api-laris-acessorios.vercel.app/api/planilha-itens/edit', {
+                fetch(`${endpoint}/api/v1/${secretKey}/planilha-itens/edit`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -191,7 +194,7 @@ export default function PlanilhaPage() {
             }
             else if (planilha == "planilha-despesas") {
                 //EDITAR LINHA
-                fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas/edit', {
+                fetch(`${endpoint}/api/v1/${secretKey}/planilha-despesas/edit`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -221,7 +224,7 @@ export default function PlanilhaPage() {
         } else {
             // Crie um novo item no Appwrite sem especificar o ID
             if (planilha == "planilha-itens") {
-                fetch('https://api-laris-acessorios.vercel.app/api/planilha-itens/add', {
+                fetch(`${endpoint}/api/v1/${secretKey}/planilha-itens/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -254,7 +257,7 @@ export default function PlanilhaPage() {
             }
             else if (planilha == "planilha-despesas") {
                 //ADICIONAR LINHA
-                fetch('https://api-laris-acessorios.vercel.app/api/planilha-despesas/add', {
+                fetch(`${endpoint}/api/v1/${secretKey}/planilha-despesas/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

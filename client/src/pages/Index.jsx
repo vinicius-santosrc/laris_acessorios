@@ -1,6 +1,5 @@
 //COMPONENTS
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import BannerFooter from "../components/BannerFooter";
 import FooterIndexPage from "../components/FooterIndexPage";
 import Header from "../components/Header";
@@ -15,12 +14,12 @@ import CardItems from "../components/ItemCard";
 export default function Index() {
     const [promoItems, setPromocoes] = useState([])
 
-    const DATABASE_UID = '651ca99af19b7afad3f1'
-    const PRODUTOS_UID = '651ca9adf3de7aad17d9'
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
 
     const setShowProductPromocoes = async () => {
         try {
-            const response = await fetch(`https://api-laris-acessorios.vercel.app/api/products`)
+            const response = await fetch(`${endpoint}/api/v1/${secretKey}/products`)
             const data = await response.json()
             const ProductsArray = data.reverse().sort((a, b) => (b.disponibilidade - a.disponibilidade)).filter((product) => product.desconto > 0).map((pdt) => {
                 <CardItems

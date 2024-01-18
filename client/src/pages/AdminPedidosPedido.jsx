@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import db from "../lib/appwrite";
 import { Query } from "appwrite";
 

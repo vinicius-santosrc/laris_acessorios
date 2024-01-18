@@ -9,11 +9,14 @@ export default function Pratas() {
     const [QTD_PRODUCT, SETQTD_PRODUCT] = useState(null);
     const [NAMEWINDOW, SETNAMEWINDOW] = useState(null);
     const [produtos, setProdutos] = useState([]);
+
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
    
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://api-laris-acessorios.vercel.app/api/products');
+                const response = await fetch(`${endpoint}/api/v1/${secretKey}/products`);
                 const data = await response.json();
                 //SETANDO DADOS
                 setProdutos(data);

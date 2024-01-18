@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import { ID } from "appwrite";
 import { Client, Storage } from "appwrite";
@@ -19,6 +19,9 @@ export default function AddProducts() {
     const [user, setUser] = useState(null)
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
+
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
 
     useEffect(() => {
         getUserData()
@@ -221,7 +224,7 @@ export default function AddProducts() {
                 await uploadImages();
                 /*try {
                     // Faça algo com imageUrls, se necessário
-                    fetch('https://api-laris-acessorios.vercel.app/api/products/add', {
+                    fetch(`${endpoint}/api/v1/${secretKey}/products/add`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -253,7 +256,7 @@ export default function AddProducts() {
     async function criarProduto(IMAGES) {
         try {
             // Faça algo com imageUrls, se necessário
-            fetch('https://api-laris-acessorios.vercel.app/api/products/add', {
+            fetch(`${endpoint}/api/v1/${secretKey}/products/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
