@@ -17,8 +17,10 @@ export default function ContentPlanejamentos() {
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
 
     useEffect(() => {
-        getCards()
-    }, [])
+        setTimeout(() => {
+            getCards()
+        }, 2000);
+    })
 
     function deleteThatCard(id) {
         Swal.fire({
