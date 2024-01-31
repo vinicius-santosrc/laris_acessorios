@@ -5308,6 +5308,12 @@ h2.extensorfrase {
     pointer-events: none;
 }
 
+.Graphic-ShowContent {
+    max-height: 500px;
+    height: 500px;
+    width: 100%
+}
+
 @media screen and (max-width: 1400px) {
     .Cards-Left-Middle {
         display: block;
