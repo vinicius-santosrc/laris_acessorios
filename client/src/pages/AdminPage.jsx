@@ -31,7 +31,6 @@ export default function AdminPage() {
 
 
 
-
     if (!user) {
         return <Loading />
 
