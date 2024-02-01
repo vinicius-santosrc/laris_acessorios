@@ -18,19 +18,7 @@ export default function ContentDashboard() {
     const [metaAnual, setMetaAnual] = useState(0)
 
     const [PlanejamentoDiario, setPlanejamentoDiario] = useState([])
-    useEffect(() => {
-        getPlanejamentoDiario()
-        getInfoData()
-    }, []);
 
-    useEffect(() => {
-        const getPlanilhaValores = async () => {
-            const PlanilhaJSON = await getPlanilhaDespesas()
-            setValores(PlanilhaJSON.reverse())
-        }
-    
-        getPlanilhaValores()
-    }, [])
 
     async function getInfoData() {
         const AllProducts = await getAllProducts();
@@ -41,8 +29,6 @@ export default function ContentDashboard() {
 
         let entradas = 0; // Inicialize as variáveis aqui
         let saidas = 0;
-
-
 
         //SETAR METAS PEGANDO DO DATABASE
         Metas.filter((meta) => meta.id === 1).map((res) => {
@@ -93,6 +79,19 @@ export default function ContentDashboard() {
         }))
     }
 
+    useEffect(() => {
+        getPlanejamentoDiario()
+        getInfoData()
+    }, []);
+
+    useEffect(() => {
+        const getPlanilhaValores = async () => {
+            const PlanilhaJSON = await getPlanilhaDespesas()
+            setValores(PlanilhaJSON.reverse())
+        }
+
+        getPlanilhaValores()
+    }, [])
 
     async function getPlanejamentoDiario() {
         const daysOfWeek = [
@@ -292,10 +291,10 @@ export default function ContentDashboard() {
                         </div>
 
                     </div>
-                    <div className="CardsBottom-Graphics">
+                    {/*<div className="CardsBottom-Graphics">
                         <h2 id="titleacessorapido">Gráficos de Preços</h2>
                         <GraficoPrecos valores={valores} />
-                    </div>
+                        </div>*/}
 
                 </section>
             </div>

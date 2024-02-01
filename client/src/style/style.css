@@ -28,7 +28,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    padding: 20px 0px;
+    padding: 20px 10px;
     border-bottom: 1px solid lightgray;
     position: fixed;
     z-index: 100;
@@ -5669,7 +5669,7 @@ h2.extensorfrase {
     background: #F1F2F4;
     border-radius: 10px;
     width: 270px;
-    height: auto;
+    height: 100%;
 }
 
 .contents-card {
@@ -6368,8 +6368,8 @@ h2.extensorfrase {
 
 
     .imgitem img {
-        width: 45vw;
-        height: 45vh;
+        width: 35vw;
+        height: 35vh;
         background: #d4d4d4;
         object-fit: cover;
     }
@@ -6547,36 +6547,56 @@ h2.extensorfrase {
         font-size: 2vw;
     }
 
+    .comentarios {
+        display: block;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        width: 100%;
+
+    }
+
+    .comentarios h1 {
+        font-size: 6.3vw;
+        font-weight: 400;
+    }
+
+    .comentarios-sides {
+        display: block;
+        padding-left: 7vw;
+        padding-right: 7vw;
+        justify-content: space-between;
+        padding-top: 4vh;
+        padding-bottom: 2vh;
+        margin-bottom: 2vh;
+    }
+
     .comentarios1 p {
-        font-size: 1.6vw;
+        font-size: 3.5vw;
     }
 
     .comentarios2 h2 {
-        font-size: 2vw;
+        font-size: 9vw;
         font-weight: 500;
     }
 
+    .comentarios2-top {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2vh;
+        margin-top: 5vh;
+    }
+
     .comentarios2-top img {
-        width: 10vw;
-        height: 2.5vw;
-        margin: auto;
+        width: 45vw;
+        height: auto;
+        margin: 0;
+
     }
 
-    .comment-avaliation img {
-        width: 10vw;
+    .comentarios2 p {
+        text-align: center;
     }
 
-    .comment-avaliation p {
-        font-size: 1.6vw;
-        margin-top: 1vh;
-        margin-bottom: 1vh;
-    }
-
-    .comentarios {
-        display: block;
-        padding-left: 10vw;
-        padding-right: 10vw;
-    }
 
     .direct {
         margin-bottom: 1vh;
