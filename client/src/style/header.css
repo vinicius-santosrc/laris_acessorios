@@ -1,0 +1,99 @@
+.header-content-laris-acessorios {
+    position: fixed;
+    display: block;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid rgb(235, 235, 235);
+    background-color: white;
+}
+
+.topHeaderComponent {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+    background: #FF62AC;
+    color: white;
+    font-size: 10px;
+    padding: 5px 0px;
+}
+
+.header-component {
+    padding: 10px 0px;
+}
+
+.rightside-header {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-search-wrapper {
+    width: 500px;
+    outline: none;
+    border: 1px solid lightgray;
+    padding: 10px 5px;
+    font-weight: 500;
+}
+
+#destacado a{
+    color: red !important;
+}
+
+.box-products-search {
+    position: fixed;
+    background-color: white;
+    width: 500px;
+    padding: 10px ;
+    box-shadow: 1px 1px 5px gray;
+}
+
+.box-products-search h2 {
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 1px solid lightgray;
+}
+
+.item-wrapper-searched {
+    border: 1px solid lightgray;
+}
+
+.item-wrapper-searched {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0px;
+}
+.box-products-search {
+    height: auto;
+}
+
+.item-wrapper-searched img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.item-wrapper-searched h3 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.list-Items {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.item-wrapper-searched p {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 1480px) {
+    .header-component, .card {
+        padding: 20px 2vw  !important;
+    }
+}
