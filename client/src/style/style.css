@@ -2726,11 +2726,12 @@ img#colar-- {
 }
 
 .card {
-    background-color: transparent;
+    background-color: #f38ce7;
     padding: 20px 20px;
     max-width: 1500px;
     margin: auto;
     display: flex;
+    color: white;
     justify-content: space-between;
 }
 
@@ -6623,7 +6624,7 @@ h2.extensorfrase {
     }
 
     .card {
-        background-color: #E3E3E3;
+        background-color: #f38ce7;
         padding-left: 5vw;
         padding-right: 5vw;
         padding-top: 2vh;
@@ -8924,7 +8925,7 @@ h2.extensorfrase {
 
     .card {
 
-        background-color: transparent;
+        background-color: #f38ce7;
         padding: 20px 5px;
         border-radius: 10px;
         width: 95%;

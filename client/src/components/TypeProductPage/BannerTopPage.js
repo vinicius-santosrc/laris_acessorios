@@ -36,9 +36,6 @@ export default function BannerTopPage(props) {
                                 <div className='direct'>
                                     <label><a href={window.location.origin}>Página Inicial</a><a href="">{props.name}</a></label>
                                 </div>
-                                <div className="ImageContentPage">
-                                    {window.location.pathname.includes("/pratas") ? <img src={"https://cloud.appwrite.io/v1/storage/buckets/653eccb57f4ab270eb1a/files/PRATAS-INDEX-CAT-CARD/view?project=651c17501139519bc5a2&mode=admin"} /> : null}
-                                </div>
                                 <div className="topcard">
                                     <h1>{props.name}</h1>
                                     <p>{props.QTD_PRODT} Produtos</p>
