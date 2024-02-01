@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Notification_Top from "./Notification_Top";
 import Swal from 'sweetalert2'
-
-
-
+import '../style/header.css'
 import SacolaDeCompras from "./ProductsPage/sacola";
+import InputSearchBox from "./InputSearchBox";
 
 export default function Header() {
     let data = new Date;
@@ -216,12 +215,17 @@ export default function Header() {
         )
     }
 
-
+    function goToAccount(){
+        return
+    }
 
     return (
         <>
-            <div className="HeaderContent-LARIS">
-                <header className='menu-pc'>
+            <div className="header-content-laris-acessorios">
+                <div className="topHeaderComponent">
+                    <h2>SEJA BEM-VINDA(O) A LARI'S ACESSÓRIOS</h2>
+                </div>
+                <header className='header-component'>
                     <div className='menu-pc-flex'>
                         <div className="menu-pc-top">
                             <div className='logo'>
@@ -229,33 +233,45 @@ export default function Header() {
                                     <img src={window.location.origin + '/static/media/Logo.webp'} alt="" />
                                 </a>
                             </div>
-                            <div className='icons'>
-                                <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
-                                <span className="number-bag-items">{numberbagitems}</span>
-                                <a onClick={openmenu} className='menu' title="Acesso rápido"><i className="fas fa-bars"></i></a>
+                            <div className="rightside-header">
+                                <div className="input-search">
+                                    <InputSearchBox />
+                                </div>
+                                <div className="icons">
+                                    <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
+                                </div>
+                                {/**/}
                             </div>
                         </div>
-                        {/** // 
-                     
-                     * NAVEGAÇÃO HEADER BOTTOM
-                     
-                     <div className="menu-pc-bottom">
-                        <div className="item-bottom-header">
-                            <a href={window.location.origin + "/novidades"}>LANÇAMENTOS <i className="fa-solid fa-sort-down"></i></a>
+                        <div className="menu-pc-bottom">
+                            <div className="item-bottom-header" id="destacado">
+                                <a href={window.location.origin + "/novidades"}>LANÇAMENTOS</a>
+                            </div>
+                            <div className="item-bottom-header">
+                                <a href={window.location.origin + "/pratas-colares"}>COLARES <i className="fa-solid fa-sort-down"></i></a>
+                            </div>
+                            <div className="item-bottom-header">
+                                <a href={window.location.origin + "/pratas-brincos"}>BRINCOS <i className="fa-solid fa-sort-down"></i></a>
+                            </div>
+                            <div className="item-bottom-header">
+                                <a href={window.location.origin + "/pratas-aneis"}>ANÉIS <i className="fa-solid fa-sort-down"></i></a>
+                            </div>
+                            <div className="item-bottom-header">
+                                <a href={window.location.origin + "/pratas-pulseiras"}>PULSEIRAS <i className="fa-solid fa-sort-down"></i></a>
+                            </div>
+                            <div className="item-bottom-header">
+                                <a href={window.location.origin + "/pratas-braceletes"}>BRACELETES <i className="fa-solid fa-sort-down"></i></a>
+                            </div>
+                            <div className="item-bottom-header">
+                                <a href={window.location.origin + "/pratas-tornozeleiras"}>TORNOZELEIRAS <i className="fa-solid fa-sort-down"></i></a>
+                            </div>
+                            <div className="item-bottom-header">
+                                <a href={window.location.origin + "/pratas-piercing"}>PIERCINGS <i className="fa-solid fa-sort-down"></i></a>
+                            </div>
                         </div>
-                        <div className="item-bottom-header">
-                            <a href={window.location.origin + "/pratas"}>PRATAS <i className="fa-solid fa-sort-down"></i></a>
-                        </div>
-                        <div className="item-bottom-header">
-                            <a href={window.location.origin + "/micangas"}>MIÇANGAS <i className="fa-solid fa-sort-down"></i></a>
-                        </div>
-                        <div className="item-bottom-header">
-                            <a href={window.location.origin + "/cetim"}>CETIM <i className="fa-solid fa-sort-down"></i></a>
-                        </div>
-                    </div>
 
-                    
-                     */}
+
+
                     </div>
                 </header>
             </div>
