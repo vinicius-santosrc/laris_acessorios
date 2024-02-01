@@ -5669,7 +5669,7 @@ h2.extensorfrase {
     background: #F1F2F4;
     border-radius: 10px;
     width: 270px;
-    height: auto;
+    height: 100%;
 }
 
 .contents-card {
