@@ -1730,13 +1730,65 @@ label#cart {
     border-radius: 10vw;
 }
 
+.AccountsRegisterForm__Content {
+    text-align: center;
+    width: 650px;
+    border: 1px solid lightgray;
+    margin: 15px auto;
+    padding: 20px
+}
 
+.AccountsInputs-Content {
+    text-align: left;
+}
 
+.AccountsRegisterForm__Content button {
+    width: 50%;
+    padding: 10px;
+    font-size: 17px;
+    font-weight: 500;
+    background: #EC57B1;
+    color: white;
+    cursor: pointer;
+    transition: 500ms;
+    border: 1px solid #EC57B1
+}
+
+.AccountsRegisterForm__Content button:hover {
+    box-shadow: 5px -5px 1px #EC57B1;
+    background-color: white;
+    color: #EC57B1;
+    border: 1px solid #EC57B1
+}
+
+.AccountsInputs-Content input {
+    width: 100%;
+    padding: 15px;
+    background: #EFEFEF;
+    outline: none;
+    border: none;
+    color: #EF59A0;
+    
+}
+
+.already-account-box {
+    margin: 10px 0px;
+}
+
+.already-account-box a {
+    color: #EF59A0;
+}
+
+.Account-Box-Input-Show {
+    margin: 20px 0px;
+}
 
 .cart {
     border-radius: 0.7vw;
     color: black;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .menu {
@@ -4612,6 +4664,17 @@ h2.extensorfrase {
     color: black;
 }
 
+.logoUpLogin img {
+    width: 120px;
+}
+
+.ErrorMessageBox {
+    text-align: left;
+    margin: 10px 0px;
+    padding: 10px;
+    background: #EF59A0;
+    color: white;
+}
 
 .products-add-principal-right {
     width: 100%;
@@ -4623,7 +4686,6 @@ h2.extensorfrase {
     overflow-y: scroll;
 }
 
-.products-add-principal {}
 
 .ipts-wrapper {
     width: 100%;
@@ -10954,6 +11016,15 @@ h2.extensorfrase {
 
     .Admin-ContentDashBoard table td h2 {
         font-size: 1.1rem;
+    }
+
+    .AccountsRegisterForm__Content {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .logoUpLogin img {
+        width: 100px;
     }
 
     .product-atual {

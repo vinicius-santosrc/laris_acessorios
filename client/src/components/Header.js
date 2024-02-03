@@ -4,20 +4,47 @@ import Swal from 'sweetalert2'
 import '../style/header.css'
 import SacolaDeCompras from "./ProductsPage/sacola";
 import InputSearchBox from "./InputSearchBox";
+import { auth } from "../lib/firebase";
+import { GetUserAtual } from "../lib/database";
 
 export default function Header() {
     let data = new Date;
-    let ano = data.getFullYear()
-    let footer = document.querySelector('p#ano')
-    const [numberbagitems, setnumberbagitems] = useState(null)
+    let ano = data.getFullYear();
+    let footer = document.querySelector('p#ano');
+    const [numberbagitems, setnumberbagitems] = useState(null);
 
-    let [precototal, setprecototal] = useState(null)
-    let [subtotal, setsubtotal] = useState(null)
-    let [desconto, setdescontos] = useState(null)
+    let [precototal, setprecototal] = useState(null);
+    let [subtotal, setsubtotal] = useState(null);
+    let [desconto, setdescontos] = useState(null);
     const [sacolaAt, setSacolaAtual] = useState([]);
+
+    const [usuarioAtual, setusuarioAtual] = useState([]);
+    const [loadingUser, setloadingUser] = useState(false);
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
+    }
+
+    async function searchByUserAtual() {
+        setloadingUser(true);
+        try {
+            if (auth.currentUser) {
+                const res = await GetUserAtual(auth.currentUser.uid);
+                setusuarioAtual(res);
+                setloadingUser(false);
+            }
+            setloadingUser(false);
+        }
+        catch (error) {
+            console.log("ERRO AO BUSCAR USUARIO ATUAL")
+            setloadingUser(false);
+        }
+    }
+
+    function extrairPrimeiroNome(nomeCompleto) {
+        const partesDoNome = nomeCompleto.split(' ');
+        const primeiroNome = partesDoNome[0];
+        return primeiroNome;
     }
 
     useEffect(() => {
@@ -37,6 +64,10 @@ export default function Header() {
             setdescontos(desc)
         }
     })
+
+    useEffect(() => {
+        searchByUserAtual()
+    }, [auth.currentUser])
 
     function GoToCheckOut() {
         if (localStorage.getItem("sacola") == '[]') {
@@ -215,9 +246,6 @@ export default function Header() {
         )
     }
 
-    function goToAccount(){
-        return
-    }
 
     return (
         <>
@@ -240,7 +268,26 @@ export default function Header() {
                                 <div className="icons">
                                     <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
                                 </div>
-                                {/**/}
+                                {loadingUser ?
+                                    <></>
+                                    :
+                                    <>
+                                        {usuarioAtual && usuarioAtual.nome_completo ?
+                                            <div className="icons">
+                                                <a href={window.location.origin + "/accounts/myaccount"} className='cart' title="Minha conta"><i className="fas fa-user"></i> {usuarioAtual && usuarioAtual.nome_completo &&
+                                                    <p>Olá, {extrairPrimeiroNome(usuarioAtual.nome_completo)}</p>
+                                                }</a>
+
+                                            </div>
+                                            :
+                                            <div className="icons">
+                                                <a href={window.location.origin + "/accounts/register"} className='cart' title="Minha conta"><i className="fas fa-user"></i></a>
+                                            </div>
+                                        }
+                                    </>
+                                }
+
+
                             </div>
                         </div>
                         <div className="menu-pc-bottom">

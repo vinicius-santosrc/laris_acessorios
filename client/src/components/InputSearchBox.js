@@ -8,7 +8,6 @@ const InputSearchBox = () => {
     useEffect(() => {
         async function getProducts() {
             const products = await getAllProducts();
-            console.log(products)
             setproductsList(products)
         }
         getProducts()

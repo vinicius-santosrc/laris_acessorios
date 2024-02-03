@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 const secretKey = process.env.REACT_APP_API_SECRET_KEY;
-//const url = process.env.REACT_APP_API_ENDPOINT_TEST
+//const url = process.env.REACT_APP_API_ENDPOINT_TEST;
 
 const GetProduct = async (URL) => {
 
@@ -59,14 +59,42 @@ const getUser = async (email) => {
     }
 };
 
+
+const GetUserAtual = async (uid) => {
+    try {
+        const response = await fetch(`${url}/api/v1/${secretKey}/users`);
+        const data = await response.json();
+
+        const foundUser = data.find((user) => user.uid === uid)
+
+        return foundUser;
+    }
+    catch(error) {
+        console.log(error)
+    }
+}
+
+const GetAllUsers = async () => {
+    try {
+        const response = await fetch(`${url}/api/v1/${secretKey}/users`);
+        const data = await response.json();
+        return data;
+    }
+    catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+
 const getAllProducts = async () => {
     try {
         const response = await fetch(`${url}/api/v1/${secretKey}/products`);
         const data = await response.json();
         // Encontrando o produto pelo URL usando find
-
         // Verificando se o produto foi encontrado antes de atualizar o estado
         return data.reverse();
+
 
     } catch (err) {
         console.error(err);
@@ -111,9 +139,9 @@ const getPlanilhaItens = async () => {
     try {
         const response = await fetch(`${url}/api/v1/${secretKey}/planilha-itens`);
         const data = await response.json();
-        // Encontrando o produto pelo URL usando find
+        // Encontrando a planilha
 
-        // Verificando se o produto foi encontrado antes de atualizar o estado
+        // Verificando se a planilha foi encontrado antes de atualizar o estado
         return data.reverse();
 
     } catch (err) {
@@ -134,4 +162,4 @@ const getPlanejamentos = async () => {
     }
 }
 
-export { GetProduct, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};
+export { GetProduct, GetUserAtual, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};
