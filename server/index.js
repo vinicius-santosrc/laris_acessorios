@@ -199,6 +199,32 @@ app.post(`/api/v1/${secretKey}/planejamentos/delete`, (req, res) => {
     });
 });
 
+//REQUISIÇÃO DE USUARIOS
+
+app.get(`/api/v1/${secretKey}/users`, (req, res) => {
+    connection.query('SELECT * FROM users', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
+//POSTS DE USUARIOS
+
+app.post(`/api/v1/${secretKey}/users/add`, (req, res) => {
+    const item = req.body
+    connection.query('INSERT INTO users VALUES (default, ?, ?, ?, ?)', [item.uid, item.nome_completo, item.cpf, item.email], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Usuário criado com sucesso' });
+        }
+    });
+});
+
 
 //REQUISIÇÃO DE PRODUTOS
 

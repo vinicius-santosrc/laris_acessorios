@@ -36,6 +36,9 @@ import AdminPedidosPedido from './pages/AdminPedidosPedido';
 import AdminPlanejamentos from './pages/AdminPlanejamentos';
 import AdminImages from './pages/AdminImages';
 import LinksPage from './pages/LinksPage';
+import Register from './pages/authentication/Register';
+import LoginPage from './pages/authentication/Login';
+import MyAccount from './pages/authentication/MyAccount';
 
 //SCRIPTS
 function App() {
@@ -48,6 +51,10 @@ function App() {
         <Routes>
 
           <Route path='/' element={<Index />}></Route>
+
+          <Route path='/accounts/login' element={<LoginPage />}></Route>
+          <Route path='/accounts/register' element={<Register />}></Route>
+          <Route path='/accounts/myaccount' element={<MyAccount />} />
 
           <Route path='/pratas' element={<Pratas />}></Route>
           <Route path='/pratas-colares' element={<Pratas />}></Route>
