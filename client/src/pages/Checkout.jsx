@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Ring } from "@uiball/loaders";
 import Swal from "sweetalert2";
 import * as emailjs from "@emailjs/browser"
 import db from "../lib/appwrite";
 import { ID } from "appwrite";
+import { CheckIfUserIsLogged, auth } from "../lib/firebase";
+import { GetUserAtual } from "../lib/database";
 
 export default function Checkout() {
-
 
     const [sacolaAt, setSacolaAtual] = useState([]);
     const [exportSacola, setExportSacola] = useState([]);
@@ -16,10 +17,46 @@ export default function Checkout() {
     let [subtotal, setsubtotal] = useState(null)
     let [desconto, setdescontos] = useState(null)
 
+    const [usuarioAtual, setusuarioAtual] = useState(null);
+
+    const [message, setMessage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [telefone, setTelefone] = useState(null);
+
+    const [cep, setCEP] = useState(null);
+    const [estado, setEstado] = useState(null);
+    const [cidade, setcidade] = useState(null);
+    const [bairro, setbairro] = useState(null);
+    const [endereco, setendereco] = useState(null);
+    const [numero, setnumero] = useState(null);
+    const [referencia, setreferencia] = useState(null);
+
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+
     useEffect(() => {
-        document.querySelector("title").innerText = "Finalizar compra"
+        document.querySelector("title").innerText = "Finalizar compra";
 
     }, [])
+
+    useEffect(() => {
+        searchByUserAtual()
+
+    }, [auth.currentUser])
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/accounts/login?=afterRedirectCheckout";
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
 
 
@@ -45,20 +82,20 @@ export default function Checkout() {
                                         <a href={item.onclick}>{item.name} {item.personalizacao ? <>({item.personalizacao})</> : ""}</a>
                                     </td>
                                     <td>
-                                        <p>R$ {item.preco}</p>
+                                        <p>R$ {item.preco.toFixed(2)}</p>
                                     </td>
                                     <td>
-                                        <p>R$ {item.desconto}</p>
+                                        <p>R$ {item.desconto.toFixed(2)}</p>
                                     </td>
                                     <td>
                                         <select disabled>
-                                            <option selected value={item.preco}>
+                                            <option selected value={item.preco.toFixed(2)}>
                                                 {item.qtd}
                                             </option>
                                         </select>
                                     </td>
                                     <td>
-                                        <p>R$ {item.preco - item.desconto}</p>
+                                        <p>R$ {(item.preco - item.desconto).toFixed(2)}</p>
                                     </td>
                                 </tr>
                             </>
@@ -71,21 +108,21 @@ export default function Checkout() {
                                 <a href={item.onclick}>{item.name}</a>
                             </td>
                             <td>
-                                <p>R$ {item.preco}</p>
+                                <p>R$ {item.preco.toFixed(2)}</p>
                             </td>
                             <td>
-                                <p>R$ {item.desconto}</p>
+                                <p>R$ {item.desconto.toFixed(2)}</p>
                             </td>
                             <td>
                                 <select disabled>
-                                    <option selected value={item.preco}>
+                                    <option selected value={item.preco.toFixed(2)}>
                                         {item.qtd}
                                     </option>
                                 </select>
                             </td>
 
                             <td>
-                                <p>R$ {item.preco - item.desconto}</p>
+                                <p>R$ {(item.preco - item.desconto).toFixed(2)}</p>
                             </td>
                         </tr>
                     );
@@ -123,7 +160,7 @@ export default function Checkout() {
                                     <div>
                                         {item.desconto > 0
                                             ?
-                                            <h2><s style={{ color: "gray" }}>R$ {item.preco}</s> R$ {item.preco - desconto}</h2>
+                                            <h2><s style={{ color: "gray" }}>R$ {item.preco.toFixed(2)}</s> R$ {(item.preco - desconto).toFixed(2)}</h2>
                                             :
                                             <h2>R$ {item.preco}</h2>
                                         }
@@ -154,172 +191,87 @@ export default function Checkout() {
         }
     })
 
-    function finalizartudo() {
+    async function searchByUserAtual() {
 
-        let rua = document.getElementById('endereco')
-        let bairro = document.getElementById('bairro')
-        let cidade = document.getElementById('cidade')
-        let estado = document.getElementById('estado')
-        let numero = document.getElementById('numero')
-        let referencia = document.getElementById('referencia')
-
-        let primeironome = document.getElementById('primeironome')
-        let ultimonome = document.getElementById('ultimonome')
-        let cpf = document.getElementById('cpf')
-        let email = document.getElementById('Email')
-        let numercont = document.getElementById('Numerocont')
-
-
-
-        if (primeironome.value == '' || ultimonome.value == '' || cpf.value == '' || rua.value == '' || email.value == '' || numercont.value == '' || bairro.value == '' || cidade.value == '' || estado.value == '' || numero.value == '' || referencia.value == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Erro!',
-                text: 'Preencha todos os dados.',
-
-            })
-        }
-
-        else if (localStorage.sacola == '[]' || localStorage.sacola == undefined || localStorage.sacola == 'undefined' || localStorage == null) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Erro!',
-                text: 'Sua sacola de compras está vazia.',
-
-            })
-        }
-        else {
-            let background = document.querySelector('.background-load')
-            let loader = document.querySelector('.loader')
-
-            loader.style.display = 'block'
-            background.style.display = 'block'
-
-            let rua = document.getElementById('endereco')
-            let bairro = document.getElementById('bairro')
-            let cidade = document.getElementById('cidade')
-            let estado = document.getElementById('estado')
-            let numero = document.getElementById('numero')
-            let referencia = document.getElementById('referencia')
-            let cep = document.getElementById('cep')
-            let methodpay = document.querySelector('.pay-inside select')
-
-            let primeironome = document.getElementById('primeironome')
-            let ultimonome = document.getElementById('ultimonome')
-            let cpf = document.getElementById('cpf')
-            let email = document.getElementById('Email')
-            let numercont = document.getElementById('Numerocont').value
-            const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
-            const pedido = random(0, 999)
-            let data2 = new Date()
-            let ano = data2.getFullYear()
-            let mes = data2.getMonth()
-            let dia = data2.getDate()
-            if (dia > 10) {
-                dia = '0' + dia
-            }
-            else {
+        try {
+            if (auth.currentUser) {
+                const res = await GetUserAtual(auth.currentUser.uid);
+                setusuarioAtual(res);
 
             }
-            let outputfinal = ''
-            let produtos2 = JSON.parse(localStorage.getItem('sacola')) || []
-
-            produtos2.forEach((item) => {
-                if (item.personalizacao) {
-                    outputfinal += `
-                  📦
-                      Produto: ${item.name}
-                      Personalização: ${item.personalizacao}
-                      Tamanho: ${item.tamanho}
-                      Quantidade: ${item.qtd}
-                      Desconto: ${item.desconto}
-                      Subtotal: ${item.preco}
-                      Total: ${item.preco - item.desconto}
-                    -------------------------
-                 `
-                }
-                else {
-                    outputfinal += `
-                  📦
-                      Produto: ${item.name}
-                      Tamanho: ${item.tamanho}
-                      Quantidade: ${item.qtd}
-                      Desconto: ${item.desconto}
-                      Subtotal: ${item.preco}
-                      Total: ${item.preco - item.desconto}
-                    -------------------------
-                 `
-                }
-            })
-
-            db.createDocument(
-                '651ca99af19b7afad3f1',
-                '652a0331c1f7f4d327ff',
-                ID.unique(),
-                {
-                    order_name: primeironome.value + " " + ultimonome.value,
-                    order_email: email.value,
-                    order_cpf: cpf.value,
-                    order_tel: numercont,
-                    order_end: `CEP: ` + cep.value + ` Cidade: ` + cidade.value + '-' + estado.value + ` Bairro: ` + bairro.value + ` Rua: ` + rua.value + ` Número: ` + numero.value + ` Referência: ` + referencia.value,
-                    order_number: pedido,
-                    order_pedido: outputfinal,
-                    order_payment: methodpay.value
-                }
-            )
-                .then((r) => {
-                    emailjs.send("laris-acessorios", "template_v9pyefq", {
-                        from_name: `Nome: ` + primeironome.value + ` ` + ultimonome.value + ` Email: ` + email.value + ` ` + `CPF: ` + cpf.value + ` Telefone: ` + numercont + '',
-                        to_name: `CEP: ` + cep.value + ` Cidade: ` + cidade.value + '-' + estado.value + ` Bairro: ` + bairro.value + ` Rua: ` + rua.value + ` Número: ` + numero.value + ` Referência: ` + referencia.value,
-                        message: `Pedido N°` + pedido + `: ` + outputfinal,
-                        reply_to: '' + methodpay.value,
-                    }, "user_LFJAXNJjH0WCy5N2o9gl4").catch(e => {
-                        console.log('ERRO: ' + e)
-                    })
-                        .then(() => {
-                            loader.style.display = 'none'
-                            background.style.display = 'none'
-
-                            window.open("https://api.whatsapp.com/send/?phone=553597394181&text=" + '✨*LARI’S ACEESSORIOS*✨'
-                                + '%0D%0A'
-                                + 'Acessórios que te representam'
-                                + '%0D%0A' + '%0D%0A'
-                                + '================' +
-                                '%0D%0A' + '%0D%0A' +
-                                '📦 Pedido *N' + pedido
-                                + '*' + '%0D%0A'
-                                + '💳 Pagamento via *' + methodpay.value +
-                                '*' + '%0D%0A' +
-                                '🚚 Endereço : *' + cidade.value + ': ' + bairro.value + ', ' + rua.value + ', ' + numero.value +
-                                '*' + '%0D%0A' + '%0D%0A' +
-                                '🔍 Nome: *' + primeironome.value + ' ' + ultimonome.value + '*' +
-                                '%0D%0A' + '%0D%0A'
-                                + '================')
-
-                            localStorage.sacola = '[]'
-                            window.location.href = 'sucesso'
-
-
-                        })
-                })
-                .catch((e) => {
-                    loader.style.display = 'none'
-                    background.style.display = 'none'
-                    console.log(e)
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Algo deu errado. Tente novamente mais tarde',
-                      })
-                })
-
-
 
         }
-    };
+        catch (error) {
+            console.log("ERRO AO BUSCAR USUARIO ATUAL")
+
+        }
+    }
+
+    async function finalizartudo() {
+
+        if(!usuarioAtual || !endereco || !cidade || !bairro || !estado || !cep || !referencia || !numero || !telefone) {
+            return
+        }
+
+        try {
+            //VERIFICAÇÃO DE DADOS
+
+            const dadosPedido = {
+                "usuario": usuarioAtual,
+                "produtos": sacolaAt,
+
+            };
+
+            const enderecoPedido = {
+                "endereço:": endereco,
+                "bairro": bairro,
+                "cidade": cidade,
+                "estado": estado,
+                "cep": cep,
+                "referencia": referencia,
+                "numero": numero
+            }
+
+            //FORMAS DE PAGAMENTO
+
+
+
+            //CRIAR PEDIDO NO BANCO DE DADOS
+
+            await fetch(`${endpoint}/api/v1/${secretKey}/orders/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    address: JSON.stringify(enderecoPedido),
+                    items: JSON.stringify(dadosPedido.produtos),
+                    user: JSON.stringify(dadosPedido.usuario),
+                    totalprice: precototal,
+                    paymentOption: 'PIX',
+                    situation: 'PAGO',
+                    desconto: desconto,
+                    subtotal: subtotal
+                }),
+            })
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `Pedido realizado com sucesso.`,
+                showConfirmButton: false,
+                timer: 2500
+            })
+        }
+        catch (error) { //MENSAGEM DE SUCESSO OU ERRO.
+            console.error("Erro ao criar pedido:", error)
+        }
+    }
+
 
 
     if (localStorage.getItem("sacola") != '[]') {
+
         return (
             <section className="laris-checkout-page">
                 <span class="loader"><span class="loader-inner"></span></span>
@@ -366,80 +318,91 @@ export default function Checkout() {
 
                     </div>
 
-                    <div class='dados-pessoais'>
-                        <h1><i class="fa-solid fa-person-dress"></i> Dados pessoais</h1>
-                        <div class="inputbox">
-                            <p>Email:</p><input type="email" id='Email' placeholder="" required />
-                            <p>Primeiro nome</p><input type="text" id='primeironome' placeholder="" required />
-                            <p>Último nome</p><input type="text" id='ultimonome' placeholder="" required />
-                            <p>CPF</p><input type="number" min="0" id="cpf" placeholder="" required />
-                            <p>Telefone</p><input type="tel" id='Numerocont' placeholder="" required />
-                        </div>
-                        <p>Seu telefone será utilizada para qualquer contato sobre o pedido.</p>
+                    {usuarioAtual &&
+                        <React.Fragment>
+                            <div class='dados-pessoais'>
+                                <h1><i class="fa-solid fa-person-dress"></i> Dados pessoais</h1>
+                                <div class="inputbox">
+                                    <p>Email:</p><input type="email" id='Email' placeholder="" required disabled value={usuarioAtual.email ? usuarioAtual.email : null} />
+                                    <p>Nome:</p><input type="text" id='primeironome' placeholder="" required disabled value={usuarioAtual.nome_completo ? usuarioAtual.nome_completo : null} />
+                                    <p>CPF:</p><input type="number" min="0" id="cpf" placeholder="" required disabled value={usuarioAtual.cpf ? usuarioAtual.cpf : null} />
+                                    <p>Telefone (para contato):</p><input type="tel" id='Numerocont' placeholder="" value={telefone} onChange={(e) => setTelefone(e.target.value)} required />
+                                </div>
+                                <p>Seu telefone será utilizado para qualquer contato sobre o pedido.</p>
 
-                    </div>
+                            </div>
 
 
-                    <div class='seu-endereco'>
-                        <h1><i class="fa-solid fa-bag-shopping"></i> Entrega</h1>
-                        <div class="inputbox">
+                            <div class='seu-endereco'>
+                                <h1><i class="fa-solid fa-bag-shopping"></i> Entrega</h1>
+                                <div class="inputbox">
 
-                            <p>CEP</p>
-                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php?t" target="_blank">Não sei meu CEP</a>
-                            <input type="text" id="cep" placeholder="" required />
-                            <p>Estado</p><input type="text" id="estado" placeholder="" required />
-                            <p>Cidade</p><input type="text" id="cidade" placeholder="" required />
-                            <p>Bairro</p><input type="text" id="bairro" placeholder="" required />
-                            <p>Endereço</p><input type="text" id="endereco" placeholder="" required />
-                            <p>Número</p><input type="text" id="numero" placeholder="" required />
-                            <p>Referência</p><input type="text" id="referencia" placeholder="" required />
-                        </div>
-
-                    </div>
-
-                    <div class='pay--'>
-                        <h1><i class="fa-solid fa-money-bill"></i> Pagamento</h1>
-                        <div class='pay-inside'>
-                            <div class="paymenttotal">
-                                <div class="monetarycard">
-                                    <div class="monetary">
-                                        <div>
-                                            <p class="leftsidemonetary">Subtotal:</p>
-                                        </div>
-                                        <p class="valuemonetary">R$ {subtotal}</p>
-                                    </div>
-                                    <div class="monetary">
-                                        <div>
-                                            <p class="leftsidemonetary">Descontos:</p>
-                                        </div>
-                                        <p class="valuemonetary">R$ {desconto}</p>
-                                    </div>
-                                    <div class="monetary">
-                                        <div>
-                                            <p class="leftsidemonetary">Entrega:</p>
-                                        </div>
-                                        <p class="valuemonetary ">A COMBINAR</p>
-                                    </div>
-                                    <div class="monetarytotal monetary">
-                                        <div>
-                                            <p class="leftsidemonetary">Total:</p>
-                                        </div>
-                                        <p>R$ {precototal}</p>
-                                    </div>
+                                    <p>CEP</p>
+                                    <a href="https://buscacepinter.correios.com.br/app/endereco/index.php?t" target="_blank">Não sei meu CEP</a>
+                                    <input type="text" id="cep" placeholder="" value={cep} onChange={(e) => setCEP(e.target.value)} required />
+                                    <p>Estado</p><input type="text" id="estado" placeholder="" value={estado} onChange={(e) => setEstado(e.target.value)} required />
+                                    <p>Cidade</p><input type="text" id="cidade" placeholder="" value={cidade} onChange={(e) => setcidade(e.target.value)} required />
+                                    <p>Bairro</p><input type="text" id="bairro" placeholder="" value={bairro} onChange={(e) => setbairro(e.target.value)} required />
+                                    <p>Endereço</p><input type="text" id="endereco" placeholder="" value={endereco} onChange={(e) => setendereco(e.target.value)} required />
+                                    <p>Número</p><input type="text" id="numero" placeholder="" value={numero} onChange={(e) => setnumero(e.target.value)} required />
+                                    <p>Referência</p><input type="text" id="referencia" placeholder="" value={referencia} onChange={(e) => setreferencia(e.target.value)} required />
                                 </div>
 
                             </div>
-                            <select name="method" id="method">
-                                <option value="Dinheiro" selected>Dinheiro</option>
-                                <option value="Pix">Pix</option>
-                            </select>
-                            <p><strong>Obs: </strong>Pagamentos via dinheiro são realizados no momento da entrega</p>
-                            <p>Pagamentos via Pix são realizados antes da entrega</p>
-                        </div>
-                        <div class='botoesseucart'>
-                            <button onClick={finalizartudo}><i class="fa-solid fa-lock"></i> FINALIZAR COMPRA</button>
-                        </div>
-                    </div>
+
+                            <div class='pay--'>
+                                <h1><i class="fa-solid fa-money-bill"></i> Pagamento</h1>
+                                <div class='pay-inside'>
+                                    <div class="paymenttotal">
+                                        <div class="monetarycard">
+                                            <div class="monetary">
+                                                <div>
+                                                    <p class="leftsidemonetary">Subtotal:</p>
+                                                </div>
+                                                <p class="valuemonetary">R$ {subtotal}</p>
+                                            </div>
+                                            <div class="monetary">
+                                                <div>
+                                                    <p class="leftsidemonetary">Descontos:</p>
+                                                </div>
+                                                <p class="valuemonetary">R$ {desconto}</p>
+                                            </div>
+                                            <div class="monetary">
+                                                <div>
+                                                    <p class="leftsidemonetary">Entrega:</p>
+                                                </div>
+                                                <p class="valuemonetary ">A COMBINAR</p>
+                                            </div>
+                                            <div class="monetarytotal monetary">
+                                                <div>
+                                                    <p class="leftsidemonetary">Total:</p>
+                                                </div>
+                                                <p>R$ {precototal}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <select name="method" id="method">
+                                        <option value="Dinheiro" selected>Dinheiro</option>
+                                        <option value="Pix">Pix</option>
+                                    </select>
+                                    <p><strong>Obs: </strong>Pagamentos via dinheiro são realizados no momento da entrega</p>
+                                    <p>Pagamentos via Pix são realizados antes da entrega</p>
+
+                                    <React.Fragment>
+                                        <button disabled={isLoading} id="submit" onClick={finalizartudo}>
+                                            <span id="button-text">
+                                                {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+                                            </span>
+                                        </button>
+                                        {message && <div id="payment-message">{message}</div>}
+
+                                    </React.Fragment>
+
+                                </div>
+                            </div>
+                        </React.Fragment>
+                    }
 
 
                 </div>

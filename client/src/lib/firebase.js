@@ -54,12 +54,12 @@ const loginIn = async (user) => {
 }
 
 const CheckIfUserIsLogged = () => {
-    if(auth.currentUser && auth.currentUser.uid && auth.currentUser.email) {
-        return true
+    if (auth.currentUser && auth.currentUser.uid && auth.currentUser.email) {
+        return true;
+    } else {
+        return false;
     }
-    else {
-        return false
-    }
-}
+};
+
 
 export { auth, CreateNewAccount, loginIn, CheckIfUserIsLogged }

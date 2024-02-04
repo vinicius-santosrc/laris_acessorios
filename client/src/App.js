@@ -39,6 +39,8 @@ import LinksPage from './pages/LinksPage';
 import Register from './pages/authentication/Register';
 import LoginPage from './pages/authentication/Login';
 import MyAccount from './pages/authentication/MyAccount';
+import Orders from './pages/authentication/MyAccountSub/Orders';
+import OrderPage from './pages/authentication/MyAccountSub/OrderPage';
 
 //SCRIPTS
 function App() {
@@ -55,6 +57,11 @@ function App() {
           <Route path='/accounts/login' element={<LoginPage />}></Route>
           <Route path='/accounts/register' element={<Register />}></Route>
           <Route path='/accounts/myaccount' element={<MyAccount />} />
+          <Route path='/accounts/myaccount/orders' element={<Orders />} />
+          <Route path='/accounts/myaccount/orders/:pedidoID' element={<OrderPage />} />
+          <Route path='/accounts/myaccount/address' element={<MyAccount />} />
+          <Route path='/accounts/myaccount/favorites' element={<MyAccount />} />
+          <Route path='/accounts/myaccount/help' element={<MyAccount />} />
 
           <Route path='/pratas' element={<Pratas />}></Route>
           <Route path='/pratas-colares' element={<Pratas />}></Route>

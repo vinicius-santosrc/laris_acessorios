@@ -252,6 +252,32 @@ app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
     });
 });
 
+//REQUISIÇÃO DE ORDERS
+
+app.get(`/api/v1/${secretKey}/orders`, (req, res) => {
+    connection.query('SELECT * FROM orders', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
+//POSTS DE ORDERS
+
+app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
+    const item = req.body
+    connection.query('insert into orders values (default, ?, ?, ?, ?, default, ?, default, ?, ?, ?)', [item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Pedido cadastrado com sucesso' });
+        }
+    });
+});
+
 app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
     const item = req.body
     connection.query('update `produtos` set name_product = ?, price = ?, desconto = ?, disponibilidade = ?, categoria = ?, url = ?, quantidade_disponivel = ?, extensor = ? where id = ?', [item.name_product, item.price, item.desconto, item.disponibilidade, item.categoria, item.url, item.quantidade_disponivel, item.extensor, item.id], (err, result) => {

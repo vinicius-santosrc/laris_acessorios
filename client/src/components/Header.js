@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import '../style/header.css'
 import SacolaDeCompras from "./ProductsPage/sacola";
 import InputSearchBox from "./InputSearchBox";
-import { auth } from "../lib/firebase";
+import { CheckIfUserIsLogged, auth } from "../lib/firebase";
 import { GetUserAtual } from "../lib/database";
 
 export default function Header() {
@@ -69,7 +69,12 @@ export default function Header() {
         searchByUserAtual()
     }, [auth.currentUser])
 
-    function GoToCheckOut() {
+    async function GoToCheckOut() {
+        const isLogged = await CheckIfUserIsLogged();
+        if (!isLogged) {
+            window.location.href = window.location.origin + '/accounts/login?=afterRedirectCheckout'
+        }
+
         if (localStorage.getItem("sacola") == '[]') {
             Swal.fire({
                 icon: 'error',
@@ -77,6 +82,7 @@ export default function Header() {
                 text: 'Sua sacola está vazia.',
             })
         }
+
         else {
             window.location.href = window.location.origin + '/checkout#cart=' + getRandomInt(1502) + '?'
         }
@@ -266,7 +272,7 @@ export default function Header() {
                                     <InputSearchBox />
                                 </div>
                                 <div className="icons">
-                                    <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
+                                    <a onClick={opencart} className='cart' title="Sacola"><i className="fa-solid fa-bag-shopping"></i></a>
                                 </div>
                                 {loadingUser ?
                                     <></>
@@ -274,14 +280,17 @@ export default function Header() {
                                     <>
                                         {usuarioAtual && usuarioAtual.nome_completo ?
                                             <div className="icons">
-                                                <a href={window.location.origin + "/accounts/myaccount"} className='cart' title="Minha conta"><i className="fas fa-user"></i> {usuarioAtual && usuarioAtual.nome_completo &&
-                                                    <p>Olá, {extrairPrimeiroNome(usuarioAtual.nome_completo)}</p>
+                                                <a href={window.location.origin + "/accounts/myaccount"} className='cart' title="Minha conta"><i className="fa-regular fa-user"></i> {usuarioAtual && usuarioAtual.nome_completo &&
+                                                    <div className="flex-box-a">
+                                                        <h3>Minha conta</h3>
+                                                        <p>Olá, {extrairPrimeiroNome(usuarioAtual.nome_completo)}</p>
+                                                    </div>
                                                 }</a>
 
                                             </div>
                                             :
                                             <div className="icons">
-                                                <a href={window.location.origin + "/accounts/register"} className='cart' title="Minha conta"><i className="fas fa-user"></i></a>
+                                                <a href={window.location.origin + "/accounts/register"} className='cart' title="Minha conta"><i className="fa-regular fa-user"></i></a>
                                             </div>
                                         }
                                     </>
@@ -331,7 +340,14 @@ export default function Header() {
                             <img src={window.location.origin + "/static/media/Logo.webp"} alt="" />
                         </a>
                     </div>
-                    <a onClick={opencart} className='cart' title="Sacola"><i className="fas fa-bag-shopping"></i></a>
+                    <div className="icons-right-side">
+                        {usuarioAtual ?
+                            <a href={window.location.origin + '/accounts/myaccount'} title="Minha conta"><i className="fa-regular fa-user"></i></a>
+                            :
+                            <a href={window.location.origin + '/accounts/login'} title="Minha conta"><i className="fa-regular fa-user"></i></a>
+                        }
+                        <a onClick={opencart} className='cart' title="Sacola"><i className="fa-solid fa-bag-shopping"></i></a>
+                    </div>
 
                 </div>
             </header>
