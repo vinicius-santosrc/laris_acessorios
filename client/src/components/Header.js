@@ -176,12 +176,7 @@ export default function Header() {
 
         carrinho.style.display = 'none'
         back.style.display = 'none'
-        if (filtros) {
-            filtros.style.display = 'none'
-        }
-        if (window.location.href.includes("/pratas")) {
-            filtros.style.display = 'none'
-        }
+
     }
 
 
@@ -338,7 +333,7 @@ export default function Header() {
                 </header>
             </div>
             <header className='headercell'>
-                {window.scrollY === 0 ?
+                {window.scrollY < 15 ?
                     <div className="topHeaderComponent">
                         <h2>SEJA BEM-VINDA(O) A LARI'S ACESSÓRIOS</h2>
                     </div>
@@ -362,7 +357,7 @@ export default function Header() {
                     </div>
 
                 </div>
-                {window.scrollY === 0 ?
+                {window.scrollY < 15 ?
                     <div className="SearchBox-Mobile">
                         <div className="innerSearchBox-content">
                             <label htmlFor="iptsearch"><i className="fa-solid fa-magnifying-glass"></i></label>

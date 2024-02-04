@@ -32,6 +32,8 @@ export default function Checkout() {
     const [numero, setnumero] = useState(null);
     const [referencia, setreferencia] = useState(null);
 
+    const [paymentOption, setPayment] = useState('DINHEIRO')
+
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
@@ -154,7 +156,7 @@ export default function Checkout() {
                                 <div class="product-item-info-qtd">
                                     <div>
                                         <select disabled>
-                                            <option value="${item.qtd}" selected>{item.qtd}</option>
+                                            <option value={item.qtd} selected>{item.qtd}</option>
                                         </select>
                                     </div>
                                     <div>
@@ -223,7 +225,7 @@ export default function Checkout() {
             };
 
             const enderecoPedido = {
-                "endereço:": endereco,
+                "endereço": endereco,
                 "bairro": bairro,
                 "cidade": cidade,
                 "estado": estado,
@@ -248,11 +250,14 @@ export default function Checkout() {
                     items: JSON.stringify(dadosPedido.produtos),
                     user: JSON.stringify(dadosPedido.usuario),
                     totalprice: precototal,
-                    paymentOption: 'PIX',
+                    paymentOption: paymentOption,
                     situation: 'PAGO',
                     desconto: desconto,
                     subtotal: subtotal
                 }),
+            })
+            .then((res) => {
+                localStorage.setItem('sacola', '[]')
             })
 
             Swal.fire({
@@ -262,6 +267,9 @@ export default function Checkout() {
                 showConfirmButton: false,
                 timer: 2500
             })
+            setTimeout(() => {
+                window.location.href = window.location.origin + "/accounts/myaccount/orders"
+            }, 1000);
         }
         catch (error) { //MENSAGEM DE SUCESSO OU ERRO.
             console.error("Erro ao criar pedido:", error)
@@ -382,9 +390,9 @@ export default function Checkout() {
                                         </div>
 
                                     </div>
-                                    <select name="method" id="method">
-                                        <option value="Dinheiro" selected>Dinheiro</option>
-                                        <option value="Pix">Pix</option>
+                                    <select value={paymentOption} onChange={(e) => setPayment(e.target.value)} name="method" id="method">
+                                        <option value="DINHEIRO" selected>Dinheiro</option>
+                                        <option value="PIX">Pix</option>
                                     </select>
                                     <p><strong>Obs: </strong>Pagamentos via dinheiro são realizados no momento da entrega</p>
                                     <p>Pagamentos via Pix são realizados antes da entrega</p>
@@ -392,7 +400,7 @@ export default function Checkout() {
                                     <React.Fragment>
                                         <button disabled={isLoading} id="submit" onClick={finalizartudo}>
                                             <span id="button-text">
-                                                {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+                                                {isLoading ? <div className="spinner" id="spinner"></div> : "FINALIZAR COMPRA"}
                                             </span>
                                         </button>
                                         {message && <div id="payment-message">{message}</div>}
