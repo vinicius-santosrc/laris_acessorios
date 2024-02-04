@@ -6,6 +6,7 @@ import SacolaDeCompras from "./ProductsPage/sacola";
 import InputSearchBox from "./InputSearchBox";
 import { CheckIfUserIsLogged, auth } from "../lib/firebase";
 import { GetUserAtual } from "../lib/database";
+import InputSearchBoxMobile from "./InputSearchBoxMobile";
 
 export default function Header() {
     let data = new Date;
@@ -189,6 +190,7 @@ export default function Header() {
         return (
             <>
                 <div className="HeaderContent-LARIS">
+
                     <header class='menu-pc'>
                         <div class='logo'>
                             <a href={window.location.origin}>
@@ -256,9 +258,13 @@ export default function Header() {
     return (
         <>
             <div className="header-content-laris-acessorios">
-                <div className="topHeaderComponent">
-                    <h2>SEJA BEM-VINDA(O) A LARI'S ACESSÓRIOS</h2>
-                </div>
+                {window.scrollY === 0 ?
+                    <div className="topHeaderComponent">
+                        <h2>SEJA BEM-VINDA(O) A LARI'S ACESSÓRIOS</h2>
+                    </div>
+                    :
+                    null
+                }
                 <header className='header-component'>
                     <div className='menu-pc-flex'>
                         <div className="menu-pc-top">
@@ -332,7 +338,13 @@ export default function Header() {
                 </header>
             </div>
             <header className='headercell'>
-
+                {window.scrollY === 0 ?
+                    <div className="topHeaderComponent">
+                        <h2>SEJA BEM-VINDA(O) A LARI'S ACESSÓRIOS</h2>
+                    </div>
+                    :
+                    null
+                }
                 <div className="menu-cell">
                     <a onClick={openmenu} className='menu' title="Acesso rápido"><i className="fas fa-bars"></i></a>
                     <div className='logo'>
@@ -350,6 +362,16 @@ export default function Header() {
                     </div>
 
                 </div>
+                {window.scrollY === 0 ?
+                    <div className="SearchBox-Mobile">
+                        <div className="innerSearchBox-content">
+                            <label htmlFor="iptsearch"><i className="fa-solid fa-magnifying-glass"></i></label>
+                            <InputSearchBoxMobile />
+                        </div>
+                    </div>
+                    :
+                    null
+                }
             </header>
 
             <div className='background-cart' onClick={fecharcart}></div>
