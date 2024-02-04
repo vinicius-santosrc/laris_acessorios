@@ -162,4 +162,16 @@ const getPlanejamentos = async () => {
     }
 }
 
-export { GetProduct, GetUserAtual, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};
+const getPedidos = async () => {
+    try {
+        const response = await fetch(`${url}/api/v1/${secretKey}/orders`);
+        const data = await response.json();
+
+        return data;
+    } catch(err) {
+        throw err;
+    }
+}
+
+
+export { GetProduct, getPedidos, GetUserAtual, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};

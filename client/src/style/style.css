@@ -1768,7 +1768,7 @@ label#cart {
     outline: none;
     border: none;
     color: #EF59A0;
-    
+
 }
 
 .already-account-box {
@@ -4676,6 +4676,45 @@ h2.extensorfrase {
     color: white;
 }
 
+.myaccount--page {
+    display: flex;
+    justify-content: left;
+    max-width: 1500px;
+    margin: 30px auto;
+}
+
+.navigation-my-account {
+    width: 300px;
+
+}
+
+.nav-bar-left {
+    width: 100%;
+}
+
+.nav-bar-left a {
+    font-size: 23px;
+    color: black;
+    border-left: 2px solid #EF59A0;
+    padding: 5px 10px;
+}
+
+.option-nav-bar {
+    margin: 20px 0px
+}
+
+.myaccount-information {
+    border: 1px solid lightgray;
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+.myaccount-information h1 {
+    font-size: 20px;
+}
+
+
+
 .products-add-principal-right {
     width: 100%;
     background-color: transparent;
@@ -4686,6 +4725,21 @@ h2.extensorfrase {
     overflow-y: scroll;
 }
 
+.flex-box-a {
+    text-align: left;
+    justify-content: left;
+    display: block;
+    padding: 0px 5px;
+}
+
+.flex-box-a h3 {
+    font-size: 16px;
+}
+
+.flex-box-a p {
+    font-size: 13px;
+    text-align: left;
+}
 
 .ipts-wrapper {
     width: 100%;
@@ -5376,7 +5430,160 @@ h2.extensorfrase {
     width: 100%
 }
 
+.order-content-item-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    border: 1px solid lightgray;
+    margin: 10px 0px;
+    color: black;
+    width: 500px;
+    
+}
+
+.items-order {
+    padding: 20px;
+    border: 1px solid lightgray;
+    margin: 10px 0px;
+    width: 100%
+}
+
+.items-order h2{
+    font-size: 20px;
+}
+
+.items-order p {
+    font-size: 16px;
+}
+
+.items-order h5 {
+    font-size: 16px
+}
+
+.items-order img {
+    width: 100px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.myaccount--section-content {
+    width: 100%;
+}
+
+.Order-Status-Box {
+    margin: 40px 0px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+#selected {
+    color: #EF59A0
+}
+
+.Order-Status-State {
+    text-align: center;
+
+}
+
+.item-wrapper-order {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0px;
+}
+
+.order-content-item-box h5 {
+    color: #EF59A0
+}
+
+.order-right-side-item {
+    width: 100%
+}
+
+.orders-buttons-interact {
+    display: flex;
+    justify-content: right;
+    gap: 5px;
+    width: 50%;
+}
+
+.orders-buttons-interact button{
+    background: #EF59A0;
+    padding: 5px 10px;
+    border: none;
+    color: white;
+    cursor: pointer
+}
+
+.order-content-item-box img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
 @media screen and (max-width: 1480px) {
+    .myaccount--page {
+        display: flex;
+        justify-content: left;
+        max-width: 1300px;
+        margin: 30px auto;
+    }
+
+    .sessoes-top {
+        width: 1200px;
+    }
+
+    .infocompra {
+        width: 1200px;
+    }
+
+    .item {
+        width: 1200px
+    }
+
+    .informaçõesproduto {
+        width: 1200px;
+    }
+
+    .comentarios {
+        width: 1200px;
+    }
+
+    .navigation-my-account {
+        width: 300px;
+
+    }
+
+    .nav-bar-left {
+        width: 100%;
+    }
+
+    .nav-bar-left a {
+        font-size: 23px;
+        color: black;
+        border-left: 2px solid #EF59A0;
+        padding: 5px 10px;
+    }
+
+    .option-nav-bar {
+        margin: 20px 0px
+    }
+
+    .myaccount-information {
+        border: 1px solid lightgray;
+        padding: 10px;
+        margin: 10px 0px;
+    }
+
+    .myaccount-information h1 {
+        font-size: 20px;
+    }
+
+
     .Cards-Left-Middle {
         display: block;
 
@@ -5390,7 +5597,7 @@ h2.extensorfrase {
         height: 250px;
     }
 
-    
+
     .dbs {
         margin: 20px 0px;
         font-size: 0.7rem;
@@ -5794,6 +6001,43 @@ h2.extensorfrase {
 
 /* TABLETS */
 @media screen and (max-width: 1200px) {
+    .myaccount--page {
+        display: flex;
+        justify-content: left;
+        max-width: 1100px;
+        margin: 30px auto;
+    }
+
+    .navigation-my-account {
+        width: 300px;
+
+    }
+
+    .nav-bar-left {
+        width: 100%;
+    }
+
+    .nav-bar-left a {
+        font-size: 23px;
+        color: black;
+        border-left: 2px solid #EF59A0;
+        padding: 5px 10px;
+    }
+
+    .option-nav-bar {
+        margin: 20px 0px
+    }
+
+    .myaccount-information {
+        border: 1px solid lightgray;
+        padding: 10px;
+        margin: 10px 0px;
+    }
+
+    .myaccount-information h1 {
+        font-size: 20px;
+    }
+
     .menu-pc-top {
         width: 100%;
         display: flex;
@@ -8711,6 +8955,10 @@ h2.extensorfrase {
         margin-bottom: 2vh;
     }
 
+    .order-content-item-box {
+        width: 100%
+    }
+
     .comentarios1 p {
         font-size: 3.5vw;
     }
@@ -8725,6 +8973,13 @@ h2.extensorfrase {
         justify-content: center;
         margin-bottom: 2vh;
         margin-top: 5vh;
+    }
+
+    .icons-right-side {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        align-items: center;
     }
 
     .comentarios2-top img {
@@ -9464,7 +9719,7 @@ h2.extensorfrase {
 
     .carrinhoshow .list ul {
         overflow: auto;
-        height: 60vh;
+        height: 55vh;
         margin: auto;
         border-bottom: 0vw;
         width: 90%;
@@ -11730,4 +11985,43 @@ h2.extensorfrase {
         margin: auto;
         pointer-events: none;
     }
+
+    .myaccount--page {
+        display: block;
+        justify-content: center;
+        max-width: 100%;
+        margin: 30px auto;
+        padding: 10px;
+    }
+
+    .navigation-my-account {
+        width: 300px;
+
+    }
+
+    .nav-bar-left {
+        width: 100%;
+    }
+
+    .nav-bar-left a {
+        font-size: 23px;
+        color: black;
+        border-left: 2px solid #EF59A0;
+        padding: 5px 10px;
+    }
+
+    .option-nav-bar {
+        margin: 20px 0px
+    }
+
+    .myaccount-information {
+        border: 1px solid lightgray;
+        padding: 10px;
+        margin: 10px 0px;
+    }
+
+    .myaccount-information h1 {
+        font-size: 20px;
+    }
+
 }
