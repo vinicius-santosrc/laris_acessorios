@@ -2777,19 +2777,25 @@ img#colar-- {
 }
 
 .card {
-    background-color: #f38ce7;
+    background-color: #EF59A0;
     padding: 20px 20px;
-    max-width: 1500px;
+    max-width: 100%;
     margin: auto;
     display: flex;
     color: white;
     justify-content: space-between;
 }
+.card .leftside {
+    max-width: 1500px;
+    margin: auto;
+    font-size: 22px;
+}
+
 
 .direct {
     margin-bottom: 1vh;
     color: white;
-    font-size: 0.8vw;
+    font-size: 15px;
 }
 
 .card .imgside {
@@ -2803,7 +2809,7 @@ img#colar-- {
 }
 
 .card h1 {
-    font-size: 2.5vw;
+    font-size: 38px;
     font-weight: 400;
 }
 
@@ -2812,10 +2818,8 @@ img#colar-- {
 }
 
 .topcard p {
-    margin-top: auto;
-    margin-left: 0.3vw;
-    margin-bottom: 1vh;
-    font-size: 0.8vw;
+    margin: auto 5px;
+    font-size: 15px;
     font-weight: 400;
 }
 
@@ -2841,7 +2845,7 @@ img#colar-- {
 }
 
 .desccard {
-    font-size: 0.7vw;
+    font-size: 15px;
     width: 100%;
 }
 
@@ -6938,7 +6942,7 @@ h2.extensorfrase {
     }
 
     .card {
-        background-color: #f38ce7;
+        background-color: #EF59A0;
         padding-left: 5vw;
         padding-right: 5vw;
         padding-top: 2vh;
@@ -7572,7 +7576,7 @@ h2.extensorfrase {
     }
 
     body {
-        padding: 50px 0px;
+        padding: 140px 0px;
     }
 
     header {
@@ -9249,15 +9253,19 @@ h2.extensorfrase {
     }
 
     .card {
-        background-color: #f38ce7;
+        background-color: #EF59A0;
         padding: 20px 5px;
-        border-radius: 10px;
-        width: 95%;
+        border-radius: 0px;
+        width: 100%;
         margin: auto;
         display: flex;
         margin-top: 10px;
         justify-content: space-between;
 
+    }
+
+    .card .leftside {
+        width: 90%;
     }
 
     .direct {
@@ -9307,7 +9315,7 @@ h2.extensorfrase {
     }
 
     .card a {
-        color: gray;
+        color: white;
     }
 
     .card a:nth-last-child(2) {

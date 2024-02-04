@@ -6,6 +6,7 @@
     z-index: 100;
     border-bottom: 1px solid rgb(235, 235, 235);
     background-color: white;
+    transition: 500ms;
 }
 
 .topHeaderComponent {
@@ -18,10 +19,12 @@
     color: white;
     font-size: 10px;
     padding: 5px 0px;
+    transition: 500ms;
 }
 
 .header-component {
     padding: 10px 0px;
+    transition: 500ms;
 }
 
 .rightside-header {
@@ -95,5 +98,39 @@
 @media screen and (max-width: 1480px) {
     .header-component, .card {
         padding: 20px 2vw  !important;
+    }
+
+    .topHeaderComponent {
+        font-size: 8px;
+    }
+
+    .innerSearchBox-content {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: black;
+        padding: 0px 10px;
+        border: 1px solid lightgray
+    }
+
+    .innerSearchBox input {
+        border: 1px solid transparent;
+        outline: none;
+        color: black;
+        width: 100%;
+        padding: 0px;
+        align-items: center;
+        font-size: 18px;
+    }
+
+    .SearchBox-Mobile {
+        padding: 5px 20px;
+    }
+    .box-products-search {
+        top: 140px;
+        left: 0;
+        right: 0;
+        width: 90%;
+        margin: auto;
     }
 }
