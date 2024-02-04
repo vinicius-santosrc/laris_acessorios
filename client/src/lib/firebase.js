@@ -22,7 +22,6 @@ const auth = getAuth();
 const CreateNewAccount = async (user) => {
     await createUserWithEmailAndPassword(auth, user.email, user.password)
         .then(async (userCredential) => {
-            const usuario = userCredential.user;
             await fetch(`${endpoint}/api/v1/${secretKey}/users/add`, {
                 method: 'POST',
                 headers: {
@@ -38,11 +37,12 @@ const CreateNewAccount = async (user) => {
                 .then((res) => {
                     window.location.href = window.location.origin;
                 })
+                .catch((err) => console.error(err))
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // ..
+            console.error(error)
         });
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckIfUserIsLogged, CreateNewAccount, auth } from "../../lib/firebase";
+import { GetUserAtual } from "../../lib/database";
 
 const FormRegister = () => {
     const [name, setName] = useState(null);
@@ -32,11 +33,14 @@ const FormRegister = () => {
     }
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            if (CheckIfUserIsLogged()) {
-                window.location.href = window.location.origin;
-            } else {
-
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user && user.uid) {
+                const u = await GetUserAtual(user.uid);
+            if (u) {
+                if (CheckIfUserIsLogged()) {
+                    window.location.href = window.location.origin;
+                }
+            }
             }
         });
 
