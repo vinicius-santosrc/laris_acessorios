@@ -341,7 +341,7 @@ export default function Header() {
                         </a>
                     </div>
                     <div className="icons-right-side">
-                        {usuarioAtual ?
+                        {usuarioAtual && usuarioAtual.nome_completo ?
                             <a href={window.location.origin + '/accounts/myaccount'} title="Minha conta"><i className="fa-regular fa-user"></i></a>
                             :
                             <a href={window.location.origin + '/accounts/login'} title="Minha conta"><i className="fa-regular fa-user"></i></a>
