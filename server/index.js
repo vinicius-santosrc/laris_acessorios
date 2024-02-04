@@ -278,6 +278,21 @@ app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
     });
 });
 
+//DELETE DE ORDERS
+
+app.post(`/api/v1/${secretKey}/orders/delete`, (req, res) => {
+    const item = req.body
+    connection.query('delete from orders where id = ?;', [item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Pedido cadastrado com sucesso' });
+        }
+    });
+});
+
+
 app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
     const item = req.body
     connection.query('update `produtos` set name_product = ?, price = ?, desconto = ?, disponibilidade = ?, categoria = ?, url = ?, quantidade_disponivel = ?, extensor = ? where id = ?', [item.name_product, item.price, item.desconto, item.disponibilidade, item.categoria, item.url, item.quantidade_disponivel, item.extensor, item.id], (err, result) => {
