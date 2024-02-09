@@ -22,6 +22,67 @@ header {
     margin: 0 auto;
 }
 
+.cupom-box-wrapper {
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+    padding: 5px;
+    align-items: center;
+    border: 1px dashed #EF59A0;
+    width: 500px;
+    margin: 10px 0px;
+    cursor: pointer;
+}
+
+.cupom-box-wrapper  img {
+    width: 100px;
+    height: 100px;
+}
+
+.all-cuppons {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-resgate {
+    display: flex;
+    gap: 10px;
+
+}
+
+.input-resgate input {
+    outline: none;
+    border: 1px solid lightgray;
+    padding: 5px 20px;
+}
+
+.input-resgate button {
+    background: #EF59A0;
+    color: white;
+    padding: 5px 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.sucessmessage, .errormessage {
+    width: 70%;
+    padding: 20px;
+    color: white;
+    margin: 10px 0px;
+
+}
+
+.sucessmessage {
+    background: green
+}
+
+.errormessage {
+    background: red;
+}
+
 .HeaderContent-LARIS {
     width: 100%;
     top: 0;
@@ -3041,6 +3102,14 @@ td.photos {
     padding: 20px;
 }
 
+.fixed-information-addres-pedido input {
+    outline: none;
+    border: 1px solid lightgray;
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0px;
+}
+
 .list-pedidos {
     padding: 20px;
     width: 100%;
@@ -3656,6 +3725,79 @@ h2.extensorfrase {
     border: none;
 }
 
+.discont-coupons h4{
+    font-weight: 500;
+    text-align: center;
+}
+
+.discont-coupons input {
+    margin: 10px auto;
+    outline: none;
+    border: 1px solid rgb(233, 233, 233);
+    width: 100%;
+    padding: 5px;
+
+
+}
+
+.CupomBox {
+    width: 100%;
+    border: 1px solid rgb(233, 233, 233);
+    padding: 5px;
+    text-align: left;
+    margin: auto;
+    display: flex;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.CupomBox img {
+    width: 50px;
+    height: 50px;
+}
+
+.fixed-cuppons-box {
+    text-align: left;
+    width: 100%;
+    padding: 20px;
+
+}
+
+.fixed-cuppons-box-content {
+    position: fixed;
+    background: white;
+    border: 1px solid rgb(233, 233, 233);
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    width: 600px;
+    height: 500px;
+}
+
+.title-cupons {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    width: 100%;
+}
+
+.title-cupons button {
+    color: black;
+    font-size: 25px;
+    padding: 5px;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.CupomBox h2 {
+    font-size: 15px
+}
+
+
 .laris-checkout-page .itens-cart {
     height: auto;
     margin: auto;
@@ -4019,12 +4161,18 @@ h2.extensorfrase {
     width: 130px;
 }
 
+.navigation-bar-left-side {
+    overflow-y: auto;
+    height: 73vh;
+}
+
 .navigation-bar-left-side ul {
     width: 100%;
     height: 100%;
     text-align: center;
     justify-content: center;
     display: block;
+    overflow-y: scroll;
 }
 
 .AdminPage-DashBoard li {
@@ -6493,6 +6641,11 @@ h2.extensorfrase {
         padding-right: 10vw;
         padding-bottom: 10vh;
         padding-top: 2vh;
+    }
+
+    .navigation-bar-left-side {
+        overflow-y: auto;
+        height: 65vh;
     }
 
     .formasdepag h2 {
@@ -12117,6 +12270,33 @@ h2.extensorfrase {
 
     .myaccount-information h1 {
         font-size: 20px;
+    }
+
+    .fixed-cuppons-box-content {
+        position: fixed;
+        box-shadow: 1px 1px 15px gray;
+        background: white;
+        border: 1px solid rgb(233, 233, 233);
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        left: 0;
+        right: 0;
+        width: 95%;
+        height: 500px;
+    }
+
+    .sucessmessage, .errormessage {
+        width: 100%;
+        padding: 20px;
+        color: white;
+        margin: 10px 0px;
+    
+    }
+
+    .fixed-information-addres-pedido {
+        width: 95%;
+        margin: auto;
     }
 
 }

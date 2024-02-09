@@ -112,18 +112,35 @@ export default function NavigationLeft() {
                         </li>
                     }
 
+                    {window.location.href.includes('admin/cupons')
+                        ?
+                        <li>
+                            <a id="selectednavigation" href={window.location.origin + '/admin/cupons'}>
+                                <i className="fa-solid fa-ticket-simple"></i>
+                                <span>Cupons</span>
+                            </a>
+                        </li>
+                        :
+                        <li>
+                            <a href={window.location.origin + '/admin/cupons'}>
+                                <i className="fa-solid fa-ticket-simple"></i>
+                                <span>Cupons</span>
+                            </a>
+                        </li>
+                    }
+
                     {window.location.href.includes('admin/imagens-pagina')
                         ?
                         <li>
-                            <a  id="selectednavigation" href={window.location.origin + '/admin/imagens-pagina'}>
-                            <i className="fa-regular fa-image"></i>
+                            <a id="selectednavigation" href={window.location.origin + '/admin/imagens-pagina'}>
+                                <i className="fa-regular fa-image"></i>
                                 <span>Imagens</span>
                             </a>
                         </li>
                         :
                         <li>
                             <a href={window.location.origin + '/admin/imagens-pagina'}>
-                            <i className="fa-regular fa-image"></i>
+                                <i className="fa-regular fa-image"></i>
                                 <span>Imagens</span>
                             </a>
                         </li>
@@ -166,6 +183,7 @@ export default function NavigationLeft() {
                     {window.location.href.includes("/metas") ? <h2>Metas</h2> : null}
                     {window.location.href.includes("/planejamentos") ? <h2>Planejamentos</h2> : null}
                     {window.location.href.includes("/imagens-pagina") ? <h2>Imagens</h2> : null}
+                    {window.location.href.includes("/cupons") ? <h2>Cupons</h2> : null}
                 </div>
                 <div className="rightside-navigation-bar-cellphone">
 

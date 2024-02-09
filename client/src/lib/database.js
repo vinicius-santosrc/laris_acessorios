@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-const url = process.env.REACT_APP_API_ENDPOINT;
+//const url = process.env.REACT_APP_API_ENDPOINT;
 const secretKey = process.env.REACT_APP_API_SECRET_KEY;
-//const url = process.env.REACT_APP_API_ENDPOINT_TEST;
+const url = process.env.REACT_APP_API_ENDPOINT_TEST;
 
 const GetProduct = async (URL) => {
 
@@ -173,5 +173,17 @@ const getPedidos = async () => {
     }
 }
 
+const getCupons = async () => {
+    try {
+        const response = await fetch(`${url}/api/v1/${secretKey}/cupons`);
+        const data = await response.json();
 
-export { GetProduct, getPedidos, GetUserAtual, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};
+        return data;
+    } catch(err) {
+        throw err;
+    }
+}
+
+
+
+export { GetProduct, getCupons, getPedidos, GetUserAtual, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};
