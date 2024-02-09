@@ -11,6 +11,9 @@ const NavigationBarLeft = () => {
                     <Link to={window.location.origin + "/accounts/myaccount/orders"}>Meus pedidos</Link>
                 </div>
                 <div className="option-nav-bar">
+                    <Link to={window.location.origin + "/accounts/myaccount/cupons"}>Cupons</Link>
+                </div>
+                <div className="option-nav-bar">
                     <Link to={window.location.origin + "/accounts/myaccount/favorites"}>Favoritos</Link>
                 </div>
                 <div className="option-nav-bar">

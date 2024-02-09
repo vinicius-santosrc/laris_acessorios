@@ -6,9 +6,12 @@ import * as emailjs from "@emailjs/browser"
 import db from "../lib/appwrite";
 import { ID } from "appwrite";
 import { CheckIfUserIsLogged, auth } from "../lib/firebase";
-import { GetUserAtual } from "../lib/database";
+import { GetUserAtual, getCupons } from "../lib/database";
+import QRCode from 'qrcode.react';
 
 export default function Checkout() {
+
+    const pixKey = '11794087648'
 
     const [sacolaAt, setSacolaAtual] = useState([]);
     const [exportSacola, setExportSacola] = useState([]);
@@ -32,7 +35,16 @@ export default function Checkout() {
     const [numero, setnumero] = useState(null);
     const [referencia, setreferencia] = useState(null);
 
-    const [paymentOption, setPayment] = useState('DINHEIRO')
+    const [Cupom, setCupom] = useState(null);
+    const [CuponsDescontos, setCuponsDescontos] = useState(0);
+
+    const [CuponsBox, setCuponsBox] = useState(false);
+
+    const [paymentOption, setPayment] = useState('DINHEIRO');
+
+    const [cuponsDisp, setcuponsDisp] = useState(null);
+
+    const [CupomAtual, setCupomAtual] = useState(null);
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
@@ -48,6 +60,15 @@ export default function Checkout() {
 
     }, [auth.currentUser])
 
+    async function getAllCupons() {
+        const res = await getCupons();
+        setcuponsDisp(res);
+    }
+
+    useEffect(() => {
+        getAllCupons()
+    }, [])
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (CheckIfUserIsLogged()) {
@@ -60,7 +81,22 @@ export default function Checkout() {
         return () => unsubscribe();
     }, []);
 
+    const createPixPayload = () => {
+        const payloadFormatIndicator = '000201'; // Fixo
+        const pointOfInitiationMethod = '0101'; // Fixo
+        const merchantAccountInformation = `2633${pixKey.length}${pixKey}`; // Chave PIX
+        const merchantCategoryCode = '52040000'; // Fixo
+        const transactionCurrency = '5303986'; // BRL
+        const countryCode = '5802BR'; // Brasil
+        const merchantName = '5924VINICIUS DA SILVA SANTOS'; // Nome do beneficiário
+        const merchantCity = '6009Sao Paulo'; // Cidade do beneficiário
+        const additionalDataFieldTemplate = '62070503***'; // Informações adicionais (pode ser ajustado conforme necessário)
+        const crc16 = '6304'; // CRC16 (a ser calculado)
 
+        const emvPayload = `${payloadFormatIndicator}${pointOfInitiationMethod}${merchantAccountInformation}${merchantCategoryCode}${transactionCurrency}${countryCode}${merchantName}${merchantCity}${additionalDataFieldTemplate}${crc16}`;
+
+        return emvPayload;
+    };
 
     useEffect(() => {
 
@@ -187,7 +223,20 @@ export default function Checkout() {
                 sub += item.preco
                 desc += item.desconto
             })
-            setprecototal(preco)
+            if (CupomAtual && CupomAtual.desconto) {
+                if ((CupomAtual.desconto.toString()).length >= 2) {
+                    setprecototal(preco * (1.00 - Number('0.' + CupomAtual.desconto)))
+                    setCuponsDescontos((preco * ('1.' + CupomAtual.desconto)) - preco)
+                }
+                else {
+                    setprecototal(preco * (1.00 - Number('0.0' + CupomAtual.desconto)))
+                    setCuponsDescontos((preco * ('1.0' + CupomAtual.desconto)) - preco)
+                }
+            }
+
+            else {
+                setprecototal(preco)
+            }
             setsubtotal(sub)
             setdescontos(desc)
         }
@@ -211,7 +260,7 @@ export default function Checkout() {
 
     async function finalizartudo() {
 
-        if(!usuarioAtual || !endereco || !cidade || !bairro || !estado || !cep || !referencia || !numero || !telefone) {
+        if (!usuarioAtual || !endereco || !cidade || !bairro || !estado || !cep || !referencia || !numero || !telefone) {
             return
         }
 
@@ -253,12 +302,44 @@ export default function Checkout() {
                     paymentOption: paymentOption,
                     situation: 'PAGO',
                     desconto: desconto,
-                    subtotal: subtotal
+                    subtotal: subtotal,
+                    cupom_desconto: CuponsDescontos || 0,
+                    cupons: CupomAtual ? CupomAtual.name : ''
                 }),
             })
-            .then((res) => {
-                localStorage.setItem('sacola', '[]')
-            })
+                .then((res) => {
+
+                    if (usuarioAtual && usuarioAtual.cupons && CupomAtual.uniqueKey) {
+                        const CUPONS_USER = JSON.parse(usuarioAtual.cupons);
+                        const cupons_usados = JSON.parse(usuarioAtual.cupons_usados);
+
+                        // Filtra o array removendo o cupomusado
+                        const novoArrayCupons = CUPONS_USER.filter(cupom => cupom !== CupomAtual.uniqueKey);
+
+                        // Se você precisar convertê-lo de volta para uma string JSON
+                        const novaStringCupons = JSON.stringify(novoArrayCupons);
+
+                        cupons_usados.push(CupomAtual.uniqueKey)
+
+                        async function setCupomUser() {
+                            await fetch(`${endpoint}/api/v1/${secretKey}/cupons/myaccount/add`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    cupons: novaStringCupons,
+                                    cupom_usado: JSON.stringify(cupons_usados),
+                                    user_uid: usuarioAtual.uid
+                                }),
+                            })
+                        }
+                        setCupomUser()
+
+                    }
+
+                    localStorage.setItem('sacola', '[]')
+                })
 
             Swal.fire({
                 position: 'top-end',
@@ -358,22 +439,98 @@ export default function Checkout() {
 
                             </div>
 
+                            {CuponsBox &&
+                                <div className="fixed-cuppons-box-content">
+                                    <div className="fixed-cuppons-box">
+                                        <div className="title-cupons">
+                                            <h1>Meus cupons</h1>
+                                            <button onClick={() => setCuponsBox(false)}>
+                                                <span><i className="fa-solid fa-xmark"></i></span>
+                                            </button>
+                                        </div>
+                                        <div className="cupons-list">
+                                            <a href={window.location.origin + '/accounts/myaccount/cupons'}>Deseja mais cupons? Resgate agora!</a>
+                                            <div className="cuppons-ul">
+                                                {cuponsDisp && cuponsDisp.map((cupom) => {
+                                                    const USER_CUPONS = JSON.parse(usuarioAtual.cupons) || ''
+
+                                                    if (USER_CUPONS.includes(cupom.uniqueKey)) {
+                                                        return (
+                                                            <div className="cupom-box-wrapper" onClick={(e) => setCupomAtual(cupom)} key={cupom.id}>
+                                                                <div className="left-side-box-cupom">
+                                                                    <img src={window.location.origin + "/static/media/cupons/" + cupom.imageURL} />
+                                                                </div>
+                                                                <div className="right-side-box-cupom">
+                                                                    <div className="up-cupom">
+                                                                        <p>Para você</p>
+                                                                        <h4>{cupom.name}</h4>
+                                                                        <h5>{cupom.desconto}% de desconto.</h5>
+                                                                    </div>
+                                                                    <div className="validade">
+                                                                        <p>Sem validade</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
                             <div class='pay--'>
                                 <h1><i class="fa-solid fa-money-bill"></i> Pagamento</h1>
                                 <div class='pay-inside'>
+                                    <div className="discont-coupons">
+                                        <div className="CupomBox" onClick={() => setCuponsBox(true)}>
+                                            {CupomAtual && CupomAtual.name ?
+                                                <React.Fragment>
+                                                    <div className="leftside-cupom-selected">
+                                                        <img src={window.location.origin + "/static/media/cupons/" + CupomAtual.imageURL} />
+                                                    </div>
+                                                    <div className="rightside-cupom-selected">
+                                                        <h2>{CupomAtual.name}</h2>
+                                                        <p>{CupomAtual.desconto}% off nos produtos.</p>
+                                                    </div>
+
+                                                </React.Fragment>
+                                                :
+                                                <React.Fragment>
+                                                    <div className="leftside-cupom-selected">
+                                                        <img src={null} />
+                                                    </div>
+                                                    <div className="rightside-cupom-selected">
+                                                        <h2>Selecione um cupom</h2>
+                                                        <p>Nenhum cupom selecionado.</p>
+                                                    </div>
+
+                                                </React.Fragment>
+                                            }
+                                        </div>
+                                    </div>
                                     <div class="paymenttotal">
                                         <div class="monetarycard">
                                             <div class="monetary">
                                                 <div>
                                                     <p class="leftsidemonetary">Subtotal:</p>
                                                 </div>
-                                                <p class="valuemonetary">R$ {subtotal}</p>
+                                                <p class="valuemonetary">R$ {subtotal.toFixed(2)}</p>
                                             </div>
                                             <div class="monetary">
                                                 <div>
                                                     <p class="leftsidemonetary">Descontos:</p>
                                                 </div>
-                                                <p class="valuemonetary">R$ {desconto}</p>
+                                                <p class="valuemonetary">R$ {desconto.toFixed(2)}</p>
+                                            </div>
+                                            <div class="monetary">
+                                                <div>
+                                                    <p class="leftsidemonetary">Cupons:</p>
+                                                </div>
+                                                <p class="valuemonetary">R$ {CuponsDescontos.toFixed(2)}</p>
                                             </div>
                                             <div class="monetary">
                                                 <div>
@@ -385,7 +542,7 @@ export default function Checkout() {
                                                 <div>
                                                     <p class="leftsidemonetary">Total:</p>
                                                 </div>
-                                                <p>R$ {precototal}</p>
+                                                <p>R$ {precototal.toFixed(2)}</p>
                                             </div>
                                         </div>
 

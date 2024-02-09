@@ -87,6 +87,7 @@ const OrderPage = () => {
                                         <div className="spacer-title">
                                             <h3>Subtotal: R${pedidoAtual.subtotal.toFixed(2)}</h3>
                                             <h3>Descontos: R${pedidoAtual.desconto.toFixed(2)}</h3>
+                                            <h3>Cupons: R${pedidoAtual.cupom_desconto.toFixed(2)} / {pedidoAtual.cupom_name}</h3>
                                             <h2>Total: R${pedidoAtual.order_totalprice.toFixed(2)}</h2>
                                             <h4>Número de items: {itemsPedido.length}</h4>
                                         </div>

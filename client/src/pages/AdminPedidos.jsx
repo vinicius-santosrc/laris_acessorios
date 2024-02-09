@@ -85,8 +85,8 @@ export default function AdminPedidos() {
                                 <td>{userOrder.cpf}</td>
                                 <td className="photos">
                                     {items.map((res) => {
-                                        return <div className="item-content-table" key={res.item}>
-                                            <img src={res.photoURL} />
+                                        return <div title={res.name} className="item-content-table" key={res.item}>
+                                            <img alt={res.name} src={res.photoURL} />
                                         </div>
                                     })}
                                 </td>
@@ -98,6 +98,7 @@ export default function AdminPedidos() {
                                 <td>{response.state}</td>
                                 <td>{response.paymentOption}</td>
                                 <td>R$ {response.desconto.toFixed(2)}</td>
+                                <td>R$ {response.cupom_desconto.toFixed(2)}</td>
                                 <td>R$ {response.subtotal.toFixed(2)}</td>
                                 <td>R${response.order_totalprice.toFixed(2)}</td>
                                 <td>
@@ -154,6 +155,7 @@ export default function AdminPedidos() {
                             <td>Estado Atual: </td>
                             <td>Pagamento: </td>
                             <td>Desconto: </td>
+                            <td>Cupons: </td>
                             <td>Subtotal: </td>
                             <td>Total: </td>
                             <td>Ações: </td>

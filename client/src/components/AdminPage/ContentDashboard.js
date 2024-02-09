@@ -146,6 +146,9 @@ export default function ContentDashboard() {
                             window.location.href = "/admin/products/add";
                         }}>Adicionar Produtos</button>
                         <button onClick={() => {
+                            window.location.href = "/admin/cupons";
+                        }}>Criação de Cupom</button>
+                        <button onClick={() => {
                             window.location.href = "/admin/pedidos";
                         }}>Pedidos realizados</button>
                         <button onClick={() => {

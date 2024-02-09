@@ -41,6 +41,8 @@ import LoginPage from './pages/authentication/Login';
 import MyAccount from './pages/authentication/MyAccount';
 import Orders from './pages/authentication/MyAccountSub/Orders';
 import OrderPage from './pages/authentication/MyAccountSub/OrderPage';
+import Cupons from './pages/authentication/MyAccountSub/Cupons';
+import CuponsAdm from './pages/AdminCupons/CuponsAdm';
 
 //SCRIPTS
 function App() {
@@ -60,6 +62,7 @@ function App() {
           <Route path='/accounts/myaccount/orders' element={<Orders />} />
           <Route path='/accounts/myaccount/orders/:pedidoID' element={<OrderPage />} />
           <Route path='/accounts/myaccount/address' element={<MyAccount />} />
+          <Route path='/accounts/myaccount/cupons' element={<Cupons />} />
           <Route path='/accounts/myaccount/favorites' element={<MyAccount />} />
           <Route path='/accounts/myaccount/help' element={<MyAccount />} />
 
@@ -87,6 +90,7 @@ function App() {
           <Route path="/admin/metas/:meta" element={<AdminMetasMeta />}></Route>
           <Route path="/admin/planejamentos" element={<AdminPlanejamentos />}></Route>
           <Route path="/admin/imagens-pagina" element={<AdminImages />}></Route>
+          <Route path="/admin/cupons" element={<CuponsAdm />}></Route>
 
  
           <Route path='/promocoes' element={<Promocoes />}></Route>

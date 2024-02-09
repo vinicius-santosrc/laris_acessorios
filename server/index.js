@@ -268,7 +268,7 @@ app.get(`/api/v1/${secretKey}/orders`, (req, res) => {
 
 app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
     const item = req.body
-    connection.query('insert into orders values (default, ?, ?, ?, ?, default, ?, default, ?, ?, ?)', [item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal], (err, result) => {
+    connection.query('insert into orders values (default, ?, ?, ?, ?, default, ?, default, ?, ?, ?, ?, ?)', [item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal, item.cupom_desconto, item.cupons], (err, result) => {
         if (err) {
             console.error(err);  // Log the error for debugging
             res.status(500).json({ error: 'Erro ao obter dados' });
@@ -288,6 +288,54 @@ app.post(`/api/v1/${secretKey}/orders/delete`, (req, res) => {
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
             res.status(200).json({ message: 'Pedido cadastrado com sucesso' });
+        }
+    });
+});
+
+//REQUISIÇÃO DE CUPONS
+
+app.get(`/api/v1/${secretKey}/cupons`, (req, res) => {
+    connection.query('SELECT * FROM cupons', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
+app.post(`/api/v1/${secretKey}/cupons/add`, (req, res) => {
+    const item = req.body
+    connection.query(`INSERT INTO cupons VALUES ( DEFAULT, ?, ?, DEFAULT, ?, 'cupom-image-wrapper.webp', DEFAULT, NULL, 0, ? )`, [item.uniqueKey, item.name, item.desconto, item.private], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Cupom adicionado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/v1/${secretKey}/cupons/remove`, (req, res) => {
+    const item = req.body
+    connection.query(`DELETE FROM cupons WHERE ID = ?`, [item.id], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Cupom adicionado com sucesso' });
+        }
+    });
+});
+
+app.post(`/api/v1/${secretKey}/cupons/myaccount/add`, (req, res) => {
+    const item = req.body
+    connection.query('UPDATE `users` SET cupons = ?, cupons_usados = ? WHERE uid = ? ', [item.cupons, item.cupom_usado, item.user_uid], (err, result) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Cupom adicionado na conta com sucesso' });
         }
     });
 });
