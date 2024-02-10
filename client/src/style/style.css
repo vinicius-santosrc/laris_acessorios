@@ -5400,6 +5400,7 @@ h2.extensorfrase {
 
 .cuppons-ul {
     overflow-y: scroll;
+    height: 400px;
 }
 
 .card-saldo-disponivel {
