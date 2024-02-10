@@ -169,6 +169,7 @@ header .icons {
 
 .bottom-code {
     color: gray;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -655,6 +656,7 @@ p.new {
 
 .itensdesc h1 {
     font-size: 32px;
+    line-height: 40px;
     color: rgb(0, 0, 0);
 }
 
@@ -697,19 +699,17 @@ p.new {
     margin-top: 0vh;
     margin-bottom: auto;
     text-align: center;
-    width: 35%;
+    width: 30%;
 
 }
 
 .itensdesc h2 {
-    font-size: 20px;
-    color: rgb(0, 0, 0);
-    border-left: 0.2vw solid #ef599f00;
-    padding-left: 0.5vw;
-    margin-bottom: 10px;
+    color: rgb(7, 7, 7);
     font-weight: 400;
     text-align: center;
 }
+
+
 
 .personalizado-card input {
     border: 0.1vw solid #e2e2e2;
@@ -2156,6 +2156,77 @@ label#cart {
 
 }
 
+.tamanhos-options {
+    margin: 5px auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap
+
+}
+
+.price-component-show h2 {
+    font-size: 26px;
+}
+
+.button-tamanhos-wrapper {
+    padding: 5px;
+    border: 2px solid lightgray;
+    width: 70px;
+    cursor: pointer;
+    background: transparent;
+    color: black;
+    text-transform: uppercase;
+}
+
+.price-component-show, .tamanho-component, .guia-tamanhos-component {
+    margin: 20px 0px;
+}
+
+.buttons-component-actions {
+    padding: 20px 0px;
+    border-top: 1px solid lightgray
+}
+
+.guia-tamanhos-component a{
+    border-bottom: 2px solid #EF59A0;
+    padding: 5px;
+    text-decoration: none;
+    color: black
+}
+
+.guia-tamanhos-component {
+    text-decoration: none;
+}
+
+#red-color {
+    color: red
+}
+
+.button-wrapper--content {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    color: white;
+    font-weight: 500;
+    background: #ef59a0;
+    border: 1px solid #ef59a0;
+    cursor: pointer
+}
+
+.button-tamanhos-wrapper#selected {
+    padding: 5px;
+    border: 2px solid #EF59A0;
+
+    background: #EF59A0;
+    width: 70px;
+    color: #EF59A0;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white
+}
+
 .pc-slider ul {
     width: 100%;
     height: 100%;
@@ -2181,9 +2252,8 @@ label#cart {
 
 
 .compartilhar {
-    margin-top: 2vh;
-    font-size: 17px;
-    text-align: center;
+    font-size: 15px;
+    text-align: right;
 }
 
 .compartilhar a {
@@ -2361,6 +2431,10 @@ label#cart {
     color: red;
     border-radius: 100%;
     font-size: 15px;
+}
+
+.imagensmobile {
+    display: none;
 }
 
 .info-inicioside1 {
@@ -3303,8 +3377,7 @@ td.photos {
     display: flex;
     justify-content: center;
     text-align: center;
-    font-size: 0.6vw;
-    padding: 10px 0px;
+    padding-top: 20px;
     margin: auto;
 }
 
@@ -3314,6 +3387,12 @@ td.photos {
     margin-left: 0;
     margin-right: 0;
 }
+
+.bottom-button-content-share 
+{
+    text-align: right;
+}
+
 
 .redes-sociais {
     color: #000000;
@@ -3617,12 +3696,6 @@ td.photos {
     font-size: 0.7vw;
 }
 
-h2.tamanhofrase {
-    border-top: 0.1vw solid;
-    padding: 10px 0px;
-    text-align: left;
-    padding-left: 0;
-}
 
 h2.extensorfrase {
     padding-top: 0vh;
@@ -5004,6 +5077,10 @@ h2.extensorfrase {
     cursor: pointer;
 }
 
+.imagem-principal-mobile {
+    display: none
+}
+
 .navigation-header-cell {
     display: none !important
 }
@@ -5237,6 +5314,14 @@ h2.extensorfrase {
 
 #saidas {
     color: red
+}
+
+.swiper-button-prev, .swiper-button-next {
+    color: #EC57B1 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #ec57b1 !important;
 }
 
 .color-green-receita {
@@ -8666,16 +8751,6 @@ h2.extensorfrase {
         margin-bottom: 0;
     }
 
-
-    h2.tamanhofrase {
-        border-top: 0.1vw solid rgb(219, 219, 219);
-        padding-top: 2vh;
-        text-align: left;
-        margin-bottom: 1vh;
-        padding-left: 0;
-        margin-right: 3vw;
-        margin-left: 3vw;
-    }
 
     .content-inside-item-left-side a {
         color: black;
@@ -12307,4 +12382,80 @@ h2.extensorfrase {
         width: 100%
     }
 
+    .price-component-show p, .tamanhofrase, .itensdesc h1, #caminho, .bottom-code, .avaliacoes, .price-component-show h2{
+        text-align: center;
+    }
+
+    .price-component-show p {
+        color: gray;
+        font-size: 13px;
+    }
+
+    .avaliacoes {
+        justify-content: center;
+    }
+
+    .itensdesc h1 {
+        font-size: 28px
+    }
+
+    .bottom-code {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    .price-component-show h2 {
+        font-size: 25px;
+    }
+
+    .buttons-component-actions {
+        border-top: 1px solid #f4f4f4
+    }
+
+    .compartilhar {
+        margin: 0px;
+        text-align: right;
+    }
+
+    .opcoesdeimagem {
+        display: none;
+    }
+
+    .imgitem {
+        width: 100%;
+        
+    }
+    .imagemprincipal {
+        width: 100%;
+    }
+
+    .imgitem img {
+        width: 100%;
+        height: 350px
+    }
+
+    .imagensmobile {
+        display: flex;
+        justify-content: right;
+        gap: 5px;
+    }
+
+    .imagensmobile img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover
+    }
+    
+    .imagemprincipal-img {
+        width: 100%;
+    }
+
+    .img-principal {
+        width: 100%;
+    }
+
+    .imagem-principal-mobile {
+        width: 100%;
+        display: block
+    }
 }

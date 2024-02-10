@@ -1,7 +1,7 @@
 import { Query } from "appwrite"
 
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import * as emailjs from "@emailjs/browser"
 
@@ -48,6 +48,8 @@ export default function ProductPage() {
     const [photospublic, setPhotosOfPublic] = useState([])
     const [SIZES, SETSIZES] = useState([]) //PEGAR TODOS OS SIZES DA PUBLICACAO
     const [PHOTOATUAL, SETPHOTOATUAL] = useState(0) //PARA MUDAR A FOTO PRINCIPAL
+
+    const [tamanho, setTamanho] = useState(null)
 
     useEffect(() => {
 
@@ -147,9 +149,13 @@ export default function ProductPage() {
     }
 
     function HandleClickAdd() {
+
+        if (!tamanho) {
+            return
+        }
+
         let LOCALST = localStorage.getItem("sacola")
-        let quantidade = document.querySelector('select#quant')
-        let tamanho = document.querySelector('select#tamanho')
+        let quantidade = 1
         let personalizacao = document.querySelector(".personalizado-card input")
 
         let JSON2 = JSON.parse(LOCALST)
@@ -219,8 +225,8 @@ export default function ProductPage() {
                                 JSON2.push({
                                     id: Product.id,
                                     name: Product.name_product,
-                                    tamanho: tamanho.value,
-                                    qtd: parseInt(quantidade.value),
+                                    tamanho: tamanho,
+                                    qtd: parseInt(quantidade),
                                     preco: Product.price,
                                     desconto: Product.desconto,
                                     photoURL: photopdt
@@ -249,8 +255,8 @@ export default function ProductPage() {
                                     JSON2.push({
                                         id: Product.id,
                                         name: Product.name_product,
-                                        tamanho: tamanho.value,
-                                        qtd: parseInt(quantidade.value),
+                                        tamanho: tamanho,
+                                        qtd: parseInt(quantidade),
                                         preco: Product.price,
                                         desconto: Product.desconto,
                                         photoURL: photopdt,
@@ -277,8 +283,8 @@ export default function ProductPage() {
                                 JSON2.push({
                                     id: Product.$id,
                                     name: Product.name_product,
-                                    tamanho: tamanho.value,
-                                    qtd: parseInt(quantidade.value),
+                                    tamanho: tamanho,
+                                    qtd: parseInt(quantidade),
                                     preco: Product.price,
                                     desconto: Product.desconto,
                                     photoURL: photopdt
@@ -307,8 +313,8 @@ export default function ProductPage() {
                                     JSON2.push({
                                         id: Product.$id,
                                         name: Product.name_product,
-                                        tamanho: tamanho.value,
-                                        qtd: parseInt(quantidade.value),
+                                        tamanho: tamanho,
+                                        qtd: parseInt(quantidade),
                                         preco: Product.price,
                                         desconto: Product.desconto,
                                         photoURL: photopdt,
@@ -337,8 +343,8 @@ export default function ProductPage() {
                         JSON2.push({
                             id: Product.id,
                             name: Product.name_product,
-                            tamanho: tamanho.value,
-                            qtd: parseInt(quantidade.value),
+                            tamanho: tamanho,
+                            qtd: parseInt(quantidade),
                             preco: Product.price,
                             desconto: Product.desconto,
                             photoURL: photopdt
@@ -367,8 +373,8 @@ export default function ProductPage() {
                             JSON2.push({
                                 id: Product.$id,
                                 name: Product.name_product,
-                                tamanho: tamanho.value,
-                                qtd: parseInt(quantidade.value),
+                                tamanho: tamanho,
+                                qtd: parseInt(quantidade),
                                 preco: Product.price,
                                 desconto: Product.desconto,
                                 photoURL: photopdt,
@@ -387,6 +393,7 @@ export default function ProductPage() {
     return (
         <>
             <Header />
+            {/*
             <section>
                 <div className='sessoes-top'>
                     <div className='etapa'>
@@ -399,7 +406,9 @@ export default function ProductPage() {
                     </div>
                 </div>
             </section>
+             */}
 
+            {/*
             <section>
                 <div className="infocompra">
 
@@ -407,6 +416,7 @@ export default function ProductPage() {
 
                 </div>
             </section>
+             */}
 
             <section>
                 <div className='item'>
@@ -431,48 +441,96 @@ export default function ProductPage() {
                             <div className="imagemprincipal">
                                 <img src={Product != "" && PHOTOURL && PHOTOURL.length > 0 ? PHOTOURL[PHOTOATUAL] : ""} alt="" />
                             </div>
+                            <div className="imagem-principal-mobile">
+                                <Swiper
+                                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                    slidesPerView={1}
+                                    pagination={{ clickable: true }}
+                                    navigation
+                                >
+                                    {PHOTOURL && PHOTOURL.length && PHOTOURL.map((item, index) => {
+
+                                        const handleClick = () => {
+                                            SETPHOTOATUAL(index);
+                                        };
+
+                                        return (
+                                            <SwiperSlide  key={item.id}>
+                                                <img
+                                                    onClick={handleClick}
+                                                    id={index}
+                                                    key={index}
+                                                    src={item}
+                                                    className='imagemprincipal-img'
+                                                />
+                                            </SwiperSlide>
+                                        )
+                                    })}
+                                </Swiper>
+                            </div>
+
                         </div>
                         {Product != '' ?
                             <div className='itensdesc'>
-                                <p id='caminho'>LARI'S ACESSÓRIOS</p>
-                                <h1>{Product.name_product}</h1>
-                                <p className="bottom-code">Código: {Product.id}</p>
+                                <div className="directory-component">
+                                    <p id='caminho'>LARI'S ACESSÓRIOS</p>
+                                </div>
+                                <div className="header-product-component">
+                                    <h1>{Product.name_product}</h1>
+                                    <p className="bottom-code">Código: LARIS-{Product.id}</p>
+                                </div>
                                 <div className="avaliacoes">
                                     <img src="../static/media/product-images/Nenhuma estrela.png" alt="" />
                                 </div>
-                                {Product.desconto > 0 ?
-                                    <h2>Valor: <s style={{ color: 'darkgray' }}>R${Product.price.toFixed(2)}</s> R${(Product.price - Product.desconto).toFixed(2)}</h2> :
-                                    <h2>Valor: <b>R$ {Product.price.toFixed(2)}</b></h2>
-                                }
-                                {Product.personalizavel == true ?
-                                    <div class="personalizado-card">
-
-                                        <h2>Personalização: <input minlength="1" maxlength="7" name="personalizacao" id="personalizacao" /></h2>
-                                    </div>
-                                    :
-                                    ""}
-                                <h2>Quantidade: <select name="Quantidade" id="quant">
-                                    <option value={Product.quantidade_disponivel > 0 ? 1 : 0} selected>{Product.quantidade_disponivel} {Product.quantidade_disponivel > 1 ? "unidades" : Product.quantidade_disponivel == 0 ? 'unidades' : 'unidade'}</option>
-                                </select></h2>
-                                <div className='tamanhocenterleft'>
-                                    <h2 className="tamanhofrase">Selecione Tamanho: <select name="Tamanho" id="tamanho">
+                                <div className="price-component-show">
+                                    {Product.desconto > 0 ?
+                                        <React.Fragment>
+                                            <h2><s style={{ color: 'darkgray' }}>R$ {Product.price.toFixed(2)}</s> R$ {(Product.price - Product.desconto).toFixed(2)}</h2>
+                                            <p>Produto disponível para cupons</p>
+                                        </React.Fragment>
+                                        :
+                                        <React.Fragment>
+                                            <h2>R$ {Product.price.toFixed(2)}</h2>
+                                            <p>Produto disponível para cupons</p>
+                                        </React.Fragment>
+                                    }
+                                </div>
+                                <div className='tamanho-component'>
+                                    <p className="tamanhofrase">Tamanho {!tamanho && <span id="red-color">Selecione uma opção</span>}</p>
+                                    <div className="tamanhos-options">
                                         {SIZES.map((s) => {
                                             return (
-                                                <option value={s}>{s}</option>
+                                                <div className="tamanho-option-select" value={s}>
+                                                    <button onClick={() => setTamanho(s)} className="button-tamanhos-wrapper" id={tamanho === s ? "selected" : null}>
+                                                        <span>{s}</span>
+                                                    </button>
+                                                </div>
                                             )
                                         })}
-                                    </select>
-                                    </h2>
-                                    <a href={window.location.origin + "/institucional/guia-de-tamanhos/colares"} target="_blank"><u>Guia de Tamanhos</u></a>
+                                    </div>
                                 </div>
-                                {Product.disponibilidade == true ?
-                                    <label id='cart' onClick={HandleClickAdd}><i className="fas fa-cart-plus"></i> ADICIONAR A SACOLA</label>
-                                    :
-                                    <label className="indisponivel" onClick={product_indisponivel}><i className="fas fa-shopping-bag"></i> AVISE-ME QUANDO CHEGAR</label>
-                                }
 
-                                <p id='entregue'>Este produto é vendido e entregue pela <a href=''>LARI'S</a>.</p>
-                                <p className="compartilhar">Compartilhe: <a href={'https://api.whatsapp.com/send/?text=' + window.location.href} target="_blank"><i className="fa-brands fa-square-whatsapp"></i></a></p>
+                                <div className="guia-tamanhos-component">
+                                    <a href={window.location.origin + "/institucional/guia-de-tamanhos/colares"} target="_blank"><i className="fa-solid fa-ruler"></i> Descubra seu tamanho</a>
+                                </div>
+
+                                <div className="buttons-component-actions">
+                                    {Product.disponibilidade == true ?
+                                        <button className='button-wrapper--content' onClick={HandleClickAdd}>
+                                            <span><i className="fas fa-cart-plus"></i> Adicionar a sacola</span>
+                                        </button>
+                                        :
+                                        <button className='button-wrapper--indisponivel' onClick={product_indisponivel}>
+                                            <span>
+                                                <i className="fas fa-shopping-bag"></i> AVISE-ME QUANDO CHEGAR</span>
+                                        </button>
+                                    }
+                                </div>
+
+                                <div className="bottom-button-content-share">
+                                    <p className="compartilhar">Compartilhe: <a href={'https://api.whatsapp.com/send/?text=' + window.location.href} target="_blank"><i className="fa-brands fa-square-whatsapp"></i></a></p>
+                                </div>
+
                             </div>
                             :
                             <Ring
