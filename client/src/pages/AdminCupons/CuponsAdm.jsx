@@ -29,6 +29,13 @@ const CuponsAdm = () => {
     async function createNewCupom() {
         try {
             if (nomeCupom && CodigoCupom, DescontoCupom) {
+
+                let isPrivate;
+
+                if (typeof Private === 'boolean') {
+                    isPrivate = Private ? 1 : 0;
+                }
+
                 await fetch(`${endpoint}/api/v1/${secretKey}/cupons/add`, {
                     method: 'POST',
                     headers: {
@@ -38,7 +45,7 @@ const CuponsAdm = () => {
                         uniqueKey: CodigoCupom,
                         name: nomeCupom,
                         desconto: DescontoCupom,
-                        private: Private ? 1 : 0
+                        private: isPrivate
                     }),
                 })
                     .then((res) => {
@@ -70,7 +77,7 @@ const CuponsAdm = () => {
                     id: id
                 }),
             })
-            .then(() => getAllCupons())
+                .then(() => getAllCupons())
 
         }
         catch (error) {
@@ -129,7 +136,7 @@ const CuponsAdm = () => {
                                 </div>
                                 <div className="input-ticket">
                                     <p>Cupom privado? (Somente com o código)</p>
-                                    <select onChange={(e) => { setPrivate(e.target.value); console.log(e.target.value) }} value={Private}>
+                                    <select onChange={(e) => { setPrivate(e.target.value) }} value={Private}>
                                         <option value={true}>Sim</option>
                                         <option value={false}>Não</option>
                                     </select>

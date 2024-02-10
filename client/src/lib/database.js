@@ -5,7 +5,7 @@ const secretKey = process.env.REACT_APP_API_SECRET_KEY;
 //const url = process.env.REACT_APP_API_ENDPOINT_TEST;
 
 const GetProduct = async (URL) => {
-
+    
     try {
         const response = await fetch(`${url}/api/v1/${secretKey}/products`);
         const data = await response.json();
