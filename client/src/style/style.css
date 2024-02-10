@@ -12445,6 +12445,10 @@ h2.extensorfrase {
         height: 80px;
         object-fit: cover
     }
+
+    .imagemprincipal {
+        display: none;
+    }
     
     .imagemprincipal-img {
         width: 100%;
