@@ -186,4 +186,4 @@ const getCupons = async () => {
 
 
 
-export { GetProduct, getCupons, getPedidos, GetUserAtual, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};
+export { GetProduct, GetAllUsers, getCupons, getPedidos, GetUserAtual, getUser, getAllProducts, getMetas, getPlanilhaDespesas, getPlanilhaItens, getPlanejamentos, GetProductById};
