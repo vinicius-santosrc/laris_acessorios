@@ -5303,6 +5303,10 @@ h2.extensorfrase {
     width: 80%
 }
 
+.cuppons-ul {
+    overflow-y: scroll;
+}
+
 .card-saldo-disponivel {
     background: #EF59A0;
     width: 100%;
@@ -12297,6 +12301,10 @@ h2.extensorfrase {
     .fixed-information-addres-pedido {
         width: 95%;
         margin: auto;
+    }
+
+    .cupom-box-wrapper {
+        width: 100%
     }
 
 }

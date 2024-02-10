@@ -456,7 +456,7 @@ export default function Checkout() {
 
                                                     if (USER_CUPONS.includes(cupom.uniqueKey)) {
                                                         return (
-                                                            <div className="cupom-box-wrapper" onClick={(e) => setCupomAtual(cupom)} key={cupom.id}>
+                                                            <div className="cupom-box-wrapper" onClick={(e) => {setCupomAtual(cupom); setCuponsBox(false)}} key={cupom.id}>
                                                                 <div className="left-side-box-cupom">
                                                                     <img src={window.location.origin + "/static/media/cupons/" + cupom.imageURL} />
                                                                 </div>
