@@ -23,7 +23,7 @@
             <li>React: Biblioteca JavaScript para construção da interface do usuário.</li>
             <li>CSS: Utilizado para estilização e design responsivo.</li>
             <li>Javascript: Linguagem de programação principal para a lógica do cliente.</li>
-            <li>Appwrite: Plataforma open-source para a criação de backends de aplicativos.</li>
+            <li>MySQL: Plataforma para gerenciamento de banco de dados de linguagem SQL.</li>
             <li>NodeJS: Ambiente de execução para JavaScript do lado do servidor.</li>
         </ul>
       </table>
