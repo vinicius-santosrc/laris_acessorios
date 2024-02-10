@@ -2215,6 +2215,16 @@ label#cart {
     cursor: pointer
 }
 
+.button-wrapper--indisponivel {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    color: white;
+    background: #141414;
+    border: 1px solid #141414;
+    cursor: pointer
+}
+
 .button-tamanhos-wrapper#selected {
     padding: 5px;
     border: 2px solid #EF59A0;
