@@ -76,6 +76,7 @@ const Cupons = () => {
             setErrorMessage(true)
             setTimeout(() => {
                 setErrorMessage(false)
+                getAllCupons()
             }, 5000);
         }
 
@@ -105,6 +106,7 @@ const Cupons = () => {
                 getAllCupons()
                 setTimeout(() => {
                     setSucessMessage(false)
+                    getAllCupons()
                 }, 5000);
             })
         }
