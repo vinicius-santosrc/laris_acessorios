@@ -454,9 +454,29 @@ export default function Checkout() {
                                                 {cuponsDisp && cuponsDisp.map((cupom) => {
                                                     const USER_CUPONS = JSON.parse(usuarioAtual.cupons) || ''
 
+                                                    if (desconto > 0 && USER_CUPONS.includes(cupom.uniqueKey)) {
+                                                        return (
+                                                            <div className="cupom-box-wrapper" key={cupom.id}>
+                                                                <div className="left-side-box-cupom">
+                                                                    <img src={window.location.origin + "/static/media/cupons/" + cupom.imageURL} />
+                                                                </div>
+                                                                <div className="right-side-box-cupom">
+                                                                    <div className="up-cupom">
+                                                                        <p id="red-color">CUPOM INDISPONÍVEL PARA ESSA COMPRA</p>
+                                                                        <h4>{cupom.name}</h4>
+                                                                        <h5><s>{cupom.desconto}% de desconto.</s></h5>
+                                                                    </div>
+                                                                    <div className="validade">
+                                                                        <p>Indisponível para compras que incluem produtos em promoção.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+
                                                     if (USER_CUPONS.includes(cupom.uniqueKey)) {
                                                         return (
-                                                            <div className="cupom-box-wrapper" onClick={(e) => {setCupomAtual(cupom); setCuponsBox(false)}} key={cupom.id}>
+                                                            <div className="cupom-box-wrapper" onClick={(e) => { setCupomAtual(cupom); setCuponsBox(false) }} key={cupom.id}>
                                                                 <div className="left-side-box-cupom">
                                                                     <img src={window.location.origin + "/static/media/cupons/" + cupom.imageURL} />
                                                                 </div>
@@ -500,13 +520,30 @@ export default function Checkout() {
                                                 </React.Fragment>
                                                 :
                                                 <React.Fragment>
-                                                    <div className="leftside-cupom-selected">
-                                                        <img src={null} />
-                                                    </div>
-                                                    <div className="rightside-cupom-selected">
-                                                        <h2>Selecione um cupom</h2>
-                                                        <p>Nenhum cupom selecionado.</p>
-                                                    </div>
+                                                    {/*SE O DESCONTO FOR menor ou igual a 0 e SACOLA TIVER 1 OU MENOS ITENS */}
+                                                    {desconto > 0
+                                                        ?
+                                                        <React.Fragment>
+                                                            <div className="leftside-cupom-selected">
+                                                                <img src={null} />
+                                                            </div>
+                                                            <div className="rightside-cupom-selected">
+                                                                <h2 id="red-color">Cupons indisponíveis para esse tipo de compra</h2>
+                                                                <p>Adicione mais um produto para poder usar cupons.</p>
+                                                            </div>
+                                                        </React.Fragment>
+                                                        :
+
+                                                        <React.Fragment>
+                                                            <div className="leftside-cupom-selected">
+                                                                <img src={null} />
+                                                            </div>
+                                                            <div className="rightside-cupom-selected">
+                                                                <h2>Selecione um cupom</h2>
+                                                                <p>Nenhum cupom selecionado.</p>
+                                                            </div>
+                                                        </React.Fragment>
+                                                    }
 
                                                 </React.Fragment>
                                             }
