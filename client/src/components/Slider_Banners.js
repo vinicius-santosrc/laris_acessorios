@@ -27,8 +27,7 @@ const items_slider = [
         imagemobile: '/static/media/banner-jewerly-mobile.png'
     }
     
-    
-    
+
 ]
 
 export default function Slider_Banners() {
