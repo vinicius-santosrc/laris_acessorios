@@ -12,15 +12,20 @@ import 'swiper/css/scrollbar';
 
 const items_slider = [
     {
+        id: '1',
+        image: '/static/media/banner-carnaval.png',
+        imagemobile: '/static/media/banner-carnaval-mobile.png'
+    },
+    {
         id: '2',
-        image: '/static/media/product-images/banner-primeiro-pedido.png',
-        imagemobile: '/static/media/product-images/banner-primeiro-pedido-cell.png'
+        image: '/static/media/banner-pratas-luxo.png',
+        imagemobile: '/static/media/banner-pratas-luxo-mobile.png'
     },
     {
         id: '3',
-        image: '/static/media/banner-laris-brilhe.svg',
-        imagemobile: '/static/media/banner-laris-brilhe-cell.svg'
-    },
+        image: '/static/media/banner-jewerly.png',
+        imagemobile: '/static/media/banner-jewerly-mobile.png'
+    }
     
     
     

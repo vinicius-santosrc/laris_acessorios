@@ -2151,7 +2151,7 @@ label#cart {
 .pc-slider {
     overflow: hidden;
     margin: 10px auto;
-    padding: 0px 20px;
+    padding: 0px 0px;
     max-width: 1500px;
 
 }
