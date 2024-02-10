@@ -43,6 +43,7 @@ import Orders from './pages/authentication/MyAccountSub/Orders';
 import OrderPage from './pages/authentication/MyAccountSub/OrderPage';
 import Cupons from './pages/authentication/MyAccountSub/Cupons';
 import CuponsAdm from './pages/AdminCupons/CuponsAdm';
+import Clientes from './pages/AdminClientes/Clientes';
 
 //SCRIPTS
 function App() {
@@ -91,6 +92,7 @@ function App() {
           <Route path="/admin/planejamentos" element={<AdminPlanejamentos />}></Route>
           <Route path="/admin/imagens-pagina" element={<AdminImages />}></Route>
           <Route path="/admin/cupons" element={<CuponsAdm />}></Route>
+          <Route path="/admin/clientes" element={<Clientes />}></Route>
 
  
           <Route path='/promocoes' element={<Promocoes />}></Route>

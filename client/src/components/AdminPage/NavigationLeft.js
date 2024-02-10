@@ -28,138 +28,155 @@ export default function NavigationLeft() {
                     {window.location.pathname == '/admin'
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin'}>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin'}>
                                 <i className="fa-solid fa-globe"></i>
                                 <span>Dashboard</span>
 
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin'}>
+                            <Link to={window.location.origin + '/admin'}>
                                 <i className="fa-solid fa-globe"></i>
                                 <span>Dashboard</span>
 
-                            </a>
+                            </Link>
                         </li>
                     }
 
                     {window.location.href.includes('products')
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin/products'}>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin/products'}>
                                 <i className="fa-solid fa-gem"></i>
                                 <span>Produtos</span>
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/products'}>
+                            <Link to={window.location.origin + '/admin/products'}>
                                 <i className="fa-solid fa-gem"></i>
                                 <span>Produtos</span>
-                            </a>
+                            </Link>
+                        </li>
+                    }
+
+                    {window.location.href.includes('clientes')
+                        ?
+                        <li>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin/clientes'}>
+                                <i className="fa-solid fa-clipboard-user"></i>
+                                <span>Clientes</span>
+                            </Link>
+                        </li>
+                        :
+                        <li>
+                            <Link to={window.location.origin + '/admin/clientes'}>
+                                <i className="fa-solid fa-clipboard-user"></i>
+                                <span>Clientes</span>
+                            </Link>
                         </li>
                     }
 
                     {window.location.href.includes('admin/planilhas')
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin/planilhas'}>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin/planilhas'}>
                                 <i className="fa-regular fa-calendar-days"></i>
                                 <span>Planilhas</span>
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/planilhas'}>
+                            <Link to={window.location.origin + '/admin/planilhas'}>
                                 <i className="fa-regular fa-calendar-days"></i>
                                 <span>Planilhas</span>
-                            </a>
+                            </Link>
                         </li>
                     }
 
                     {window.location.href.includes('admin/pedidos')
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin/pedidos'}>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin/pedidos'}>
                                 <i className="fa-regular fa-clipboard"></i>
                                 <span>Pedidos</span>
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/pedidos'}>
+                            <Link to={window.location.origin + '/admin/pedidos'}>
                                 <i className="fa-regular fa-clipboard"></i>
                                 <span>Pedidos</span>
-                            </a>
+                            </Link>
                         </li>
                     }
 
                     {window.location.href.includes('admin/planejamentos')
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin/planejamentos'}>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin/planejamentos'}>
                                 <i className="fa-regular fa-calendar-check"></i>
                                 <span>Planejamentos</span>
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/planejamentos'}>
+                            <Link to={window.location.origin + '/admin/planejamentos'}>
                                 <i className="fa-regular fa-calendar-check"></i>
                                 <span>Planejamentos</span>
-                            </a>
+                            </Link>
                         </li>
                     }
 
                     {window.location.href.includes('admin/cupons')
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin/cupons'}>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin/cupons'}>
                                 <i className="fa-solid fa-ticket-simple"></i>
                                 <span>Cupons</span>
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/cupons'}>
+                            <Link to={window.location.origin + '/admin/cupons'}>
                                 <i className="fa-solid fa-ticket-simple"></i>
                                 <span>Cupons</span>
-                            </a>
+                            </Link>
                         </li>
                     }
 
                     {window.location.href.includes('admin/imagens-pagina')
                         ?
                         <li>
-                            <a id="selectednavigation" href={window.location.origin + '/admin/imagens-pagina'}>
+                            <Link id="selectednavigation" to={window.location.origin + '/admin/imagens-pagina'}>
                                 <i className="fa-regular fa-image"></i>
                                 <span>Imagens</span>
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/imagens-pagina'}>
+                            <Link to={window.location.origin + '/admin/imagens-pagina'}>
                                 <i className="fa-regular fa-image"></i>
                                 <span>Imagens</span>
-                            </a>
+                            </Link>
                         </li>
                     }
 
                     {window.location.href.includes('admin/settings')
                         ?
                         <li>
-                            <a href={window.location.origin + '/admin/settings'}>
+                            <Link to={window.location.origin + '/admin/settings'}>
                                 <i className="fa-solid fa-gear"></i>
                                 <span>Configurações</span>
-                            </a>
+                            </Link>
                         </li>
                         :
                         <li>
-                            <a href={window.location.origin + '/admin/settings'}>
+                            <Link to={window.location.origin + '/admin/settings'}>
                                 <i className="fa-solid fa-gear"></i>
                                 <span>Configurações</span>
-                            </a>
+                            </Link>
                         </li>
                     }
 
@@ -179,6 +196,7 @@ export default function NavigationLeft() {
                     {window.location.href.includes("/admin/products") ? <h2>Produtos</h2> : null}
                     {window.location.href.includes("/admin/planilhas") ? <h2>Planilhas</h2> : null}
                     {window.location.href.includes("/admin/pedidos") ? <h2>Pedidos</h2> : null}
+                    {window.location.href.includes("/admin/clientes") ? <h2>Clientes</h2> : null}
                     {window.location.href.includes("/errors") ? <h2>Docs</h2> : null}
                     {window.location.href.includes("/metas") ? <h2>Metas</h2> : null}
                     {window.location.href.includes("/planejamentos") ? <h2>Planejamentos</h2> : null}
