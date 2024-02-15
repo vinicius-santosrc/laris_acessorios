@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import NavigationLeft from "../../components/AdminPage/NavigationLeft"
-import { getCupons } from "../../lib/database";
+import { getCupons, getUser } from "../../lib/database";
 import Swal from "sweetalert2";
+import { getUserData } from "../../lib/appwrite";
+import Loading from "../../components/AdminPage/Loading";
 
 const CuponsAdm = () => {
 
@@ -10,12 +12,14 @@ const CuponsAdm = () => {
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
 
     const [cuponsDisp, setcuponsDisp] = useState(null);
-    const [CuponsCreator, setCuponsCreator] = useState(false)
+    const [CuponsCreator, setCuponsCreator] = useState(false);
 
-    const [nomeCupom, setnomeCupom] = useState(null)
-    const [CodigoCupom, setCodigoCupom] = useState(null)
-    const [DescontoCupom, setDesconto] = useState(null)
-    const [Private, setPrivate] = useState(true)
+    const [nomeCupom, setnomeCupom] = useState(null);
+    const [CodigoCupom, setCodigoCupom] = useState(null);
+    const [DescontoCupom, setDesconto] = useState(null);
+    const [Private, setPrivate] = useState(true);
+
+    const [user, setUser] = useState(null)
 
     async function getAllCupons() {
         const res = await getCupons();
@@ -83,6 +87,23 @@ const CuponsAdm = () => {
         catch (error) {
             console.error("Erro: ", error)
         }
+    }
+
+    useEffect(() => {
+        getUserData()
+            .then(async (account) => {
+                setUser(account)
+                const user = await getUser(account.email)
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    }, [])
+
+    if (!user) {
+        return <Loading />
+
     }
 
     return (

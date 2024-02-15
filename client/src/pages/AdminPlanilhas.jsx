@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
+import { getUser } from "../lib/database";
+import Loading from "../components/AdminPage/Loading";
 
 
 
@@ -35,6 +37,23 @@ export default function AdminPlanilhas() {
             })
 
     }, [])
+
+    useEffect(() => {
+        getUserData()
+            .then(async (account) => {
+                setUser(account)
+                const user = await getUser(account.email)
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    }, [])
+
+    if (!user) {
+        return <Loading />
+
+    }
     return (
         <div className="AdminPage-DashBoard">
             <NavigationLeft />

@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import { Client, Query, Storage } from "appwrite";
 import Swal from "sweetalert2";
+import { getUserData } from "../lib/appwrite";
+import Loading from "../components/AdminPage/Loading";
+import { getUser } from "../lib/database";
 
 export default function AdminImages() {
+
+    const [user, setUser] = useState(null)
+    
     const [imagemipt, ImagemAtual] = useState(null);
 
     const [imagemmicangas, ImagemAtualMicangas] = useState(null);
@@ -197,6 +203,23 @@ export default function AdminImages() {
                 })
             })
         
+
+    }
+
+    useEffect(() => {
+        getUserData()
+            .then(async (account) => {
+                setUser(account)
+                const user = await getUser(account.email)
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    }, [])
+
+    if (!user) {
+        return <Loading />
 
     }
 
