@@ -9,27 +9,19 @@ import { getUser } from "../lib/database";
 
 export default function AdminPage() {
     const [user, setUser] = useState(null)
-    const [status, userStatus] = useState(null)
-    const [userDB, setUserDBAccount] = useState([])
-
-
     const [pageClosed, setPageClosed] = useState(false)
 
     useEffect(() => {
         getUserData()
             .then(async (account) => {
                 setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
                 const user = await getUser(account.email)
-                setUserDBAccount(user)
                 if (!account) {
                     window.location.href = window.location.origin + "/admin/login"
                 }
             })
 
     }, [])
-
-
 
     if (!user) {
         return <Loading />

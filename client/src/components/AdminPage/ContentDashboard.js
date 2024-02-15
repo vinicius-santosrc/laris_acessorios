@@ -177,13 +177,13 @@ export default function ContentDashboard() {
                                             ?
                                             <p>Conseguimos! Batemos a meta anual e estamos com <span id="greenlight">R${saldoWrap - metaAnual}</span> acima da meta.</p>
                                             :
-                                            <p>Faltam: R${metaAnual - saldoWrap} para alcançar sua meta anual.</p>
+                                            <p>Faltam: R${(metaAnual - saldoWrap).toFixed(2)} para alcançar sua meta anual.</p>
                                         }
                                         {metaMensal - saldoWrap <= 0
                                             ?
                                             <p>Conseguimos! Batemos a meta mensal e estamos com <span id="greenlight">R${saldoWrap - metaMensal}</span> acima da meta.</p>
                                             :
-                                            <p>Faltam: R${metaMensal - saldoWrap} para alcançar sua meta mensal.</p>
+                                            <p>Faltam: R${(metaMensal - saldoWrap).toFixed(2)} para alcançar sua meta mensal.</p>
                                         }
 
                                     </div>
@@ -198,13 +198,13 @@ export default function ContentDashboard() {
                                     <div className="bottom-middle-top-card">
                                         {metaAnual - saldoWrap <= 0
                                             ?
-                                            <p>Conseguimos! Batemos a meta anual e estamos com <span id="greenlight">R${saldoWrap - metaAnual}</span> acima da meta.</p>
+                                            <p>Conseguimos! Batemos a meta anual e estamos com <span id="greenlight">R${(saldoWrap - metaAnual).toFixed(2)}</span> acima da meta.</p>
                                             :
                                             <p>Faltam: R${(metaAnual - saldoWrap).toFixed(2)} para alcançar sua meta anual.</p>
                                         }
                                         {metaMensal - saldoWrap <= 0
                                             ?
-                                            <p>Conseguimos! Batemos a meta mensal e estamos com <span id="greenlight">R${saldoWrap - metaMensal}</span> acima da meta.</p>
+                                            <p>Conseguimos! Batemos a meta mensal e estamos com <span id="greenlight">R${(saldoWrap - metaMensal).toFixed(2)}</span> acima da meta.</p>
                                             :
                                             <p>Faltam: R${(metaMensal - saldoWrap).toFixed(2)} para alcançar sua meta mensal.</p>
                                         }

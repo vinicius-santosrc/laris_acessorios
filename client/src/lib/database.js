@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { auth } from "./firebase";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
 const secretKey = process.env.REACT_APP_API_SECRET_KEY;

@@ -1,30 +1,20 @@
 import { useEffect, useState } from "react"
 import db, { getUserData } from "../../lib/appwrite"
+import { GetUserAtual } from "../../lib/database";
+import { auth } from "../../lib/firebase";
 
 export default function HeaderAdminPage() {
     const [user, setUser] = useState(null)
-    const [status, userStatus] = useState(null)
-    const [userDB, setUserDBAccount] = useState(null)
+    const [status, setStatus] = useState('Online')
 
     useEffect(() => {
-        getUserData()
-            .then((account) => {
+        const GetAtual = async () => {
+            const response = await GetUserAtual(auth.currentUser.uid);
+            setUser(response);
+            console.log(response);
+        }
 
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
-                }
-            })
+        GetAtual()
 
     }, [])
 
@@ -37,14 +27,14 @@ export default function HeaderAdminPage() {
                     <img src="" />
                 </div>
                 <div className="right-side-header">
-                    {userDB ?
+                    {auth.currentUser && user ?
                         <>
                             <button><i class="fa-regular fa-bell" onclick="notificacaoopen()"></i></button>
                             <div>
                                 <a className="account-details-header" href="#">
-                                    <img src={userDB.PHOTOURL} />
+                                    <img src={user.photoURL} />
                                     <div className="flex-details-account">
-                                        <p>{userDB.USUARIO}</p>
+                                        <p>{user.nome_completo}</p>
                                         {status == "Online" ?
                                             <p id="useronline">Conectado</p>
                                             :

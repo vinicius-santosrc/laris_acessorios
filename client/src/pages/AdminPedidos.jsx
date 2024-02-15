@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import { Query } from "appwrite";
-import { getPedidos } from "../lib/database";
+import { getPedidos, getUser } from "../lib/database";
+import Loading from "../components/AdminPage/Loading";
 
 export default function AdminPedidos() {
     const [user, setUser] = useState(null)
@@ -119,6 +120,24 @@ export default function AdminPedidos() {
         }, 2000);
 
     })
+    const [pageClosed, setPageClosed] = useState(false)
+
+    useEffect(() => {
+        getUserData()
+            .then(async (account) => {
+                setUser(account)
+                const user = await getUser(account.email)
+                if (!account) {
+                    window.location.href = window.location.origin + "/admin/login"
+                }
+            })
+
+    }, [])
+
+    if (!user) {
+        return <Loading />
+
+    }
 
     return (
         <div className="AdminPage-DashBoard">

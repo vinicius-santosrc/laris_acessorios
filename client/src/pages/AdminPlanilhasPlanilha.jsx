@@ -49,7 +49,7 @@ export default function PlanilhaPage() {
 
             setEntradas(entradas)
             setSaidas(saidas)
-            setSaldo(entradas - saidas)
+            setSaldo(entradas - saidas);
 
         }
         getTotal()
