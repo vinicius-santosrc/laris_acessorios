@@ -11,18 +11,14 @@ import 'swiper/css/scrollbar';
 
 
 const items_slider = [
+    
     {
         id: '1',
-        image: '/static/media/banner-carnaval.png',
-        imagemobile: '/static/media/banner-carnaval-mobile.png'
-    },
-    {
-        id: '2',
         image: '/static/media/banner-pratas-luxo.png',
         imagemobile: '/static/media/banner-pratas-luxo-mobile.png'
     },
     {
-        id: '3',
+        id: '2',
         image: '/static/media/banner-jewerly.png',
         imagemobile: '/static/media/banner-jewerly-mobile.png'
     }
