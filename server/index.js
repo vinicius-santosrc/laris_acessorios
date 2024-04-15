@@ -19,7 +19,13 @@ const connection = mysql.createConnection({
     ssl: {
         rejectUnauthorized: false,
     },
-    connectionLimit: 50
+    connectionLimit: 50,
+    acquireTimeout: 10000, // Tempo limite para aquisição de conexão (em milissegundos)
+    waitForConnections: true, // Esperar por conexões quando atingir o limite de conexões
+    reconnect: {
+        maxAttempts: 10, // Número máximo de tentativas de reconexão
+        delay: 3000 // Tempo de espera entre tentativas de reconexão (em milissegundos)
+    }
 })
 
 app.use(express.json());
