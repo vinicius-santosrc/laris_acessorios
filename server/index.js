@@ -15,10 +15,11 @@ const connection = mysql.createConnection({
     host: host,
     user: user,
     password: pass,
-    database: 'laris_acessorios',
+    database: 'u776744792_laris_database',
     ssl: {
         rejectUnauthorized: false,
     },
+    connectionLimit: 50
 })
 
 app.use(express.json());
