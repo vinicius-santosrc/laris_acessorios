@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
     host: host,
     user: user,
     password: pass,
-    database: 'u776744792_laris_database',
+    database: 'u637683078_laris_acc',
     ssl: {
         rejectUnauthorized: false,
     },
