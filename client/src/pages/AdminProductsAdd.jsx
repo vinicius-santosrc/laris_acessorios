@@ -3,7 +3,8 @@ import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import { Query } from "appwrite";
 import Loading from "../components/AdminPage/Loading";
-import { getAllProducts, getUser } from "../lib/database";
+import { getAllProducts, getUser, GetUserAtual } from "../lib/database";
+import { auth, CheckIfUserIsLogged } from "../lib/firebase";
 
 export default function AdminProductsAdd() {
     const [user, setUser] = useState(null);
@@ -16,20 +17,6 @@ export default function AdminProductsAdd() {
     const [userDB, setUserDBAccount] = useState([]);
 
     useEffect(() => {
-
-
-        getUserData()
-            .then(async (account) => {
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                const user = await getUser(account.email)
-                setUserDBAccount(user)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
-                }
-
-
-            }, [])
 
         async function setProducts() {
             const AllPdt = await getAllProducts();
@@ -69,8 +56,40 @@ export default function AdminProductsAdd() {
         setProducts()
     }, []);
 
-    if (!user) {
+    const [userAtual, setuserAtual] = useState([]);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
+                }
+            } else {
+                setuserAtual(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
         return <Loading />
+
     }
 
     return (

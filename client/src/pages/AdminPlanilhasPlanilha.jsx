@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import Swal from "sweetalert2";
 import { ID, Query } from "appwrite";
-import { getPlanilhaDespesas, getPlanilhaItens, getUser } from "../lib/database";
+import { getPlanilhaDespesas, getPlanilhaItens, getUser, GetUserAtual } from "../lib/database";
+import { auth, CheckIfUserIsLogged } from "../lib/firebase";
+import Loading from "../components/AdminPage/Loading";
 
 export default function PlanilhaPage() {
     const [user, setUser] = useState(null)
@@ -14,25 +16,16 @@ export default function PlanilhaPage() {
     const [entradasWrap, setEntradas] = useState(0)
     const [saidasWrap, setSaidas] = useState(0)
 
+    
+
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
 
-    useEffect(() => {
-        getUserData()
-            .then(async (account) => {
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                const user = await getUser(account.email)
-                setUserDBAccount(user)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
-                }
-            })
-
-    }, [])
 
     let entradas = 0; // Inicialize as variáveis aqui
     let saidas = 0;
+
+    
 
     useEffect(() => {
         async function getTotal() {
@@ -142,6 +135,42 @@ export default function PlanilhaPage() {
         }
 
     };
+
+    const [userAtual, setuserAtual] = useState([]);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
+                }
+            } else {
+                setuserAtual(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
+        return <Loading />
+
+    }
 
     const handleSave = () => {
         if (planilha == "planilha-itens") {

@@ -4,29 +4,46 @@ import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import HeaderTop from "../components/AdminPage/PlanejamentosComponents/HeaderTop";
 import ContentPlanejamentos from "../components/AdminPage/PlanejamentosComponents/ContentPlanejamentos";
-import { getUser } from "../lib/database";
+import { getUser, GetUserAtual } from "../lib/database";
+import { auth, CheckIfUserIsLogged } from "../lib/firebase";
 
 export default function AdminPlanejamentos() {
     const [user, setUser] = useState(null)
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
 
+    const [userAtual, setuserAtual] = useState([]);
+
     useEffect(() => {
-        getUserData()
-            .then(async (account) => {
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                const user = await getUser(account.email)
-                setUserDBAccount(user)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
                 }
-            })
+            } else {
+                setuserAtual(null);
+            }
+        });
 
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
 
-    if (!user) {
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
         return <Loading />
 
     }

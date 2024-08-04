@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
 import { Query } from "appwrite";
-import { getPedidos, getUser } from "../lib/database";
+import { getPedidos, getUser, GetUserAtual } from "../lib/database";
 import Loading from "../components/AdminPage/Loading";
+import { auth, CheckIfUserIsLogged } from "../lib/firebase";
 
 export default function AdminPedidos() {
     const [user, setUser] = useState(null)
@@ -19,27 +20,7 @@ export default function AdminPedidos() {
     //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY
 
-    useEffect(() => {
-        getUserData()
-            .then((account) => {
-
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
-                }
-            })
-
-    }, [])
+    
 
     useEffect(() => {
         setTimeout(() => {
@@ -122,19 +103,38 @@ export default function AdminPedidos() {
     })
     const [pageClosed, setPageClosed] = useState(false)
 
+    const [userAtual, setuserAtual] = useState([]);
+
     useEffect(() => {
-        getUserData()
-            .then(async (account) => {
-                setUser(account)
-                const user = await getUser(account.email)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
                 }
-            })
+            } else {
+                setuserAtual(null);
+            }
+        });
 
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
-    if (!user) {
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
         return <Loading />
 
     }

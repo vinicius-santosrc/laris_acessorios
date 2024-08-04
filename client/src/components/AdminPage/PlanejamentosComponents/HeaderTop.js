@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import db, { getUserData } from "../../../lib/appwrite"
 import Loading from "../Loading"
+import { auth, CheckIfUserIsLogged } from "../../../lib/firebase"
+import { GetUserAtual } from "../../../lib/database"
 
 export default function HeaderTop() {
     const [user, setUser] = useState(null)
@@ -10,29 +12,38 @@ export default function HeaderTop() {
 
 
 
+    const [userAtual, setuserAtual] = useState([]);
+
     useEffect(() => {
-        getUserData()
-            .then((account) => {
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
                 }
-            })
+            } else {
+                setuserAtual(null);
+            }
+        });
 
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
 
-    if (!user) {
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
         return <Loading />
 
     }

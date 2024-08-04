@@ -5,6 +5,8 @@ import { Client, Storage } from "appwrite";
 import Swal from "sweetalert2";
 import db, { getUserData } from "../lib/appwrite";
 import Loading from "../components/AdminPage/Loading";
+import { auth, CheckIfUserIsLogged } from "../lib/firebase";
+import { GetUserAtual } from "../lib/database";
 
 const client = new Client();
 const storage = new Storage(client);
@@ -23,27 +25,6 @@ export default function AddProducts() {
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
 
-    useEffect(() => {
-        getUserData()
-            .then((account) => {
-
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
-                }
-            })
-
-    }, [])
 
 
 
@@ -180,7 +161,7 @@ export default function AddProducts() {
                 );
                 const imageURL = `https://cloud.appwrite.io/v1/storage/buckets/651df9c4741bb296da03/files/${response.$id}/view?project=651c17501139519bc5a2`;
                 jsonPHOTOS.push(imageURL);
-                
+
             }
             criarProduto(jsonPHOTOS);
             setJSONNew();
@@ -189,7 +170,7 @@ export default function AddProducts() {
             console.error(error);
         }
     };
-    
+
 
     useEffect(() => {
 
@@ -198,16 +179,7 @@ export default function AddProducts() {
 
     //FAZENDO VERIFICACAO DO LOGIN
 
-    useEffect(() => {
-        getUserData()
-            .then((account) => {
-                setUser(account)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
-                }
-            })
 
-    }, [])
 
     const createNewProduct = () => {
         Swal.fire({
@@ -275,7 +247,7 @@ export default function AddProducts() {
                     tipo: Style,
                     personalizavel: PERSONALIZAVEL === 'true' ? true : false,
                     extensor: EXTENSOR === 'true' ? true : false,
-    
+
                 }),
             })
 
@@ -299,7 +271,41 @@ export default function AddProducts() {
     }
 
 
+    const [userAtual, setuserAtual] = useState([]);
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
+                }
+            } else {
+                setuserAtual(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
+        return <Loading />
+
+    }
 
     return (
         <div className="AdminPage-DashBoard">

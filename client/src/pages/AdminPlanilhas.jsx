@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
-import { getUser } from "../lib/database";
+import { getUser, GetUserAtual } from "../lib/database";
 import Loading from "../components/AdminPage/Loading";
+import { auth, CheckIfUserIsLogged } from "../lib/firebase";
 
 
 
@@ -16,41 +17,38 @@ export default function AdminPlanilhas() {
     const PRODUTOSUID = '651ca9adf3de7aad17d9';
 
 
-    useEffect(() => {
-        getUserData()
-            .then((account) => {
-
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                db.getDocument(
-                    "651ca99af19b7afad3f1",
-                    "652102213eeea3189590",
-                    account.$id
-                )
-                    .then((r) => {
-                        setUserDBAccount(r)
-                    })
-
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
-                }
-            })
-
-    }, [])
+    const [userAtual, setuserAtual] = useState([]);
 
     useEffect(() => {
-        getUserData()
-            .then(async (account) => {
-                setUser(account)
-                const user = await getUser(account.email)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
                 }
-            })
+            } else {
+                setuserAtual(null);
+            }
+        });
 
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
-    if (!user) {
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
         return <Loading />
 
     }
