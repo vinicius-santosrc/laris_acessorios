@@ -1,4 +1,6 @@
 import { Account, AppwriteException, Client, Databases } from 'appwrite'
+import { signOut } from 'firebase/auth';
+import { auth } from './firebase';
 
 const client = new Client()
 
@@ -27,11 +29,12 @@ export const getUserData = async () => {
 
 export const logout = async () => {
     try {
-        const account = new Account(client)
-        return account.deleteSession("current")
-    } catch (error) {
-        alert(error)
-    }
+        await signOut(auth);
+        window.location.href = window.location.origin;
+      } catch (error) {
+        console.error("Logout error:", error);
+        throw error;
+      }
 }
 
 client

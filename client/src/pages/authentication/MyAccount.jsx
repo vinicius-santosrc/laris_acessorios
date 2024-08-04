@@ -4,6 +4,7 @@ import { CheckIfUserIsLogged, auth } from "../../lib/firebase";
 import { GetUserAtual } from "../../lib/database";
 import { Link } from 'react-router-dom'
 import NavigationBarLeft from "../../components/AuthPage/NavigationBarLeft";
+import { logout } from "../../lib/appwrite";
 
 const MyAccount = () => {
 
@@ -64,6 +65,7 @@ const MyAccount = () => {
                                     <p>{userAtual ? userAtual.cpf : null}</p>
                                 </div>
                             </div>
+                            <button onClick={logout}>Sair dessa conta</button>
                         </>
                     }
                 </div>
