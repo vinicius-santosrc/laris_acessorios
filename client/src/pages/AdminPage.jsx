@@ -19,11 +19,18 @@ export default function AdminPage() {
                 try {
                     const res = await GetUserAtual(user.uid);
                     setuserAtual(res);
+
+                    if(window.location.origin.includes("admin") && res.label !== "Admin") {
+                        window.location.href = window.location.origin
+                    }
                 } catch (error) {
                     console.warn("Erro ao pegar usuário: ", error);
                 }
             } else {
                 setuserAtual(null);
+                if(window.location.origin.includes("admin")) {
+                    window.location.href = window.location.origin
+                }
             }
         });
 

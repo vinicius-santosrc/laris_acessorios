@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import NavigationLeft from "../../components/AdminPage/NavigationLeft"
-import { getCupons, getUser } from "../../lib/database";
+import { getCupons, getUser, GetUserAtual } from "../../lib/database";
 import Swal from "sweetalert2";
 import { getUserData } from "../../lib/appwrite";
 import Loading from "../../components/AdminPage/Loading";
+import { auth, CheckIfUserIsLogged } from "../../lib/firebase";
 
 const CuponsAdm = () => {
 
@@ -89,19 +90,38 @@ const CuponsAdm = () => {
         }
     }
 
+    const [userAtual, setuserAtual] = useState([]);
+
     useEffect(() => {
-        getUserData()
-            .then(async (account) => {
-                setUser(account)
-                const user = await getUser(account.email)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
                 }
-            })
+            } else {
+                setuserAtual(null);
+            }
+        });
 
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
-    if (!user) {
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    if (!userAtual) {
         return <Loading />
 
     }

@@ -66,12 +66,17 @@ const GetUserAtual = async (uid) => {
         const response = await fetch(`${url}/api/v1/${secretKey}/users`);
         const data = await response.json();
 
-        const foundUser = data.find((user) => user.uid === uid)
+        const foundUser = data.find((user) => user.uid === uid);
+
+        if(window.location.origin.includes("admin") && foundUser.label === "client") {
+            window.location.href = window.location.origin
+        }
 
         return foundUser;
     }
     catch(error) {
         console.log(error)
+        
     }
 }
 

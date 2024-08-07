@@ -5,7 +5,8 @@ import { Query } from "appwrite";
 import { useParams } from "react-router-dom";
 import Loading from "../components/AdminPage/Loading";
 import Swal from "sweetalert2";
-import { GetProductById, getUser } from "../lib/database";
+import { GetProductById, getUser, GetUserAtual } from "../lib/database";
+import { auth, CheckIfUserIsLogged } from "../lib/firebase";
 
 export default function AdminProductEditPage() {
     const { product } = useParams();
@@ -20,28 +21,42 @@ export default function AdminProductEditPage() {
     const [URLPRODUTO, setURLProduto] = useState(null)
     const [EXTENSOR, setExtensor] = useState(null)
 
-    const [user, setUser] = useState(null)
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
     
+    const [userAtual, setuserAtual] = useState([]);
+
     useEffect(() => {
-        getUserData()
-            .then(async (account) => {
-                setUser(account)
-                userStatus(account.status ? 'Online' : 'Offline')
-                const user = await getUser(account.email)
-                setUserDBAccount(user)
-                if (!account) {
-                    window.location.href = window.location.origin + "/admin/login"
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
                 }
+            } else {
+                setuserAtual(null);
+            }
+        });
 
+        return () => unsubscribe();
+    }, []);
 
-            }, [])
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (CheckIfUserIsLogged()) {
+                return
+            } else {
+                return window.location.href = window.location.origin + "/admin/login";
+            }
+        });
 
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
     useEffect(() => {
         getProdutoAtual()
@@ -176,7 +191,7 @@ export default function AdminProductEditPage() {
     const isAvaliable = avaliableProduto == 'true' ? 'true' : 'false';
     const TypeProduct = typeProduto;
 
-    if (!user) {
+    if (!userAtual) {
         return <Loading />
 
     }
