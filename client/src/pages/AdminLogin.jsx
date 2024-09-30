@@ -1,39 +1,47 @@
 import { useEffect, useState } from "react"
 import { getUserData, login } from "../lib/appwrite";
 import { Models } from "appwrite";
+import { auth, CheckIfUserIsLogged, loginIn } from "../lib/firebase";
+import { GetUserAtual } from "../lib/database";
 
 export default function AdminLogin() {
     const [user, setUser] = useState(null)
     const [password, setPassword] = useState(null)
     const [email, setEmail] = useState(null)
 
-    function signIn() {
+    async function signIn() {
         if(!email || !password) {
             alert("Preencha todos os dados")
             return;
         }
-        login(email, password)        
-        .then((res) => {
-            window.location.href = window.location.origin + "/admin"
-        })
-        .catch((error) => {
-            alert(error)
-        })
+        await loginAccount();
+        async function loginAccount() {
+            const User = {
+                email: email,
+                password: password
+            }
+            if (User.email && User.password) {
+                await loginIn(User)
+                .then(() => window.location.href = window.location.origin + "/admin")
+                .catch((err) => alert(err))
+            }
+        }
     }
 
     useEffect(() => {
-        getUserData()
-        .then((account) => {
-            if(account) {
-                setUser(account)
-            }  
-        })
-        .catch((e) => {
-            console.log(e)
-        })
-        
-        
-    }, [])
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user && user.uid) {
+                const u = await GetUserAtual(user.uid);
+            if (u) {
+                if (CheckIfUserIsLogged()) {
+                    window.location.href = window.location.origin + "/admin";
+                }
+            }
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     if(user) {
         window.location.href = '/admin'

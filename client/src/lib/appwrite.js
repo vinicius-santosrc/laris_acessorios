@@ -1,10 +1,8 @@
-import { Account, AppwriteException, Client, Databases } from 'appwrite'
+import { Account, Client, Databases } from 'appwrite'
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase';
 
 const client = new Client()
-
-
 const db = new Databases(client);
 
 export const login = async (email, password) => {
@@ -40,7 +38,5 @@ export const logout = async () => {
 client
     .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("651c17501139519bc5a2")
-
-
 
 export default db

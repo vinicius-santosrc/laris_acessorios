@@ -18,7 +18,7 @@ function SacolaDeCompras() {
     };
 
     useEffect(() => {
-        carregarSacolaDoLocalStorage(setSacola); // Passando setSacola como argumento
+        carregarSacolaDoLocalStorage(setSacola);
     }, []);
 
     useEffect(() => {
