@@ -5,6 +5,7 @@ const ApiKey = process.env.REACT_APP_FIREBASE_API;
 const endpoint = process.env.REACT_APP_API_ENDPOINT;
 //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
 const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
 const firebaseConfig = {
     apiKey: "AIzaSyBTeUye3l9AOgcyGVQza-ped-IUG65yGq8",
@@ -22,7 +23,7 @@ const auth = getAuth();
 const CreateNewAccount = async (user) => {
     await createUserWithEmailAndPassword(auth, user.email, user.password)
         .then(async (userCredential) => {
-            await fetch(`${endpoint}/api/v1/${secretKey}/users/add`, {
+            await fetch(`${endpoint}${preEndpoint}${secretKey}/users/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -29,13 +29,13 @@ export default function Index() {
             setPromocoes(ProductsArray)
         }
         catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 
     useEffect(() => {
         setShowProductPromocoes()
-    }, [promoItems])
+    }, [])
     return (
         <>
             <Header />
