@@ -14,6 +14,7 @@ import db, { getUserData } from "../lib/appwrite";
 import Loading from "../components/AdminPage/Loading";
 import { getUser, GetUserAtual } from "../lib/database";
 import { auth, CheckIfUserIsLogged } from "../lib/firebase";
+import { users } from "../constants/users_const";
 
 export default function AdminPage() {
     const [pageClosed, setPageClosed] = useState(false)
@@ -27,11 +28,12 @@ export default function AdminPage() {
                     const res = await GetUserAtual(user.uid);
                     setuserAtual(res);
 
-                    if(window.location.origin.includes("admin") && res.label !== "Admin") {
+                    if(window.location.origin.includes("admin") && res.label !== "admin" && users.admin.permissions.adminpage.canRead == 1) {
                         window.location.href = window.location.origin
                     }
                 } catch (error) {
                     console.warn("Erro ao pegar usuário: ", error);
+                    window.location.href = window.location.origin
                 }
             } else {
                 setuserAtual(null);

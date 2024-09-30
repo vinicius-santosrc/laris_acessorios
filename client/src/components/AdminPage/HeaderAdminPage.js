@@ -17,15 +17,25 @@ export default function HeaderAdminPage() {
     const [status, setStatus] = useState('Online')
 
     useEffect(() => {
-        const GetAtual = async () => {
-            const response = await GetUserAtual(auth.currentUser.uid);
-            setUser(response);
-            console.log(response);
-        }
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setUser(res);
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
+                    window.location.href = window.location.origin
+                }
+            } else {
+                setUser(null);
+                if(window.location.origin.includes("admin")) {
+                    window.location.href = window.location.origin
+                }
+            }
+        });
 
-        GetAtual()
-
-    }, [])
+        return () => unsubscribe();
+    }, []);
 
     return (
         <>
