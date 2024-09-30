@@ -1,4 +1,12 @@
-//COMPONENTS
+/**
+ * Creation Date: 15/01/2024
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import React, { useEffect, useState } from "react";
 import BannerFooter from "../components/BannerFooter";
 import FooterIndexPage from "../components/FooterIndexPage";
@@ -16,10 +24,11 @@ export default function Index() {
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
     const setShowProductPromocoes = async () => {
         try {
-            const response = await fetch(`${endpoint}/api/v1/${secretKey}/products`)
+            const response = await fetch(`${endpoint}${preEndpoint}${secretKey}/products`)
             const data = await response.json()
             const ProductsArray = data.reverse().sort((a, b) => (b.disponibilidade - a.disponibilidade)).filter((product) => product.desconto > 0).map((pdt) => {
                 <CardItems

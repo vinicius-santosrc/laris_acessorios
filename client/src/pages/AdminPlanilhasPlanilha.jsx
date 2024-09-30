@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 13/09/2023
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import React, { useEffect, useState } from "react";
 import db, { getUserData } from "../lib/appwrite";
 import { useParams } from "react-router-dom";
@@ -20,6 +29,7 @@ export default function PlanilhaPage() {
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
 
     let entradas = 0; // Inicialize as variáveis aqui
@@ -94,7 +104,7 @@ export default function PlanilhaPage() {
         }
 
         if (planilha == 'planilha-despesas') {
-            fetch(`${endpoint}/api/v1/${secretKey}/planilha-despesas/delete`, {
+            fetch(`${endpoint}${preEndpoint}${secretKey}/planilha-despesas/delete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -114,7 +124,7 @@ export default function PlanilhaPage() {
                 });
         }
         else if (planilha == 'planilha-itens') {
-            fetch(`${endpoint}/api/v1/${secretKey}/planilha-itens/delete`, {
+            fetch(`${endpoint}${preEndpoint}${secretKey}/planilha-itens/delete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -190,7 +200,7 @@ export default function PlanilhaPage() {
         if (itemId) {
             // Atualize o item no Appwrite
             if (planilha == "planilha-itens") {
-                fetch(`${endpoint}/api/v1/${secretKey}/planilha-itens/edit`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planilha-itens/edit`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -223,7 +233,7 @@ export default function PlanilhaPage() {
             }
             else if (planilha == "planilha-despesas") {
                 //EDITAR LINHA
-                fetch(`${endpoint}/api/v1/${secretKey}/planilha-despesas/edit`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planilha-despesas/edit`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -253,7 +263,7 @@ export default function PlanilhaPage() {
         } else {
             // Crie um novo item no Appwrite sem especificar o ID
             if (planilha == "planilha-itens") {
-                fetch(`${endpoint}/api/v1/${secretKey}/planilha-itens/add`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planilha-itens/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -286,7 +296,7 @@ export default function PlanilhaPage() {
             }
             else if (planilha == "planilha-despesas") {
                 //ADICIONAR LINHA
-                fetch(`${endpoint}/api/v1/${secretKey}/planilha-despesas/add`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planilha-despesas/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

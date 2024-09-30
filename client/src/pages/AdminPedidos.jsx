@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 13/01/2024
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
@@ -18,7 +27,8 @@ export default function AdminPedidos() {
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
-    const secretKey = process.env.REACT_APP_API_SECRET_KEY
+    const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
     
 
@@ -40,7 +50,7 @@ export default function AdminPedidos() {
                         }
 
                         async function handleDelete() {
-                            await fetch(`${endpoint}/api/v1/${secretKey}/orders/delete`, {
+                            await fetch(`${endpoint}${preEndpoint}${secretKey}/orders/delete`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',

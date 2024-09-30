@@ -1,46 +1,34 @@
-import { Query } from "appwrite"
+/**
+ * Creation Date: 20/05/2023
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
 
+import { Query } from "appwrite"
 import { useParams } from "react-router-dom"
 import React, { useEffect, useState } from "react"
-
 import * as emailjs from "@emailjs/browser"
-
-// import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
-//DATABASE
-
 import db from "../lib/appwrite"
-
-//COMPONENTES
 import Header from "../components/Header"
-
-
-//COMPONENTE LOADING
 import { Ring } from '@uiball/loaders'
 import Swal from "sweetalert2"
-
-//SCRIPTS
-
 import { SacolaDeCompras, carregarSacolaDoLocalStorage } from "../components/ProductsPage/sacola"
 import FooterIndexPage from "../components/FooterIndexPage"
 import CardItems from "../components/ItemCard"
 import { GetProduct, getAllProducts } from "../lib/database";
 
-
 const produtos = JSON.parse(localStorage.getItem('produtos')) || []
 
-
 export default function ProductPage() {
-
     const PRODUTO_NAME = useParams() //PEGAR URL ATUAL
     const [Product, setProduct] = useState([]) //DEFINIR PRODUTO ATUAL
     const [ProdutosRelacionados, setProductRelacionados] = useState([]) //DEFINIR PRODUTOS RELACIONADOS
@@ -48,11 +36,9 @@ export default function ProductPage() {
     const [photospublic, setPhotosOfPublic] = useState([])
     const [SIZES, SETSIZES] = useState([]) //PEGAR TODOS OS SIZES DA PUBLICACAO
     const [PHOTOATUAL, SETPHOTOATUAL] = useState(0) //PARA MUDAR A FOTO PRINCIPAL
-
     const [tamanho, setTamanho] = useState(null)
 
     useEffect(() => {
-
         async function request_Product() {
             try {
                 const pdtRequest = await GetProduct(PRODUTO_NAME.product);
@@ -92,7 +78,7 @@ export default function ProductPage() {
 
         request_Product();
         getRelatedProducts();
-    }, [PRODUTO_NAME]); // Adicione PRODUTO_NAME como dependência para reexecutar o efeito quando ele mudar
+    }, [PRODUTO_NAME]); // PRODUTO_NAME como dependência para reexecutar o efeito quando ele mudar
 
     async function ChangePageTitle(name) {
         document.querySelector("title").innerText = name + " | LARI'S ACESSÓRIOS"

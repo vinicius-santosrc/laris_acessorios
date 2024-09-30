@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 14/01/2024
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import { ID } from "appwrite";
@@ -24,6 +33,7 @@ export default function AddProducts() {
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
 
 
@@ -166,20 +176,14 @@ export default function AddProducts() {
             criarProduto(jsonPHOTOS);
             setJSONNew();
         } catch (error) {
-            // Handle error appropriately
             console.error(error);
         }
     };
-
 
     useEffect(() => {
 
         setJSONNew()
     })
-
-    //FAZENDO VERIFICACAO DO LOGIN
-
-
 
     const createNewProduct = () => {
         Swal.fire({
@@ -194,9 +198,9 @@ export default function AddProducts() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await uploadImages();
-                /*try {
+                try {
                     // Faça algo com imageUrls, se necessário
-                    fetch(`${endpoint}/api/v1/${secretKey}/products/add`, {
+                    fetch(`${endpoint}${preEndpoint}${secretKey}/products/add`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -220,15 +224,14 @@ export default function AddProducts() {
                         text: `Erro ao criar o produto: ${error}`,
                         footer: '<a href="errors">Por que deste erro?</a>'
                     });
-                }*/
+                }
             }
         })
 
     }
     async function criarProduto(IMAGES) {
         try {
-            // Faça algo com imageUrls, se necessário
-            fetch(`${endpoint}/api/v1/${secretKey}/products/add`, {
+            fetch(`${endpoint}${preEndpoint}${secretKey}/products/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

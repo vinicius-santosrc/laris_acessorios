@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 14/09/2023
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
 import db, { getUserData } from "../lib/appwrite";
@@ -26,6 +35,7 @@ export default function AdminProductEditPage() {
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
     
     const [userAtual, setuserAtual] = useState([]);
 
@@ -127,7 +137,7 @@ export default function AdminProductEditPage() {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
 
-                fetch(`${endpoint}/api/v1/${secretKey}/products/edit`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/products/edit`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -170,7 +180,7 @@ export default function AdminProductEditPage() {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                fetch(`${endpoint}/api/v1/${secretKey}/products/delete`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/products/delete`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

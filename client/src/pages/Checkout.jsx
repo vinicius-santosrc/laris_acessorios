@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 06/09/2023
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Ring } from "@uiball/loaders";
@@ -49,6 +58,7 @@ export default function Checkout() {
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
     useEffect(() => {
         document.querySelector("title").innerText = "Finalizar compra";
@@ -289,7 +299,7 @@ export default function Checkout() {
 
             //CRIAR PEDIDO NO BANCO DE DADOS
 
-            await fetch(`${endpoint}/api/v1/${secretKey}/orders/add`, {
+            await fetch(`${endpoint}${preEndpoint}${secretKey}/orders/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -322,7 +332,7 @@ export default function Checkout() {
                         cupons_usados.push(CupomAtual.uniqueKey)
 
                         async function setCupomUser() {
-                            await fetch(`${endpoint}/api/v1/${secretKey}/cupons/myaccount/add`, {
+                            await fetch(`${endpoint}${preEndpoint}${secretKey}/cupons/myaccount/add`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
