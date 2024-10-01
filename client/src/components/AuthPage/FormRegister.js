@@ -59,7 +59,7 @@ const FormRegister = () => {
     return (
         <div className="AccountsRegisterForm__Content">
             <div className="logoUpLogin">
-                <img src={window.location.origin + "/static/media/logolaris.png"} />
+                <img src={window.location.origin + "/static/media/logolaris.png"} alt="LARIS ACESSÓRIOS"/>
             </div>
             <h2>Criação de Conta</h2>
             <p>Faça seu cadastro em nosso site</p>

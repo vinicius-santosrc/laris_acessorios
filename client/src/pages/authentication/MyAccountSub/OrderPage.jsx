@@ -52,11 +52,11 @@ const OrderPage = () => {
                     console.warn("Erro ao pegar usuário: ", error);
                 }
             } else {
-                setuserAtual(null); // No user is logged in
+                setuserAtual(null);
             }
         });
 
-        return () => unsubscribe(); // Cleanup the subscription when the component unmounts
+        return () => unsubscribe();
     }, []);
 
     return (
@@ -105,7 +105,7 @@ const OrderPage = () => {
                                                 return (
                                                     <div className="item-wrapper-order">
                                                         <div className="item-wrapper-left-side">
-                                                            <img src={item.photoURL} />
+                                                            <img src={item.photoURL} alt="itemPhoto" />
                                                         </div>
                                                         <div className="item-wrapper-right-side">
                                                             <h2>{item.name}</h2>

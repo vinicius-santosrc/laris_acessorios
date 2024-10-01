@@ -65,7 +65,7 @@ export default function ContentDashboard() {
             const PHOTOURL = JSON.parse(response.photoURL)
             return (
                 <div className="product-content">
-                    <a target="_blank" href={"admin/products/" + response.id}>
+                    <a target="_blank" rel="noreferrer" href={"admin/products/" + response.id}>
 
                         <div className="product-content-show-rightside">
                             <div className="product-content-show-rightside-l">
@@ -267,7 +267,7 @@ export default function ContentDashboard() {
                             </div>
                             <div className="Cards-Middle-Top">
                                 <div className="Card-Mid-Top-Inner">
-                                    <Link to={'https://app.conectavenda.com.br/91fd8209815b8f86427520a32c28a053'} target="_blank">
+                                    <Link to={'https://app.conectavenda.com.br/91fd8209815b8f86427520a32c28a053'} target="_blank" rel="noreferrer">
                                         <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/002/289/530/themes/common/logo-1300451119-1658325553-8236ebeadb95411f6d5a1629dcd5e0701658325554.jpg?0" />
                                         <div>
                                             <h2>Cy Semijóias</h2>
@@ -276,7 +276,7 @@ export default function ContentDashboard() {
                                     </Link>
                                 </div>
                                 <div className="Card-Mid-Top-Inner">
-                                    <Link to={'https://app.conectavenda.com.br/349c32a2e0b13b4a4629ba91567e110e?busca=00006475'} target="_blank">
+                                    <Link to={'https://app.conectavenda.com.br/349c32a2e0b13b4a4629ba91567e110e?busca=00006475'} target="_blank" rel="noreferrer">
                                         <img src="https://conecta-vendas.s3.amazonaws.com/illuminati_comercio_de_semijoias/1651842311.6949-WhatsAppImage2022-05-05at13.05.51.jpeg" />
                                         <div>
                                             <h2>Luminati Pratas</h2>

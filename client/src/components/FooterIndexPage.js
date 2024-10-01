@@ -39,9 +39,9 @@ export default function FooterIndexPage() {
 
             <section className="redes-sociais">
                 <div className='side1'>
-                    <a href="https://api.whatsapp.com/send/?phone=5535997394181&text&type=phone_number&app_absent=0" target="_blank"><i className="fa-brands fa-square-whatsapp"></i></a>
-                    <a href="https://www.instagram.com/laris.acessorioss/" target="_blank"><i className="fa-brands fa-square-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@laris.acessorioss" target="_blank"><i className="fa-brands fa-tiktok"></i></a>
+                    <a href="https://api.whatsapp.com/send/?phone=5535997394181&text&type=phone_number&app_absent=0" target="_blank" rel="noreferrer"><i className="fa-brands fa-square-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/laris.acessorioss/" target="_blank" rel="noreferrer"><i className="fa-brands fa-square-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@laris.acessorioss" target="_blank" rel="noreferrer"><i className="fa-brands fa-tiktok"></i></a>
                     <h1>Receba as novidades da LARIS ACESSÓRIOS</h1>
                     <p>Entre no nosso grupo' e receba novidades e promoções exclusivas.</p>
                     <div className="emailsubscribe">

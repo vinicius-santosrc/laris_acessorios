@@ -497,7 +497,7 @@ export default function ProductPage() {
                                 </div>
 
                                 <div className="guia-tamanhos-component">
-                                    <a href={window.location.origin + "/institucional/guia-de-tamanhos/colares"} target="_blank"><i className="fa-solid fa-ruler"></i> Descubra seu tamanho</a>
+                                    <a href={window.location.origin + "/institucional/guia-de-tamanhos/colares"} target="_blank" rel="noreferrer"><i className="fa-solid fa-ruler"></i> Descubra seu tamanho</a>
                                 </div>
 
                                 <div className="buttons-component-actions">
@@ -514,7 +514,7 @@ export default function ProductPage() {
                                 </div>
 
                                 <div className="bottom-button-content-share">
-                                    <p className="compartilhar">Compartilhe: <a href={'https://api.whatsapp.com/send/?text=' + window.location.href} target="_blank"><i className="fa-brands fa-square-whatsapp"></i></a></p>
+                                    <p className="compartilhar">Compartilhe: <a href={'https://api.whatsapp.com/send/?text=' + window.location.href} target="_blank" rel="noreferrer"><i className="fa-brands fa-square-whatsapp"></i></a></p>
                                 </div>
 
                             </div>

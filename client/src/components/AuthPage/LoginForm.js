@@ -12,9 +12,7 @@ import { CheckIfUserIsLogged, CreateNewAccount, auth, loginIn } from "../../lib/
 import { GetUserAtual } from "../../lib/database";
 
 const LoginForm = () => {
-    const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
-    const [cpf, setCPF] = useState(null);
     const [password, setPassword] = useState(null);
 
     const [ErrorMessage, setErrorMessage] = useState(false);
@@ -57,7 +55,7 @@ const LoginForm = () => {
     return (
         <div className="AccountsRegisterForm__Content">
             <div className="logoUpLogin">
-                <img src={window.location.origin + "/static/media/logolaris.png"} />
+                <img src={window.location.origin + "/static/media/logolaris.png"} alt="LARIS ACESSÓRIOS" />
             </div>
             <h2>Realize seu login</h2>
             <p>Efetue seu login para continuar</p>

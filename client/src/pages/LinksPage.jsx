@@ -35,14 +35,14 @@ export default function LinksPage() {
                     </div>
                     <div class="card">
                         <div class="card-imagem">
-                            <a class="LinkHref" target="_blank" href={"https://api.whatsapp.com/send/?phone=5535997394181&text&type=phone_number&app_absent=0"}>
+                            <a class="LinkHref" target="_blank" rel="noreferrer" href={"https://api.whatsapp.com/send/?phone=5535997394181&text&type=phone_number&app_absent=0"}>
                                 <img src="https://laris-acessorios.netlify.app/imgs/whats.png" alt="" />
                             </a>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-imagem">
-                            <a class="LinkHref" target="_blank" href={"https://www.tiktok.com/@laris.acessorioss"}>
+                            <a class="LinkHref" target="_blank" rel="noreferrer" href={"https://www.tiktok.com/@laris.acessorioss"}>
                                 <img src="https://laris-acessorios.netlify.app/imgs/tiktok-link.png" alt="" />
                             </a>
                         </div>

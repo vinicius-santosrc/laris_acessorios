@@ -4300,6 +4300,7 @@ h2.extensorfrase {
     justify-content: center;
     margin: 0 auto;
     display: flex;
+    margin: -160px auto;
 
 }
 
@@ -4748,7 +4749,7 @@ h2.extensorfrase {
 
 .Admin-ContentDashBoard {
     justify-content: center;
-    margin: 0 auto;
+    /*margin: -160px auto;*/
 
     margin-left: 130px;
     margin-right: 60px;
@@ -4803,7 +4804,7 @@ h2.extensorfrase {
     padding: 10px;
     position: absolute;
     right: -10px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .navigation-bar-logo-top {
