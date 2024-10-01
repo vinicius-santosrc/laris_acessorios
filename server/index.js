@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 27/12/2023
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
@@ -20,11 +29,11 @@ const connection = mysql.createConnection({
         rejectUnauthorized: false,
     },
     connectionLimit: 50,
-    acquireTimeout: 10000, // Tempo limite para aquisição de conexão (em milissegundos)
-    waitForConnections: true, // Esperar por conexões quando atingir o limite de conexões
+    acquireTimeout: 10000,
+    waitForConnections: true,
     reconnect: {
-        maxAttempts: 10, // Número máximo de tentativas de reconexão
-        delay: 3000 // Tempo de espera entre tentativas de reconexão (em milissegundos)
+        maxAttempts: 10,
+        delay: 3000
     }
 })
 

@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 14/01/2024
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import React, { useEffect, useState } from "react"
 import Header from "../../../components/Header"
 import { CheckIfUserIsLogged, auth } from "../../../lib/firebase";
@@ -8,6 +17,7 @@ const Cupons = () => {
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
     const [userAtual, setuserAtual] = useState([]);
 
@@ -91,7 +101,7 @@ const Cupons = () => {
 
             CUPONS_USER.push(uniqueKey)
 
-            await fetch(`${endpoint}/api/v1/${secretKey}/cupons/myaccount/add`, {
+            await fetch(`${endpoint}${preEndpoint}${secretKey}/cupons/myaccount/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -203,7 +213,7 @@ const Cupons = () => {
 
                                     CUPONS_USER.push(cupom.uniqueKey)
 
-                                    await fetch(`${endpoint}/api/v1/${secretKey}/cupons/myaccount/add`, {
+                                    await fetch(`${endpoint}${preEndpoint}${secretKey}/cupons/myaccount/add`, {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',

@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 09/01/2024
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import { useEffect, useState } from "react";
 import db from "../../../lib/appwrite";
 import Swal from "sweetalert2";
@@ -15,6 +24,7 @@ export default function ContentPlanejamentos() {
     
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
     useEffect(() => {
         setTimeout(() => {
@@ -33,7 +43,7 @@ export default function ContentPlanejamentos() {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 try {
-                    fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/delete`, {
+                    fetch(`${endpoint}${preEndpoint}${secretKey}/planejamentos/delete`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -67,7 +77,7 @@ export default function ContentPlanejamentos() {
         if (NameOfNewList) {
             try {
                 // Faça algo com imageUrls, se necessário
-                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/add`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planejamentos/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -123,7 +133,7 @@ export default function ContentPlanejamentos() {
             try {
                 const list = [...itensantigos]
                 list.push(newItems)
-                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/update`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planejamentos/update`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -151,7 +161,7 @@ export default function ContentPlanejamentos() {
             try {
                 const list = []
                 list.push(newItems.toString())
-                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/update`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planejamentos/update`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -186,7 +196,7 @@ export default function ContentPlanejamentos() {
 
             // Atualize o documento no banco de dados com a nova matriz 'content_card'
             try {
-                fetch(`${endpoint}/api/v1/${secretKey}/planejamentos/update`, {
+                fetch(`${endpoint}${preEndpoint}${secretKey}/planejamentos/update`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

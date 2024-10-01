@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 05/09/2023
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import { Query } from "appwrite"
 import db from "../../lib/appwrite"
 import { useEffect, useState } from "react"
@@ -11,6 +20,7 @@ export default function ProductsShow(props) {
 
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
     useEffect(() => {
         async function getPdt() {
@@ -21,7 +31,7 @@ export default function ProductsShow(props) {
 
     const getProducts = async () => {
         try {
-            const response = await fetch(`${endpoint}/api/v1/${secretKey}/products`)
+            const response = await fetch(`${endpoint}${preEndpoint}${secretKey}/products`)
             const data = await response.json()
             SETPRODUCTS(data);
 

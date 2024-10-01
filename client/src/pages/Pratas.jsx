@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 20/05/2023
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import BannerTopPage from "../components/TypeProductPage/BannerTopPage";
@@ -12,11 +21,12 @@ export default function Pratas() {
 
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
    
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${endpoint}/api/v1/${secretKey}/products`);
+                const response = await fetch(`${endpoint}${preEndpoint}${secretKey}/products`);
                 const data = await response.json();
                 //SETANDO DADOS
                 setProdutos(data);

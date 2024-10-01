@@ -1,3 +1,12 @@
+/**
+ * Creation Date: 15/01/2024
+ * Author: Vinícius da Silva Santos
+ * Coordinator: Larissa Alves de Andrade Moreira
+ * Developed by: Lari's Acessórios Team
+ * Copyright 2023, LARI'S ACESSÓRIOS
+ * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
+*/
+
 import { useEffect, useState } from "react";
 import NavigationLeft from "../../components/AdminPage/NavigationLeft"
 import { getCupons, getUser, GetUserAtual } from "../../lib/database";
@@ -11,6 +20,7 @@ const CuponsAdm = () => {
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     //const endpoint = process.env.REACT_APP_API_ENDPOINT_TEST;
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
+    const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
     const [cuponsDisp, setcuponsDisp] = useState(null);
     const [CuponsCreator, setCuponsCreator] = useState(false);
@@ -41,7 +51,7 @@ const CuponsAdm = () => {
                     isPrivate = Private ? 1 : 0;
                 }
 
-                await fetch(`${endpoint}/api/v1/${secretKey}/cupons/add`, {
+                await fetch(`${endpoint}${preEndpoint}${secretKey}/cupons/add`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -73,7 +83,7 @@ const CuponsAdm = () => {
 
     async function removeCupom(id) {
         try {
-            await fetch(`${endpoint}/api/v1/${secretKey}/cupons/remove`, {
+            await fetch(`${endpoint}${preEndpoint}${secretKey}/cupons/remove`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
