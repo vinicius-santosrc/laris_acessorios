@@ -4139,46 +4139,64 @@ h2.extensorfrase {
 }
 
 .AdminLoginPage {
-    margin: -10vh 180px;
+    margin: -160px 60px;
+}
+
+.modalFormLogin {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .AdminLogin-flexbox {
     display: flex;
     justify-content: space-between;
-    gap: 100px;
+    gap: 10px;
     width: 100%;
+    padding-left: 60px;
+    padding-right: -60px;
 }
 
 .LogoAdmin {
-    width: 170px;
+    width: 120px;
     margin: 15px 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 60px
 }
 
 .AdminLogin-top {
-    margin: 50px 0px;
+    margin: 20px 0px;
 }
 
 .AdminLogin-top h2 {
-    font-size: 2.6rem;
+    font-size: 28px;
+    font-weight: 400;
 }
 
 .AdminLogin-top p {
-    font-size: 1.4rem;
+    font-size: 16px;
     color: gray;
+    
 }
 
 .AdminLogin-input-box p {
-    color: gray;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
 }
 
 .AdminLogin-left-side {
-    display: block;
+    display: flex;
     align-items: center;
 }
 
 .AdminLogin-right-side img {
-    width: 700px;
-    height: 100%;
+    width: 50vw;
+    object-fit: cover;
+    height: 100vh;
+    margin-right: -60px;
+    border-radius: 50px 0px 00px 50px;
     pointer-events: none;
 }
 
@@ -4186,9 +4204,10 @@ h2.extensorfrase {
     width: 100%;
     padding: 15px 10px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid #DFDFDF;
+    background: #ECECEC;
     outline: none;
-    margin: 5px 0px;
+    margin: 00px 00px 16px 00px;
 }
 
 .AdminLogin-bottom {
@@ -4197,15 +4216,83 @@ h2.extensorfrase {
 }
 
 .AdminLogin-bottom button {
-    background-color: black;
-    width: 90%;
-    border-radius: 10px;
+    background-color: #FD3A98;
+    width: 100%;
+    border-radius: 50px;
     margin: 30px auto;
     color: white;
     padding: 10px 0px;
-    border: none;
     cursor: pointer;
-    font-size: 1.4rem;
+    font-size: 16px;
+    transition: 300ms;
+    border: 1px solid #FD3A98;
+}
+
+.AdminLogin-bottom button:active {
+    background-color: #fdfdfd;
+    border: 1px solid #FD3A98;
+    width: 100%;
+    border-radius: 50px;
+    margin: 30px auto;
+    color: #FD3A98;
+    padding: 10px 0px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.alertComponent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right:0;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 1px 1px 5px gray;
+    z-index: 5;
+    display: flex;
+    width: 390px;
+    gap: 10px;
+    justify-content: center;
+    animation: openAlertComponent 0.2s linear;
+}
+
+.alertComponentError {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right:0;
+    margin: auto;
+    background: #fc9191;
+    padding: 20px;
+    box-shadow: 1px 1px 5px gray;
+    z-index: 5;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: left;
+}
+
+@keyframes openAlertComponent {
+    0% {
+        width: 0px;
+        opacity: 0;
+        height: 100px;
+    }
+
+    100% {
+        width: 390px;
+        opacity: 1
+    }
+}
+
+.alertComponentBackGround {
+    position: fixed;
+    width: 200vw;
+    height: 200vh;
+    margin: -70px;
+    background: rgba(0, 0, 0, 0.397);
+    z-index: 2;
 }
 
 .AdminPage-DashBoard {
@@ -11401,19 +11488,25 @@ h2.extensorfrase {
     }
 
     .AdminLoginPage {
-        margin: -11vh 20px;
+        margin: -140px 20px;
     }
 
     .AdminLogin-flexbox {
-        display: block;
+        display: flex;
         justify-content: space-between;
         gap: 0px;
         width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+        flex-direction: column;
+        margin-top: 20px;
     }
 
     .LogoAdmin {
-        width: 170px;
+        width: 110px;
         margin: 15px 0px;
+        position: relative;
+        display: block;
     }
 
     .AdminLogin-top {
@@ -11421,7 +11514,7 @@ h2.extensorfrase {
     }
 
     .AdminLogin-top h2 {
-        font-size: 1.9rem;
+        font-size: 2rem;
     }
 
     .AdminLogin-top p {
@@ -11439,17 +11532,20 @@ h2.extensorfrase {
     }
 
     .AdminLogin-right-side img {
-        width: 100%;
+        width: 100vw;
         height: 100%;
         pointer-events: none;
-        display: none;
+        border-radius: 40px 40px 00px 00px;
+        margin: 0px -20px;
+        padding-top: 20px;
+        height: 46vh;
     }
 
     .AdminLogin-input-box input {
         width: 100%;
         padding: 15px 10px;
         border-radius: 10px;
-        border: 1px solid black;
+        border: 1px solid #DFDFDF;
         outline: none;
         margin: 5px 0px;
     }

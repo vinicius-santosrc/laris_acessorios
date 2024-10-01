@@ -58,9 +58,12 @@ const CreateNewAccount = async (user) => {
 
 const loginIn = async (user) => {
     await signInWithEmailAndPassword(auth, user.email, user.password)
-    .then(async (userCredential) => {
-        window.location.href = window.location.origin
-    })
+        .then(async (userCredential) => {
+            if (window.location.href.includes("admin")) {
+                return window.location.href = window.location.origin + "/admin"
+            }
+            return  window.location.href = window.location.origin;
+        })
 }
 
 const CheckIfUserIsLogged = () => {

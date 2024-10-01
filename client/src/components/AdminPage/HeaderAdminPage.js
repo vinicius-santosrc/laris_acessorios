@@ -7,7 +7,7 @@
  * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
 */
 
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import db, { getUserData } from "../../lib/appwrite"
 import { GetUserAtual } from "../../lib/database";
 import { auth } from "../../lib/firebase";
@@ -28,7 +28,7 @@ export default function HeaderAdminPage() {
                 }
             } else {
                 setUser(null);
-                if(window.location.origin.includes("admin")) {
+                if (window.location.origin.includes("admin")) {
                     window.location.href = window.location.origin
                 }
             }
@@ -38,39 +38,37 @@ export default function HeaderAdminPage() {
     }, []);
 
     return (
-        <>
-            <header>
-                <div className="leftside-header">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                    <input placeholder="Buscar" />
-                    <img src="" />
-                </div>
-                <div className="right-side-header">
-                    {auth.currentUser && user ?
-                        <>
-                            <button><i class="fa-regular fa-bell" onclick="notificacaoopen()"></i></button>
-                            <div>
-                                <a className="account-details-header" href="#">
-                                    <img src={user.photoURL} />
-                                    <div className="flex-details-account">
-                                        <p>{user.nome_completo}</p>
-                                        {status == "Online" ?
-                                            <p id="useronline">Conectado</p>
-                                            :
-                                            <p id="useroffline">Sem conexão</p>
-                                        }
-                                    </div>
-                                </a>
+        <header>
+            <div className="leftside-header">
+                <i className="fa-solid fa-magnifying-glass"></i>
+                <input placeholder="Buscar" />
+            </div>
+            <div className="right-side-header">
+                {auth.currentUser && user ?
+                    <>
+                        <button><i class="fa-regular fa-bell" onclick="notificacaoopen()"></i></button>
+                        <button onClick={() => {auth.signOut(); window.location.href = window.location.origin + "/admin/login"}}>leave account</button>
+                        <div>
+                            <a className="account-details-header" href="#">
+                                <img src={user.photoURL} alt="avatar image"/>
+                                <div className="flex-details-account">
+                                    <p>{user.nome_completo}</p>
+                                    {status == "Online" ?
+                                        <p id="useronline">Conectado</p>
+                                        :
+                                        <p id="useroffline">Sem conexão</p>
+                                    }
+                                </div>
+                            </a>
 
 
-                            </div>
-                        </>
-                        :
-                        <></>
-                    }
+                        </div>
+                    </>
+                    :
+                    <></>
+                }
 
-                </div>
-            </header >
-        </>
+            </div>
+        </header >
     )
 }
