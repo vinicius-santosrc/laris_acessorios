@@ -10,8 +10,8 @@
 import React, { useEffect, useState } from "react"
 import Header from "../../../components/Header"
 import { CheckIfUserIsLogged, auth } from "../../../lib/firebase";
-import { GetUserAtual, getAllProducts, getPedidos } from "../../../lib/database";
-import { Link, json } from 'react-router-dom'
+import { GetUserAtual, getPedidos } from "../../../lib/database";
+import { Link } from 'react-router-dom'
 import NavigationBarLeft from "../../../components/AuthPage/NavigationBarLeft";
 
 const Orders = () => {
@@ -29,13 +29,13 @@ const Orders = () => {
                     console.warn("Erro ao pegar usuário: ", error);
                 }
             } else {
-                setuserAtual(null); // No user is logged in
+                setuserAtual(null);
             }
         });
 
 
 
-        return () => unsubscribe(); // Cleanup the subscription when the component unmounts
+        return () => unsubscribe(); 
     }, []);
 
     useEffect(() => {
@@ -43,23 +43,20 @@ const Orders = () => {
             if (CheckIfUserIsLogged()) {
                 async function fetchAllOrders() {
                     try {
-                        const res = await getPedidos();  // Supondo que getAllOrders é uma função assíncrona
+                        const res = await getPedidos();
 
-                        // Filtrar os pedidos com base no UID do usuário atual
                         const filteredOrders = res.filter((item) => {
                             const user = JSON.parse(item.user);
                             return user.uid == auth.currentUser.uid;
                         });
 
                         console.log(filteredOrders)
-                        // Atualizar o estado com os pedidos filtrados
                         setAllOrders(filteredOrders.reverse());
                     } catch (error) {
                         console.error("Erro ao buscar os pedidos:", error);
                     }
                 }
 
-                // Chamar a função fetchAllOrders apenas uma vez ao montar o componente
                 fetchAllOrders();
             } else {
                 return window.location.href = window.location.origin;

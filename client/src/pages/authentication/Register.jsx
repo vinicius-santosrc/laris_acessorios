@@ -7,7 +7,7 @@
  * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
 */
 
-import React, { Component } from "react";
+import React from "react";
 import Header from "../../components/Header";
 import FormRegister from "../../components/AuthPage/FormRegister";
 

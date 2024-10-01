@@ -31,8 +31,8 @@ export default function FaleConosco() {
                         <div class="content-inside-item">
                             <div class='content-inside-item-left-side'>
                                 <h2>Entre em contato: </h2>
-                                <a href="https://api.whatsapp.com/send/?phone=5535997394181&text&type=phone_number&app_absent=0" target="_blank"><i class="fa-brands fa-square-whatsapp"></i> WhatsApp</a>
-                                <a href="https://www.instagram.com/laris.acessorioss/" target="_blank"><i class="fa-brands fa-square-instagram"></i> Instagram</a>
+                                <a href="https://api.whatsapp.com/send/?phone=5535997394181&text&type=phone_number&app_absent=0" target="_blank" rel="noreferrer"><i class="fa-brands fa-square-whatsapp"></i> WhatsApp</a>
+                                <a href="https://www.instagram.com/laris.acessorioss/" target="_blank" rel="noreferrer"><i class="fa-brands fa-square-instagram"></i> Instagram</a>
                                 <a href="mailto:contato.larisacessorios@gmail.com"><i class="fa-solid fa-envelope"></i> E-mail</a>
                             </div>
                         </div>
