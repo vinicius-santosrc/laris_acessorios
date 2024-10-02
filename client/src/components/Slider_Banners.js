@@ -15,14 +15,18 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 const items_slider = [
-    
     {
         id: '1',
+        image: '/static/media/banner-elegancia.png',
+        imagemobile: '/static/media/banner-elegancia-mobile.png'
+    },
+    {
+        id: '2',
         image: '/static/media/banner-pratas-luxo.png',
         imagemobile: '/static/media/banner-pratas-luxo-mobile.png'
     },
     {
-        id: '2',
+        id: '3',
         image: '/static/media/banner-jewerly.png',
         imagemobile: '/static/media/banner-jewerly-mobile.png'
     }
