@@ -107,6 +107,7 @@
 @media screen and (max-width: 1480px) {
     .header-component, .card {
         padding: 20px 2vw  !important;
+        padding-bottom: 0px !important;
     }
 
     .topHeaderComponent {
