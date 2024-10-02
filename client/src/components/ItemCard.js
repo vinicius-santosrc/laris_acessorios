@@ -20,12 +20,12 @@ function CardItems(products) {
                         </div>
                         <div className="Product-Jewel-Content-Data">
                             <div className="Product-Availabilities">
-                                {products.data.personalizavel == true ? <p class="personalizado-loja">Personalizado</p> :
+                                {products.data.personalizavel == true ? <p className="personalizado-loja">Personalizado</p> :
                                     <>
                                         {products.data.disponibilidade == true ?
-                                            <p class='novidade-loja'>Disponível</p>
+                                            <p className='novidade-loja'>Disponível</p>
                                             :
-                                            <p class="esgotado-loja">Esgotado</p>
+                                            <p className="esgotado-loja">Esgotado</p>
                                         }
                                     </>}
                             </div>
@@ -53,26 +53,26 @@ function CardItems(products) {
 
     /*return (
         <a href={window.location.origin + "/produto/" + products.data.URL} id={products.data.$id} key={products.data.$id}>
-            <div class='item-prata' id={products.data.$id}>
+            <div className='item-prata' id={products.data.$id}>
                 <img src={window.location.origin + products != "" && products.data.PHOTOURL && products.data.PHOTOURL.length > 0 ? products.data.PHOTOURL[0] : ""} alt="" />
-                <div class="text-prata">
-                    {products.data.PERSONALIZAVEL == true ? <p class="personalizado-loja">Personalizado</p> :
+                <div className="text-prata">
+                    {products.data.PERSONALIZAVEL == true ? <p className="personalizado-loja">Personalizado</p> :
                         <>
                             {products.data.AVALIABLE == true ?
-                                <p class='novidade-loja'>Disponível</p>
+                                <p className='novidade-loja'>Disponível</p>
                                 :
-                                <p class="esgotado-loja">Esgotado</p>
+                                <p className="esgotado-loja">Esgotado</p>
                             }
                         </>}
-                    <h1 class="nome-prata">{products.data.NAME_PRODUCT}</h1>
+                    <h1 className="nome-prata">{products.data.NAME_PRODUCT}</h1>
 
-                    <div class="promocao">
+                    <div className="promocao">
                         {products.data.DESCONTO > 0 ?
-                            <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.data.PRICE.toFixed(2)}</s> R$ {(products.data.PRICE - products.data.DESCONTO).toFixed(2)}</p>
+                            <p className="preço-loja"><s style={{ color: 'darkgray' }}>R$ {products.data.PRICE.toFixed(2)}</s> R$ {(products.data.PRICE - products.data.DESCONTO).toFixed(2)}</p>
                             :
-                            <p class="preço-loja">R$ {(products.data.PRICE - products.data.DESCONTO).toFixed(2)}</p>
+                            <p className="preço-loja">R$ {(products.data.PRICE - products.data.DESCONTO).toFixed(2)}</p>
                         }
-                        <p class="opcoesdepaga">Pague à vista, Pix ou no Cartão</p>
+                        <p className="opcoesdepaga">Pague à vista, Pix ou no Cartão</p>
                     </div>
                     <div className="botaocomprarprata">
                         <label>VER DETALHES</label>

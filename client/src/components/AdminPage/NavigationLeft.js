@@ -32,7 +32,7 @@ export default function NavigationLeft() {
                 <div className="navigation-bar-logo-top">
                     <img src={window.location.origin + '/static/media/logolaris.png'} />
                 </div>
-                <h1 class="title-opcoes-pc">Opções de Navegação</h1>
+                <h1 className="title-opcoes-pc">Opções de Navegação</h1>
                 <ul className="navigation-bar-left-side">
                     {window.location.pathname == '/admin'
                         ?

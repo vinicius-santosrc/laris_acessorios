@@ -350,14 +350,14 @@ export default function PlanilhaPage() {
                         </div>
                         :
                         <>
-                            <div class="newItem">
+                            <div className="newItem">
                                 <h3>Entradas: R$<span id="entradas">{entradasWrap.toFixed(2)}</span></h3>
                                 <h3>Saídas: R$<span id="saidas">{saidasWrap.toFixed(2)}</span></h3>
                                 <h3 id="saldoh3">Saldo: R$<span>{saldoWrap.toFixed(2)}</span></h3>
                             </div>
-                            <div class="newItem">
-                                <div class="headeritem">
-                                    <div class="side1item">
+                            <div className="newItem">
+                                <div className="headeritem">
+                                    <div className="side1item">
                                         <h1>{itemId ? 'Editando' : 'Adicionar'} um Item</h1>
                                         <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
                                     </div>
@@ -366,11 +366,11 @@ export default function PlanilhaPage() {
                                             ?
                                             <button onClick={() => {
                                                 setAddItemOpen(false)
-                                            }}><i class="fa-solid fa-minus"></i></button>
+                                            }}><i className="fa-solid fa-minus"></i></button>
                                             :
                                             <button onClick={() => {
                                                 setAddItemOpen(true)
-                                            }}><i class="fa-solid fa-plus"></i></button>
+                                            }}><i className="fa-solid fa-plus"></i></button>
                                         }
 
 
@@ -427,7 +427,7 @@ export default function PlanilhaPage() {
                                                 {item.tipo == 'Receita'
                                                     ?
                                                     <>
-                                                        <i class="fa-solid fa-circle-chevron-up"></i>
+                                                        <i className="fa-solid fa-circle-chevron-up"></i>
                                                         <span>Entrada</span>
                                                     </>
                                                     :
@@ -483,9 +483,9 @@ export default function PlanilhaPage() {
                     </div>
                     :
                     <>
-                        <div class="newItem">
-                            <div class="headeritem">
-                                <div class="side1item">
+                        <div className="newItem">
+                            <div className="headeritem">
+                                <div className="side1item">
                                     <h1>{itemId ? 'Editando' : 'Adicionar'} um Item</h1>
                                     <p>Preencha todos os dados para adicionar o item ao banco de dados.</p>
                                 </div>
@@ -494,11 +494,11 @@ export default function PlanilhaPage() {
                                         ?
                                         <button onClick={() => {
                                             setAddItemOpen(false)
-                                        }}><i class="fa-solid fa-minus"></i></button>
+                                        }}><i className="fa-solid fa-minus"></i></button>
                                         :
                                         <button onClick={() => {
                                             setAddItemOpen(true)
-                                        }}><i class="fa-solid fa-plus"></i></button>
+                                        }}><i className="fa-solid fa-plus"></i></button>
                                     }
 
 

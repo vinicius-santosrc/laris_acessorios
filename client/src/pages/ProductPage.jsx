@@ -90,9 +90,9 @@ export default function ProductPage() {
             const { value: formValues } = await Swal.fire({
                 title: 'Complete as opções abaixo para receber aviso quando esse produto estiver disponível.',
                 html:
-                    '<input id="swal-input" class="swal2-input" placeholder=Nome>' +
-                    '<input type="email" id="swal-input1" class="swal2-input" placeholder=Email>' +
-                    '<input type="tel" id="swal-input2" class="swal2-input" placeholder=Telefone>',
+                    '<input id="swal-input" className="swal2-input" placeholder=Nome>' +
+                    '<input type="email" id="swal-input1" className="swal2-input" placeholder=Email>' +
+                    '<input type="tel" id="swal-input2" className="swal2-input" placeholder=Telefone>',
                 focusConfirm: false,
                 confirmButtonText: 'Confirmar recebimento de notificações',
                 confirmButtonColor: '#EF59A0',
@@ -165,18 +165,18 @@ export default function ProductPage() {
                 icon: 'info',
                 html:
                     `
-                    <div class='item-prata'>
+                    <div className='item-prata'>
                         <img src="../static/media/product-images/extensor (1).jpeg" alt="">
-                        <div class="text-prata">
-                            <p class='novidade-loja'>Novo</p>
-                            <h1 class="nome-prata">Extensor (+4cm)</h1>
-                            <div class='estrelas'>
+                        <div className="text-prata">
+                            <p className='novidade-loja'>Novo</p>
+                            <h1 className="nome-prata">Extensor (+4cm)</h1>
+                            <div className='estrelas'>
                                 <img src="../static/media/product-images/Nenhuma estrela.png" alt="">
                             </div>
-                            <div class="promocao">
-                                <p class="preço-promo"><s>R$ 13,00</s>
-                                <p class="preço-loja">R$ 8,50</p>
-                                <p class="opcoesdepaga">(comprado junto com produtos)</p>
+                            <div className="promocao">
+                                <p className="preço-promo"><s>R$ 13,00</s>
+                                <p className="preço-loja">R$ 8,50</p>
+                                <p className="opcoesdepaga">(comprado junto com produtos)</p>
                             </div>
                             
                         </div>

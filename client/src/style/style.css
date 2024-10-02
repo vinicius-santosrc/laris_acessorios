@@ -780,7 +780,7 @@ svg {
     height: 0.1vh;
 }
 
-.botaofecharsacola i {
+.botaofecharsacola svg {
     font-size: 2vw;
     margin-top: 2vh;
     margin-left: 1vw;
@@ -6966,7 +6966,7 @@ h2.extensorfrase {
         height: 0.1vh;
     }
 
-    .botaofecharsacola i {
+    .botaofecharsacola svg {
         font-size: 3vw;
         margin-top: 2vh;
         margin-left: 2.5vw;
@@ -10188,7 +10188,7 @@ h2.extensorfrase {
 
 
 
-    .botaofecharsacola i {
+    .botaofecharsacola svg {
         font-size: 7vw;
         margin-top: 1vh;
         margin-left: 3vw;

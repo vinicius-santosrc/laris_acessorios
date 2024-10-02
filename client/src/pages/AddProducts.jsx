@@ -16,6 +16,7 @@ import db, { getUserData } from "../lib/appwrite";
 import Loading from "../components/AdminPage/Loading";
 import { auth, CheckIfUserIsLogged } from "../lib/firebase";
 import { GetUserAtual } from "../lib/database";
+import AlertComponent from "../components/alertComponent";
 
 const client = new Client();
 const storage = new Storage(client);
@@ -74,7 +75,9 @@ export default function AddProducts() {
 
     const [JSONPdtNovo, setJSONProductNovo] = useState([])
 
-
+    const [isAlert, setIsAlert] = useState(false);
+    const [typeAlert, settypeAlert] = useState("error");
+    const [alertMessage, setMessageAlert] = useState("");
 
     //FAZENDO RECONHECIMENTO DA IMAGEM
 
@@ -177,6 +180,12 @@ export default function AddProducts() {
             setJSONNew();
         } catch (error) {
             console.error(error);
+            setIsAlert(true)
+            settypeAlert("error")
+            setMessageAlert("Erro ao enviar fotos para o banco de fotos")
+            setTimeout(() => {
+                setIsAlert(false)
+            }, 4000);
         }
     };
 
@@ -208,22 +217,21 @@ export default function AddProducts() {
                         body: JSON.stringify(JSONPdtNovo),
                     })
 
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: `O produto ${nameProduct} foi criado com sucesso.`,
-                        showConfirmButton: false,
-                        timer: 2500
-                    }).then(() => {
+                    setIsAlert(true)
+                    settypeAlert("sucess")
+                    setMessageAlert(`O produto ${nameProduct} foi criado com sucesso.`)
+                    setTimeout(() => {
+                        setIsAlert(false)
                         window.location.reload()
-                    })
+                    }, 4000);
                 } catch (error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: `Erro ao criar o produto: ${error}`,
-                        footer: '<a href="errors">Por que deste erro?</a>'
-                    });
+                    setIsAlert(true)
+                    settypeAlert("error")
+                    setMessageAlert(`Erro ao criar o produto: ${error}`)
+                    setTimeout(() => {
+                        setIsAlert(false)
+                    }, 4000);
+                    
                 }
             }
         })
@@ -313,11 +321,19 @@ export default function AddProducts() {
     return (
         <div className="AdminPage-DashBoard">
             <NavigationLeft />
+            {isAlert ?
+                <AlertComponent
+                    message={alertMessage}
+                    type={typeAlert}
+                    close={() => setIsAlert()}
+                />
+                : null
+            }
             <div className="CreateProduct">
                 {step == 1
                     ?
                     <section className="sendPhotosDiv">
-                        <img src={window.location.origin + '/static/media/admin-images/undraw_folder_files_re_2cbm.svg'} />
+                        <img src={window.location.origin + '/static/media/admin-images/undraw_folder_files_re_2cbm.svg'} alt="Upload image"/>
                         <h1>PRIMEIRO, ENVIE AS IMAGENS DO PRODUTO</h1>
                         <p>Envie até 3 imagens, sendo no mínimo uma, do produto.</p>
                         <div className="ipts-wrapper">
@@ -567,32 +583,32 @@ export default function AddProducts() {
                             <div className="capturestela">
                                 <div className='estoque-prata-index-pc'>
                                     <a href="#">
-                                        <div class='item-prata'>
+                                        <div className='item-prata'>
                                             <img src={
                                                 window.location.origin + filepreview != "" && filepreview && filepreview.length > 0 ? filepreview : filepreview
                                             } alt="" />
-                                            <div class="text-prata">
-                                                {PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <div className="text-prata">
+                                                {PERSONALIZAVEL == true ? <p className="personalizado-loja">PERSONALIZADO</p> :
                                                     <>
                                                         {avaliable === 'true' ?
-                                                            <p class='novidade-loja'>Disponível</p>
+                                                            <p className='novidade-loja'>Disponível</p>
                                                             :
-                                                            <p class="esgotado-loja">ESGOTADO</p>
+                                                            <p className="esgotado-loja">ESGOTADO</p>
                                                         }
                                                     </>}
-                                                <h1 class="nome-prata">{nameProduct}</h1>
-                                                <div class='estrelas'>
+                                                <h1 className="nome-prata">{nameProduct}</h1>
+                                                <div className='estrelas'>
                                                     <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
                                                 </div>
-                                                <div class="promocao">
+                                                <div className="promocao">
                                                     {descontoProduct > 0 ?
-                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
+                                                        <p className="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                         :
-                                                        <p class="preço-loja">R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
+                                                        <p className="preço-loja">R$ {(priceProduct - descontoProduct).toFixed(2)}</p>
                                                     }
-                                                    <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                                    <p className="opcoesdepaga">Pague à vista ou Pix</p>
                                                 </div>
-                                                <div class="botaocomprarprata">
+                                                <div className="botaocomprarprata">
                                                     <span>VER DETALHES</span>
                                                 </div>
 
@@ -604,32 +620,32 @@ export default function AddProducts() {
                             </div>
                             <div className='estoque-prata-index'>
                                 <a href="#">
-                                    <div class='item-prata'>
+                                    <div className='item-prata'>
                                         <img src={
                                             window.location.origin + filepreview != "" && filepreview && filepreview.length > 0 ? filepreview : filepreview
                                         } alt="" />
-                                        <div class="text-prata">
-                                            {PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                        <div className="text-prata">
+                                            {PERSONALIZAVEL == true ? <p className="personalizado-loja">PERSONALIZADO</p> :
                                                 <>
                                                     {avaliable === 'true' ?
-                                                        <p class='novidade-loja'>Disponível</p>
+                                                        <p className='novidade-loja'>Disponível</p>
                                                         :
-                                                        <p class="esgotado-loja">ESGOTADO</p>
+                                                        <p className="esgotado-loja">ESGOTADO</p>
                                                     }
                                                 </>}
-                                            <h1 class="nome-prata">{nameProduct}</h1>
-                                            <div class='estrelas'>
+                                            <h1 className="nome-prata">{nameProduct}</h1>
+                                            <div className='estrelas'>
                                                 <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
                                             </div>
-                                            <div class="promocao">
+                                            <div className="promocao">
                                                 {descontoProduct > 0 ?
-                                                    <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {(priceProduct - descontoProduct)}</p>
+                                                    <p className="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduct}</s> R$ {(priceProduct - descontoProduct)}</p>
                                                     :
-                                                    <p class="preço-loja">R$ {(priceProduct - descontoProduct)}</p>
+                                                    <p className="preço-loja">R$ {(priceProduct - descontoProduct)}</p>
                                                 }
-                                                <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                                <p className="opcoesdepaga">Pague à vista ou Pix</p>
                                             </div>
-                                            <div class="botaocomprarprata">
+                                            <div className="botaocomprarprata">
                                                 <span>VER DETALHES</span>
                                             </div>
 

@@ -351,30 +351,30 @@ export default function AdminProductEditPage() {
                             <div className="capturestela">
                                 <div className='estoque-prata-index-pc'>
                                     <a href="#">
-                                        <div class='item-prata' id={ProdutoAtual.$id}>
+                                        <div className='item-prata' id={ProdutoAtual.$id}>
                                             <img src={ProdutoAtual != "" && JSON.parse(ProdutoAtual.photoURL) && JSON.parse(ProdutoAtual.photoURL).length > 0 ? JSON.parse(ProdutoAtual.photoURL)[0] : ""} alt="" />
-                                            <div class="text-prata">
-                                                {ProdutoAtual.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <div className="text-prata">
+                                                {ProdutoAtual.PERSONALIZAVEL == true ? <p className="personalizado-loja">PERSONALIZADO</p> :
                                                     <>
                                                         {isAvaliable === 'true' ?
-                                                            <p class='novidade-loja'>Disponível</p>
+                                                            <p className='novidade-loja'>Disponível</p>
                                                             :
-                                                            <p class="esgotado-loja">ESGOTADO</p>
+                                                            <p className="esgotado-loja">ESGOTADO</p>
                                                         }
                                                     </>}
-                                                <h1 class="nome-prata">{nomeProduto}</h1>
-                                                <div class='estrelas'>
+                                                <h1 className="nome-prata">{nomeProduto}</h1>
+                                                <div className='estrelas'>
                                                     <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
                                                 </div>
-                                                <div class="promocao">
+                                                <div className="promocao">
                                                     {descontoProduto > 0 ?
-                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduto}</s> R$ {priceProduto - descontoProduto}</p>
+                                                        <p className="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduto}</s> R$ {priceProduto - descontoProduto}</p>
                                                         :
-                                                        <p class="preço-loja">R$ {priceProduto - descontoProduto}</p>
+                                                        <p className="preço-loja">R$ {priceProduto - descontoProduto}</p>
                                                     }
-                                                    <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                                    <p className="opcoesdepaga">Pague à vista ou Pix</p>
                                                 </div>
-                                                <div class="botaocomprarprata">
+                                                <div className="botaocomprarprata">
                                                     <span>VER DETALHES</span>
                                                 </div>
 
@@ -385,30 +385,30 @@ export default function AdminProductEditPage() {
                                 </div>
                                 <div className='estoque-prata-index'>
                                     <a href="#">
-                                        <div class='item-prata' id={ProdutoAtual.$id}>
+                                        <div className='item-prata' id={ProdutoAtual.$id}>
                                             <img src={ProdutoAtual != "" && JSON.parse(ProdutoAtual.photoURL) && JSON.parse(ProdutoAtual.photoURL).length > 0 ? JSON.parse(ProdutoAtual.photoURL)[0] : ""} alt="" />
-                                            <div class="text-prata">
-                                                {ProdutoAtual.PERSONALIZAVEL == true ? <p class="personalizado-loja">PERSONALIZADO</p> :
+                                            <div className="text-prata">
+                                                {ProdutoAtual.PERSONALIZAVEL == true ? <p className="personalizado-loja">PERSONALIZADO</p> :
                                                     <>
                                                         {isAvaliable === 'true' ?
-                                                            <p class='novidade-loja'>Disponível</p>
+                                                            <p className='novidade-loja'>Disponível</p>
                                                             :
-                                                            <p class="esgotado-loja">ESGOTADO</p>
+                                                            <p className="esgotado-loja">ESGOTADO</p>
                                                         }
                                                     </>}
-                                                <h1 class="nome-prata">{nomeProduto}</h1>
-                                                <div class='estrelas'>
+                                                <h1 className="nome-prata">{nomeProduto}</h1>
+                                                <div className='estrelas'>
                                                     <img src={window.location.origin + "/static/media/product-images/Nenhuma estrela.png"} alt="" />
                                                 </div>
-                                                <div class="promocao">
+                                                <div className="promocao">
                                                     {descontoProduto > 0 ?
-                                                        <p class="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduto}</s> R$ {priceProduto - descontoProduto}</p>
+                                                        <p className="preço-loja"><s style={{ color: 'darkgray' }}>R$ {priceProduto}</s> R$ {priceProduto - descontoProduto}</p>
                                                         :
-                                                        <p class="preço-loja">R$ {priceProduto - descontoProduto}</p>
+                                                        <p className="preço-loja">R$ {priceProduto - descontoProduto}</p>
                                                     }
-                                                    <p class="opcoesdepaga">Pague à vista ou Pix</p>
+                                                    <p className="opcoesdepaga">Pague à vista ou Pix</p>
                                                 </div>
-                                                <div class="botaocomprarprata">
+                                                <div className="botaocomprarprata">
                                                     <span>VER DETALHES</span>
                                                 </div>
 

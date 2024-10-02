@@ -31,9 +31,11 @@ export default function Index() {
             const response = await fetch(`${endpoint}${preEndpoint}${secretKey}/products`)
             const data = await response.json()
             const ProductsArray = data.reverse().sort((a, b) => (b.disponibilidade - a.disponibilidade)).filter((product) => product.desconto > 0).map((pdt) => {
-                <CardItems
-                    data={pdt}
-                />
+                return (
+                    <CardItems
+                        data={pdt}
+                    />
+                )
             });
             setPromocoes(ProductsArray)
         }
