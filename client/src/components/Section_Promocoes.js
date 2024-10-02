@@ -116,30 +116,26 @@ export default function SectionProducts(props) {
             <div className='estoque-prata-index'>
                 {props.name == 'NOVIDADES'
                     ?
-                    <>
-                        <Swiper
-                            modules={[Navigation, Scrollbar, A11y]}
-                            slidesPerView={2}
-                            pagination={{ clickable: true }}
+                    <Swiper
+                        modules={[Navigation, Scrollbar, A11y]}
+                        slidesPerView={2}
+                        pagination={{ clickable: true }}
 
-                        >
-                            {ProductsNovidades}
-                        </Swiper>
-                    </>
+                    >
+                        {ProductsNovidades}
+                    </Swiper>
                     :
                     <></>}
                 {props.name == 'RECOMENDADOS PARA VOCÊ'
                     ?
-                    <>
-                        <Swiper
-                            modules={[Navigation, Scrollbar, A11y]}
-                            slidesPerView={2}
-                            pagination={{ clickable: true }}
+                    <Swiper
+                        modules={[Navigation, Scrollbar, A11y]}
+                        slidesPerView={2}
+                        pagination={{ clickable: true }}
 
-                        >
-                            {ProductForYouItems}
-                        </Swiper>
-                    </>
+                    >
+                        {ProductForYouItems}
+                    </Swiper>
                     :
                     <></>
                 }
@@ -157,7 +153,7 @@ export default function SectionProducts(props) {
                             <>
                                 <Swiper
                                     modules={[Navigation, Scrollbar, A11y]}
-                                    slidesPerView={2}
+                                    slidesPerView={numberProductsPromo < 2 ? numberProductsPromo : 2}
                                     pagination={{ clickable: true }}
 
                                 >

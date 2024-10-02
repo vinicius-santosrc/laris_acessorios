@@ -21,10 +21,10 @@ export default function BannerTopPage(props) {
             {window.location.href.includes('novidades')
                 ?
                 <>
-                    <div class="novidades-capa">
+                    <div className="novidades-capa">
                         <img src="./static/media/product-images/novidades-logo.png" alt="" />
                     </div>
-                    <div class="novidades-capa-cell">
+                    <div className="novidades-capa-cell">
                         <img src="./static/media/product-images/novidades-logo-cell.png" alt="" />
                     </div></>
                 :
@@ -32,10 +32,10 @@ export default function BannerTopPage(props) {
                     {window.location.href.includes("promocoes")
                         ?
                         <>
-                            <div class="novidades-capa">
+                            <div className="novidades-capa">
                                 <img src="./static/media/product-images/promocoescardpc.png" alt="" />
                             </div>
-                            <div class="novidades-capa-cell">
+                            <div className="novidades-capa-cell">
                                 <img src="./static/media/product-images/promocoescardcell.png" alt="" />
                             </div>
                         </>

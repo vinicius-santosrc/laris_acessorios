@@ -8,8 +8,6 @@
 */
 
 import { useEffect, useState } from "react"
-import { getUserData, login } from "../lib/appwrite";
-import { Models } from "appwrite";
 import { auth, CheckIfUserIsLogged, loginIn } from "../lib/firebase";
 import { GetUserAtual } from "../lib/database";
 import AlertComponent from "../components/alertComponent";

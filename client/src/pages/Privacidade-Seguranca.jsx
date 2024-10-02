@@ -14,22 +14,22 @@ export default function PrivacidadeSeguranca() {
     return (
         <>
             <Header />
-            <section class="topinstitucional">
+            <section className="topinstitucional">
                 <h1>Política de Privacidade</h1>
-                <div class='content-institucional'>
-                    <div class='opcoesinstitucional'>
-                        <a href="../institucional/duvidas-frequentes"><i class="fa-regular fa-circle-question"></i> Duvidas Frequentes</a>
-                        <a href="../pages/privacidade-seguranca"><i class="fa-solid fa-file-contract"></i> Política de Privacidade</a>
-                        <a href="../institucional/guia-de-tamanhos/colares"><i class="fa-solid fa-book"></i> Guia de Tamanhos</a>
-                        <a href="../institucional/cuidado-joias"><i class="fa-solid fa-gem"></i> Cuidados com as Joias e Miçangas</a>
-                        <a href="../institucional/fale-conosco"><i class="fa-solid fa-comment"></i> Fale Conosco</a>
+                <div className='content-institucional'>
+                    <div className='opcoesinstitucional'>
+                        <a href="../institucional/duvidas-frequentes"><i className="fa-regular fa-circle-question"></i> Duvidas Frequentes</a>
+                        <a href="../pages/privacidade-seguranca"><i className="fa-solid fa-file-contract"></i> Política de Privacidade</a>
+                        <a href="../institucional/guia-de-tamanhos/colares"><i className="fa-solid fa-book"></i> Guia de Tamanhos</a>
+                        <a href="../institucional/cuidado-joias"><i className="fa-solid fa-gem"></i> Cuidados com as Joias e Miçangas</a>
+                        <a href="../institucional/fale-conosco"><i className="fa-solid fa-comment"></i> Fale Conosco</a>
                     </div>
-                    <div class="items-content-inst">
-                        <div class="top-item-content">
+                    <div className="items-content-inst">
+                        <div className="top-item-content">
                             <h1>Política de Privacidade</h1>
                         </div>
-                        <div class="content-inside-item">
-                            <section class='politica-dados'>
+                        <div className="content-inside-item">
+                            <section className='politica-dados'>
                                 <h1>Política de Privacidade e de Proteção de Dados da Loja LARI'S ACESSÓRIOS</h1>
                                 <p>Última atualização: 07/12/2021</p>
 

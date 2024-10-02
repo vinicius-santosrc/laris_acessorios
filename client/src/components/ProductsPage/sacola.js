@@ -16,7 +16,7 @@ export function carregarSacolaDoLocalStorage(setSacola) {
     }
 }
 
-function SacolaDeCompras() {
+function SacolaDeCompras({fetch}) {
     const [sacola, setSacola] = useState(() => {
         const sacolaNoLocalStorage = JSON.parse(localStorage.getItem('sacola'));
         return sacolaNoLocalStorage || [];
@@ -24,14 +24,17 @@ function SacolaDeCompras() {
 
     const salvarSacolaNoLocalStorage = () => {
         localStorage.setItem('sacola', JSON.stringify(sacola));
+        fetch()
     };
 
     useEffect(() => {
         carregarSacolaDoLocalStorage(setSacola);
+        fetch()
     }, []);
 
     useEffect(() => {
         salvarSacolaNoLocalStorage();
+        fetch()
     }, [sacola]);
 
     const adicionarProduto = (produto, preco) => {
@@ -45,6 +48,7 @@ function SacolaDeCompras() {
         const novaSacola = [...sacola];
         novaSacola.splice(index, 1);
         setSacola(novaSacola);
+        fetch()
     };
 
     function fecharcart() {
@@ -67,25 +71,25 @@ function SacolaDeCompras() {
         <div>
             {sacola.map((item, index) => (
                 <li key={index}>
-                    <li class="mdl-list__item" id='index'>
-                        <div class="product-photo leftsidecart">
+                    <li className="mdl-list__item" id='index'>
+                        <div className="product-photo leftsidecart">
 
                             <img src={item.photoURL} alt="" />
                         </div>
-                        <div class="product-info rightsidecart">
-                            <div class="product-info-top toprightside">
-                                <div class="productname-delete">
+                        <div className="product-info rightsidecart">
+                            <div className="product-info-top toprightside">
+                                <div className="productname-delete">
                                     <p>{item.name} {item.personalizacao ? <>({item.personalizacao})</> : ""}</p>
-                                    <a class="material-icons" onClick={() => removerProduto(index)}>
-                                        <i class="fa-solid fa-trash-can"></i>
+                                    <a className="material-icons" onClick={() => removerProduto(index)}>
+                                        <i className="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
-                                <p class="product-size">Tamanho: {item.tamanho}</p>
+                                <p className="product-size">Tamanho: {item.tamanho}</p>
                             </div>
                             <select disabled>
                                 <option value="${item.qtd}">{item.qtd}</option>
                             </select>
-                            <div class="product-list-price">
+                            <div className="product-list-price">
                                 {item.desconto > 0
                                     ?
                                     <><s style={{color: 'gray'}}>R$ {(item.preco).toFixed(2)}</s> R$ {(item.preco - item.desconto).toFixed(2)}</>

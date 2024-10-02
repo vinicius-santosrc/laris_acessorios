@@ -16,6 +16,7 @@ import InputSearchBox from "./InputSearchBox";
 import { CheckIfUserIsLogged, auth } from "../lib/firebase";
 import { GetUserAtual } from "../lib/database";
 import InputSearchBoxMobile from "./InputSearchBoxMobile";
+import AlertComponent from "./alertComponent";
 
 export default function Header() {
     let data = new Date;
@@ -30,6 +31,10 @@ export default function Header() {
 
     const [usuarioAtual, setusuarioAtual] = useState([]);
     const [loadingUser, setloadingUser] = useState(false);
+
+    const [isAlert, setIsAlert] = useState(false);
+    const [typeAlert, settypeAlert] = useState("error");
+    const [alertMessage, setMessageAlert] = useState("");
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
@@ -58,31 +63,35 @@ export default function Header() {
     }
 
     useEffect(() => {
-        setSacolaAtual(JSON.parse(localStorage.getItem("sacola")));
+        fetchSacola();
+    }, [])
 
-        if (Array.isArray(sacolaAt)) {
-            let preco = 0
-            let sub = 0
-            let desc = 0
-            sacolaAt.map((item, index) => {
-                preco += item.preco - item.desconto
-                sub += item.preco
-                desc += item.desconto
+    function fetchSacola() {
+        setSacolaAtual(JSON.parse(localStorage.getItem("sacola")));
+        setnumberbagitems(JSON.parse(localStorage.getItem("sacola")).length)
+        if (Array.isArray(JSON.parse(localStorage.getItem("sacola")))) {
+            let preco = 0;
+            let sub = 0;
+            let desc = 0;
+            JSON.parse(localStorage.getItem("sacola")).map((item, index) => {
+                preco += item.preco - item.desconto;
+                sub += item.preco;
+                desc += item.desconto;
             })
-            setprecototal(preco)
-            setsubtotal(sub)
-            setdescontos(desc)
+            setprecototal(preco);
+            setsubtotal(sub);
+            setdescontos(desc);
         }
-    })
+    }
 
     useEffect(() => {
-        searchByUserAtual()
-    }, [auth.currentUser])
+        searchByUserAtual();
+    }, [auth.currentUser]);
 
     async function GoToCheckOut() {
         const isLogged = await CheckIfUserIsLogged();
         if (!isLogged) {
-            window.location.href = window.location.origin + '/accounts/login?=afterRedirectCheckout'
+            window.location.href = window.location.origin + '/accounts/login?=afterRedirectCheckout';
         }
 
         if (localStorage.getItem("sacola") == '[]') {
@@ -94,21 +103,21 @@ export default function Header() {
         }
 
         else {
-            window.location.href = window.location.origin + '/checkout#cart=' + getRandomInt(1502) + '?'
+            window.location.href = window.location.origin + '/checkout#cart=' + getRandomInt(1502) + '?';
         }
     }
 
     function openmenu() {
-        let menu = document.querySelector('.options')
-        let back = document.querySelector('.background-option')
+        let menu = document.querySelector('.options');
+        let back = document.querySelector('.background-option');
 
         menu.style.display = 'block';
         back.style.display = 'block';
     }
 
     function fecharmenu() {
-        let menu = document.querySelector('.options')
-        let back = document.querySelector('.background-option')
+        let menu = document.querySelector('.options');
+        let back = document.querySelector('.background-option');
 
         menu.style.display = 'none';
         back.style.display = 'none';
@@ -126,24 +135,22 @@ export default function Header() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    'Sucesso!',
-                    'Sua sacola foi limpa',
-                    'success'
-                )
+                setIsAlert(true);
+                settypeAlert("sucess");
+                setMessageAlert(`Sua sacola foi limpa.`);
+                setTimeout(() => {
+                    setIsAlert(false)
+                    window.location.reload();
+                }, 4000);
                 localStorage.sacola = '[]';
-                window.location.reload()
+                window.location.reload();
             }
         })
     }
 
 
-    useEffect(() => {
-        setnumberbagitems(JSON.parse(localStorage.getItem("sacola")).length)
-    })
-
     if (localStorage.sacola == '[]' || localStorage.sacola == undefined || localStorage.sacola == 'undefined' || localStorage == null) {
-
+        
     }
 
     else {
@@ -165,7 +172,7 @@ export default function Header() {
 
         carrinho.style.display = 'block'
         back.style.display = 'block'
-
+        fetchSacola()
 
     }
 
@@ -195,13 +202,13 @@ export default function Header() {
             <>
                 <div className="HeaderContent-LARIS">
 
-                    <header class='menu-pc'>
-                        <div class='logo'>
+                    <header className='menu-pc'>
+                        <div className='logo'>
                             <a href={window.location.origin}>
                                 <img src={window.location.origin + '/static/media/Logo.webp'} alt="" />
                             </a>
                         </div>
-                        <div class='icons'>
+                        <div className='icons'>
 
                         </div>
                     </header>
@@ -211,45 +218,45 @@ export default function Header() {
                 <div className='background-option' onClick={fecharmenu}></div>
 
 
-                <div class='options'>
-                    <div class='botaofecharsacola' onClick={fecharmenu}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div className='options'>
+                    <div className='botaofecharsacola' onClick={fecharmenu}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L12 10.9393L17.4697 5.46967C17.7626 5.17678 18.2374 5.17678 18.5303 5.46967C18.8232 5.76256 18.8232 6.23744 18.5303 6.53033L13.0607 12L18.5303 17.4697C18.8232 17.7626 18.8232 18.2374 18.5303 18.5303C18.2374 18.8232 17.7626 18.8232 17.4697 18.5303L12 13.0607L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L10.9393 12L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967Z" fill="#0F172A" />
                     </svg>
                     </div>
-                    <p class="titlemenu">Acesso Rápido</p>
-                    <div class='linesacola'></div>
-                    <div class='opcoes'>
+                    <p className="titlemenu">Acesso Rápido</p>
+                    <div className='linesacola'></div>
+                    <div className='opcoes'>
                         <a href={window.location.origin + "/pratas"}><p>Pratas 925</p></a>
                     </div>
                 </div>
 
-                <div class='carrinhoshow'>
-                    <div class='mobile'>
+                <div className='carrinhoshow'>
+                    <div className='mobile'>
                         <p>PRODUTOS</p>
                     </div>
-                    <div class='cheio'>
-                        <div class='botaofecharsacola' onClick={fecharcart}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className='cheio'>
+                        <div className='botaofecharsacola' onClick={fecharcart}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L12 10.9393L17.4697 5.46967C17.7626 5.17678 18.2374 5.17678 18.5303 5.46967C18.8232 5.76256 18.8232 6.23744 18.5303 6.53033L13.0607 12L18.5303 17.4697C18.8232 17.7626 18.8232 18.2374 18.5303 18.5303C18.2374 18.8232 17.7626 18.8232 17.4697 18.5303L12 13.0607L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L10.9393 12L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967Z" fill="#0F172A" />
                         </svg>
                         </div>
-                        <div class='sacola-top'>
+                        <div className='sacola-top'>
                             <h1>Meus acessórios</h1>
-                            <div class='linesacola'></div>
+                            <div className='linesacola'></div>
                         </div>
-                        <div class='sides'>
-                            <div class='side1'>
-                                <div class='list'>
+                        <div className='sides'>
+                            <div className='side1'>
+                                <div className='list'>
                                     <ul>
                                         <SacolaDeCompras />
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class='botoesfinais'>
-                            <div class='obsfinal'>
+                        <div className='botoesfinais'>
+                            <div className='obsfinal'>
                                 <label>Pague com o Pix ou à vista</label>
                             </div>
-                            <div class='botaofinal'>
+                            <div className='botaofinal'>
                                 <button onClick={GoToCheckOut}>FINALIZAR COMPRA</button>
                             </div>
                         </div>
@@ -274,6 +281,14 @@ export default function Header() {
                     </div>
                     :
                     null
+                }
+                {isAlert ?
+                    <AlertComponent
+                        message={alertMessage}
+                        type={typeAlert}
+                        close={() => setIsAlert()}
+                    />
+                    : null
                 }
                 <header className='header-component'>
                     <div className='menu-pc-flex'>
@@ -434,42 +449,44 @@ export default function Header() {
             <div className='background-option' onClick={fecharmenu}></div>
 
 
-            <div class='options'>
-                <div class='botaofecharsacola' onClick={fecharmenu}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className='options'>
+                <div className='botaofecharsacola' onClick={fecharmenu}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L12 10.9393L17.4697 5.46967C17.7626 5.17678 18.2374 5.17678 18.5303 5.46967C18.8232 5.76256 18.8232 6.23744 18.5303 6.53033L13.0607 12L18.5303 17.4697C18.8232 17.7626 18.8232 18.2374 18.5303 18.5303C18.2374 18.8232 17.7626 18.8232 17.4697 18.5303L12 13.0607L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L10.9393 12L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967Z" fill="#0F172A" />
                 </svg>
                 </div>
-                <p class="titlemenu">Acesso Rápido</p>
-                <div class='linesacola'></div>
-                <div class='opcoes'>
+                <p className="titlemenu">Acesso Rápido</p>
+                <div className='linesacola'></div>
+                <div className='opcoes'>
                     <a href={window.location.origin + "/pratas"}><p>Pratas 925</p></a>
                 </div>
             </div>
 
-            <div class='carrinhoshow'>
-                <div class='mobile'>
+            <div className='carrinhoshow'>
+                <div className='mobile'>
                     <p>PRODUTOS</p>
                 </div>
-                <div class='cheio'>
-                    <div class='botaofecharsacola' onClick={fecharcart}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div className='cheio'>
+                    <div className='botaofecharsacola' onClick={fecharcart}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L12 10.9393L17.4697 5.46967C17.7626 5.17678 18.2374 5.17678 18.5303 5.46967C18.8232 5.76256 18.8232 6.23744 18.5303 6.53033L13.0607 12L18.5303 17.4697C18.8232 17.7626 18.8232 18.2374 18.5303 18.5303C18.2374 18.8232 17.7626 18.8232 17.4697 18.5303L12 13.0607L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L10.9393 12L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967Z" fill="#0F172A" />
                     </svg>
                     </div>
-                    <div class='sacola-top'>
+                    <div className='sacola-top'>
                         <h1>Meus acessórios</h1>
-                        <div class='linesacola'></div>
+                        <div className='linesacola'></div>
                     </div>
-                    <div class='sides'>
-                        <div class='side1'>
-                            <div class='list'>
+                    <div className='sides'>
+                        <div className='side1'>
+                            <div className='list'>
                                 <ul>
-                                    <SacolaDeCompras />
+                                    <SacolaDeCompras 
+                                        fetch={() => fetchSacola()}
+                                    />
                                 </ul>
                             </div>
                         </div>
                     </div>
                     {precototal && precototal > 0 ?
-                        <div class='botoesfinais'>
+                        <div className='botoesfinais'>
 
                             <div className="precosfinais">
                                 <div className="showitemprice">
@@ -487,10 +504,10 @@ export default function Header() {
                             </div>
 
 
-                            <div class='obsfinal'>
+                            <div className='obsfinal'>
                                 <label>Pague com o Pix ou à vista</label>
                             </div>
-                            <div class='botaofinal'>
+                            <div className='botaofinal'>
                                 <button onClick={GoToCheckOut}>IR PARA O CHECKOUT</button>
                             </div>
                         </div>

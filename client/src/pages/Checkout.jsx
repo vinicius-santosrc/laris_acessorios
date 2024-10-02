@@ -117,7 +117,7 @@ export default function Checkout() {
                     if (index == 0) {
                         return (
                             <>
-                                <tr class="top-list-cart">
+                                <tr className="top-list-cart">
                                     <td><label>PRODUTO</label></td>
                                     <td><label>PREÇO</label></td>
                                     <td><label>DESCONTO</label></td>
@@ -185,21 +185,21 @@ export default function Checkout() {
 
                     }
                     return (
-                        <div class="product-item-card">
-                            <div class="product-item-image">
+                        <div className="product-item-card">
+                            <div className="product-item-image">
                                 <img src={item.photoURL} />
                             </div>
-                            <div class="product-item-info">
-                                <div class="product-item-info-title">
+                            <div className="product-item-info">
+                                <div className="product-item-info-title">
                                     <div>
                                         <a style={{ color: 'black' }} onclick="window.location.href='${item.onclick}'">{item.name} {item.personalizacao ? <>({item.personalizacao})</> : ""}</a>
                                         <p style={{ color: 'gray', fontSize: '2.9vw' }}>Produto fornecido e entregue pela LARI'S</p>
                                     </div>
-                                    <a class="material-icons" onClick={removeTarefaCart}>
-                                        <i class="fa-solid fa-trash-can"></i>
+                                    <a className="material-icons" onClick={removeTarefaCart}>
+                                        <i className="fa-solid fa-trash-can"></i>
                                     </a>
                                 </div>
-                                <div class="product-item-info-qtd">
+                                <div className="product-item-info-qtd">
                                     <div>
                                         <select disabled>
                                             <option value={item.qtd} selected>{item.qtd}</option>
@@ -373,14 +373,14 @@ export default function Checkout() {
 
         return (
             <section className="laris-checkout-page">
-                <span class="loader"><span class="loader-inner"></span></span>
-                <div class='background-load'></div>
+                <span className="loader"><span className="loader-inner"></span></span>
+                <div className='background-load'></div>
                 <Header />
-                <div class='itensresumo'>
+                <div className='itensresumo'>
 
-                    <div class='seu-carrinho'>
+                    <div className='seu-carrinho'>
                         <h1>Resumo do pedido </h1>
-                        <table class='itens-cart'>
+                        <table className='itens-cart'>
                             {exportSacola != '' ?
                                 <>{exportSacola}</>
                                 :
@@ -394,10 +394,10 @@ export default function Checkout() {
                         </table>
 
                     </div>
-                    <div class='seu-carrinho-mobile'>
-                        <h1><i class="fa-solid fa-bag-shopping"></i> Seus produtos </h1>
+                    <div className='seu-carrinho-mobile'>
+                        <h1><i className="fa-solid fa-bag-shopping"></i> Seus produtos </h1>
 
-                        <table class='itens-cart'>
+                        <table className='itens-cart'>
 
 
                             <>
@@ -419,9 +419,9 @@ export default function Checkout() {
 
                     {usuarioAtual &&
                         <React.Fragment>
-                            <div class='dados-pessoais'>
-                                <h1><i class="fa-solid fa-person-dress"></i> Dados pessoais</h1>
-                                <div class="inputbox">
+                            <div className='dados-pessoais'>
+                                <h1><i className="fa-solid fa-person-dress"></i> Dados pessoais</h1>
+                                <div className="inputbox">
                                     <p>Email:</p><input type="email" id='Email' placeholder="" required disabled value={usuarioAtual.email ? usuarioAtual.email : null} />
                                     <p>Nome:</p><input type="text" id='primeironome' placeholder="" required disabled value={usuarioAtual.nome_completo ? usuarioAtual.nome_completo : null} />
                                     <p>CPF:</p><input type="number" min="0" id="cpf" placeholder="" required disabled value={usuarioAtual.cpf ? usuarioAtual.cpf : null} />
@@ -432,9 +432,9 @@ export default function Checkout() {
                             </div>
 
 
-                            <div class='seu-endereco'>
-                                <h1><i class="fa-solid fa-bag-shopping"></i> Entrega</h1>
-                                <div class="inputbox">
+                            <div className='seu-endereco'>
+                                <h1><i className="fa-solid fa-bag-shopping"></i> Entrega</h1>
+                                <div className="inputbox">
 
                                     <p>CEP</p>
                                     <a href="https://buscacepinter.correios.com.br/app/endereco/index.php?t" target="_blank">Não sei meu CEP</a>
@@ -515,9 +515,9 @@ export default function Checkout() {
 
                             }
 
-                            <div class='pay--'>
-                                <h1><i class="fa-solid fa-money-bill"></i> Pagamento</h1>
-                                <div class='pay-inside'>
+                            <div className='pay--'>
+                                <h1><i className="fa-solid fa-money-bill"></i> Pagamento</h1>
+                                <div className='pay-inside'>
                                     <div className="discont-coupons">
                                         <div className="CupomBox" onClick={() => setCuponsBox(true)}>
                                             {CupomAtual && CupomAtual.name ?
@@ -562,35 +562,35 @@ export default function Checkout() {
                                             }
                                         </div>
                                     </div>
-                                    <div class="paymenttotal">
-                                        <div class="monetarycard">
-                                            <div class="monetary">
+                                    <div className="paymenttotal">
+                                        <div className="monetarycard">
+                                            <div className="monetary">
                                                 <div>
-                                                    <p class="leftsidemonetary">Subtotal:</p>
+                                                    <p className="leftsidemonetary">Subtotal:</p>
                                                 </div>
-                                                <p class="valuemonetary">R$ {subtotal.toFixed(2)}</p>
+                                                <p className="valuemonetary">R$ {subtotal.toFixed(2)}</p>
                                             </div>
-                                            <div class="monetary">
+                                            <div className="monetary">
                                                 <div>
-                                                    <p class="leftsidemonetary">Descontos:</p>
+                                                    <p className="leftsidemonetary">Descontos:</p>
                                                 </div>
-                                                <p class="valuemonetary">R$ {desconto.toFixed(2)}</p>
+                                                <p className="valuemonetary">R$ {desconto.toFixed(2)}</p>
                                             </div>
-                                            <div class="monetary">
+                                            <div className="monetary">
                                                 <div>
-                                                    <p class="leftsidemonetary">Cupons:</p>
+                                                    <p className="leftsidemonetary">Cupons:</p>
                                                 </div>
-                                                <p class="valuemonetary">R$ {CuponsDescontos.toFixed(2)}</p>
+                                                <p className="valuemonetary">R$ {CuponsDescontos.toFixed(2)}</p>
                                             </div>
-                                            <div class="monetary">
+                                            <div className="monetary">
                                                 <div>
-                                                    <p class="leftsidemonetary">Entrega:</p>
+                                                    <p className="leftsidemonetary">Entrega:</p>
                                                 </div>
-                                                <p class="valuemonetary ">A COMBINAR</p>
+                                                <p className="valuemonetary ">A COMBINAR</p>
                                             </div>
-                                            <div class="monetarytotal monetary">
+                                            <div className="monetarytotal monetary">
                                                 <div>
-                                                    <p class="leftsidemonetary">Total:</p>
+                                                    <p className="leftsidemonetary">Total:</p>
                                                 </div>
                                                 <p>R$ {precototal.toFixed(2)}</p>
                                             </div>
@@ -629,9 +629,9 @@ export default function Checkout() {
             <section className="laris-checkout-page">
                 <Header />
                 <div className="itensresumo">
-                    <div class="empty-cart">
+                    <div className="empty-cart">
                         <h1>
-                            <i class="fa-solid fa-bag-shopping"></i>
+                            <i className="fa-solid fa-bag-shopping"></i>
                         </h1>
                         <h2>Sua sacola de compras está vazia.</h2>
                         <p>Para adicionar uma joia a sacola, navegue pelo nosso website e clique no botão "ADICIONAR A SACOLA" </p>

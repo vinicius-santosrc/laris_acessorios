@@ -81,7 +81,7 @@ const GetAllUsers = async () => {
 const getAllProducts = async () => {
     try {
         const response = await fetch(`${url}${preEndpoint}${secretKey}/products`);
-        const data = await response.json();
+        const data = await response.json() || [];
         return data.reverse();
     } catch (err) {
         console.error(err);

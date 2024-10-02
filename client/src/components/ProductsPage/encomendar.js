@@ -22,24 +22,24 @@ function MostraTarefas() {
 
     SetSacola(produtos.map((item, index) => {
         return (
-            <li class="mdl-list__item" id={index}>
-                <div class="product-photo leftsidecart">
+            <li className="mdl-list__item" id={index}>
+                <div className="product-photo leftsidecart">
                     <img src={item.photoURL} />
                 </div>
-                <div class="product-info rightsidecart">
-                    <div class="product-info-top toprightside">
-                        <div class="productname-delete">
+                <div className="product-info rightsidecart">
+                    <div className="product-info-top toprightside">
+                        <div className="productname-delete">
                             <p>${item.name}</p>
-                            <a class="material-icons" onclick="removeTarefa(0)">
-                                <i class="fa-solid fa-trash-can"></i>
+                            <a className="material-icons" onclick="removeTarefa(0)">
+                                <i className="fa-solid fa-trash-can"></i>
                             </a>
                         </div>
-                        <p class="product-size">Tamanho: ${item.tamanho}</p>
+                        <p className="product-size">Tamanho: ${item.tamanho}</p>
                     </div>
                     <select disabled>
                         <option value="${item.qtd}">${item.qtd}</option>
                     </select>
-                    <div class="product-list-price">
+                    <div className="product-list-price">
                         R$ ${item.preco}
                     </div>
                 </div>
