@@ -762,7 +762,11 @@ p.new {
 .sacola-top {
     margin-top: 1vh;
     margin-left: 2vh;
-    font-size: 15px;
+    font-size: 12px;
+}
+
+svg {
+    cursor: pointer
 }
 
 .sacola-top h1 {
@@ -3107,9 +3111,14 @@ td.photos {
     display: flex;
     justify-content: center;
     margin: auto;
-    padding: 30px 20px;
+    padding: 30px 100px;
     max-width: 1500px;
 
+}
+
+.swiper-slide {
+    justify-content: center !important;
+    display: flex !important;
 }
 
 .right-side-categorias-show {
@@ -6008,11 +6017,11 @@ h2.extensorfrase {
     }
 
     .Product-Card-Wrapper {
-        width: 250px;
+        width: 300px;
     }
 
     .Product-Jewel-Image-Content img {
-        height: 250px;
+        height: 290px;
     }
 
 

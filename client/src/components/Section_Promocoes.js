@@ -24,6 +24,7 @@ export default function SectionProducts(props) {
     const [ProductsNovidades, setProductsNovidades] = useState([]);
     const [ProductForYouItems, setProductForYouItems] = useState([]);
     const [ProductsPromocoes, setProductsPromocoes] = useState([]);
+    const [numberProductsPromo, setnumberProductsPromo] = useState(0);
 
     const PREFERENCE = localStorage.getItem("PREFERENCE");
     if (PREFERENCE) {
@@ -74,6 +75,11 @@ export default function SectionProducts(props) {
 
     async function setShowProductPromocoes() {
         const products = await getAllProducts();
+        let numberOfProducts = 0;
+        products.filter(pdt => pdt.desconto > 0).map((produto) => {
+            numberOfProducts++
+        });
+        setnumberProductsPromo(numberOfProducts);
         const ProductsArray = products.filter(pdt => pdt.desconto > 0).map((produto) => (
             <SwiperSlide>
                 <CardItems
@@ -212,7 +218,7 @@ export default function SectionProducts(props) {
                             <>
                                 <Swiper
                                     modules={[Navigation, Scrollbar, A11y]}
-                                    slidesPerView={3}
+                                    slidesPerView={numberProductsPromo < 4 ? numberProductsPromo : 4}
                                     pagination={{ clickable: true }}
 
                                 >
