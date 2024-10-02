@@ -17,6 +17,69 @@ export default function HeaderAdminPage() {
     const [status, setStatus] = useState('Online');
     const [searchBox, setSearchBox] = useState("");
 
+    const searchOptions = [
+        {
+            name: "Dashboard",
+            href: "/admin",
+            logo: null
+        },
+        {
+            name: "Produtos",
+            href: "/admin/products",
+            logo: null
+        },
+        {
+            name: "Adicionar produto",
+            href: "/admin/products/add",
+            logo: null
+        },
+        {
+            name: "Clientes",
+            href: "/admin/clientes",
+            logo: null
+        },
+        {
+            name: "Planilhas",
+            href: "/admin/planilhas",
+            logo: null
+        },
+        {
+            name: "Planilha Itens",
+            href: "/admin/planilhas/planilha-itens",
+            logo: null
+        },
+        {
+            name: "Planilha Despesas",
+            href: "/admin/planilhas/planilha-despesas",
+            logo: null
+        },
+        {
+            name: "Pedidos",
+            href: "/admin/pedidos",
+            logo: null
+        },
+        {
+            name: "Planejamentos",
+            href: "/admin/planejamentos",
+            logo: null
+        },
+        {
+            name: "Cupons",
+            href: "/admin/cupons",
+            logo: null
+        },
+        {
+            name: "Adicionar cupom",
+            href: "/admin/cupons",
+            logo: null
+        },
+        {
+            name: "Metas",
+            href: "/admin/metas",
+            logo: null
+        }
+    ]
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
