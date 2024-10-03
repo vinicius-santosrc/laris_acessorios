@@ -32,31 +32,29 @@ export default function PlanilhaPage() {
     const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
 
 
-    let entradas = 0; // Inicialize as variáveis aqui
-    let saidas = 0;
-
-    
-
     useEffect(() => {
-        async function getTotal() {
-            const PlanilhaDespesa = await getPlanilhaDespesas();
-
-            //SETAR PLANILHAS ENTRADAS E SAIDAS
-            PlanilhaDespesa.map((r) => {
-                if (r.tipo === "Receita") {
-                    entradas += Number(r.valor);
-                } else {
-                    saidas += Number(r.valor);
-                }
-            });
-
-            setEntradas(entradas)
-            setSaidas(saidas)
-            setSaldo(entradas - saidas);
-
-        }
-        getTotal()
+        
+        getTotal();
     }, []);
+    
+    async function getTotal() {
+        const PlanilhaDespesa = await getPlanilhaDespesas();
+
+        let entradas = 0;
+        let saidas = 0; 
+
+        PlanilhaDespesa.forEach((r) => {
+            if (r.tipo === "Receita") {
+                entradas += Number(r.valor);
+            } else {
+                saidas += Number(r.valor);
+            }
+        });
+
+        setEntradas(entradas);
+        setSaidas(saidas);
+        setSaldo(entradas - saidas);
+    }
 
     const { planilha } = useParams();
 
@@ -90,6 +88,7 @@ export default function PlanilhaPage() {
         setcurrentItemDESPESAS(item);
         setItemId(item.id)
         setAddItemOpen(true)
+        getTotal();
     };
 
     const handleDelete = (item) => {
@@ -100,6 +99,7 @@ export default function PlanilhaPage() {
                 text: 'O item não possui um ID válido para exclusão! Contate um desenvolvedor.',
                 footer: '<a href="errors">Por que deste erro?</a>'
             })
+            getTotal();
             return;
         }
 
@@ -113,6 +113,7 @@ export default function PlanilhaPage() {
             })
                 .then(() => {
                     loadItens();
+                    getTotal();
                 })
                 .catch(() => {
                     Swal.fire({
@@ -242,6 +243,7 @@ export default function PlanilhaPage() {
                 })
                     .then(() => {
                         loadItens();
+                        getTotal();
                         setCurrentItem({
                             descricao: "",
                             valor: "",
@@ -306,6 +308,7 @@ export default function PlanilhaPage() {
                     .then(() => {
                         Swal.fire("Item criado com sucesso!");
                         loadItens();
+                        getTotal();
                         setCurrentItem({
                             descricao: "",
                             valor: "",
@@ -344,7 +347,7 @@ export default function PlanilhaPage() {
                     {planilha != "planilha-despesas"
                         ?
                         <div className="Planilha-404-NotFound">
-                            <img src={window.location.origin + "/static/media/admin-images/undraw_void_-3-ggu.svg"} />
+                            <img src={window.location.origin + "/static/media/admin-images/undraw_void_-3-ggu.svg"} alt="Sem Planilha"/>
                             <h1>Nenhuma planilha foi encontrada.</h1>
                             <p>Entre em contato com o desenvolvedor ou tente novamente mais tarde.</p>
                         </div>

@@ -64,7 +64,7 @@ export default function ContentDashboard() {
         setProdutos(AllProducts.map((response) => {
             const PHOTOURL = JSON.parse(response.photoURL)
             return (
-                <div className="product-content">
+                <div key={response.id} className="product-content">
                     <a target="_blank" rel="noreferrer" href={"admin/products/" + response.id}>
 
                         <div className="product-content-show-rightside">
@@ -96,6 +96,7 @@ export default function ContentDashboard() {
         const getPlanilhaValores = async () => {
             const PlanilhaJSON = await getPlanilhaDespesas()
             setValores(PlanilhaJSON.reverse())
+            console.log(PlanilhaJSON)
         }
 
         getPlanilhaValores()
@@ -265,6 +266,10 @@ export default function ContentDashboard() {
                                     </a>
                                 </div>
                             </div>
+                            <div className="CardsBottom-Graphics">
+                                <h2 id="titleacessorapido">Gráficos de Renda</h2>
+                                <GraficoPrecos valores={valores} />
+                            </div>
                             <div className="Cards-Middle-Top">
                                 <div className="Card-Mid-Top-Inner">
                                     <Link to={'https://app.conectavenda.com.br/91fd8209815b8f86427520a32c28a053'} target="_blank" rel="noreferrer">
@@ -302,11 +307,6 @@ export default function ContentDashboard() {
                         </div>
 
                     </div>
-                    {/*<div className="CardsBottom-Graphics">
-                        <h2 id="titleacessorapido">Gráficos de Preços</h2>
-                        <GraficoPrecos valores={valores} />
-                        </div>*/}
-
                 </section>
             </div>
 

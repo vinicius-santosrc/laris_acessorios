@@ -11,29 +11,36 @@ import React, { useEffect, useState } from "react";
 import ApexChart from 'react-apexcharts';
 
 const GraficoPrecos = ({ valores }) => {
-    const [ultimoValor, setUltimoValor] = useState(0)
-    const [dataValue, setDataValue] = useState([])
+    const [dataValue, setDataValue] = useState([]);
 
     useEffect(() => {
-        setDataValue(valores.map((item, index) => {
+        let currentUltimoValor = 0;
+
+        const newDataValue = valores.map((item, index) => {
             let newY;
 
             if (item.tipo === "Receita") {
                 if (index === 0) {
                     newY = item.valor;
                 } else {
-                    newY = ultimoValor + item.valor;
+                    newY = currentUltimoValor + item.valor;
                 }
             } else {
                 if (index === 0) {
                     newY = item.valor;
                 } else {
-                    newY = ultimoValor - item.valor;
+                    newY = currentUltimoValor - item.valor;
                 }
             }
+
+            currentUltimoValor = newY;
+
             return { x: new Date(item.created_at).getTime(), y: newY };
-        }))
-    }, [])
+        });
+
+        setDataValue(newDataValue);
+    }, [valores]);
+
 
     const options = {
         xaxis: {
@@ -42,6 +49,15 @@ const GraficoPrecos = ({ valores }) => {
         yaxis: {
             tooltip: {
                 enabled: true
+            }
+        },
+        colors: ['#EC57B1', '#EC57B1', '#EC57B1'],
+        fill: {
+            colors: ['#EC57B1', '#EC57B1', '#EC57B1']
+        },
+        dataLabels: {
+            style: {
+                colors: ['#EC57B1', '#EC57B1', '#EC57B1']
             }
         }
     };
@@ -53,13 +69,15 @@ const GraficoPrecos = ({ valores }) => {
     ];
 
     return (
-        <ApexChart
-            options={options}
-            series={series}
-            type="area"
-            width={640}
-            height={400}
-        />
+        <div className="graphic-Component">
+            <ApexChart
+                options={options}
+                series={series}
+                type="area"
+                width={"100%"}
+                height={400}
+            />
+        </div>
     );
 };
 

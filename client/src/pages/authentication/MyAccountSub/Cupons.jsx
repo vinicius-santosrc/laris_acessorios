@@ -23,7 +23,7 @@ const Cupons = () => {
 
     const [cuponsDisp, setcuponsDisp] = useState(null);
 
-    const [CupomInput, setCupomInput] = useState(null);
+    const [CupomInput, setCupomInput] = useState("");
 
     const [SucessMessage, setSucessMessage] = useState(false);
     const [ErrorMessage, setErrorMessage] = useState(false);

@@ -606,6 +606,12 @@ p.new {
     background: rgb(241, 241, 241);
 }
 
+.imgPreview {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: cover;
+}
+
 .imgitem .opcoesdeimagem #selected {
     border: 0.1vw solid black;
     cursor: pointer;
@@ -2935,24 +2941,25 @@ img#colar-- {
 }
 
 .card {
-    background-color: #EF59A0;
+    background-color: transparent;
     padding: 20px 20px;
     max-width: 100%;
     margin: auto;
     display: flex;
-    color: white;
+    color: black;
     justify-content: space-between;
 }
 .card .leftside {
     max-width: 1500px;
     margin: auto;
     font-size: 22px;
+    padding-bottom: 10px;
 }
 
 
 .direct {
     margin-bottom: 1vh;
-    color: white;
+    color: black;
     font-size: 15px;
 }
 
@@ -2982,7 +2989,7 @@ img#colar-- {
 }
 
 .card a {
-    color: white;
+    color: black;
 }
 
 .card a:nth-last-child(2) {
@@ -3353,7 +3360,7 @@ td.photos {
 .ordenar {
     margin: auto;
     padding: 10px 20px;
-    max-width: 1500px;
+    max-width: 1400px;
 
 }
 
@@ -4899,6 +4906,21 @@ h2.extensorfrase {
     gap: 10px;
 }
 
+.right-side-header button{
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.right-side-header i{
+    font-size: 20px !important;
+    cursor: pointer;
+}
+
+.right-side-header button svg {
+    width: 20px
+}
+
 .right-side-header img {
     width: 40px;
     height: 40px;
@@ -5969,7 +5991,7 @@ h2.extensorfrase {
     }
 
     .item {
-        width: 1200px
+        width: 1400px
     }
 
     .informaçõesproduto {
@@ -6167,7 +6189,7 @@ h2.extensorfrase {
     .rightside-itens {
         right: 0;
         width: auto;
-        margin: auto;
+        margin: 0 auto;
     }
 
     .Cards-Middle-Top {
@@ -7102,6 +7124,12 @@ h2.extensorfrase {
         background: rgb(241, 241, 241);
     }
 
+    .imgPreview {
+        width: 10vw !important;
+        height: 10vw !important;
+        object-fit: cover;
+    }
+
     .imgitem .opcoesdeimagem #selected {
         border: 0.1vw solid black;
         cursor: pointer;
@@ -7347,7 +7375,7 @@ h2.extensorfrase {
 
     .direct {
         margin-bottom: 1vh;
-        color: white;
+        color: black;
         font-size: 1.6vw;
     }
 
@@ -7370,7 +7398,7 @@ h2.extensorfrase {
     }
 
     .card {
-        background-color: #EF59A0;
+        background-color: transparent;
         padding-left: 5vw;
         padding-right: 5vw;
         padding-top: 2vh;
@@ -9684,7 +9712,7 @@ h2.extensorfrase {
     }
 
     .card {
-        background-color: #EF59A0;
+        background-color: transparent;
         padding: 20px 5px;
         border-radius: 0px;
         width: 100%;
@@ -9701,7 +9729,7 @@ h2.extensorfrase {
 
     .direct {
         margin-bottom: 2vh;
-        color: white;
+        color: black;
         font-size: 3vw;
     }
 
@@ -9746,7 +9774,7 @@ h2.extensorfrase {
     }
 
     .card a {
-        color: white;
+        color: black;
     }
 
     .card a:nth-last-child(2) {
