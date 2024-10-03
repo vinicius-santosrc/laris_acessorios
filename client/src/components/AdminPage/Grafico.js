@@ -15,10 +15,10 @@ const GraficoPrecos = ({ valores }) => {
 
     useEffect(() => {
         let currentUltimoValor = 0;
-
+    
         const newDataValue = valores.map((item, index) => {
             let newY;
-
+    
             if (item.tipo === "Receita") {
                 if (index === 0) {
                     newY = item.valor;
@@ -32,25 +32,31 @@ const GraficoPrecos = ({ valores }) => {
                     newY = currentUltimoValor - item.valor;
                 }
             }
-
+    
             currentUltimoValor = newY;
-
-            return { x: new Date(item.created_at).getTime(), y: newY };
+    
+            const adjustedTime = new Date(item.created_at).getTime() - 3 * 60 * 60 * 1000;
+    
+            return { x: adjustedTime, y: newY };
         });
-
+    
         setDataValue(newDataValue);
     }, [valores]);
+    
 
 
     const options = {
         xaxis: {
-            type: "datetime"
+            type: "datetime",
         },
         yaxis: {
             tooltip: {
                 enabled: true
             }
         },
+        stroke: {
+            width: 2
+            },
         colors: ['#EC57B1', '#EC57B1', '#EC57B1'],
         fill: {
             colors: ['#EC57B1', '#EC57B1', '#EC57B1']
