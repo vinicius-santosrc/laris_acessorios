@@ -40,21 +40,24 @@ export default function Header() {
         return Math.floor(Math.random() * max);
     }
 
-    async function searchByUserAtual() {
-        setloadingUser(true);
-        try {
-            if (auth.currentUser) {
-                const res = await GetUserAtual(auth.currentUser.uid);
-                setusuarioAtual(res);
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setusuarioAtual(res);
+                } catch (error) {
+                    console.warn("Erro ao obter dados do usuário: ", error);
+                } finally {
+                    setloadingUser(false);
+                }
+            } else {
+                console.warn("Usuário não autenticado");
                 setloadingUser(false);
             }
-            setloadingUser(false);
-        }
-        catch (error) {
-            console.log("ERRO AO BUSCAR USUARIO ATUAL")
-            setloadingUser(false);
-        }
-    }
+        });
+        return () => unsubscribe();
+    }, []);
 
     function extrairPrimeiroNome(nomeCompleto) {
         const partesDoNome = nomeCompleto.split(' ');
@@ -68,7 +71,7 @@ export default function Header() {
 
     function fetchSacola() {
         setSacolaAtual(JSON.parse(localStorage.getItem("sacola")));
-        setnumberbagitems(JSON.parse(localStorage.getItem("sacola")).length)
+        setnumberbagitems(JSON.parse(localStorage.getItem("sacola"))?.length)
         if (Array.isArray(JSON.parse(localStorage.getItem("sacola")))) {
             let preco = 0;
             let sub = 0;
@@ -83,10 +86,6 @@ export default function Header() {
             setdescontos(desc);
         }
     }
-
-    useEffect(() => {
-        searchByUserAtual();
-    }, [auth.currentUser]);
 
     async function GoToCheckOut() {
         const isLogged = await CheckIfUserIsLogged();
@@ -150,7 +149,7 @@ export default function Header() {
 
 
     if (localStorage.sacola == '[]' || localStorage.sacola == undefined || localStorage.sacola == 'undefined' || localStorage == null) {
-        
+
     }
 
     else {
@@ -247,7 +246,9 @@ export default function Header() {
                             <div className='side1'>
                                 <div className='list'>
                                     <ul>
-                                        <SacolaDeCompras />
+                                        <SacolaDeCompras
+                                            fetch={() => fetchSacola()}
+                                        />
                                     </ul>
                                 </div>
                             </div>
@@ -478,7 +479,7 @@ export default function Header() {
                         <div className='side1'>
                             <div className='list'>
                                 <ul>
-                                    <SacolaDeCompras 
+                                    <SacolaDeCompras
                                         fetch={() => fetchSacola()}
                                     />
                                 </ul>

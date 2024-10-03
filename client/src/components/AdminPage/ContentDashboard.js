@@ -268,7 +268,7 @@ export default function ContentDashboard() {
                             <div className="Cards-Middle-Top">
                                 <div className="Card-Mid-Top-Inner">
                                     <Link to={'https://app.conectavenda.com.br/91fd8209815b8f86427520a32c28a053'} target="_blank" rel="noreferrer">
-                                        <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/002/289/530/themes/common/logo-1300451119-1658325553-8236ebeadb95411f6d5a1629dcd5e0701658325554.jpg?0" />
+                                        <img src="https://conecta-vendas.s3.amazonaws.com/jacy_luccas_rosa/1647537514.9924-Designsemnome.jpg" alt="CySemiJoias" />
                                         <div>
                                             <h2>Cy Semijóias</h2>
                                             <p>(55) 11 99710-7008</p>
@@ -277,7 +277,7 @@ export default function ContentDashboard() {
                                 </div>
                                 <div className="Card-Mid-Top-Inner">
                                     <Link to={'https://app.conectavenda.com.br/349c32a2e0b13b4a4629ba91567e110e?busca=00006475'} target="_blank" rel="noreferrer">
-                                        <img src="https://conecta-vendas.s3.amazonaws.com/illuminati_comercio_de_semijoias/1651842311.6949-WhatsAppImage2022-05-05at13.05.51.jpeg" />
+                                        <img src="https://conecta-vendas.s3.amazonaws.com/illuminati_comercio_de_semijoias/1651842311.6949-WhatsAppImage2022-05-05at13.05.51.jpeg" alt="Luminati" />
                                         <div>
                                             <h2>Luminati Pratas</h2>
                                             <p>@luminatipratas</p>

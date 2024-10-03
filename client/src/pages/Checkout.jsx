@@ -185,7 +185,7 @@ export default function Checkout() {
 
                     }
                     return (
-                        <div className="product-item-card">
+                        <div key={item.id} className="product-item-card">
                             <div className="product-item-image">
                                 <img src={item.photoURL} />
                             </div>
@@ -318,6 +318,16 @@ export default function Checkout() {
                 }),
             })
                 .then((res) => {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `Pedido realizado com sucesso.`,
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                    setTimeout(() => {
+                        window.location.href = window.location.origin + "/accounts/myaccount/orders"
+                    }, 1000);
 
                     if (usuarioAtual && usuarioAtual.cupons && CupomAtual.uniqueKey) {
                         const CUPONS_USER = JSON.parse(usuarioAtual.cupons);
@@ -351,16 +361,6 @@ export default function Checkout() {
                     localStorage.setItem('sacola', '[]')
                 })
 
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: `Pedido realizado com sucesso.`,
-                showConfirmButton: false,
-                timer: 2500
-            })
-            setTimeout(() => {
-                window.location.href = window.location.origin + "/accounts/myaccount/orders"
-            }, 1000);
         }
         catch (error) { //MENSAGEM DE SUCESSO OU ERRO.
             console.error("Erro ao criar pedido:", error)

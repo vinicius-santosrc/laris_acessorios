@@ -13,6 +13,9 @@ import db from "../lib/appwrite";
 import { Ring } from '@uiball/loaders'
 import { ID } from "appwrite";
 import Swal from "sweetalert2";
+import { auth } from "../lib/firebase";
+import { GetUserAtual } from "../lib/database";
+import { users } from "../constants/users_const";
 
 export default function AdminMetas() {
 
@@ -25,10 +28,36 @@ export default function AdminMetas() {
     const [newMeta, setNewMeta] = useState('Nova Meta');
     const [newMetaAnual, setNewMetaAnual] = useState(0);
     const [newMetaMensal, setNewMetaMensal] = useState(0);
+    const [userAtual, setuserAtual] = useState([]);
 
     const DBUID = "651ca99af19b7afad3f1";
     const collectionMetas = "6526fb79b32651e0087a";
     const collectionSaldo = "6526ef810e37b1d693c1"
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const res = await GetUserAtual(user.uid);
+                    setuserAtual(res);
+
+                    if(window.location.origin.includes("admin") && res.label !== "admin" && users.admin.permissions.adminpage.canRead == 1) {
+                        window.location.href = window.location.origin
+                    }
+                } catch (error) {
+                    console.warn("Erro ao pegar usuário: ", error);
+                    window.location.href = window.location.origin
+                }
+            } else {
+                setuserAtual(null);
+                if(window.location.origin.includes("admin")) {
+                    window.location.href = window.location.origin
+                }
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     useEffect(() => {
         let entradas = 0; // Inicialize as variáveis aqui

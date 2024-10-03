@@ -16,7 +16,7 @@ export function carregarSacolaDoLocalStorage(setSacola) {
     }
 }
 
-function SacolaDeCompras({fetch}) {
+function SacolaDeCompras({ fetch }) {
     const [sacola, setSacola] = useState(() => {
         const sacolaNoLocalStorage = JSON.parse(localStorage.getItem('sacola'));
         return sacolaNoLocalStorage || [];
@@ -30,11 +30,10 @@ function SacolaDeCompras({fetch}) {
     useEffect(() => {
         carregarSacolaDoLocalStorage(setSacola);
         fetch()
-    }, []);
+    }, [fetch]);
 
     useEffect(() => {
         salvarSacolaNoLocalStorage();
-        fetch()
     }, [sacola]);
 
     const adicionarProduto = (produto, preco) => {

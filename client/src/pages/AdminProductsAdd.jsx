@@ -9,21 +9,14 @@
 
 import React, { useEffect, useState } from "react";
 import NavigationLeft from "../components/AdminPage/NavigationLeft";
-import db, { getUserData } from "../lib/appwrite";
-import { Query } from "appwrite";
 import Loading from "../components/AdminPage/Loading";
-import { getAllProducts, getUser, GetUserAtual } from "../lib/database";
+import { getAllProducts, GetUserAtual } from "../lib/database";
 import { auth, CheckIfUserIsLogged } from "../lib/firebase";
 
 export default function AdminProductsAdd() {
-    const [user, setUser] = useState(null);
-    const [DatabaseAt, setDatabaseAtual] = useState(null);
-    const [search, setSearch] = useState(null);
     const [ContentSearch, setContentSearch] = useState("");
     const [ProdutosCadastrados, setTodosProdutos] = useState([]);
     const [ProdutosLength, setProdutosLength] = useState(null);
-    const [status, userStatus] = useState(null);
-    const [userDB, setUserDBAccount] = useState([]);
     const [userAtual, setuserAtual] = useState([]);
 
     useEffect(() => {

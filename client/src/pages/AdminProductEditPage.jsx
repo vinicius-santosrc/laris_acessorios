@@ -29,6 +29,7 @@ export default function AdminProductEditPage() {
     const [qtdDisProduto, setQntDisponivelProduto] = useState(null)
     const [URLPRODUTO, setURLProduto] = useState(null)
     const [EXTENSOR, setExtensor] = useState(null)
+    const [userAtual, setuserAtual] = useState([]);
 
     const [status, userStatus] = useState(null)
     const [userDB, setUserDBAccount] = useState([])
@@ -37,7 +38,6 @@ export default function AdminProductEditPage() {
     const secretKey = process.env.REACT_APP_API_SECRET_KEY;
     const preEndpoint = process.env.REACT_APP_API_PREENDPOINT;
     
-    const [userAtual, setuserAtual] = useState([]);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -88,17 +88,14 @@ export default function AdminProductEditPage() {
     }
 
     const handleNomeProdutoChange = (event) => {
-        // Atualize o estado local com o novo valor do input
         setNomeProduto(event.target.value);
     };
 
     const handleChangeType = (event) => {
-        // Atualize o estado local com o novo valor do select
         setTypeProduto(event.target.value);
     }
 
     const handleChangeAvaliable = (event) => {
-        // Atualize o estado local com o novo valor do select
         setavaliableProduto(event.target.value);
     }
 
@@ -122,8 +119,6 @@ export default function AdminProductEditPage() {
         setURLProduto(event.target.value)
     }
 
-
-
     const SalvarAlteracoes = async () => {
         Swal.fire({
             title: 'Você deseja continuar?',
@@ -134,7 +129,6 @@ export default function AdminProductEditPage() {
             denyButtonText: `Não`,
             cancelButtonText: `Cancelar`,
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
 
                 fetch(`${endpoint}${preEndpoint}${secretKey}/products/edit`, {
@@ -161,8 +155,6 @@ export default function AdminProductEditPage() {
                 .catch((error) => {
                     Swal.fire('Error ao salvar: ' + error, '', 'info')
                 })                    
-            } else if (result.isDenied) {
-
             }
         })
 
@@ -178,7 +170,6 @@ export default function AdminProductEditPage() {
             denyButtonText: `Não`,
             cancelButtonText: `Cancelar`,
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 fetch(`${endpoint}${preEndpoint}${secretKey}/products/delete`, {
                     method: 'POST',
@@ -199,7 +190,6 @@ export default function AdminProductEditPage() {
     }
 
     const isAvaliable = avaliableProduto == 'true' ? 'true' : 'false';
-    const TypeProduct = typeProduto;
 
     if (!userAtual) {
         return <Loading />
