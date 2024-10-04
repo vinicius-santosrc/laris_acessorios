@@ -416,7 +416,7 @@ export default function ProductPage() {
                                     };
 
                                     return (
-                                        <div className="imgContentOption">
+                                        <div key={index} className="imgContentOption">
                                             <img onClick={handleClick} className="imgPreview" id={index} key={index} src={photo} alt="" />
                                         </div>
                                     )

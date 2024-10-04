@@ -4486,6 +4486,30 @@ h2.extensorfrase {
     margin: 20px 0px;
 }
 
+.itemSearch img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+}
+
+.inputbox_content {
+    width: 95%;
+    margin: auto;
+    justify-content: center;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 10px
+}
+
+.inputbox_content input {
+    width: 100%;
+    outline: none;
+    padding: 10px;
+    border: none;
+}
+
 .images-product img {
     width: 100px;
     height: 100px;
@@ -4910,6 +4934,30 @@ h2.extensorfrase {
     border: none;
     background-color: transparent;
     font-size: 16px;
+}
+
+.contentSearchbox {
+    position: absolute;
+    top: 60px;
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: 1px 1px 5px gray;
+    width: 100%;
+    left: 0; 
+    border-radius: 10px;
+}
+
+.itemSearch {
+    padding: 10px;
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    align-items: center;
+}
+
+.nameSearchItem span{
+    display: block;
+    color: lightgray;
 }
 
 .right-side-header i{
@@ -10401,6 +10449,44 @@ h2.extensorfrase {
     .divbotao {
         margin-top: 1vh;
         width: 50%;
+    }
+
+    .contentSearchbox {
+        z-index: 10;
+        height: 400px;
+        overflow-y: auto;
+    }
+
+    .contentSearchbox {
+        position: absolute;
+        top: 60px;
+        background-color: white;
+        border-radius: 0px 0px 10px 10px;
+        box-shadow: 1px 1px 5px gray;
+        width: 100%;
+        left: 0; 
+        border-radius: 10px;
+    }
+    
+    .itemSearch {
+        padding: 10px;
+        display: flex;
+        justify-content: left;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .itemSearch p{
+        color: #ef59a0;
+    }
+
+    .itemSearch {
+        color: black;
+    }
+    
+    .nameSearchItem span{
+        display: block;
+        color: lightgray;
     }
 
     .divbotao label {

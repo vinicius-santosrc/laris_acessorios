@@ -57,10 +57,6 @@ const GraficoPrecos = ({ valores }) => {
         stroke: {
             width: 2
         },
-        title: {
-            text: "Saldo atual - LARIS ACESSÓRIOS",
-            align: "left"
-          },
         colors: ['#EC57B1', '#EC57B1', '#EC57B1'],
         fill: {
             colors: ['#EC57B1', '#EC57B1', '#EC57B1']
