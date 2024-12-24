@@ -1,12 +1,3 @@
-/**
- * Creation Date: 09/01/2024
- * Author: Vinícius da Silva Santos
- * Coordinator: Larissa Alves de Andrade Moreira
- * Developed by: Lari's Acessórios Team
- * Copyright 2023, LARI'S ACESSÓRIOS
- * All rights are reserved. Reproduction in whole or part is prohibited without the written consent of the copyright owner.
-*/
-
 import React, { useEffect, useState } from "react";
 import ApexChart from 'react-apexcharts';
 
@@ -15,35 +6,33 @@ const GraficoPrecos = ({ valores }) => {
 
     useEffect(() => {
         let currentUltimoValor = 0;
-    
+
         const newDataValue = valores.map((item, index) => {
             let newY;
-    
+
             if (item.tipo === "Receita") {
                 if (index === 0) {
-                    newY = item.valor;
+                    newY = parseFloat(item.valor.toFixed(2));
                 } else {
-                    newY = currentUltimoValor + item.valor;
+                    newY = parseFloat((currentUltimoValor + item.valor).toFixed(2));
                 }
             } else {
                 if (index === 0) {
-                    newY = item.valor;
+                    newY = parseFloat(item.valor.toFixed(2));
                 } else {
-                    newY = currentUltimoValor - item.valor;
+                    newY = parseFloat((currentUltimoValor - item.valor).toFixed(2));
                 }
             }
-    
+
             currentUltimoValor = newY;
-    
+
             const adjustedTime = new Date(item.created_at).getTime() - 3 * 60 * 60 * 1000;
-    
+
             return { x: adjustedTime, y: newY };
         });
-    
+
         setDataValue(newDataValue);
     }, [valores]);
-    
-
 
     const options = {
         xaxis: {
