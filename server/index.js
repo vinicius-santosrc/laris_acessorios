@@ -270,6 +270,23 @@ app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
     });
 });
 
+app.post(`/api/v1/${secretKey}/products/searchbyurl`, (req, res) => {
+    const item = req.body;
+    const url = item.url;
+
+    // Realiza a consulta no banco de dados para encontrar o produto com a URL fornecida
+    connection.query('SELECT * FROM produtos WHERE url = ?', [url], (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else if (result.length > 0) {
+            res.json(result[0]);  // Retorna o primeiro produto encontrado
+        } else {
+            res.status(404).json({ message: 'Produto não encontrado' });
+        }
+    });
+});
+
+
 //REQUISIÇÃO DE ORDERS
 
 app.get(`/api/v1/${secretKey}/orders`, (req, res) => {
