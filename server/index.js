@@ -26,6 +26,18 @@ let attempts = 0;
 
 const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51QRNKlGVqOlbWdKNOt6ee3r4mPRAYIqGGPykMoiBnZTWUkSZ2wPs7MnyD3st6y2mXb6EJjXQk22f4pVtZ388YdoS00lrrHHmEG');
+async function initializeStripe() {
+    try {
+        const paymentMethodDomain = await stripe.paymentMethodDomains.create({
+            domain_name: 'staging-laris-acessorios.vercel.app',
+        });
+        console.log('Payment method domain created:', paymentMethodDomain);
+    } catch (error) {
+        console.error("Error initializing Stripe:", error);
+    }
+}
+
+initializeStripe();
 
 const connection = mysql.createConnection({
     host: host,
