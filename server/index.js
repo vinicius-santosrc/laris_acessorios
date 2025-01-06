@@ -10,6 +10,7 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
+const { resolve } = require("path");
 
 const app = express();
 const cors = require('cors');
@@ -20,6 +21,12 @@ const user = process.env.DB_USER;
 const pass = process.env.DB_PASSWORD;
 const secretKey = process.env.secretKey;
 
+const maxRetries = 5;
+let attempts = 0;
+
+const Stripe = require('stripe');
+const stripe = Stripe('sk_test_51QRNKlGVqOlbWdKNOt6ee3r4mPRAYIqGGPykMoiBnZTWUkSZ2wPs7MnyD3st6y2mXb6EJjXQk22f4pVtZ388YdoS00lrrHHmEG');
+
 const connection = mysql.createConnection({
     host: host,
     user: user,
@@ -29,16 +36,59 @@ const connection = mysql.createConnection({
         rejectUnauthorized: false,
     },
     connectionLimit: 50,
-    acquireTimeout: 10000,
-    waitForConnections: true,
-    reconnect: {
-        maxAttempts: 10,
-        delay: 3000
+    waitForConnections: true
+});
+
+connection.connect((err) => {
+    if (err) {
+        if (attempts < maxRetries) {
+            console.log(`Connection failed, retrying... (${attempts + 1})`);
+            attempts++;
+            setTimeout(connectToDatabase, 3000);  // Retry after 3 seconds
+        } else {
+            console.error('Max retries reached, could not connect to the database');
+        }
+    } else {
+        console.log('Connected to the database');
     }
-})
+});
 
 app.use(express.json());
 app.use(cors());
+
+//*?//
+//Stripe Pagamentos
+
+app.get("/", (req, res) => {
+    const path = resolve("./index.html");
+    res.sendFile(path);
+});
+
+app.get("/config", (req, res) => {
+    res.send({
+        publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    });
+});
+
+app.post("/create-payment-intent", async (req, res) => {
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            currency: "EUR",
+            amount: 1999,
+            automatic_payment_methods: { enabled: true },
+        });
+
+        res.send({
+            clientSecret: paymentIntent.client_secret,
+        });
+    } catch (e) {
+        return res.status(400).send({
+            error: {
+                message: e.message,
+            },
+        });
+    }
+});
 
 app.get(`/api/v1/${secretKey}/admins`, (req, res) => {
     connection.query('SELECT * FROM administradores', (err, result) => {
@@ -232,15 +282,15 @@ app.get(`/api/v1/${secretKey}/users`, (req, res) => {
 app.post(`/api/v1/${secretKey}/users/add`, (req, res) => {
     const item = req.body
     connection.query(
-        'INSERT INTO users VALUES (default, "client", ?, ?, ?, ?, "https://laris-acessorios.vercel.app/static/media/user-null.webp", "[]", "[]")', 
+        'INSERT INTO users VALUES (default, "client", ?, ?, ?, ?, "https://laris-acessorios.vercel.app/static/media/user-null.webp", "[]", "[]")',
         [item.uid, item.nome_completo, item.cpf, item.email], (err, result) => {
-        if (err) {
-            console.error(err);  // Log the error for debugging
-            res.status(500).json({ error: 'Erro ao obter dados' });
-        } else {
-            res.status(200).json({ message: 'Usuário criado com sucesso' });
-        }
-    });
+            if (err) {
+                console.error(err);  // Log the error for debugging
+                res.status(500).json({ error: 'Erro ao obter dados' });
+            } else {
+                res.status(200).json({ message: 'Usuário criado com sucesso' });
+            }
+        });
 });
 
 
