@@ -4,100 +4,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API LARIS ACESSÓRIOS</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Documentação da API</title>
     <style>
-        /* Estilos gerais */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             color: #333;
         }
 
+        header {
+            background-color: #BE0A45;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
         h1 {
-            text-align: center;
-            color: #2C3E50;
-            margin-top: 50px;
+            margin: 0;
         }
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
+        section {
+            margin: 20px;
+        }
+
+        h2 {
+            color: #BE0A45;
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .route {
             background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .section {
-            margin-bottom: 30px;
+        .route h3 {
+            margin-top: 0;
         }
 
-        .section h2 {
-            font-size: 24px;
-            color: #2980B9;
+        .method {
+            font-weight: bold;
+            color: #2d87f0;
         }
 
-        .section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .section ul li {
-            padding: 8px 0;
-            font-size: 18px;
-            color: #7F8C8D;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #2C3E50;
-            color: #fff;
-            margin-top: 50px;
-        }
-
-        .note {
-            font-size: 12px;
-            color: #7F8C8D;
+        .subroute {
+            background-color: #e9f5ff;
             margin-top: 10px;
+            padding: 10px;
+            border-left: 5px solid #BE0A45;
+        }
+
+        .subroute h4 {
+            margin: 0;
+        }
+
+        .subroute pre {
+            background-color: #f9f9f9;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>API LARIS ACESSÓRIOS</h1>
+    <header>
+        <h1>Documentação da API LARIS ACESSÓRIOS</h1>
+    </header>
 
-    <div class="container">
-        <div class="section">
-            <h2>Diretórios da API</h2>
-            <ul>
-                <li><strong>/api/v1/{secretKey}/admins</strong> - Listar administradores</li>
-                <li><strong>/api/v1/{secretKey}/planilha-despesas</strong> - Listar despesas</li>
-                <li><strong>/api/v1/{secretKey}/planilha-itens</strong> - Listar itens</li>
-                <li><strong>/api/v1/{secretKey}/metas</strong> - Listar metas</li>
-                <li><strong>/api/v1/{secretKey}/planejamentos</strong> - Listar planejamentos</li>
-                <li><strong>/api/v1/{secretKey}/products</strong> - Listar produtos</li>
-                <li><strong>/api/v1/{secretKey}/orders</strong> - Listar pedidos</li>
-                <li><strong>/api/v1/{secretKey}/cupons</strong> - Listar cupons</li>
-                <li><strong>/api/v1/{secretKey}/users</strong> - Listar usuários</li>
-            </ul>
+    <section>
+        <h2>Informações da API</h2>
+        <p>Esta API fornece informações sobre a lista de rotas e sub-rotas que você pode acessar para consultar dados.
+        </p>
+
+        <div class="route">
+            <h3>Rotas Recebidas</h3>
+            <p>Este é o conjunto de rotas que a API pode receber e processar.</p>
+            <pre>GET /rota1
+GET /rota2
+POST /rota3</pre>
         </div>
 
-        <div class="section">
-            <h2>Sobre a API</h2>
-            <p>A API LARIS ACESSÓRIOS oferece uma série de funcionalidades para gerenciar produtos, usuários, pedidos,
-                cupons e muito mais para o sistema de acessórios online.</p>
+        <div class="route">
+            <h3>Sub-rotas</h3>
+            <p>Estas são as sub-rotas que estão disponíveis dentro das rotas principais.</p>
+            <div class="subroute">
+                <h4>Sub-rota 1: /rota1/subrota</h4>
+                <pre>GET /rota1/subrota</pre>
+            </div>
+            <div class="subroute">
+                <h4>Sub-rota 2: /rota2/subrota</h4>
+                <pre>POST /rota2/subrota</pre>
+            </div>
+            <div class="subroute">
+                <h4>Sub-rota 3: /rota3/subrota</h4>
+                <pre>PUT /rota3/subrota</pre>
+            </div>
         </div>
 
-        <footer>
-            <p>&copy; 2023 LARI'S ACESSÓRIOS. Todos os direitos reservados.</p>
-            <p class="note">Reprodução total ou parcial proibida sem consentimento escrito do proprietário dos direitos
-                autorais.</p>
-        </footer>
-    </div>
+        <div class="route">
+            <h3>Rotas da API</h3>
+            <p>A seguir estão as rotas completas disponíveis na API.</p>
+
+            <div class="subroute">
+                <h4>Rota 1: /api/v1/{secretKey}/admins</h4>
+                <pre>GET /api/v1/{secretKey}/admins</pre>
+                <p>Retorna todos os administradores.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 2: /api/v1/{secretKey}/planilha-despesas</h4>
+                <pre>GET /api/v1/{secretKey}/planilha-despesas</pre>
+                <p>Retorna todas as despesas.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 3: /api/v1/{secretKey}/planilha-itens</h4>
+                <pre>GET /api/v1/{ secretKey}/planilha-itens</pre>
+                <p>Retorna todos os itens da planilha.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 4: /api/v1/{secretKey}/planilha-despesas/add</h4>
+                <pre>POST /api/v1/{secretKey}/planilha-despesas/add</pre>
+                <p>Adiciona uma nova despesa.</p>
+                <pre>Body:
+{
+    "descricao": "Descrição da despesa",
+    "valor": 100.00,
+    "tipo": "Tipo da despesa"
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 5: /api/v1/{secretKey}/planilha-despesas/edit</h4>
+                <pre>POST /api/v1/{secretKey}/planilha-despesas/edit</pre>
+                <p>Edita uma despesa existente.</p>
+                <pre>Body:
+{
+    "id": 1,
+    "descricao": "Nova descrição",
+    "valor": 150.00,
+    "tipo": "Novo tipo"
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 6: /api/v1/{secretKey}/planilha-despesas/delete</h4>
+                <pre>POST /api/v1/{secretKey}/planilha-despesas/delete</pre>
+                <p>Deleta uma despesa.</p>
+                <pre>Body:
+{
+    "id": 1
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 7: /api/v1/{secretKey}/planilha-itens/add</h4>
+                <pre>POST /api/v1/{secretKey}/planilha-itens/add</pre>
+                <p>Adiciona um novo item.</p>
+                <pre>Body:
+{
+    "custos": "Custos do item",
+    "detalhe": "Detalhes do item",
+    "codigo": "Código do item",
+    "nameofitem": "Nome do item",
+    "preco_compra": 50.00,
+    "precorevenda": 75.00,
+    "quantcompra": 10,
+    "lucroporitem": 25.00
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 8: /api/v1/{secretKey}/planilha-itens/edit</h4>
+                <pre>POST /api/v1/{secretKey}/planilha-itens/edit</pre>
+                <p>Edita um item existente.</p>
+                <pre>Body:
+{
+    "id": 1,
+    "custos": "Novos custos",
+    "detalhe": "Novos detalhes",
+    "codigo": "Novo código",
+    "nameofitem": "Novo nome",
+    "preco_compra": 60.00,
+    "precorevenda": 90.00,
+    "quantcompra": 15,
+    "lucroporitem": 30.00
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 9: /api/v1/{secretKey}/planilha-itens/delete</h4>
+                <pre>POST /api/v1/{secretKey}/planilha-itens/delete</pre>
+                <p>Deleta um item.</p>
+                <pre>Body:
+{
+    "id": 1
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 10: /api/v1/{secretKey}/metas</h4>
+                <pre>GET /api/v1/{secretKey}/metas</pre>
+                <p>Retorna todas as metas.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 11: /api/v1/{secretKey}/planejamentos</h4>
+                <pre>GET /api/v1/{secretKey}/planejamentos</pre>
+                <p>Retorna todos os planejamentos.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 12: /api/v1/{secretKey}/planejamentos/add</h4>
+                <pre>POST /api/v1/{secretKey}/planejamentos/add</pre>
+                <p>Adiciona um novo planejamento.</p>
+                <pre>Body:
+{
+    "name_card": "Nome do planejamento"
+}</ pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 13: /api/v1/{secretKey}/planejamentos/update</h4>
+                <pre>POST /api/v1/{secretKey}/planejamentos/update</pre>
+                <p>Atualiza um planejamento existente.</p>
+                <pre>Body:
+{
+    "id": 1,
+    "list": ["item1", "item2"]
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 14: /api/v1/{secretKey}/planejamentos/delete</h4>
+                <pre>POST /api/v1/{secretKey}/planejamentos/delete</pre>
+                <p>Deleta um planejamento.</p>
+                <pre>Body:
+{
+    "id": 1
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 15: /api/v1/{secretKey}/users</h4>
+                <pre>GET /api/v1/{secretKey}/users</pre>
+                <p>Retorna todos os usuários.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 16: /api/v1/{secretKey}/users/add</h4>
+                <pre>POST /api/v1/{secretKey}/users/add</pre>
+                <p>Adiciona um novo usuário.</p>
+                <pre>Body:
+{
+    "uid": "UID do usuário",
+    "nome_completo": "Nome completo",
+    "cpf": "CPF do usuário",
+    "email": "Email do usuário"
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 17: /api/v1/{secretKey}/products</h4>
+                <pre>GET /api/v1/{secretKey}/products</pre>
+                <p>Retorna todos os produtos.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 18: /api/v1/{secretKey}/products/add</h4>
+                <pre>POST /api/v1/{secretKey}/products/add</pre>
+                <p>Adiciona um novo produto.</p>
+                <pre>Body:
+{
+    "name_product": "Nome do produto",
+    "price": 100.00,
+    "desconto": 10,
+    "disponibilidade": "Disponível",
+    "tamanhos": ["P", "M", "G"],
+    "quantidade_disponivel": 50,
+    "categoria": "Categoria do produto",
+    "url": "URL do produto",
+    "fornecedor": "Fornecedor do produto",
+    "tipo": "Tipo do produto",
+    "personalizavel": true,
+    "photoURL": "URL da imagem do produto",
+    "extensor": "Extensor do produto"
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 19: /api/v1/{secretKey}/products/edit</h4>
+                <pre>POST /api/v1/{secretKey}/products/edit</pre>
+                <p>Edita um produto existente.</p>
+                <pre>Body:
+{
+    "id": 1,
+    "name_product": "Novo nome do produto",
+    "price": 120.00,
+    "desconto": 15,
+    "disponibilidade": "Indisponível",
+    "categoria": "Nova categoria",
+    "url": "Nova URL",
+    "quantidade_disponivel": 30,
+    "extensor": "Novo extensor"
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 20: /api/v1/{secretKey}/products/delete</h4>
+                <pre>POST /api/v1/{secretKey}/products/delete</pre>
+                <p>Deleta um produto.</p>
+                <pre>Body:
+{
+    "id": 1
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 21: /api/v1/{secretKey}/orders</h4>
+                <pre>GET /api/v1/{secretKey}/orders</pre>
+                <p>Retorna todos os pedidos.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 22: /api/v1/{secretKey}/orders/add</h4>
+                <pre>POST /api/v1/{secretKey}/orders/add</pre>
+                <p> Adiciona um novo pedido.</p>
+                <pre>Body:
+{
+    "address": "Endereço do cliente",
+    "items": "Itens do pedido",
+    "user": "ID do usuário",
+    "totalprice": 200.00,
+    "paymentOption": "Método de pagamento",
+    "situation": "Situação do pedido",
+    "desconto": 10,
+    "subtotal": 190.00,
+    "cupom_desconto": "Código do cupom",
+    "cupons": "Cupons utilizados"
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 23: /api/v1/{secretKey}/orders/delete</h4>
+                <pre>POST /api/v1/{secretKey}/orders/delete</pre>
+                <p>Deleta um pedido.</p>
+                <pre>Body:
+{
+    "id": 1
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 24: /api/v1/{secretKey}/cupons</h4>
+                <pre>GET /api/v1/{secretKey}/cupons</pre>
+                <p>Retorna todos os cupons.</p>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 25: /api/v1/{secretKey}/cupons/add</h4>
+                <pre>POST /api/v1/{secretKey}/cupons/add</pre>
+                <p>Adiciona um novo cupom.</p>
+                <pre>Body:
+{
+    "uniqueKey": "Chave única do cupom",
+    "name": "Nome do cupom",
+    "desconto": 20,
+    "private": false
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 26: /api/v1/{secretKey}/cupons/remove</h4>
+                <pre>POST /api/v1/{secretKey}/cupons/remove</pre>
+                <p>Remove um cupom.</p>
+                <pre>Body:
+{
+    "id": 1
+}</pre>
+            </div>
+
+            <div class="subroute">
+                <h4>Rota 27: /api/v1/{secretKey}/cupons/myaccount/add</h4>
+                <pre>POST /api/v1/{secretKey}/cupons/myaccount/add</pre>
+                <p>Adiciona um cupom à conta do usuário.</p>
+                <pre>Body:
+{
+    "cupons": "Lista de cupons",
+    "cupom_usado": "Cupom utilizado",
+    "user_uid": "UID do usuário"
+}</pre>
+            </div>
+        </div>
+
+    </section>
 
 </body>
 
