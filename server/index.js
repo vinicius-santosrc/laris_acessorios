@@ -26,22 +26,7 @@ let attempts = 0;
 
 const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51QRNKlGVqOlbWdKNOt6ee3r4mPRAYIqGGPykMoiBnZTWUkSZ2wPs7MnyD3st6y2mXb6EJjXQk22f4pVtZ388YdoS00lrrHHmEG');
-async function initializeStripe() {
-    try {
-        const paymentMethodDomain = await stripe.paymentMethodDomains.create({
-            domain_name: 'staging-laris-acessorios.vercel.app',
-        });
-        console.log('Payment method domain created:', "ambient-staging");
-        const paymentMethodDomain2 = await stripe.paymentMethodDomains.create({
-            domain_name: 'larisacessorios.com.br',
-        });
-        console.log('[IMPORTANT] Payment method domain created:', "ambient-laris-main");
-    } catch (error) {
-        console.error("Error initializing Stripe:", error);
-    }
-}
 
-initializeStripe();
 
 const connection = mysql.createConnection({
     host: host,
@@ -373,7 +358,7 @@ app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
     connection.query('insert into orders values (default, ?, ?, ?, ?, default, ?, default, ?, ?, ?, ?, ?)', [item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal, item.cupom_desconto, item.cupons], (err, result) => {
         if (err) {
             console.error(err);  // Log the error for debugging
-            res.status(500).json({ error: 'Erro ao obter dados' });
+            res.status(500).json({ error: 'Erro ao criar pedido:', err });
         } else {
             res.status(200).json({ message: 'Pedido cadastrado com sucesso' });
         }
