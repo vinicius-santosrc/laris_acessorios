@@ -31,7 +31,11 @@ async function initializeStripe() {
         const paymentMethodDomain = await stripe.paymentMethodDomains.create({
             domain_name: 'staging-laris-acessorios.vercel.app',
         });
-        console.log('Payment method domain created:', paymentMethodDomain);
+        console.log('Payment method domain created:', "ambient-staging");
+        const paymentMethodDomain2 = await stripe.paymentMethodDomains.create({
+            domain_name: 'larisacessorios.com.br',
+        });
+        console.log('[IMPORTANT] Payment method domain created:', "ambient-laris-main");
     } catch (error) {
         console.error("Error initializing Stripe:", error);
     }
@@ -465,5 +469,10 @@ app.post(`/api/v1/${secretKey}/products/delete`, (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
+    console.log(`Server started on port ${port}`);
+    console.log('----------------------------------------------------');
+    console.log('LARIS ACESSÓRIOS - PRINCIPAL API')
+    console.log(`-> Documentation: http://localhost:${port}`)
+    console.log('----------------------------------------------------');
+    console.log('Server is running and waiting for requests...');
 });
