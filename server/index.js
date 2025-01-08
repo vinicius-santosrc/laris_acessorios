@@ -25,7 +25,7 @@ const maxRetries = 5;
 let attempts = 0;
 
 const Stripe = require('stripe');
-const stripe = Stripe('sk_test_51QRNKlGVqOlbWdKNOt6ee3r4mPRAYIqGGPykMoiBnZTWUkSZ2wPs7MnyD3st6y2mXb6EJjXQk22f4pVtZ388YdoS00lrrHHmEG');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const pool = mysql.createPool({
     host: host,
@@ -358,15 +358,22 @@ app.get(`/api/v1/${secretKey}/orders`, (req, res) => {
 //POSTS DE ORDERS
 
 app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
-    const item = req.body
-    pool.query('insert into orders values (default, ?, ?, ?, ?, default, ?, default, ?, ?, ?, ?, ?)', [item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal, item.cupom_desconto, item.cupons], (err, result) => {
-        if (err) {
-            console.error(err);  // Log the error for debugging
-            res.status(500).json({ error: 'Erro ao criar pedido:', err });
-        } else {
-            res.status(200).json({ message: 'Pedido cadastrado com sucesso' });
+    const item = req.body;
+
+    pool.query(
+        'INSERT INTO orders VALUES (default, ?, ?, ?, ?, ?, default, ?, default, ?, ?, ?, ?, ?)',
+        [item.uid, item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal, item.cupom_desconto, item.cupons],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Erro ao criar pedido:', err });
+            } else {
+                console.log("Novo pedido cadastrado com sucesso.");
+                res.status(200).json({ message: 'Pedido cadastrado com sucesso' });
+            }
         }
-    });
+    );
+
 });
 
 //DELETE DE ORDERS
