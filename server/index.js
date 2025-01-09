@@ -25,7 +25,7 @@ const maxRetries = 5;
 let attempts = 0;
 
 const Stripe = require('stripe');
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY_PRODUCTION);
 
 const pool = mysql.createPool({
     host: host,
