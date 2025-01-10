@@ -75,15 +75,34 @@ app.get("/config", (req, res) => {
     });
 });
 
+// Endpoint para criar o PaymentIntent
 app.post("/create-payment-intent", async (req, res) => {
     try {
-        const amount = req.body.item;
-        const paymentIntent = await stripe.paymentIntents.create({
-            currency: "BRL",
-            amount: amount,
-            automatic_payment_methods: { enabled: true },
-        });
+        const { item, paymentMethodType } = req.body; // Receber o valor e tipo de pagamento
 
+        const amount = item; // O valor que será cobrado, em centavos
+
+        // Configuração inicial do PaymentIntent
+        const paymentIntentParams = {
+            amount: amount,
+            currency: 'brl',
+            automatic_payment_methods: { enabled: true }, // Permitir métodos de pagamento automáticos (cartão, pix, etc)
+        };
+
+        // Se o tipo de pagamento for "card", habilitar parcelamento
+        if (paymentMethodType === 'card') {
+            paymentIntentParams.payment_intent_options = {
+                installments: {
+                    enabled: true,
+                    maximum_installments: 4, // Permitir até 4 vezes de parcelamento
+                },
+            };
+        }
+
+        // Criar o PaymentIntent
+        const paymentIntent = await stripe.paymentIntents.create(paymentIntentParams);
+
+        // Retornar o client_secret para o front-end
         res.send({
             clientSecret: paymentIntent.client_secret,
         });
@@ -273,8 +292,9 @@ app.post(`/api/v1/${secretKey}/planejamentos/delete`, (req, res) => {
 
 //REQUISIÇÃO DE USUARIOS
 
-app.get(`/api/v1/${secretKey}/users`, (req, res) => {
-    pool.query('SELECT * FROM users', (err, result) => {
+app.post(`/api/v1/${secretKey}/user`, (req, res) => {
+    const item = req.body
+    pool.query('SELECT * FROM users WHERE email = ?', [item.email], (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
@@ -303,7 +323,7 @@ app.post(`/api/v1/${secretKey}/users/add`, (req, res) => {
 //REQUISIÇÃO DE PRODUTOS
 
 app.get(`/api/v1/${secretKey}/products`, (req, res) => {
-    pool.query('SELECT * FROM produtos', (err, result) => {
+    pool.query('SELECT id, name_product, price, desconto, disponibilidade, tamanhos, quantidade_disponivel, categoria, url, tipo, photoURL, extensor, type_full_label, categoryList FROM produtos', (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
