@@ -303,6 +303,18 @@ app.post(`/api/v1/${secretKey}/user`, (req, res) => {
     })
 });
 
+//REQUISIÇÃO DE USUARIOS
+
+app.get(`/api/v1/${secretKey}/users`, (req, res) => {
+    pool.query('SELECT * FROM users', (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.json(result);
+        }
+    })
+});
+
 //POSTS DE USUARIOS
 
 app.post(`/api/v1/${secretKey}/users/add`, (req, res) => {
@@ -482,6 +494,18 @@ app.post(`/api/v1/${secretKey}/products/delete`, (req, res) => {
         }
     });
 });
+
+app.post(`/api/v1/${secretKey}/products/changevisibility`, (req, res) => {
+    const item = req.body
+    pool.query('update `produtos` set disponibilidade = ? where id = ?', [item.disponibilidade, item.id], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            res.status(200).json({ message: 'Produto mudado de visibilidade com sucesso' });
+        }
+    });
+})
 
 
 app.listen(port, () => {
