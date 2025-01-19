@@ -358,7 +358,7 @@ app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
     const item = req.body;
 
     // Inserindo a foto como base64 diretamente no banco
-    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
         item.name_product,
         item.price,
         item.desconto,
@@ -372,6 +372,8 @@ app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
         item.personalizavel,
         item.photoURL,  // Armazenando base64 aqui
         item.extensor,
+        item.type_full_label,
+        item.categoryList
     ], (err, result) => {
         if (err) {
             console.error(err);
