@@ -11,6 +11,7 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const { resolve } = require("path");
+const bodyParser = require('body-parser');
 
 const app = express();
 const cors = require('cors');
@@ -58,8 +59,14 @@ const connectToDatabase = () => {
 connectToDatabase();  // Call the connection function on start
 
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Aumenta o limite para 50MB
+app.use(express.urlencoded({ limit: '50mb', extended: true })); // Para dados de formulário
 app.use(cors());
+
+app.use(bodyParser.json({ limit: '50mb' })); // Aumenta o limite para 50MB
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+
 
 //*?//
 //Stripe Pagamentos
@@ -346,17 +353,35 @@ app.get(`/api/v1/${secretKey}/products`, (req, res) => {
 
 //POSTS DE PRODUTOS
 
+// Endpoint para adicionar um produto
 app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
-    const item = req.body
-    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [item.name_product, item.price, item.desconto, item.disponibilidade, item.tamanhos, item.quantidade_disponivel, item.categoria, item.url, item.fornecedor, item.tipo, item.personalizavel, item.photoURL, item.extensor], (err, result) => {
+    const item = req.body;
+
+    // Inserindo a foto como base64 diretamente no banco
+    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        item.name_product,
+        item.price,
+        item.desconto,
+        item.disponibilidade,
+        item.tamanhos,
+        item.quantidade_disponivel,
+        item.categoria,
+        item.url,
+        item.fornecedor,
+        item.tipo,
+        item.personalizavel,
+        item.photoURL,  // Armazenando base64 aqui
+        item.extensor,
+    ], (err, result) => {
         if (err) {
-            console.error(err);  // Log the error for debugging
-            res.status(500).json({ error: 'Erro ao obter dados' });
+            console.error(err);
+            res.status(500).json({ error: 'Erro ao salvar o produto' });
         } else {
             res.status(200).json({ message: 'Produto cadastrado com sucesso' });
         }
     });
 });
+
 
 app.post(`/api/v1/${secretKey}/products/searchbyurl`, (req, res) => {
     const item = req.body;
@@ -473,14 +498,49 @@ app.post(`/api/v1/${secretKey}/cupons/myaccount/add`, (req, res) => {
 
 app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
     const item = req.body
-    pool.query('update `produtos` set name_product = ?, price = ?, desconto = ?, disponibilidade = ?, categoria = ?, url = ?, quantidade_disponivel = ?, extensor = ? where id = ?', [item.name_product, item.price, item.desconto, item.disponibilidade, item.categoria, item.url, item.quantidade_disponivel, item.extensor, item.id], (err, result) => {
-        if (err) {
-            console.error(err);  // Log the error for debugging
-            res.status(500).json({ error: 'Erro ao obter dados' });
-        } else {
-            res.status(200).json({ message: 'Produto editado com sucesso' });
-        }
-    });
+    pool.query('UPDATE `produtos` SET ' +
+        'name_product = ?, ' +
+        'price = ?, ' +
+        'desconto = ?, ' +
+        'disponibilidade = ?, ' +
+        'tamanhos = ?, ' +
+        'quantidade_disponivel = ?, ' +
+        'categoria = ?, ' +
+        'url = ?, ' +
+        'fornecedor = ?, ' +
+        'tipo = ?, ' +
+        'personalizavel = ?, ' +
+        'photoURL = ?, ' +
+        'extensor = ?, ' +
+        'type_full_label = ?, ' +
+        'categoryList = ? ' +
+        'WHERE id = ?',
+        [
+            item.name_product,
+            item.price,
+            item.desconto,
+            item.disponibilidade,
+            item.tamanhos,
+            item.quantidade_disponivel,
+            item.categoria,
+            item.url,
+            item.fornecedor,
+            item.tipo,
+            item.personalizavel,
+            item.photoURL,
+            item.extensor,
+            item.type_full_label,
+            item.categoryList,
+            item.id
+        ], (err, result) => {
+            if (err) {
+                console.error(err);  // Log the error for debugging
+                res.status(500).json({ error: 'Erro ao obter dados' });
+            } else {
+                console.log("Product successfuly edited: ", item.id)
+                res.status(200).json({ message: 'Produto editado com sucesso' });
+            }
+        });
 });
 
 app.post(`/api/v1/${secretKey}/products/delete`, (req, res) => {
