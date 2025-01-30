@@ -483,6 +483,19 @@ app.get(`/api/v1/${secretKey}/orders`, (req, res) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
+            console.log("Consultando pedidos ")
+            res.json(result);
+        }
+    })
+});
+
+app.post(`/api/v1/${secretKey}/getOrderById`, (req, res) => {
+    const item = req.body;
+    pool.query('SELECT * FROM orders WHERE id = ?', [item.id], (err, result) => {
+        if (err) {
+            res.status(500).json({ error: 'Erro ao obter dados' });
+        } else {
+            console.log("Consultando pedidos do id", item.id)
             res.json(result);
         }
     })
