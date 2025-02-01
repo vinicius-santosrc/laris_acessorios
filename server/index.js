@@ -342,8 +342,8 @@ app.post(`/api/v1/${secretKey}/users/add`, (req, res) => {
 //REQUISIÇÃO DE PRODUTOS
 
 app.get(`/api/v1/${secretKey}/products`, (req, res) => {
-    pool.query('SELECT id, name_product, price, desconto, disponibilidade, tamanhos, quantidade_disponivel, categoria, url, tipo, photoURL, extensor, type_full_label, categoryList FROM produtos', (err, result) => {
-        if (err) {
+    pool.query('SELECT id, name_product, price, desconto, disponibilidade, tamanhos, quantidade_disponivel, categoria, url, tipo, photoURL, extensor, type_full_label, categoryList, description FROM produtos', (err, result) => {
+    if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
             res.json(result);
@@ -432,7 +432,7 @@ app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
     const item = req.body;
 
     // Inserindo a foto como base64 diretamente no banco
-    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)', [
         item.name_product,
         item.price,
         item.desconto,
@@ -522,6 +522,29 @@ app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
 
 });
 
+//UPDATE DE ORDERS
+
+app.post(`/api/v1/${secretKey}/orders/edit`, (req, res) => {
+    const item = req.body;
+
+    pool.query(
+        'UPDATE `orders` SET ' +
+        'state = ? ' +
+        'WHERE id = ?',
+        [item.state, item.id],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Erro ao criar pedido:', err });
+            } else {
+                console.log("Order " + item.id + " editada com sucesso para estado: " + item.state);
+                res.status(200).json({ message: 'Order  com sucesso' });
+            }
+        }
+    );
+
+});
+
 //DELETE DE ORDERS
 
 app.post(`/api/v1/${secretKey}/orders/delete`, (req, res) => {
@@ -602,7 +625,8 @@ app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
         'photoURL = ?, ' +
         'extensor = ?, ' +
         'type_full_label = ?, ' +
-        'categoryList = ? ' +
+        'categoryList = ?, ' +
+        'description = ? ' +
         'WHERE id = ?',
         [
             item.name_product,
@@ -620,6 +644,7 @@ app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
             item.extensor,
             item.type_full_label,
             item.categoryList,
+            item.description,
             item.id
         ], (err, result) => {
             if (err) {
