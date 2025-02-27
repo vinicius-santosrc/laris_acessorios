@@ -395,6 +395,19 @@ app.get(`/api/v1/${secretKey}/facilitys`, (req, res) => {
     })
 })
 
+app.post(`/api/v1/${secretKey}/facilitys/edit`, (req, res) => {
+    const item = req.body
+    pool.query(
+        'UPDATE facilitys SET data = ?, dataMobile = ? WHERE id = ?', [item.data, item.dataMobile, item.id], (err, result) => {
+            if (err) {
+                console.error(err);  // Log the error for debugging
+                res.status(500).json({ error: 'Erro ao obter dados' });
+            } else {
+                res.status(200).json({ message: 'Facility editado com sucesso' });
+            }
+        });
+});
+
 app.post(`/api/v1/${secretKey}/categories/edit`, (req, res) => {
     const item = req.body
     pool.query(
