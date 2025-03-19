@@ -28,7 +28,7 @@ const maxRetries = 5;
 let attempts = 0;
 
 const Stripe = require('stripe');
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY_PRODUCTION);
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY_PRODUCTION); //use STRIPE_SECRET_KEY_PRODUCTION para producao
 
 const pool = mysql.createPool({
     host: host,
@@ -78,7 +78,7 @@ app.get("/", (req, res) => {
 
 app.get("/config", (req, res) => {
     res.send({
-        publishableKey: process.env.STRIPE_PUBLISHABLE_KEY_PRODUCTION,
+        publishableKey: process.env.STRIPE_PUBLISHABLE_KEY_PRODUCTION, // use STRIPE_PUBLISHABLE_KEY_PRODUCTION para produção
     });
 });
 
@@ -93,11 +93,12 @@ app.post("/create-payment-intent", async (req, res) => {
         const paymentIntentParams = {
             amount: amount,
             currency: 'brl',
-            automatic_payment_methods: { enabled: true }, // Permitir métodos de pagamento automáticos (cartão, pix, etc)
+            payment_method_types: ['card'], // Permitir métodos de pagamento automáticos (cartão, pix, etc)
         };
 
         // Se o tipo de pagamento for "card", habilitar parcelamento
         if (paymentMethodType === 'card') {
+            paymentIntentParams.payment_method_types = ['card'];
             paymentIntentParams.payment_intent_options = {
                 installments: {
                     enabled: true,
@@ -114,6 +115,7 @@ app.post("/create-payment-intent", async (req, res) => {
             clientSecret: paymentIntent.client_secret,
         });
     } catch (e) {
+        console.error("Error creating PaymentIntent:", e);
         return res.status(400).send({
             error: {
                 message: e.message,
