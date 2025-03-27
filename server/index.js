@@ -115,7 +115,6 @@ app.post("/create-payment-intent", async (req, res) => {
             clientSecret: paymentIntent.client_secret,
         });
     } catch (e) {
-        console.error("Error creating PaymentIntent:", e);
         return res.status(400).send({
             error: {
                 message: e.message,
@@ -387,7 +386,6 @@ app.get(`/api/v1/${secretKey}/menuItems`, (req, res) => {
 
 app.get(`/api/v1/${secretKey}/facilitys`, (req, res) => {
     pool.query(`SELECT * FROM facilitys`, (err, result) => {
-        console.log("[FACILITYS] Realizando consulta")
         if (err) {
             res.status(500).json({ error: "Erro ao obter facilitys" });
         }
@@ -569,9 +567,11 @@ app.post(`/api/v1/${secretKey}/orders/edit`, (req, res) => {
 
     pool.query(
         'UPDATE `orders` SET ' +
-        'state = ? ' +
+        'state = ?, ' +
+        'situation = ?, ' +
+        'codigoRastreio = ? ' +
         'WHERE id = ?',
-        [item.state, item.id],
+        [item.state, item.situation, item.codigoRastreio, item.id],
         (err, result) => {
             if (err) {
                 console.error(err);
