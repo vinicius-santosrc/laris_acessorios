@@ -742,7 +742,7 @@ app.post("/shipping/calculate", async (req, res) => {
                     "height": 2,
                     "width": 12,
                     "length": 17,
-                    "weight": 0.5
+                    "weight": 0.25
                 }
             })
         });
