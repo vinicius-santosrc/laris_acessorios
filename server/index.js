@@ -343,7 +343,7 @@ app.post(`/api/v1/${secretKey}/users/add`, (req, res) => {
 //REQUISIÇÃO DE PRODUTOS
 
 app.get(`/api/v1/${secretKey}/products`, (req, res) => {
-    pool.query('SELECT id, name_product, price, desconto, disponibilidade, tamanhos, quantidade_disponivel, categoria, url, tipo, photoURL, extensor, type_full_label, categoryList, description FROM produtos', (err, result) => {
+    pool.query('SELECT id, name_product, price, desconto, disponibilidade, tamanhos, quantidade_disponivel, categoria, url, tipo, photoURL, extensor, type_full_label, categoryList, description, type FROM produtos', (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
         } else {
@@ -470,7 +470,7 @@ app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
     const item = req.body;
 
     // Inserindo a foto como base64 diretamente no banco
-    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)', [
+    pool.query('insert into produtos values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)', [
         item.name_product,
         item.price,
         item.desconto,
@@ -485,7 +485,9 @@ app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
         item.photoURL,  // Armazenando base64 aqui
         item.extensor,
         item.type_full_label,
-        item.categoryList
+        item.categoryList,
+        item.description,
+        item.type
     ], (err, result) => {
         if (err) {
             console.error(err);
@@ -666,7 +668,8 @@ app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
         'extensor = ?, ' +
         'type_full_label = ?, ' +
         'categoryList = ?, ' +
-        'description = ? ' +
+        'description = ?, ' +
+        'type = ? ' +
         'WHERE id = ?',
         [
             item.name_product,
@@ -685,6 +688,7 @@ app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
             item.type_full_label,
             item.categoryList,
             item.description,
+            item.type,
             item.id
         ], (err, result) => {
             if (err) {
