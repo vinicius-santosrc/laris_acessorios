@@ -16,7 +16,7 @@
         }
 
         header {
-            background-color: #BE0A45;
+            background-color: #be0a45;
             color: white;
             padding: 15px 0;
             text-align: center;
@@ -31,7 +31,7 @@
         }
 
         h2 {
-            color: #BE0A45;
+            color: #be0a45;
         }
 
         pre {
@@ -64,7 +64,7 @@
             background-color: #e9f5ff;
             margin-top: 10px;
             padding: 10px;
-            border-left: 5px solid #BE0A45;
+            border-left: 5px solid #be0a45;
         }
 
         .subroute h4 {
@@ -259,9 +259,13 @@ POST /rota3</pre>
             </div>
 
             <div class="subroute">
-                <h4>Rota 15: /api/v1/{secretKey}/users</h4>
-                <pre>GET /api/v1/{secretKey}/users</pre>
-                <p>Retorna todos os usuários.</p>
+                <h4>Rota 15: /api/v1/{secretKey}/user</h4>
+                <pre>POST /api/v1/{secretKey}/user</pre>
+                <p>Retorna o usuário solicitado.</p>
+                <pre>Body:
+                {
+                    "email": "testeusuario@teste.com"
+                }</pre>
             </div>
 
             <div class="subroute">
