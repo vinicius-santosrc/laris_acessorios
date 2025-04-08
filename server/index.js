@@ -12,6 +12,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const { resolve } = require("path");
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const cors = require('cors');
@@ -41,6 +42,20 @@ const pool = mysql.createPool({
     connectionLimit: 50,
     waitForConnections: true
 });
+
+const verifyToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        return res.status(403).json({ message: 'Token não fornecido' });
+    }
+
+    if (token != process.env.bearerTokenForLaris) {
+        return res.status(401).json({ message: 'Token inválido' });
+    }
+    next();
+
+};
 
 const connectToDatabase = () => {
     pool.query((err) => {
@@ -135,7 +150,7 @@ app.get(`/api/v1/${secretKey}/admins`, (req, res) => {
 
 //REQUISIÇÃO PLANILHAS
 
-app.get(`/api/v1/${secretKey}/planilha-despesas`, (req, res) => {
+app.get(`/api/v1/${secretKey}/planilha-despesas`, verifyToken, (req, res) => {
     pool.query('SELECT * FROM `planilha-despesas`', (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
@@ -145,7 +160,7 @@ app.get(`/api/v1/${secretKey}/planilha-despesas`, (req, res) => {
     })
 });
 
-app.get(`/api/v1/${secretKey}/planilha-itens`, (req, res) => {
+app.get(`/api/v1/${secretKey}/planilha-itens`, verifyToken, (req, res) => {
     pool.query('SELECT * FROM `planilha-itens`', (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
@@ -158,7 +173,7 @@ app.get(`/api/v1/${secretKey}/planilha-itens`, (req, res) => {
 
 //POSTS NA PLANILHA DESPESA
 
-app.post(`/api/v1/${secretKey}/planilha-despesas/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planilha-despesas/add`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('INSERT INTO `planilha-despesas` (descricao, valor, tipo) VALUES (?, ?, ?)', [item.descricao, item.valor, item.tipo], (err, result) => {
         if (err) {
@@ -170,7 +185,7 @@ app.post(`/api/v1/${secretKey}/planilha-despesas/add`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/planilha-despesas/edit`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planilha-despesas/edit`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('update `planilha-despesas` set descricao = ?, valor = ?, tipo = ? where id = ?', [item.descricao, item.valor, item.tipo, item.id], (err, result) => {
         if (err) {
@@ -182,7 +197,7 @@ app.post(`/api/v1/${secretKey}/planilha-despesas/edit`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/planilha-despesas/delete`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planilha-despesas/delete`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('delete from `planilha-despesas` where id = ?', [item.id], (err, result) => {
         if (err) {
@@ -196,7 +211,7 @@ app.post(`/api/v1/${secretKey}/planilha-despesas/delete`, (req, res) => {
 
 //POSTS NA PLANILHA ITEMS
 
-app.post(`/api/v1/${secretKey}/planilha-itens/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planilha-itens/add`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('INSERT INTO `planilha-itens` (id, custos, detalhe, codigo, nameofitem, preco_compra, precorevenda, quantcompra, lucroporitem) VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?)', [item.custos, item.detalhe, item.codigo, item.nameofitem, item.preco_compra, item.precorevenda, item.quantcompra, item.lucroporitem], (err, result) => {
         if (err) {
@@ -208,7 +223,7 @@ app.post(`/api/v1/${secretKey}/planilha-itens/add`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/planilha-itens/edit`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planilha-itens/edit`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('update `planilha-itens` set custos = ?, detalhe = ?, codigo = ?, nameofitem = ?, preco_compra = ?, precorevenda = ?, quantcompra = ?, lucroporitem = ? where id = ?', [item.custos, item.detalhe, item.codigo, item.nameofitem, item.preco_compra, item.precorevenda, item.quantcompra, item.lucroporitem, item.id], (err, result) => {
         if (err) {
@@ -220,7 +235,7 @@ app.post(`/api/v1/${secretKey}/planilha-itens/edit`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/planilha-itens/delete`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planilha-itens/delete`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('delete from `planilha-itens` where id = ?', [item.id], (err, result) => {
         if (err) {
@@ -247,7 +262,7 @@ app.get(`/api/v1/${secretKey}/metas`, (req, res) => {
 
 //REQUISIÇÃO DE PLANEJAMENTOS
 
-app.get(`/api/v1/${secretKey}/planejamentos`, (req, res) => {
+app.get(`/api/v1/${secretKey}/planejamentos`, verifyToken, (req, res) => {
     pool.query('SELECT * FROM `planejamentos`', (err, result) => {
         if (err) {
             res.status(500).json({ error: 'Erro ao obter dados' });
@@ -259,7 +274,7 @@ app.get(`/api/v1/${secretKey}/planejamentos`, (req, res) => {
 
 //POSTS PLANEJAMENTOS
 
-app.post(`/api/v1/${secretKey}/planejamentos/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planejamentos/add`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('insert into planejamentos values (default, "[]", ?)', [item.name_card], (err, result) => {
         if (err) {
@@ -271,7 +286,7 @@ app.post(`/api/v1/${secretKey}/planejamentos/add`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/planejamentos/update`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planejamentos/update`, verifyToken, (req, res) => {
     const item = req.body;
     const contentCardValue = JSON.stringify(item.list);  // Convert array to JSON string
 
@@ -286,7 +301,7 @@ app.post(`/api/v1/${secretKey}/planejamentos/update`, (req, res) => {
 });
 
 
-app.post(`/api/v1/${secretKey}/planejamentos/delete`, (req, res) => {
+app.post(`/api/v1/${secretKey}/planejamentos/delete`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('delete from planejamentos where id = ?', [item.id], (err, result) => {
         if (err) {
@@ -325,7 +340,7 @@ app.get(`/api/v1/${secretKey}/users`, (req, res) => {
 
 //POSTS DE USUARIOS
 
-app.post(`/api/v1/${secretKey}/users/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/users/add`, verifyToken, (req, res) => {
     const item = req.body
     pool.query(
         'INSERT INTO users VALUES (default, "client", ?, ?, ?, ?, "https://laris-acessorios.vercel.app/static/media/user-null.webp", "[]", "[]")',
@@ -395,7 +410,7 @@ app.get(`/api/v1/${secretKey}/facilitys`, (req, res) => {
     })
 })
 
-app.post(`/api/v1/${secretKey}/facilitys/edit`, (req, res) => {
+app.post(`/api/v1/${secretKey}/facilitys/edit`, verifyToken, (req, res) => {
     const item = req.body
     pool.query(
         'UPDATE facilitys SET data = ?, dataMobile = ? WHERE id = ?', [item.data, item.dataMobile, item.id], (err, result) => {
@@ -408,7 +423,7 @@ app.post(`/api/v1/${secretKey}/facilitys/edit`, (req, res) => {
         });
 });
 
-app.post(`/api/v1/${secretKey}/categories/edit`, (req, res) => {
+app.post(`/api/v1/${secretKey}/categories/edit`, verifyToken, (req, res) => {
     const item = req.body
     pool.query(
         'UPDATE categories SET highlightText = ?, highlightDescription = ?, highlightImage = ?, urlLink = ? WHERE ID = ?', [item.highlightText, item.highlightDescription, item.highlightImage, item.urlLink, item.id], (err, result) => {
@@ -421,7 +436,7 @@ app.post(`/api/v1/${secretKey}/categories/edit`, (req, res) => {
         });
 });
 
-app.post(`/api/v1/${secretKey}/categories/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/categories/add`, verifyToken, (req, res) => {
     const item = req.body;
 
     // Primeiro INSERT para a tabela de categorias
@@ -466,7 +481,7 @@ app.post(`/api/v1/${secretKey}/categories/add`, (req, res) => {
 //POSTS DE PRODUTOS
 
 // Endpoint para adicionar um produto
-app.post(`/api/v1/${secretKey}/products/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/products/add`, verifyToken, (req, res) => {
     const item = req.body;
 
     // Inserindo a foto como base64 diretamente no banco
@@ -543,7 +558,7 @@ app.post(`/api/v1/${secretKey}/getOrderById`, (req, res) => {
 
 //POSTS DE ORDERS
 
-app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/orders/add`, verifyToken, (req, res) => {
     const item = req.body;
 
     pool.query(
@@ -564,7 +579,7 @@ app.post(`/api/v1/${secretKey}/orders/add`, (req, res) => {
 
 //UPDATE DE ORDERS
 
-app.post(`/api/v1/${secretKey}/orders/edit`, (req, res) => {
+app.post(`/api/v1/${secretKey}/orders/edit`, verifyToken, (req, res) => {
     const item = req.body;
 
     pool.query(
@@ -589,7 +604,7 @@ app.post(`/api/v1/${secretKey}/orders/edit`, (req, res) => {
 
 //DELETE DE ORDERS
 
-app.post(`/api/v1/${secretKey}/orders/delete`, (req, res) => {
+app.post(`/api/v1/${secretKey}/orders/delete`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('delete from orders where id = ?;', [item.id], (err, result) => {
         if (err) {
@@ -613,7 +628,7 @@ app.get(`/api/v1/${secretKey}/cupons`, (req, res) => {
     })
 });
 
-app.post(`/api/v1/${secretKey}/cupons/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/cupons/add`, verifyToken, (req, res) => {
     const item = req.body
     pool.query(`INSERT INTO cupons VALUES ( DEFAULT, ?, ?, DEFAULT, ?, 'cupom-image-wrapper.webp', DEFAULT, NULL, 0, ? )`, [item.uniqueKey, item.name, item.desconto, item.private], (err, result) => {
         if (err) {
@@ -625,7 +640,7 @@ app.post(`/api/v1/${secretKey}/cupons/add`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/cupons/remove`, (req, res) => {
+app.post(`/api/v1/${secretKey}/cupons/remove`, verifyToken, (req, res) => {
     const item = req.body
     pool.query(`DELETE FROM cupons WHERE ID = ?`, [item.id], (err, result) => {
         if (err) {
@@ -637,7 +652,7 @@ app.post(`/api/v1/${secretKey}/cupons/remove`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/cupons/myaccount/add`, (req, res) => {
+app.post(`/api/v1/${secretKey}/cupons/myaccount/add`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('UPDATE `users` SET cupons = ?, cupons_usados = ? WHERE uid = ? ', [item.cupons, item.cupom_usado, item.user_uid], (err, result) => {
         if (err) {
@@ -650,7 +665,7 @@ app.post(`/api/v1/${secretKey}/cupons/myaccount/add`, (req, res) => {
 });
 
 
-app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
+app.post(`/api/v1/${secretKey}/products/edit`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('UPDATE `produtos` SET ' +
         'name_product = ?, ' +
@@ -701,7 +716,7 @@ app.post(`/api/v1/${secretKey}/products/edit`, (req, res) => {
         });
 });
 
-app.post(`/api/v1/${secretKey}/products/delete`, (req, res) => {
+app.post(`/api/v1/${secretKey}/products/delete`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('delete from `produtos` where id = ?', [item.id], (err, result) => {
         if (err) {
@@ -713,7 +728,7 @@ app.post(`/api/v1/${secretKey}/products/delete`, (req, res) => {
     });
 });
 
-app.post(`/api/v1/${secretKey}/products/changevisibility`, (req, res) => {
+app.post(`/api/v1/${secretKey}/products/changevisibility`, verifyToken, (req, res) => {
     const item = req.body
     pool.query('update `produtos` set disponibilidade = ? where id = ?', [item.disponibilidade, item.id], (err, result) => {
         if (err) {
