@@ -8,6 +8,13 @@
     ],
     "routes": [
         {
+            "src": "/",
+            "dest": "/app.js",
+            "headers": {
+                "Content-Type": "text/html"
+            }
+        },
+        {
             "src": "/(.*)",
             "dest": "/app.js"
         }

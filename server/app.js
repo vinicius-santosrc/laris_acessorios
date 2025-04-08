@@ -55,11 +55,11 @@ app.use('/', userRoutes);
 
 // Rota inicial
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("./src/index.html"));
+    res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });
 
-// Rota para arquivos estáticos (se necessário)
-app.use(express.static(path.join(__dirname, 'public')));
+// Servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'src')));
 
 // Middleware para tratamento de erros 404
 app.use((req, res, next) => {
