@@ -14,19 +14,19 @@ const cors = require('cors');
 const path = require('path');
 
 // Importando rotas
-const authRoutes = require('./routes/authRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const couponRoutes = require('./routes/couponRoutes');
-const facilityRoutes = require('./routes/facilityRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const sheetRoutes = require('./routes/sheetRoutes');
-const productRoutes = require('./routes/productRoutes');
-const shippingRoutes = require('./routes/shippingRoutes');
-const stripeRoutes = require('./routes/stripeRoutes');
-const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const categoryRoutes = require('./src/routes/categoryRoutes');
+const couponRoutes = require('./src/routes/couponRoutes');
+const facilityRoutes = require('./src/routes/facilityRoutes');
+const orderRoutes = require('./src/routes/orderRoutes');
+const sheetRoutes = require('./src/routes/sheetRoutes');
+const productRoutes = require('./src/routes/productRoutes');
+const shippingRoutes = require('./src/routes/shippingRoutes');
+const stripeRoutes = require('./src/routes/stripeRoutes');
+const userRoutes = require('./src/routes/userRoutes');
 
 // Importando configurações do banco
-const { connectToDatabase } = require('./config/database');
+const { connectToDatabase } = require('./src/config/database');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -55,7 +55,7 @@ app.use('/', userRoutes);
 
 // Rota inicial
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("./index.html"));
+    res.sendFile(path.resolve("./src/index.html"));
 });
 
 // Rota para arquivos estáticos (se necessário)
