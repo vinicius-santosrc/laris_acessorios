@@ -12,7 +12,6 @@ const express = require('express');
 const mysql = require('mysql2');
 const { resolve } = require("path");
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
 
 const app = express();
 const cors = require('cors');
