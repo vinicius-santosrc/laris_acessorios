@@ -9,13 +9,13 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "index.xjs'"
+            "dest": "index.js'"
         }
     ],
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "index.xjs'"
+            "destination": "index.js'"
         },
         {
             "source": "/shipping/(.*)",
