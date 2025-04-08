@@ -8,8 +8,26 @@
     ],
     "routes": [
         {
-            "src": "(.*)",
-            "dest": "index.ts"
+            "src": "/(.*)",
+            "dest": "/index.ts"
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "/index.ts"
+        },
+        {
+            "source": "/shipping/calculate",
+            "destination": "/index.ts"
+        },
+        {
+            "source": "/(config|create-payment-intent)",
+            "destination": "/index.ts"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.ts"
         }
     ]
 }
