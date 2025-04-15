@@ -20,6 +20,17 @@ const facilityController = {
         });
     },
 
+    getByName: (req, res) => {
+        const item = req.body;
+        pool.query('SELECT * FROM facilitys WHERE reference = ?; ', [item.reference], (err, result) => {
+            if (err) {
+                res.status(500).json({ error: "Erro ao obter facilitys" });
+            } else {
+                res.json(result);
+            }
+        });
+    },
+
     editFacility: (req, res) => {
         const item = req.body;
         pool.query(

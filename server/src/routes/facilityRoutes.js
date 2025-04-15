@@ -14,6 +14,7 @@ const { verifyToken } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
 router.get(`/api/v1/${process.env.secretKey}/facilitys`, facilityController.getFacilities);
+router.put(`/api/v1/${process.env.secretKey}/facilitys/get`, facilityController.getByName);
 router.post(`/api/v1/${process.env.secretKey}/facilitys/edit`, verifyToken, facilityController.editFacility);
 
 module.exports = router;

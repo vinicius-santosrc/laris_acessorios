@@ -12,7 +12,9 @@ const stripe = require('../config/stripe');
 const stripeController = {
     getConfig: (req, res) => {
         res.send({
-            publishableKey: process.env.STRIPE_PUBLISHABLE_KEY_PRODUCTION,
+            publishableKey: process.env.NODE_ENV === 'production'
+                ? process.env.STRIPE_PUBLISHABLE_KEY_PRODUCTION
+                : process.env.STRIPE_PUBLISHABLE_KEY
         });
     },
 

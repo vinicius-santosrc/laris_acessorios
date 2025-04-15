@@ -15,7 +15,6 @@ const orderController = {
             if (err) {
                 res.status(500).json({ error: 'Erro ao obter dados' });
             } else {
-                console.log("Consultando pedidos");
                 res.json(result);
             }
         });
@@ -27,7 +26,6 @@ const orderController = {
             if (err) {
                 res.status(500).json({ error: 'Erro ao obter dados' });
             } else {
-                console.log("Consultando pedidos do id", item.id);
                 res.json(result);
             }
         });
@@ -36,8 +34,8 @@ const orderController = {
     addOrder: (req, res) => {
         const item = req.body;
         pool.query(
-            'INSERT INTO orders VALUES (default, ?, ?, ?, ?, ?, default, ?, default, ?, ?, ?, ?, ?)',
-            [item.uid, item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal, item.cupom_desconto, item.cupons],
+            'INSERT INTO orders VALUES (default, ?, ?, ?, ?, ?, default, ?, default, ?, ?, ?, ?, ?, ?)',
+            [item.uid, item.address, item.items, item.user, item.totalprice, item.paymentOption, item.situation, item.desconto, item.subtotal, item.cupom_desconto, item.cupons, item.codigoRastreio],
             (err) => {
                 if (err) {
                     console.error(err);
