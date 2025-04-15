@@ -8,13 +8,16 @@
 */
 
 const mysql = require('mysql2');
+const { getDatabaseyAmbient } = require('./ambient');
 require('dotenv').config();
 
+const dataDatabase = getDatabaseyAmbient();
+
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
+    host: dataDatabase.db_host,
+    user: dataDatabase.db_user,
     password: process.env.DB_PASSWORD,
-    database: process.env.database,
+    database: dataDatabase.database,
     ssl: {
         rejectUnauthorized: false,
     },
