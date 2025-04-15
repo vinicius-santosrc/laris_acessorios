@@ -10,6 +10,9 @@
 const Stripe = require('stripe');
 require('dotenv').config();
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY_PRODUCTION); // USE STRIPE_SECRET_KEY_PRODUCTION em produção
+const stripe = Stripe(process.env.NODE_ENV === "production" ?
+    process.env.STRIPE_SECRET_KEY_PRODUCTION :
+    process.env.STRIPE_SECRET_KEY
+);
 
 module.exports = stripe;
