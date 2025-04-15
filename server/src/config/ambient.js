@@ -18,7 +18,7 @@ const getDatabaseyAmbient = () => {
         case "local":
             return {
                 db_host: process.env.DB_HOST_LOCAL,
-                db_user: process.env.DB_HOST_LOCAL,
+                db_user: process.env.DB_USER_LOCAL,
                 database: process.env.database_LOCAL
             };
         default:
