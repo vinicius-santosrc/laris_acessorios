@@ -15,5 +15,7 @@ require('dotenv').config();
 router.get(`/api/v1/${process.env.secretKey}/admins`, authController.verifyAdmin);
 router.post(`/api/v1/${process.env.secretKey}/login`, authController.login);
 router.post(`/api/v1/${process.env.secretKey}/register`, authController.register);
+router.get(`/api/v1/${process.env.secretKey}/me`, authController.me);
+router.post(`/api/v1/${process.env.secretKey}/logout`, authController.logout);
 
 module.exports = router;
