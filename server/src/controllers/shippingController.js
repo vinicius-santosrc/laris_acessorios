@@ -12,7 +12,7 @@ require('dotenv').config();
 const shippingController = {
     calculateShipping: async (req, res) => {
         const body = req.body;
-        const fromCep = "37558-610";
+        const fromCep = process.env.fromCep;
         const toCep = body.to.postal_code;
 
         try {
