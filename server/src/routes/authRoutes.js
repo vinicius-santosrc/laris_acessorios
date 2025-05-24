@@ -13,5 +13,7 @@ const authController = require('../controllers/authController');
 require('dotenv').config();
 
 router.get(`/api/v1/${process.env.secretKey}/admins`, authController.verifyAdmin);
+router.post(`/api/v1/${process.env.secretKey}/login`, authController.login);
+router.post(`/api/v1/${process.env.secretKey}/register`, authController.register);
 
 module.exports = router;

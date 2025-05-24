@@ -21,6 +21,17 @@ const userController = {
         });
     },
 
+    getUserByUid: (req, res) => {
+        const item = req.body;
+        pool.query('SELECT * FROM users WHERE uid = ?', [item.uid], (err, result) => {
+            if (err) {
+                res.status(500).json({ error: 'Erro ao obter dados' });
+            } else {
+                res.json(result);
+            }
+        });
+    },
+
     getAllUsers: (req, res) => {
         pool.query('SELECT * FROM users', (err, result) => {
             if (err) {
