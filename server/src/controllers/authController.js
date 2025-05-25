@@ -99,7 +99,7 @@ const authController = {
         res.clearCookie("refresh_token", cookieOptions);
 
         return res.status(200).json({ message: "Logout feito com sucesso." });
-    }
+    },
 
 
     /**

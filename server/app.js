@@ -37,7 +37,8 @@ const port = process.env.PORT || 3001;
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://www.larisacessorios.com.br'
+    'https://www.larisacessorios.com.br',
+    'https://staging-laris-acessorios-3-0.vercel.app'
 ];
 
 app.use(cors({
