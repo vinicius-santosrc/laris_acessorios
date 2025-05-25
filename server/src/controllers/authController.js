@@ -63,18 +63,20 @@ const authController = {
 
             const result = await authService.login({ email, password });
 
-            // SETA COOKIES
-            res.cookie("access_token", result.tokens.accessToken, {
+            const cookieOptions = {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
-                sameSite: "Lax",
+                sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            };
+
+            // SETA COOKIES
+            res.cookie("access_token", result.tokens.accessToken, {
+                ...cookieOptions,
                 maxAge: 1000 * 60 * 15 // 15 minutos
             });
 
             res.cookie("refresh_token", result.tokens.refreshToken, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                sameSite: "Lax",
+                ...cookieOptions,
                 maxAge: 1000 * 60 * 60 * 24 * 30 // 30 dias
             });
 

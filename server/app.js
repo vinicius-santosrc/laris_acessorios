@@ -58,6 +58,11 @@ app.use(helmet({
     contentSecurityPolicy: false,
 }));
 app.use(cookieParser());
+app.options('*', cors({
+    origin: allowedOrigins,
+    credentials: true
+}));
+
 app.use(morgan('REQUEST :method (:url) with status :status - Respponse time :response-time ms :remote-addr'));
 
 // Conectar ao banco de dados
