@@ -41,11 +41,26 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-    origin: (origin, callback) => {
+    origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
-            return callback(null, true);
+            callback(null, origin); // Retorna o origin exato
+        } else {
+            callback(new Error('Not allowed by CORS'));
         }
-        return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Libera pré-flights (OPTIONS)
+app.options('*', cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, origin);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
     },
     credentials: true
 }));

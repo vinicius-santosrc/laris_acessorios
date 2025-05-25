@@ -67,6 +67,7 @@ const authController = {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+                path: "/"
             };
 
             // SETA COOKIES
@@ -87,10 +88,18 @@ const authController = {
     },
 
     logout: (req, res) => {
-        res.clearCookie("access_token");
-        res.clearCookie("refresh_token");
+        const cookieOptions = {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            path: "/"
+        };
+
+        res.clearCookie("access_token", cookieOptions);
+        res.clearCookie("refresh_token", cookieOptions);
+
         return res.status(200).json({ message: "Logout feito com sucesso." });
-    },
+    }
 
 
     /**
