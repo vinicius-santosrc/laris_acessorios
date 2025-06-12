@@ -38,13 +38,14 @@ const port = process.env.PORT || 3001;
 const allowedOrigins = [
     'http://localhost:3000',
     'https://www.larisacessorios.com.br',
+    'https://larisacessorios.com.br',
     'https://staging-laris-acessorios-3-0.vercel.app'
 ];
 
 app.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, origin); // Retorna o origin exato
+            callback(null, origin);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
@@ -66,18 +67,12 @@ app.options('*', cors({
     credentials: true
 }));
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(helmet({
     contentSecurityPolicy: false,
 }));
 app.use(cookieParser());
-app.options('*', cors({
-    origin: allowedOrigins,
-    credentials: true
-}));
 
 app.use(morgan('REQUEST :method (:url) with status :status - Respponse time :response-time ms :remote-addr'));
 
