@@ -126,7 +126,8 @@ const authController = {
             res.cookie("access_token", newAccessToken, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
-                sameSite: "Lax",
+                sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+                path: "/",
                 maxAge: 1000 * 60 * 15
             });
 
