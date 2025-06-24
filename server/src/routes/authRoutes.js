@@ -17,5 +17,6 @@ router.post(`/api/v1/${process.env.secretKey}/login`, authController.login);
 router.post(`/api/v1/${process.env.secretKey}/register`, authController.register);
 router.get(`/api/v1/${process.env.secretKey}/me`, authController.me);
 router.post(`/api/v1/${process.env.secretKey}/logout`, authController.logout);
+router.post(`/api/v1/${process.env.secretKey}/refreshToken`, authController.refreshToken)
 
 module.exports = router;
