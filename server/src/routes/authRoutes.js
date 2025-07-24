@@ -10,13 +10,19 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
+const { authMiddleware } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
-router.get(`/api/v1/${process.env.secretKey}/admins`, authController.verifyAdmin);
+// Rota protegida: apenas para admins (remover se não for mais usada)
+// router.get(`/api/v1/${process.env.secretKey}/admins`, authController.verifyAdmin);
+
 router.post(`/api/v1/${process.env.secretKey}/login`, authController.login);
 router.post(`/api/v1/${process.env.secretKey}/register`, authController.register);
-router.get(`/api/v1/${process.env.secretKey}/me`, authController.me);
-router.post(`/api/v1/${process.env.secretKey}/logout`, authController.logout);
-router.post(`/api/v1/${process.env.secretKey}/refreshToken`, authController.refreshToken)
+router.post(`/api/v1/${process.env.secretKey}/refreshToken`, authController.refreshToken);
+
+// Rotas protegidas
+router.get(`/api/v1/${process.env.secretKey}/admins`, authController.verifyAdmin);
+router.get(`/api/v1/${process.env.secretKey}/me`, authMiddleware, authController.me);
+router.post(`/api/v1/${process.env.secretKey}/logout`, authMiddleware, authController.logout);
 
 module.exports = router;

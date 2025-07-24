@@ -10,22 +10,22 @@
 const express = require('express');
 const router = express.Router();
 const sheetController = require('../controllers/sheetController');
-const { verifyToken } = require('../middlewares/authMiddleware');
+const { authMiddleware } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
-router.get(`/api/v1/${process.env.secretKey}/planilha-despesas`, verifyToken, sheetController.getPlanilhaDespesas);
-router.get(`/api/v1/${process.env.secretKey}/planilha-itens`, verifyToken, sheetController.getPlanilhaItens);
+router.get(`/api/v1/${process.env.secretKey}/planilha-despesas`, authMiddleware, sheetController.getPlanilhaDespesas);
+router.get(`/api/v1/${process.env.secretKey}/planilha-itens`, authMiddleware, sheetController.getPlanilhaItens);
 router.get(`/api/v1/${process.env.secretKey}/metas`, sheetController.getMetas);
-router.get(`/api/v1/${process.env.secretKey}/planejamentos`, verifyToken, sheetController.getPlanejamentos);
+router.get(`/api/v1/${process.env.secretKey}/planejamentos`, authMiddleware, sheetController.getPlanejamentos);
 
-router.post(`/api/v1/${process.env.secretKey}/planilha-despesas/add`, verifyToken, sheetController.addDespesa);
-router.post(`/api/v1/${process.env.secretKey}/planilha-despesas/edit`, verifyToken, sheetController.editDespesa);
-router.post(`/api/v1/${process.env.secretKey}/planilha-despesas/delete`, verifyToken, sheetController.deleteDespesa);
-router.post(`/api/v1/${process.env.secretKey}/planilha-itens/add`, verifyToken, sheetController.addItemPlanilha);
-router.post(`/api/v1/${process.env.secretKey}/planilha-itens/edit`, verifyToken, sheetController.editItemPlanilha);
-router.post(`/api/v1/${process.env.secretKey}/planilha-itens/delete`, verifyToken, sheetController.deleteItemPlanilha);
-router.post(`/api/v1/${process.env.secretKey}/planejamentos/add`, verifyToken, sheetController.addPlanejamento);
-router.post(`/api/v1/${process.env.secretKey}/planejamentos/update`, verifyToken, sheetController.updatePlanejamento);
-router.post(`/api/v1/${process.env.secretKey}/planejamentos/delete`, verifyToken, sheetController.deletePlanejamento);
+router.post(`/api/v1/${process.env.secretKey}/planilha-despesas/add`, authMiddleware, sheetController.addDespesa);
+router.post(`/api/v1/${process.env.secretKey}/planilha-despesas/edit`, authMiddleware, sheetController.editDespesa);
+router.post(`/api/v1/${process.env.secretKey}/planilha-despesas/delete`, authMiddleware, sheetController.deleteDespesa);
+router.post(`/api/v1/${process.env.secretKey}/planilha-itens/add`, authMiddleware, sheetController.addItemPlanilha);
+router.post(`/api/v1/${process.env.secretKey}/planilha-itens/edit`, authMiddleware, sheetController.editItemPlanilha);
+router.post(`/api/v1/${process.env.secretKey}/planilha-itens/delete`, authMiddleware, sheetController.deleteItemPlanilha);
+router.post(`/api/v1/${process.env.secretKey}/planejamentos/add`, authMiddleware, sheetController.addPlanejamento);
+router.post(`/api/v1/${process.env.secretKey}/planejamentos/update`, authMiddleware, sheetController.updatePlanejamento);
+router.post(`/api/v1/${process.env.secretKey}/planejamentos/delete`, authMiddleware, sheetController.deletePlanejamento);
 
 module.exports = router;

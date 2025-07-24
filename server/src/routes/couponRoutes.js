@@ -10,12 +10,12 @@
 const express = require('express');
 const router = express.Router();
 const couponController = require('../controllers/couponController');
-const { verifyToken } = require('../middlewares/authMiddleware');
+const { verifyToken, authMiddleware } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
 router.get(`/api/v1/${process.env.secretKey}/cupons`, couponController.getAllCoupons);
-router.post(`/api/v1/${process.env.secretKey}/cupons/add`, verifyToken, couponController.addCoupon);
-router.post(`/api/v1/${process.env.secretKey}/cupons/remove`, verifyToken, couponController.removeCoupon);
-router.post(`/api/v1/${process.env.secretKey}/cupons/myaccount/add`, verifyToken, couponController.addUserCoupon);
+router.post(`/api/v1/${process.env.secretKey}/cupons/add`, authMiddleware, couponController.addCoupon);
+router.post(`/api/v1/${process.env.secretKey}/cupons/remove`, authMiddleware, couponController.removeCoupon);
+router.post(`/api/v1/${process.env.secretKey}/cupons/myaccount/add`, authMiddleware, couponController.addUserCoupon);
 
 module.exports = router;

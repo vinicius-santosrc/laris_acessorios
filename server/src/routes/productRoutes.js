@@ -10,14 +10,14 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
-const { verifyToken } = require('../middlewares/authMiddleware');
+const { authMiddleware } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
 router.get(`/api/v1/${process.env.secretKey}/products`, productController.getAllProducts);
 router.post(`/api/v1/${process.env.secretKey}/products/searchbyurl`, productController.searchByUrl);
-router.post(`/api/v1/${process.env.secretKey}/products/add`, verifyToken, productController.addProduct);
-router.post(`/api/v1/${process.env.secretKey}/products/edit`, verifyToken, productController.editProduct);
-router.post(`/api/v1/${process.env.secretKey}/products/delete`, verifyToken, productController.deleteProduct);
-router.post(`/api/v1/${process.env.secretKey}/products/changevisibility`, verifyToken, productController.changeVisibility);
+router.post(`/api/v1/${process.env.secretKey}/products/add`, authMiddleware, productController.addProduct);
+router.post(`/api/v1/${process.env.secretKey}/products/edit`, authMiddleware, productController.editProduct);
+router.post(`/api/v1/${process.env.secretKey}/products/delete`, authMiddleware, productController.deleteProduct);
+router.post(`/api/v1/${process.env.secretKey}/products/changevisibility`, authMiddleware, productController.changeVisibility);
 
 module.exports = router;

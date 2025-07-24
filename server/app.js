@@ -31,6 +31,7 @@ const userRoutes = require('./src/routes/userRoutes');
 
 // Importando configurações do banco
 const { connectToDatabase } = require('./src/config/database');
+const { runSystemChecks } = require('./src/system/index');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -38,8 +39,10 @@ const port = process.env.PORT || 3001;
 const allowedOrigins = [
     'http://localhost:3000',
     'https://www.larisacessorios.com.br',
-    'https://larisacessorios.com.br',
-    'https://staging-laris-acessorios-3-0.vercel.app'
+    'http://larisacessorios.com.br',
+    'https://staging-laris-acessorios-3-0.vercel.app',
+    'https://api.larisacessorios.com.br',
+    'http://localhost:3001',
 ];
 
 app.use(cors({
@@ -78,6 +81,9 @@ app.use(morgan('REQUEST :method (:url) with status :status - Respponse time :res
 
 // Conectar ao banco de dados
 connectToDatabase();
+
+//Verificações de códigos / Migrações 
+runSystemChecks();
 
 // Configuração de rotas
 app.use('/', authRoutes);

@@ -10,11 +10,11 @@
 const express = require('express');
 const router = express.Router();
 const facilityController = require('../controllers/facilityController');
-const { verifyToken } = require('../middlewares/authMiddleware');
+const { verifyToken, authMiddleware } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
 router.get(`/api/v1/${process.env.secretKey}/facilitys`, facilityController.getFacilities);
 router.put(`/api/v1/${process.env.secretKey}/facilitys/get`, facilityController.getByName);
-router.post(`/api/v1/${process.env.secretKey}/facilitys/edit`, verifyToken, facilityController.editFacility);
+router.post(`/api/v1/${process.env.secretKey}/facilitys/edit`, authMiddleware, facilityController.editFacility);
 
 module.exports = router;

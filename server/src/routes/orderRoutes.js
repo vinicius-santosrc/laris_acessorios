@@ -10,13 +10,13 @@
 const express = require('express');
 const router = express.Router();
 const orderController = require('../controllers/orderController');
-const { verifyToken } = require('../middlewares/authMiddleware');
+const { verifyToken, authMiddleware } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
 router.get(`/api/v1/${process.env.secretKey}/orders`, orderController.getAllOrders);
 router.post(`/api/v1/${process.env.secretKey}/getOrderById`, orderController.getOrderById);
-router.post(`/api/v1/${process.env.secretKey}/orders/add`, verifyToken, orderController.addOrder);
-router.post(`/api/v1/${process.env.secretKey}/orders/edit`, verifyToken, orderController.editOrder);
-router.post(`/api/v1/${process.env.secretKey}/orders/delete`, verifyToken, orderController.deleteOrder);
+router.post(`/api/v1/${process.env.secretKey}/orders/add`, authMiddleware, orderController.addOrder);
+router.post(`/api/v1/${process.env.secretKey}/orders/edit`, authMiddleware, orderController.editOrder);
+router.post(`/api/v1/${process.env.secretKey}/orders/delete`, authMiddleware, orderController.deleteOrder);
 
 module.exports = router;

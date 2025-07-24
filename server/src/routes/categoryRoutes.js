@@ -10,13 +10,13 @@
 const express = require('express');
 const router = express.Router();
 const categoryController = require('../controllers/categoryController');
-const { verifyToken } = require('../middlewares/authMiddleware');
+const { verifyToken, authMiddleware } = require('../middlewares/authMiddleware');
 require('dotenv').config();
 
 router.get(`/api/v1/${process.env.secretKey}/categories`, categoryController.getAllCategories);
 router.get(`/api/v1/${process.env.secretKey}/categoriesData`, categoryController.getCategoriesData);
 router.get(`/api/v1/${process.env.secretKey}/menuItems`, categoryController.getMenuItems);
-router.post(`/api/v1/${process.env.secretKey}/categories/add`, verifyToken, categoryController.addCategory);
-router.post(`/api/v1/${process.env.secretKey}/categories/edit`, verifyToken, categoryController.editCategory);
+router.post(`/api/v1/${process.env.secretKey}/categories/add`, authMiddleware, categoryController.addCategory);
+router.post(`/api/v1/${process.env.secretKey}/categories/edit`, authMiddleware, categoryController.editCategory);
 
 module.exports = router;
