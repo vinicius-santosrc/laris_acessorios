@@ -139,7 +139,7 @@ const authController = {
      * Função para refresh token
     */
     refreshToken: (req, res) => {
-        const token = req.authorization;
+        const token = req.cookies?.refresh_token;
         if (!token) return res.status(401).json({ message: 'Refresh token ausente.' });
 
         try {
